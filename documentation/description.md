@@ -1,7 +1,7 @@
 # 1 Prelude
 
 ## 1.1 Document Objectives
-Describe and specify the problems encountered in the current imageboards and define the functions to be fulfilled by the software __NyaChan__
+Describe and specify the problems of the current imageboards and define the functions to be fulfilled by the software __NyaChan__
 
 
 ## 1.2 Audience
