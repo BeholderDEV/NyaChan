@@ -1,11 +1,11 @@
-# 1 Prelude
+# 1 Introduction
 
 ## 1.1 Document Objectives
-Describe and specify the problems of the current imageboards and define the functions to be fulfilled by the software __NyaChan__
+Describe and specify the problems of current imageboards, as well as define the functions to be fulfilled by the software __NyaChan__.
 
 
 ## 1.2 Audience
-The Development team
+The project's development team.
 
 ## 1.3 References 
  * [4Chan](http://www.4chan.org/)
@@ -15,10 +15,10 @@ The Development team
 # 2 Product's General Description
 
 ## 2.1 Overview
-In order to promote discussions around specific issues about the concept of internet forums, or messageboard, which through hierarchical and divided topics aimed at giving access to its users a place for social interactions around of common preferences. As an offshoot of the forum's concept, called imageboards were created, which bring as proposed greater emphasis on discussions around images.
+The concept of internet forum, or messageboard, was created in order to promote discussions around specific topics while promoting a sense of order by dividing the discussions in a hierarchical and well defined sense. The main objective of such places is to attract and promote social interactions around shared interests. As a ramification of the concept of foruns, started apperearing the so called imageboards. which have the purpose of putting more emphasis in discussions around images.
 
 
-Most imageboards has its structure, features and layout baseds on Futaba Channel (also known as 2chan), an imageboard developed in Japan in 2001, which prays for the anonymity of its users and possess strongly divided content by categories, highly dynamic and short, and the content posted by users are typically deleted after a short time according some imageboard rules. 4chan, a popular imageboard based on Futaba Channel, have something about 20 million unique visitors per month, according to the site's creator, Christopher Poole.
+Most imageboards have their structure, features and layout based on Futaba Channel (also known as 2chan), an imageboard developed in 2001, Japan. The fundamental elements associated with Futaba Channel are the anonymity of its users and a content which is well divided by categories, highly dinamic and short-lived according to the rules of the imageboard. 4chan, a popular imageboard based on Futaba Channel, has about 20 million unique visitors per month, according to the site's creator, Christopher Poole.
 
 
 By the popularity and potential of the imageboards, and that the most popular imageboards still having a strongly similar layout and style of Futaba Channel, it becomes feasible to improve these concepts in search for a modern approach that could improve the page's UX (user experience).
