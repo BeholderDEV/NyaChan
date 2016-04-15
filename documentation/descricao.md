@@ -54,7 +54,7 @@ Pessoas que querem participar, ler ou buscar imagens a cerca de discussões sobr
   1. O _software_ deve dividir e exibir as _threads_ de acordo com suas _tags_, sendo que cada _tag_ contará com um subdomínio do site
   * O _software_ deve exibir as _threads_ de uma _tag_ nos formatos, lista (uma _thread_ abaixo da outra) e catalogo (lado a lado), no qual o usuário poderá acessar a _thread_
   * O _software_ deve criar uma página para cada _thread_, com seus dados (imagens e comentários) linearmente
-  * O _software_ deve conter atalhos de teclado para as ações de usuário conforme a [tabela](##Tabela de Atalhos)
+  * O _software_ deve conter atalhos de teclado para as ações de usuário conforme a [tabela](#tabela-de-atalhos)
   * O _software_ deve contar com um sistema de busca e filtragem entre as _threads_ de cada _tag_
   * O _software_ deve permitir a navegação entre as _threads_ a partir da pagina de uma _thread_
   * O _software_ deve permitir o cadastro de usuário (sendo ele opcional para a maioria das funcionalidades do site)
