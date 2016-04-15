@@ -47,3 +47,40 @@ Pessoas que querem participar, ler ou buscar imagens a cerca de discussões sobr
  * Limite de número de _threads_, tamanho de imagens e arquivos, além do número de usuários simultâneos na aplicação, visto o limite de armazenamento e memória do servidor que será utilizado
  * As _threads_ fechadas serão armazenadas por duas semanas, e depois deletadas
  * O serviço rodará nos navegadores Chrome(30), Firefox(25), Opera(12)
+ 
+ # 3 Especificação de Requisitos
+ 
+ ## 3.1 Requisitos Funcionais
+  1. O _software_ deve dividir e exibir as _threads_ de acordo com suas _tags_, sendo que cada _tag_ contará com um subdomínio do site
+  * O _software_ deve exibir as _threads_ de uma _tag_ nos formatos, lista (uma _thread_ abaixo da outra) e catalogo (lado a lado), no qual o usuário poderá acessar a _thread_
+  * O _software_ deve criar uma página para cada _thread_, com seus dados (imagens e comentários) linearmente
+  * O _software_ deve conter atalhos de teclado para as ações de usuário conforme a [tabela](##Tabela de Atalhos)
+  * O _software_ deve contar com um sistema de busca e filtragem entre as _threads_ de cada _tag_
+  * O _software_ deve permitir a navegação entre as _threads_ a partir da pagina de uma _thread_
+  * O _software_ deve permitir o cadastro de usuário (sendo ele opcional para a maioria das funcionalidades do site)
+  * O _software_ deve permitir ao usuário, criar uma página de perfil com suas últimas interações no site (_threads_ criadas e comentadas)
+  * O _software_ deve permitir ao usuário postar _threads_ definindo sua(s) tag(s) e imagem(ns) inicial(is)
+  * O _software_ deve permitir ao usuário fazer comentários com texto e/ou imagem relacionados a uma _thread_ (o usuário pode utilizar sua identificação ou anonimamente)
+  * O _software_ deve conter "comandos" que quando digitados em um comentário, realizam ações sobre o texto (_spoiler_, citação) 
+  * O _software_ deve permitir que o usuário somente faça comentários em _threads_ existentes
+  * O _software_ deve permitir citar outros comentários a partir de um identificador único de cada comentário
+  * O _software_ deve permitir ao usuário marcar uma parte do comentário ou imagem como _spoiler_, escondendo-a, e para visualizar o conteúdo é necessario ao leitor efetuar determinada ação com o mouse
+  * O _software_ deve permitir ao usuário cadastrado receber notificações das _threads_ marcadas
+  * O _software_ deve permitir ao usuário cadastrado modificar o tema do site (CSS ou temas prontos)
+  
+  
+ 
+ ## 3.2 Requisitos Não Funcionais
+ 
+ 
+ ## 3.3 Regras de Negócios
+ 
+ 
+ # Apêndice
+ 
+ ## Tabela de Atalhos
+ 
+| Funcionalidade| Atalho        |
+| ------------- |---------------|
+| Próxima página      | CTRL+N  |
+| Pagina Anterior      | CTRL+B |
