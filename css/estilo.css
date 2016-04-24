@@ -1,0 +1,7 @@
+#hero{
+    background-image: url("../img/bg.jpg");
+    background-size: contain;
+    background-attachment: fixed;
+    padding: 20%;
+    color: #fff;
+}
