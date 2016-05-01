@@ -2,7 +2,7 @@ body{
     background-color: #efefef;
 }
 #hero{
-    padding: 20%;
+    
     text-align: center;
     color: #fff;
 }
@@ -11,4 +11,17 @@ body{
     background: -o-linear-gradient(bottom right, #49a09d, #5f2c82); /* For Opera 11.1 to 12.0 */
     background: -moz-linear-gradient(bottom right, #49a09d, #5f2c82); /* For Firefox 3.6 to 15 */
     background: linear-gradient(to bottom right, #5f2c82, #49a09d); /* Standard syntax */
+}
+.vertical-center {
+  height:100%;
+  width:100%;
+  text-align: center;  /* align the inline(-block) elements horizontally */
+  font: 0/0 a;         /* remove the gap between inline(-block) elements */
+}
+
+.vertical-center:before {    /* create a full-height inline block pseudo=element */
+  content: " ";
+  display: inline-block;
+  vertical-align: middle;    /* vertical alignment of the inline element */
+  height: 45%;
 }

@@ -11,9 +11,10 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
         <!-- Meu CSS -->
         <link href="css/estilo.css" rel="stylesheet" type="text/css">
+        <link href="css/scrolling-nav.css" rel="stylesheet">
 
     </head>
-    <body>
+    <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
         
         <!-- Fixed navbar -->
         <nav class="navbar navbar-default navbar-fixed-top">
@@ -29,19 +30,25 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
               <ul class="nav navbar-nav navbar-right">
-                <li><a href="../navbar/">Default</a></li>
-                <li><a href="../navbar-static-top/">Static top</a></li>
-                <li><a href="./">Fixed top <span class="sr-only">(current)</span></a></li>
+                    <li>
+                        <a class="page-scroll" href="#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#services">Services</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#contact">Contact</a>
+                    </li>
               </ul>
             </div><!--/.nav-collapse -->
           </div>
         </nav>
         
-        <div class="jumbotron gradient" id="hero">
-            <h1>NyaChann</h1>
-            <h2> Image Board </h2>
+        <div class="jumbotron vertical-center gradient" id="hero">
+                <h1>NyaChann</h1>
+                <h2> Image Board </h2>
         </div>
-        <section class="container">
+        <section class="container" id="about">
             <h2>Popular Threads</h2>
             <div class="row">
               
@@ -87,6 +94,7 @@
                 </div>
               </div>
                 
+               
             </div>
         </section>
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -96,6 +104,8 @@
         <!-- Bootstrap -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
         
+        <script src="js/scrolling-nav.js"></script>
+        <script src="js/script.js"></script>
     </body>
 </html>
         
