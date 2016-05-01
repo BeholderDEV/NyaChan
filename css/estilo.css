@@ -1,7 +1,14 @@
+body{
+    background-color: #efefef;
+}
 #hero{
-    background-image: url("../img/bg.jpg");
-    background-size: contain;
-    background-attachment: fixed;
     padding: 20%;
+    text-align: center;
     color: #fff;
+}
+.gradient{
+    background: -webkit-linear-gradient(left top, #5f2c82, #49a09d); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(bottom right, #49a09d, #5f2c82); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(bottom right, #49a09d, #5f2c82); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to bottom right, #5f2c82, #49a09d); /* Standard syntax */
 }
