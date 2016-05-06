@@ -1,5 +1,5 @@
-$(document).ready(function(){
-    $('#hero').css({
-    'height': $(window).height()+'px'
-    })
-});
+//$(document).ready(function(){
+//    $('#hero').css({
+//    'height': $(window).height()+'px'
+//    })
+//});

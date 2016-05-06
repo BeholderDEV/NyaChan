@@ -2,7 +2,8 @@ body{
     background-color: #efefef;
 }
 #hero{
-    
+    background-image: url(../img/anime.jpg);
+    background-attachment: fixed;
     text-align: center;
     color: #fff;
 }
@@ -13,7 +14,7 @@ body{
     background: linear-gradient(to bottom right, #5f2c82, #49a09d); /* Standard syntax */
 }
 .vertical-center {
-  height:100%;
+  height:65%;
   width:100%;
   text-align: center;  /* align the inline(-block) elements horizontally */
   font: 0/0 a;         /* remove the gap between inline(-block) elements */
