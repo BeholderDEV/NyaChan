@@ -19,7 +19,9 @@
             <div class="page-header">
                 <h1>Anime</h1>
             </div>
+            <ul class="row">
             <?php
+                $iterator =0;
                 $jsonurl = "http://a.4cdn.org/a/catalog.json";
                 $json = file_get_contents($jsonurl);
                 $json_output = json_decode($json);
@@ -29,29 +31,33 @@
                         if (isset($thread->sub)) {
                             $sub = $thread->sub;
                             $no  = $thread->no;
-                            $com  = $thread->com;
+                            //$com  = $thread->com;
+                            $com  = "Tem que ver um jeito de arrumar esse problema com os texto...";
                             $ext  = $thread->ext;
                             $name  = $thread->name;
                             $tim  = $thread->tim;
                             
-                            if(strlen($com)>100){
-                                $com = substr($com,0, 97);
-                                $com =$com."...";
+                            if($iterator%3==0){
+                                echo "<li class='clearfix visible-xs-block'></li>";
+                            }
+                            if($iterator%4==0){
+                                echo "<li class='clearfix visible-sm-block'></li>";
+                            }
+                            if($iterator%6==0){
+                                echo "<li class='clearfix visible-lg-block  visible-md-block'></li>";
                             }
                             
-                            echo "<div class='col-xs-6 col-md-3'><div class='thumbnail'><img src='http://i.4cdn.org/a/".$tim.$ext."' height='100px'><div class='caption'><h3>".$sub."</h3><p>".$com."</p></div></div></div>";
+                            $iterator++;
                             
-                            //echo "<div class='panel panel-default'><div class='panel-heading'><h3 class='panel-title'>".$sub."<small>".$no." by ".$name."</small></h3></div><div class='panel-body'><img src='http://i.4cdn.org/a/".$tim.$ext."' class='img-responsive' width='200px'>".$com."</div></div>";
-
-                            /*
-                            if (strpos($sub, 'DOTA') !== false) {
-                                echo 'Found DOTA!!! Thread Number is: ' . $thread->no;
-                            } 
-                            */
+                            echo "<li class='col-lg-2 col-md-2 col-sm-3 col-xs-4 col-xxs-12'><img class='img-responsive' src='http://i.4cdn.org/a/".$tim.$ext."'><div class='text'><h4>".$sub."</h4>".$com."</div></li>";
+                            
+                            //echo "<div class='col-xs-6 col-md-3'><div class='thumbnail'><img src='http://i.4cdn.org/a/".$tim.$ext."' height='100px'><div class='caption'><h3>".$sub."</h3><p>".$com."</p></div></div></div>";
+                            
                         }
                     }
                 }
             ?>
+            </ul>
         </div>        
         
         

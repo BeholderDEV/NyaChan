@@ -20,7 +20,8 @@
                 <h1>Anime</h1>
             </div>
             <?php
-                $jsonurl = "http://a.4cdn.org/a/1.json";
+            for($i=1; $i<10;$i++){
+                $jsonurl = "http://a.4cdn.org/a/".$i.".json";
                 $json = file_get_contents($jsonurl);
                 $json_output = json_decode($json);
 
@@ -33,7 +34,7 @@
                             $ext  = $post->ext;
                             $name  = $post->name;
                             $tim  = $post->tim;
-
+                            
                             echo "<div class='panel panel-default'><div class='panel-heading'><h3 class='panel-title'>".$sub."<small>".$no." by ".$name."</small></h3></div><div class='panel-body'><img src='http://i.4cdn.org/a/".$tim.$ext."' class='img-responsive' width='200px'>".$com."</div></div>";
 
                             /*
@@ -44,6 +45,8 @@
                         }
                     }
                 }
+            }
+                
             ?>
         </div>        
         
