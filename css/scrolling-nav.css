@@ -23,6 +23,9 @@ html {
         -moz-transition: background .5s ease-in-out,padding .5s ease-in-out;
         transition: background .5s ease-in-out,padding .5s ease-in-out;
     }
+    .navbar a {
+        color: #2980b9 !important;
+    }
     .navbar li a {
         color: #fff !important;
     }
@@ -30,6 +33,9 @@ html {
     .top-nav-collapse {
         background-color: #efefef;
         padding: 0;
+    }
+    .top-nav-collapse a {
+        color: #333 !important;
     }
     .top-nav-collapse li a {
         color: #333 !important;

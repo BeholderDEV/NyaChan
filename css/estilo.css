@@ -14,7 +14,7 @@ body{
     background: linear-gradient(to bottom right, #5f2c82, #49a09d); /* Standard syntax */
 }
 .vertical-center {
-  height:65%;
+  height:75%;
   width:100%;
   text-align: center;  /* align the inline(-block) elements horizontally */
   font: 0/0 a;         /* remove the gap between inline(-block) elements */
