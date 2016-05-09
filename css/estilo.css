@@ -31,9 +31,13 @@ body{
 .quote{
     color: #27ae60;
 }
-
-body {
-    background:#ebebeb;
+s{
+    background-color: #333;
+    color: #333;
+    text-decoration: none;
+}
+s:hover{
+    color: #fff;
 }
 ul {
     padding:0 0 0 0;

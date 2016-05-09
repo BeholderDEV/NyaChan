@@ -28,15 +28,28 @@
 
                 foreach ($json_output as $page) {
                     foreach($page->threads as $thread) {
-                        if (isset($thread->sub)) {
-                            $sub = $thread->sub;
+                        
+                        if (isset($thread->sub)){
+                            $sub  = $thread->sub;    
+                        //}
+                            //else{
+                            //    $sub  = "";    
+                           // }
                             $no  = $thread->no;
-                            //$com  = $thread->com;
-                            $com  = "Tem que ver um jeito de arrumar esse problema com os texto...";
+                            if (isset($thread->com)){
+                                $com  = $thread->com;
+                                if(strlen ($com)>100){
+                                    $com = substr($com, 0, 100)."'...</a>";
+                                }
+                            }
+                            else{
+                                $com  = "";    
+                            }
                             $ext  = $thread->ext;
                             $name  = $thread->name;
                             $tim  = $thread->tim;
-                            
+
+
                             if($iterator%3==0){
                                 echo "<li class='clearfix visible-xs-block'></li>";
                             }
@@ -46,13 +59,19 @@
                             if($iterator%6==0){
                                 echo "<li class='clearfix visible-lg-block  visible-md-block'></li>";
                             }
-                            
+
                             $iterator++;
-                            
-                            echo "<li class='col-lg-2 col-md-2 col-sm-3 col-xs-4 col-xxs-12'><img class='img-responsive' src='http://i.4cdn.org/a/".$tim.$ext."'><div class='text'><h4>".$sub."</h4>".$com."</div></li>";
-                            
-                            //echo "<div class='col-xs-6 col-md-3'><div class='thumbnail'><img src='http://i.4cdn.org/a/".$tim.$ext."' height='100px'><div class='caption'><h3>".$sub."</h3><p>".$com."</p></div></div></div>";
-                            
+
+                            echo "<li class='col-lg-2 col-md-2 col-sm-3 col-xs-4 col-xxs-12'>";
+
+                            if('.webm' === $ext){
+                                //echo "<video controls autoplay><source src='http://i.4cdn.org/a/".$tim.$ext."'type='video/webm' //codecs='vp8, vorbis'></video>";
+
+                            }
+                            else{
+                                echo "<img class='img-responsive' src='http://i.4cdn.org/a/".$tim.$ext."'>";
+                            }
+                            echo "<div class='text'><h4>".$sub."</h4>".$com."</div></li>";
                         }
                     }
                 }
