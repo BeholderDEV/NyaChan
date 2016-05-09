@@ -28,7 +28,7 @@ body{
   vertical-align: middle;    /* vertical alignment of the inline element */
   height: 45%;
 }
-.quote{
+.quote, .quotelink{
     color: #27ae60;
 }
 s{
