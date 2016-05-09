@@ -9,6 +9,16 @@ body{
     text-align: center;
     color: #fff;
 }
+
+.panel-heading{
+    background-color: #3498db !important;
+    color: #fff !important;
+}
+
+.panel-footer{
+    background-color: #dedede !important;
+}
+
 .gradient{
     background: -webkit-linear-gradient(left top, #5f2c82, #49a09d); /* For Safari 5.1 to 6.0 */
     background: -o-linear-gradient(bottom right, #49a09d, #5f2c82); /* For Opera 11.1 to 12.0 */
@@ -28,7 +38,7 @@ body{
   vertical-align: middle;    /* vertical alignment of the inline element */
   height: 45%;
 }
-.quote, .quotelink{
+.quote{
     color: #27ae60;
 }
 s{

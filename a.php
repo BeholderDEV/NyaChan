@@ -18,13 +18,14 @@
     <body>
         
         <div class="container">
-            <div class="page-header">
-                <h1>Anime</h1>
-            </div>
+            
             <?php
                 $board ="a";
                 $page = 1;
                 $fim =1;
+                if (isset($_GET["board"])){
+                    $board =$_GET["board"];
+                }
                 if (isset($_GET["page"])){
                     if("all" === $_GET["page"]){
                         $fim = 10;
@@ -34,6 +35,7 @@
                         $fim = $page;
                     }
                 }
+                echo "<div class='page-header'><h1>Board /".$board."</h1></div>";
                 
                 for($i=$page; $i<=$fim;$i++){
                     $jsonurl = "http://a.4cdn.org/".$board."/".$i.".json";
@@ -67,11 +69,11 @@
                                 echo "<div class='panel panel-default' id='".$no."'><div class='panel-heading'><h3 class='panel-title'>".$sub."<small>".$no." by ".$name."</small></h3></div><div class='panel-body'>";
 
                                 if('.webm' === $ext){
-                                    echo "<video controls width='320' height='240' autoplay><source src='http://i.4cdn.org/".$board."/".$tim.$ext."'type='video/webm' codecs='vp8, vorbis'></video>";
+                                    echo "<video controls width='450' height='240' autoplay><source src='http://i.4cdn.org/".$board."/".$tim.$ext."'type='video/webm' codecs='vp8, vorbis'></video>";
 
                                 }
                                 else{
-                                    echo "<img src='http://i.4cdn.org/".$board."/".$tim.$ext."' class='img-responsive' width='150px'>";
+                                    echo "<img src='http://i.4cdn.org/".$board."/".$tim.$ext."' class='img-responsive' width='300px'>";
                                 }
 
                                 echo $com."</div><div class='panel-footer'>";
@@ -106,12 +108,11 @@
                                     $tim  = "";
                                     $hasImage=false;
                                 }
-                                $name  = $post->name;
 
                                 echo "<li class='list-group-item'>";
                                 if($hasImage){
                                     if('.webm' === $ext){
-                                        echo "<video controls width='320' height='240' autoplay><source src='http://i.4cdn.org/".$board."/".$tim.$ext."'type='video/webm' codecs='vp8, vorbis'></video>";
+                                        echo "<video controls width='450' height='240' autoplay><source src='http://i.4cdn.org/".$board."/".$tim.$ext."'type='video/webm' codecs='vp8, vorbis'></video>";
 
                                     }
                                     else{
