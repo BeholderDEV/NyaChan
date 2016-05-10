@@ -9,7 +9,28 @@ body{
     text-align: center;
     color: #fff;
 }
+.zero-clipboard {
+    position: relative;
+}
 
+.btn-clipboard {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 10;
+    display: block;
+    padding: 6px 8px;
+    font-size: 12px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.btn-clipboard i{
+    margin: 6px;
+}
+.btn-clipboard i:hover{
+    color: #333;
+}
 .panel-heading{
     background-color: #3498db !important;
     color: #fff !important;
@@ -19,6 +40,9 @@ body{
     background-color: #dedede !important;
 }
 
+.panel-title span{
+    font-size: 11px;
+}
 .gradient{
     background: -webkit-linear-gradient(left top, #5f2c82, #49a09d); /* For Safari 5.1 to 6.0 */
     background: -o-linear-gradient(bottom right, #49a09d, #5f2c82); /* For Opera 11.1 to 12.0 */

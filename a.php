@@ -66,10 +66,26 @@
 
 
 
-                                echo "<div class='panel panel-default' id='".$no."'><div class='panel-heading'><h3 class='panel-title'>".$sub."<small>".$no." by ".$name."</small></h3></div><div class='panel-body'>";
-
+                                echo "<div class='panel panel-default' id='".$no."'>";
+                                
+                                echo "<div class='zero-clipboard'><span class='btn-clipboard'>";
+                                echo "<i class='fa fa-bookmark-o' title='Marcar'></i>";
+                                echo "<i class='fa fa-refresh' title='Atualizar'></i>";
+                                echo "<i class='fa fa-reply' title='Responder'></i>";
+                                echo "</span></div>";
+                                echo "<div class='panel-heading'>";
+                                
+                                
+                                
+                                echo "<h3 class='panel-title'>".$sub." ~ <span> No.<a href='#".$no."'>".$no."</a> by ".$name."</span></h3>";
+                                
+                                echo "</div>";
+                                
+                                echo "<div class='panel-body'>";
+                                
+                                
                                 if('.webm' === $ext){
-                                    echo "<video controls width='450' height='240' autoplay><source src='http://i.4cdn.org/".$board."/".$tim.$ext."'type='video/webm' codecs='vp8, vorbis'></video>";
+                                    echo "<video controls width='450' height='240'><source src='http://i.4cdn.org/".$board."/".$tim.$ext."'type='video/webm' codecs='vp8, vorbis'></video>";
 
                                 }
                                 else{
@@ -78,11 +94,6 @@
 
                                 echo $com."</div><div class='panel-footer'>";
                                 echo "<ul class='list-group'>";
-                                /*
-                                if (strpos($sub, 'DOTA') !== false) {
-                                    echo 'Found DOTA!!! Thread Number is: ' . $thread->no;
-                                } 
-                                */
                             }
                             else{
                                 $hasImage=true;
@@ -110,9 +121,11 @@
                                 }
 
                                 echo "<li class='list-group-item'>";
+                                
+                                
                                 if($hasImage){
                                     if('.webm' === $ext){
-                                        echo "<video controls width='450' height='240' autoplay><source src='http://i.4cdn.org/".$board."/".$tim.$ext."'type='video/webm' codecs='vp8, vorbis'></video>";
+                                        echo "<video controls width='450' height='240'><source src='http://i.4cdn.org/".$board."/".$tim.$ext."'type='video/webm' codecs='vp8, vorbis'></video>";
 
                                     }
                                     else{
