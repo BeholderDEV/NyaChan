@@ -69,6 +69,9 @@
                                 echo "<div class='panel panel-default' id='".$no."'>";
                                 
                                 echo "<div class='zero-clipboard'><span class='btn-clipboard'>";
+                                echo "<a href='thread.php?board=".$board."&number=".$no."'>";
+                                echo "<i class='fa fa-eye' title='Visualizar'></i>";
+                                echo "</a>";
                                 echo "<i class='fa fa-bookmark-o' title='Marcar'></i>";
                                 echo "<i class='fa fa-refresh' title='Atualizar'></i>";
                                 echo "<i class='fa fa-reply' title='Responder'></i>";
@@ -89,7 +92,7 @@
 
                                 }
                                 else{
-                                    echo "<img src='http://i.4cdn.org/".$board."/".$tim.$ext."' class='img-responsive' width='300px'>";
+                                    echo "<img src='http://i.4cdn.org/".$board."/".$tim.$ext."' class='img-responsive main-image image-md'>";
                                 }
 
                                 echo $com."</div><div class='panel-footer'>";
@@ -121,7 +124,11 @@
                                 }
 
                                 echo "<li class='list-group-item'>";
-                                
+                                echo "<div class='zero-clipboard'><span class='com-btn-clipboard'>";
+
+                                echo "No.<a href='#".$no."'>".$no."</a> by ".$name;
+
+                                echo "</span></div>";
                                 
                                 if($hasImage){
                                     if('.webm' === $ext){
@@ -129,7 +136,7 @@
 
                                     }
                                     else{
-                                        echo "<img src='http://i.4cdn.org/".$board."/".$tim.$ext."' class='img-responsive' width='150px'>";
+                                        echo "<img src='http://i.4cdn.org/".$board."/".$tim.$ext."' class='img-responsive com-image image-sm'>";
                                     }
 
                                 }                            
@@ -147,5 +154,13 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <!-- Bootstrap -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+        <script>
+            $(".main-image").click(function(){
+                $(this).toggleClass( "image-md" );
+            });
+            $(".com-image").click(function(){
+                $(this).toggleClass( "image-sm" );
+            });
+        </script>
     </body>
 </html>

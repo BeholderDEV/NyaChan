@@ -1,7 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Bree+Serif);
 
 body{
-    background-color: #efefef;
+    background-color: #333;
 }
 #hero{
     background-image: url(../img/anime.jpg);
@@ -11,6 +11,18 @@ body{
 }
 .zero-clipboard {
     position: relative;
+}
+
+.com-btn-clipboard {
+    opacity: 0.7;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 10;
+    display: block;
+    font-size: 12px;
+    color: #999;
+    cursor: pointer;
 }
 
 .btn-clipboard {
@@ -31,23 +43,50 @@ body{
 .btn-clipboard i:hover{
     color: #333;
 }
-.panel-heading{
-    background-color: #3498db !important;
+a{
+    text-decoration: none;
+    color: #dc143c;
+}
+.panel{
+    border: 0;
+}
+.panel-body{
+    background-color: #444 !important;
     color: #fff !important;
+    border: 0;
 }
-
 .panel-footer{
-    background-color: #dedede !important;
+    background-color: #222 !important;
+    color: #fff !important;
+    border: 0;
+}
+li{
+    background-color: #444 !important;
+    color: #fff !important;
+    border: 0 !important;
+}
+.panel-heading{
+    background-color: #dc143c !important;
+    color: #fff !important;
+    border: 0;
 }
 
+.panel-heading a, .btn-clipboard a{
+    text-decoration: none;
+    color: #eee;
+}
 .panel-title span{
     font-size: 11px;
 }
-.gradient{
-    background: -webkit-linear-gradient(left top, #5f2c82, #49a09d); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(bottom right, #49a09d, #5f2c82); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(bottom right, #49a09d, #5f2c82); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(to bottom right, #5f2c82, #49a09d); /* Standard syntax */
+.list-group li{
+    margin: 2px;
+}
+
+.image-md{
+    width: 300px;
+}
+.image-sm{
+    width: 150px;
 }
 .vertical-center {
   height:75%;
@@ -66,12 +105,14 @@ body{
     color: #27ae60;
 }
 s{
-    background-color: #333;
-    color: #333;
+    cursor: pointer;
+    background-color: #ddd;
+    color: #ddd;
     text-decoration: none;
+    padding: 2px;
 }
 s:hover{
-    color: #fff;
+    color: #333;
 }
 ul {
     padding:0 0 0 0;
