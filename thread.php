@@ -104,7 +104,7 @@
                             $hasImage=false;
                         }
 
-                        echo "<li class='list-group-item'>";
+                        echo "<li class='list-group-item' id='p".$no."'>";
 
                         echo "<div class='zero-clipboard'><span class='com-btn-clipboard'>";
                         
