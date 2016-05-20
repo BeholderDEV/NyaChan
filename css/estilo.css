@@ -47,25 +47,31 @@ a{
     text-decoration: none;
     color: #dc143c;
 }
+
+.page-header{
+    color: #fff;
+    border-bottom: 0;
+}
+
 .panel{
     border: 0;
 }
-.panel-body{
+.panel-body{ /* comentario principal OP*/
     background-color: #444 !important;
     color: #fff !important;
     border: 0;
 }
-.panel-footer{
+.panel-footer{ /* parte de traz dos comentarios*/
     background-color: #222 !important;
     color: #fff !important;
     border: 0;
 }
-li{
+.panel-footer li{ /* cada comentario*/
     background-color: #444 !important;
     color: #fff !important;
     border: 0 !important;
 }
-.panel-heading{
+.panel-heading{ /* Titulo OP*/
     background-color: #dc143c !important;
     color: #fff !important;
     border: 0;
