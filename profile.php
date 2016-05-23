@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="pt-BR">
     <head>
@@ -17,8 +15,7 @@
 
     </head>
     <body>
-        
-        <nav class="navbar navbar-default navbar-fixed-top">
+         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -31,7 +28,7 @@
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="btn" data-toggle="modal" data-target="#myModal"><a>New Thread  <i class="fa fa-plus"></i></a></li>
+                        <li class="btn" data-toggle="modal" data-target="#myModal"><a>New Thread  <i class="fa fa-reply"></i></a></li>
                         <li class="btn"><a><i class="fa fa-user"></i> Alisson</a></li>
                     </ul>
                 </div><!--/.nav-collapse -->
@@ -44,10 +41,25 @@
             </a>
         </div>
         
+        
+        <div class="row" id="profile-area">
+            <div class="col-md-offset-5 col-md-2" >
+                <img src="img/user.jpg" class="img-responsive img-rounded" id="profile-pic"/>
+                <h2>Alisson Steffens</h2>
+                <div class="btn-group" role="group" aria-label="...">
+                    <button type="button" class="btn btn-default" title="Alterar CSS"><i class="fa fa-code"></i></button>
+                    <button type="button" class="btn btn-default" title="Alterar Imagens Perfil"><i class="fa fa-image"></i></button>
+                    <button type="button" class="btn btn-default" title="Alterar Configurações de Perfil"><i class="fa fa-cogs"></i></button>
+                    <button type="button" class="btn btn-default">Right</button>
+                </div>
+            </div>
+        </div>
+        
         <div class="container">
             
+            
             <?php
-                $board ="a";
+                $board ="g";
                 $page = 1;
                 $fim =1;
                 if (isset($_GET["board"])){
@@ -62,7 +74,6 @@
                         $fim = $page;
                     }
                 }
-                echo "<div class='page-header'><h1>Board /".$board."</h1></div>";
                 
                 for($i=$page; $i<=$fim;$i++){
                     $jsonurl = "http://a.4cdn.org/".$board."/".$i.".json";
@@ -186,7 +197,8 @@
                     }
                 }
             ?>
-        </div>        
+        </div>
+        
         
         
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -228,7 +240,8 @@
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
-        
+
+
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <!-- Bootstrap -->
