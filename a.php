@@ -27,7 +27,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Nya Chan</a>
+                    <a class="navbar-brand" href="a.php">Nya Chan</a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
@@ -187,8 +187,36 @@
                 }
             ?>
         </div>        
-        
-        
+        <div class="container">
+            <div class="btn-group" role="group">
+                <?php
+                    echo "<button type='button' class='btn btn-default btn-page'><a href='a.php?page=all&board=".$board."'>All</a></button>";
+                    if($page>1){
+                     echo "<button type='button' class='btn btn-default btn-page'><a href='a.php?page=".($page-1)."&board=".$board."'><i class='fa fa-angle-left'></i></a></button>";   
+                    }
+                    for($i=1; $i<=10;$i++){
+                        echo "<button type='button' class='btn btn-default btn-page'><a href='a.php?page=".$i."&board=".$board."'>".$i."</a></button>";
+                    }
+                    if($page<10){
+                        echo "<button type='button' class='btn btn-default btn-page'><a href='a.php?page=".($page+1)."&board=".$board."'><i class='fa fa-angle-right'></i></a></button>";
+                    }
+                    ?>
+            </div>
+        </div>
+        <div class="container">
+            <div class="btn-group" role="group">
+                <?php
+                    $jsonurl = "https://a.4cdn.org/boards.json";
+                    $json = file_get_contents($jsonurl);
+                    $json_output = json_decode($json);
+                    foreach($json_output->boards as $boarddata){
+                        $boardname = $boarddata -> board;
+                        echo "<button type='button' class='btn btn-default btn-page'><a href='a.php?board=".$boardname."'>#".$boardname."</a></button>";
+                    }
+                ?>
+            </div>
+        </div>
+
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog">
                 <div class="modal-content">

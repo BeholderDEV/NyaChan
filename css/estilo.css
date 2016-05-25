@@ -90,6 +90,19 @@ a{
     color: #fff !important;
     border: 0;
 }
+
+.btn-page{
+    background-color: rgba(68,68,68,0.95) !important;
+    border: 0;
+}
+
+.btn-page:hover{
+    background-color: #dc143c !important;
+}
+
+.btn-page a{
+    color: #fff !important;
+}
 .btn-clipboard button, .btn-clipboard a{
     background-color: transparent;
     color: #fff;
