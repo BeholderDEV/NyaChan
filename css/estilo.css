@@ -48,6 +48,10 @@ a{
     text-decoration: none;
     color: #dc143c;
 }
+a:hover{
+    text-decoration: none;
+    color: #FF6483;
+}
 .navbar-default{
     background-color: #222;
     opacity: .95;
@@ -90,18 +94,30 @@ a{
     color: #fff !important;
     border: 0;
 }
+footer{
+    margin-top: 20px;
+    text-align: center;
+    background-color: #444;
+}
 
-.btn-page{
+.btn-board{
+    padding: 2px;
+    font-size: 11px;
+}
+.btn-page,  .btn-board{
     background-color: rgba(68,68,68,0.95) !important;
     border: 0;
 }
 
-.btn-page:hover{
+.btn-page:hover, .btn-board:hover{
     background-color: #dc143c !important;
 }
 
-.btn-page a{
+.btn-page a, .btn-board a{
     color: #fff !important;
+}
+.btn-nsfw a{
+   color: #f2ca27 !important; 
 }
 .btn-clipboard button, .btn-clipboard a{
     background-color: transparent;

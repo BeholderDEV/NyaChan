@@ -95,8 +95,11 @@
                                 $ext  = $post->ext;
                                 $name  = $post->name;
                                 $tim  = $post->tim;
-
-
+                                $filename = $post->filename;
+                                $width = $post->w;
+                                $height = $post->h;
+                                $tumb_width = $post->tn_w;
+                                $tumb_height = $post->tn_h;
 
                                 echo "<div class='panel panel-default' id='".$no."'>";
                                 
@@ -118,13 +121,13 @@
                                 
                                 echo "<div class='panel-body'>";
                                 
-                                
+                                echo "<a href='http://i.4cdn.org/".$board."/".$tim.$ext."' target='_blank'>".$filename.$ext."</a>";
                                 if('.webm' === $ext){
                                     echo "<video controls width='450' height='240'><source src='http://i.4cdn.org/".$board."/".$tim.$ext."'type='video/webm' codecs='vp8, vorbis'></video>";
 
                                 }
                                 else{
-                                    echo "<img src='http://i.4cdn.org/".$board."/".$tim.$ext."' class='img-responsive main-image image-md'>";
+                                    echo "<img src='http://i.4cdn.org/".$board."/".$tim."s.jpg' data-image='http://i.4cdn.org/".$board."/".$tim.$ext."' data-width='".$width."px'   data-height='".$height."px' width='".$tumb_width."px'   height='".$tumb_height."px' class='img-responsive nya-image'>";
                                 }
 
                                 echo "<p>".$com."</p></div><div class='panel-footer'>";
@@ -149,7 +152,8 @@
                                     $hasImage=false;
                                 }
                                 if (isset($post->tim)){
-                                   $tim  = $post->tim;   
+                                   $tim  = $post->tim;
+                                    $filename = $post->filename;
                                 }
                                 else{
                                     $tim  = "";
@@ -168,14 +172,14 @@
                                 echo "No.<a href='#".$no."'>".$no."</a> by ".$name;
 
                                 echo "</span></div>";
-                                
                                 if($hasImage){
+                                    echo "<a href='http://i.4cdn.org/".$board."/".$tim.$ext."' target='_blank'>".$filename.$ext."</a>";
                                     if('.webm' === $ext){
                                         echo "<video controls width='450' height='240'><source src='http://i.4cdn.org/".$board."/".$tim.$ext."'type='video/webm' codecs='vp8, vorbis'></video>";
 
                                     }
                                     else{
-                                        echo "<img src='http://i.4cdn.org/".$board."/".$tim.$ext."' class='img-responsive com-image image-sm'>";
+                                        echo "<img src='http://i.4cdn.org/".$board."/".$tim."s.jpg' data-image='http://i.4cdn.org/".$board."/".$tim.$ext."' data-width='".$width."px'   data-height='".$height."px' width='".$tumb_width."px'   height='".$tumb_height."px' class='img-responsive nya-image'>";
                                     }
 
                                 }                            
@@ -203,7 +207,7 @@
                     ?>
             </div>
         </div>
-        <div class="container">
+        <footer class="footer">
             <div class="btn-group" role="group">
                 <?php
                     $jsonurl = "https://a.4cdn.org/boards.json";
@@ -211,11 +215,16 @@
                     $json_output = json_decode($json);
                     foreach($json_output->boards as $boarddata){
                         $boardname = $boarddata -> board;
-                        echo "<button type='button' class='btn btn-default btn-page'><a href='a.php?board=".$boardname."'>#".$boardname."</a></button>";
+                        $isWS =$boarddata -> ws_board;
+                        echo "<button type='button' class='btn btn-default btn-board ";
+                        if(!$isWS){
+                            echo "btn-nsfw";
+                        }
+                        echo "'><a href='a.php?board=".$boardname."'>#".$boardname."</a></button>";
                     }
                 ?>
             </div>
-        </div>
+        </footer>
 
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog">
@@ -272,11 +281,17 @@
                     label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
                 input.trigger('fileselect', [numFiles, label]);
             });
-            $(".main-image").click(function(){
-                $(this).toggleClass( "image-md" );
-            });
-            $(".com-image").click(function(){
-                $(this).toggleClass( "image-sm" );
+            $(".nya-image").click(function(){
+                var img = $(this).attr('src');
+                $(this).attr('src', $(this).data('image'));
+                $(this).data('image', img);
+                var w =  $(this).attr('width');
+                $(this).attr('width', $(this).data('width'));
+                $(this).data('width', w)
+                var h =  $(this).attr('height');
+                $(this).attr('height', $(this).data('height'));
+                $(this).data('height', h)
+                
             });
         </script>
     </body>
