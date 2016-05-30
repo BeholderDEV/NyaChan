@@ -137,6 +137,18 @@ footer{
 .list-group li{
     margin: 2px;
 }
+.image-thumb{
+    max-height: 125px;
+    max-width: 125px;
+    width: auto;
+    height: auto;
+}
+.image-thumb-OP{
+    max-height: 250px;
+    max-width: 250px;
+    width: auto;
+    height: auto;
+}
 .image-md{
     width: 300px;
 }

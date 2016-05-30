@@ -127,7 +127,7 @@
 
                                 }
                                 else{
-                                    echo "<img src='http://i.4cdn.org/".$board."/".$tim."s.jpg' data-image='http://i.4cdn.org/".$board."/".$tim.$ext."' data-width='".$width."px'   data-height='".$height."px' width='".$tumb_width."px'   height='".$tumb_height."px' class='img-responsive nya-image'>";
+                                    echo "<img src='http://i.4cdn.org/".$board."/".$tim."s.jpg' data-image='http://i.4cdn.org/".$board."/".$tim.$ext."' data-width='".$width."px'   data-height='".$height."px' width='".$tumb_width."px'   height='".$tumb_height."px' class='img-responsive nya-image image-thumb-OP OP'>";
                                 }
 
                                 echo "<p>".$com."</p></div><div class='panel-footer'>";
@@ -152,8 +152,12 @@
                                     $hasImage=false;
                                 }
                                 if (isset($post->tim)){
-                                   $tim  = $post->tim;
+                                    $tim  = $post->tim;
                                     $filename = $post->filename;
+                                    $width = $post->w;
+                                    $height = $post->h;
+                                    $tumb_width = $post->tn_w;
+                                    $tumb_height = $post->tn_h;
                                 }
                                 else{
                                     $tim  = "";
@@ -179,7 +183,7 @@
 
                                     }
                                     else{
-                                        echo "<img src='http://i.4cdn.org/".$board."/".$tim."s.jpg' data-image='http://i.4cdn.org/".$board."/".$tim.$ext."' data-width='".$width."px'   data-height='".$height."px' width='".$tumb_width."px'   height='".$tumb_height."px' class='img-responsive nya-image'>";
+                                        echo "<img src='http://i.4cdn.org/".$board."/".$tim."s.jpg' data-image='http://i.4cdn.org/".$board."/".$tim.$ext."' data-width='".$width."px'   data-height='".$height."px' width='".$tumb_width."px'   height='".$tumb_height."px' class='img-responsive nya-image image-thumb'>";
                                     }
 
                                 }                            
@@ -291,8 +295,15 @@
                 var h =  $(this).attr('height');
                 $(this).attr('height', $(this).data('height'));
                 $(this).data('height', h)
+                if($(this).hasClass('OP')){
+                    $(this).toggleClass('image-thumb-OP');
+                }
+                else{
+                    $(this).toggleClass('image-thumb');    
+                }
                 
             });
+            
         </script>
     </body>
 </html>
