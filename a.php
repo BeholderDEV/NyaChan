@@ -17,7 +17,7 @@
 
     </head>
     <body>
-        
+
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
@@ -37,15 +37,15 @@
                 </div><!--/.nav-collapse -->
             </div>
         </nav>
-        
+
         <div id="back-to-top-button">
             <a href="javascript:void(0);" title="Voltar ao início da página">
                 <span class="glyphicon glyphicon-chevron-up"></span>
             </a>
         </div>
-        
+
         <div class="container">
-            
+
             <?php
                 $board ="a";
                 $page = 1;
@@ -63,7 +63,7 @@
                     }
                 }
                 echo "<div class='page-header'><h1>Board /".$board."</h1></div>";
-                
+
                 for($i=$page; $i<=$fim;$i++){
                     $jsonurl = "http://a.4cdn.org/".$board."/".$i.".json";
                     $json = file_get_contents($jsonurl);
@@ -73,10 +73,10 @@
                         foreach($thread->posts as $post) {
                             if (isset($post->bumplimit)) {
                                 if (isset($post->sub)){
-                                    $sub  = $post->sub;    
+                                    $sub  = $post->sub;
                                 }
                                 else{
-                                    $sub  = "";    
+                                    $sub  = "";
                                 }
                                 $no  = $post->no;
                                 if (isset($post->com)){
@@ -84,13 +84,13 @@
 
                                 }
                                 else{
-                                    $com  = "";    
+                                    $com  = "";
                                 }
                                 if (isset($post->trip)){
-                                    $trip  = $post->trip;    
+                                    $trip  = $post->trip;
                                 }
                                 else{
-                                    $trip = "";    
+                                    $trip = "";
                                 }
                                 $ext  = $post->ext;
                                 $name  = $post->name;
@@ -102,9 +102,9 @@
                                 $tumb_height = $post->tn_h;
 
                                 echo "<div class='panel panel-default' id='".$no."'>";
-                                
+
                                 echo "<div class='zero-clipboard'><span class='btn-clipboard'><div class='btn-group' role='group' aria-label='...'>";
-                                
+
                                 echo "<button type='button' class='btn btn-default' title='Visualizar'><a href='thread.php?board=".$board."&number=".$no."'><i class='fa fa-eye'></i></a></button>";
                                 echo "<button type='button' class='btn btn-default' title='Marcar'><i class='fa fa-bookmark-o'></i></button>";
                                 echo "<button type='button' class='btn btn-default' title='Atualizar'><i class='fa fa-refresh'></i></button>";
@@ -112,18 +112,18 @@
 
                                 echo "</div></span></div>";
                                 echo "<div class='panel-heading'>";
-                                
-                                
-                                
+
+
+
                                 echo "<h3 class='panel-title'>".$sub." ~ <span> No.<a href='#".$no."'>".$no."</a> by ".$name." ".$trip."</span></h3>";
-                                
+
                                 echo "</div>";
-                                
+
                                 echo "<div class='panel-body'>";
-                                
+
                                 echo "<a href='http://i.4cdn.org/".$board."/".$tim.$ext."' target='_blank'>".$filename.$ext."</a>";
                                 if('.webm' === $ext){
-                                    echo "<video controls width='450' height='240'><source src='http://i.4cdn.org/".$board."/".$tim.$ext."'type='video/webm' codecs='vp8, vorbis'></video>";
+                                    echo "<br><video controls width='450' height='240'><source src='http://i.4cdn.org/".$board."/".$tim.$ext."'type='video/webm' codecs='vp8, vorbis'></video>";
 
                                 }
                                 else{
@@ -134,7 +134,7 @@
                                 echo "<ul class='list-group'>";
                             }
                             else{
-                                
+
                                 $hasImage=true;
                                 $no  = $post->no;
                                 if (isset($post->com)){
@@ -142,7 +142,7 @@
 
                                 }
                                 else{
-                                    $com  = "";    
+                                    $com  = "";
                                 }
                                 if (isset($post->ext)){
                                    $ext  = $post->ext;
@@ -164,12 +164,12 @@
                                     $hasImage=false;
                                 }
                                 $name = $post->name;
-                                
+
                                 if(isset($post->capcode)){
                                     echo "<div class='panel'><div class='panel-footer'>";
                                     echo "<ul class='list-group'>";
                                 }
-                                
+
                                 echo "<li class='list-group-item'>";
                                 echo "<div class='zero-clipboard'><span class='com-btn-clipboard'>";
 
@@ -179,14 +179,14 @@
                                 if($hasImage){
                                     echo "<a href='http://i.4cdn.org/".$board."/".$tim.$ext."' target='_blank'>".$filename.$ext."</a>";
                                     if('.webm' === $ext){
-                                        echo "<video controls width='450' height='240'><source src='http://i.4cdn.org/".$board."/".$tim.$ext."'type='video/webm' codecs='vp8, vorbis'></video>";
+                                        echo "<br><video controls width='450' height='240'><source src='http://i.4cdn.org/".$board."/".$tim.$ext."'type='video/webm' codecs='vp8, vorbis'></video>";
 
                                     }
                                     else{
                                         echo "<img src='http://i.4cdn.org/".$board."/".$tim."s.jpg' data-image='http://i.4cdn.org/".$board."/".$tim.$ext."' data-width='".$width."px'   data-height='".$height."px' width='".$tumb_width."px'   height='".$tumb_height."px' class='img-responsive nya-image image-thumb'>";
                                     }
 
-                                }                            
+                                }
                                 echo "<p>".$com."</p></li>";
                             }
                         }
@@ -194,13 +194,13 @@
                     }
                 }
             ?>
-        </div>        
+        </div>
         <div class="container">
             <div class="btn-group" role="group">
                 <?php
                     echo "<button type='button' class='btn btn-default btn-page'><a href='a.php?page=all&board=".$board."'>All</a></button>";
                     if($page>1){
-                     echo "<button type='button' class='btn btn-default btn-page'><a href='a.php?page=".($page-1)."&board=".$board."'><i class='fa fa-angle-left'></i></a></button>";   
+                     echo "<button type='button' class='btn btn-default btn-page'><a href='a.php?page=".($page-1)."&board=".$board."'><i class='fa fa-angle-left'></i></a></button>";
                     }
                     for($i=1; $i<=10;$i++){
                         echo "<button type='button' class='btn btn-default btn-page'><a href='a.php?page=".$i."&board=".$board."'>".$i."</a></button>";
@@ -269,7 +269,7 @@
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
-        
+
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <!-- Bootstrap -->
@@ -299,11 +299,11 @@
                     $(this).toggleClass('image-thumb-OP');
                 }
                 else{
-                    $(this).toggleClass('image-thumb');    
+                    $(this).toggleClass('image-thumb');
                 }
-                
+
             });
-            
+
         </script>
     </body>
 </html>
