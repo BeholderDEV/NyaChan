@@ -286,8 +286,7 @@
                 input.trigger('fileselect', [numFiles, label]);
             });
             function restore_image(){
-                alert("fechoutz");
-                $(this).parent().children(".nya-image").show;
+                $(this).parent().children(".nya-image").show();
                 $(this).remove();
 
             }
@@ -295,7 +294,7 @@
                 var img = $(this).data('image');
                 var full = '<img src="'+img+'" class="img-responsive nya-image-full" />';
                 var tag = $(full);
-                tag.find(".nya-image-full").on("click", restore_image);
+                tag.on("click", restore_image);
                 $(this).hide();
                 $(this).parent().append(tag);
 
