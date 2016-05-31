@@ -127,7 +127,7 @@
 
                                 }
                                 else{
-                                    echo "<img src='http://i.4cdn.org/".$board."/".$tim."s.jpg' data-image='http://i.4cdn.org/".$board."/".$tim.$ext."' data-width='".$width."px'   data-height='".$height."px' width='".$tumb_width."px'   height='".$tumb_height."px' class='img-responsive nya-image image-thumb-OP OP'>";
+                                    echo "<div id='img-div'><img src='http://i.4cdn.org/".$board."/".$tim."s.jpg' data-image='http://i.4cdn.org/".$board."/".$tim.$ext."' data-width='".$width."px'   data-height='".$height."px' width='".$tumb_width."px'   height='".$tumb_height."px' class='img-responsive nya-image image-thumb-OP OP'></div>";
                                 }
 
                                 echo "<p>".$com."</p></div><div class='panel-footer'>";
@@ -299,7 +299,7 @@
                 $(this).parent().append(tag);
 
             });
-            
+
 
         </script>
     </body>

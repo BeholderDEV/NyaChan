@@ -34,18 +34,18 @@
                 </div><!--/.nav-collapse -->
             </div>
         </nav>
-        
+
         <div id="back-to-top-button">
             <a href="javascript:void(0);" title="Voltar ao início da página">
                 <span class="glyphicon glyphicon-chevron-up"></span>
             </a>
         </div>
-        
-        
-        
-        
+
+
+
+
         <div class="container">
-            
+
             <?php
                 $thread =$_GET["number"];
                 $board =$_GET["board"];
@@ -57,10 +57,10 @@
                     if (isset($post->bumplimit)) {
 
                         if (isset($post->sub)){
-                            $sub  = $post->sub;    
+                            $sub  = $post->sub;
                         }
                         else{
-                            $sub  = "";    
+                            $sub  = "";
                         }
                         $no  = $post->no;
                         if (isset($post->com)){
@@ -68,18 +68,22 @@
 
                         }
                         else{
-                            $com  = "";    
+                            $com  = "";
                         }
                         $ext  = $post->ext;
                         $name  = $post->name;
                         $tim  = $post->tim;
+                        $width = $post->w;
+                        $height = $post->h;
+                        $tumb_width = $post->tn_w;
+                        $tumb_height = $post->tn_h;
 
 
 
                         echo "<div class='panel panel-default' id='".$no."'>";
 
                         echo "<div class='zero-clipboard'><span class='btn-clipboard'><div class='btn-group' role='group' aria-label='...'>";
-                                
+
                         echo "<button type='button' class='btn btn-default' title='Visualizar'><a href='thread.php?board=".$board."&number=".$no."'><i class='fa fa-eye'></i></a></button>";
                         echo "<button type='button' class='btn btn-default' title='Marcar'><i class='fa fa-bookmark-o'></i></button>";
                         echo "<button type='button' class='btn btn-default' title='Atualizar'><i class='fa fa-refresh'></i></button>";
@@ -102,7 +106,7 @@
 
                         }
                         else{
-                            echo "<img src='http://i.4cdn.org/".$board."/".$tim.$ext."' class='img-responsive main-image image-md'>";
+                            echo "<img src='http://i.4cdn.org/".$board."/".$tim."s.jpg' data-image='http://i.4cdn.org/".$board."/".$tim.$ext."' data-width='".$width."px'   data-height='".$height."px' width='".$tumb_width."px'   height='".$tumb_height."px' class='img-responsive nya-image image-thumb-OP OP'>";
                         }
 
                         echo $com."</div><div class='panel-footer'>";
@@ -116,17 +120,21 @@
 
                         }
                         else{
-                            $com  = "";    
+                            $com  = "";
                         }
                         if (isset($post->ext)){
                            $ext  = $post->ext;
+                           $width = $post->w;
+                           $height = $post->h;
+                           $tumb_width = $post->tn_w;
+                           $tumb_height = $post->tn_h;
                         }
                         else{
                             $ext  = "";
                             $hasImage=false;
                         }
                         if (isset($post->tim)){
-                           $tim  = $post->tim;   
+                           $tim  = $post->tim;
                         }
                         else{
                             $tim  = "";
@@ -136,30 +144,30 @@
                         echo "<li class='list-group-item' id='p".$no."'>";
 
                         echo "<div class='zero-clipboard'><span class='com-btn-clipboard'>";
-                        
+
                         echo "No.<a href='#".$no."'>".$no."</a> by ".$name;
-                        
+
                         echo "</span></div>";
-                        
+
                         if($hasImage){
                             if('.webm' === $ext){
                                 echo "<video controls width='450' height='240'><source src='http://i.4cdn.org/".$board."/".$tim.$ext."'type='video/webm' codecs='vp8, vorbis'></video>";
 
                             }
                             else{
-                                echo "<img src='http://i.4cdn.org/".$board."/".$tim.$ext."' class='img-responsive com-image image-sm'>";
+                                echo "<div id='img-div'><img src='http://i.4cdn.org/".$board."/".$tim."s.jpg' data-image='http://i.4cdn.org/".$board."/".$tim.$ext."' data-width='".$width."px'   data-height='".$height."px' width='".$tumb_width."px'   height='".$tumb_height."px' class='img-responsive nya-image image-thumb'></div>";
                             }
 
-                        }                            
+                        }
                         echo $com."</li>";
                     }
                 }
                 echo "</ul></div></div>";
             ?>
         </div>
-        
-        
-        
+
+
+
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -169,7 +177,7 @@
                     </div>
                     <div class="modal-body">
                         <form class="form-horizontal">
-                            
+
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Comment</label>
                                 <div class="col-sm-10">
@@ -212,11 +220,19 @@
                     label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
                 input.trigger('fileselect', [numFiles, label]);
             });
-            $(".main-image").click(function(){
-                $(this).toggleClass( "image-md" );
-            });
-            $(".com-image").click(function(){
-                $(this).toggleClass( "image-sm" );
+            function restore_image(){
+                $(this).parent().children(".nya-image").show();
+                $(this).remove();
+
+            }
+            $(".nya-image").click(function(){
+                var img = $(this).data('image');
+                var full = '<img src="'+img+'" class="img-responsive nya-image-full" />';
+                var tag = $(full);
+                tag.on("click", restore_image);
+                $(this).hide();
+                $(this).parent().append(tag);
+
             });
         </script>
     </body>
