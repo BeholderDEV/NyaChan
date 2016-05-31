@@ -183,7 +183,7 @@
 
                                     }
                                     else{
-                                        echo "<img src='http://i.4cdn.org/".$board."/".$tim."s.jpg' data-image='http://i.4cdn.org/".$board."/".$tim.$ext."' data-width='".$width."px'   data-height='".$height."px' width='".$tumb_width."px'   height='".$tumb_height."px' class='img-responsive nya-image image-thumb'>";
+                                        echo "<div id='img-div'><img src='http://i.4cdn.org/".$board."/".$tim."s.jpg' data-image='http://i.4cdn.org/".$board."/".$tim.$ext."' data-width='".$width."px'   data-height='".$height."px' width='".$tumb_width."px'   height='".$tumb_height."px' class='img-responsive nya-image image-thumb'></div>";
                                     }
 
                                 }
@@ -285,24 +285,22 @@
                     label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
                 input.trigger('fileselect', [numFiles, label]);
             });
+            function restore_image(){
+                alert("fechoutz");
+                $(this).parent().children(".nya-image").show;
+                $(this).remove();
+
+            }
             $(".nya-image").click(function(){
-                var img = $(this).attr('src');
-                $(this).attr('src', $(this).data('image'));
-                $(this).data('image', img);
-                var w =  $(this).attr('width');
-                $(this).attr('width', $(this).data('width'));
-                $(this).data('width', w)
-                var h =  $(this).attr('height');
-                $(this).attr('height', $(this).data('height'));
-                $(this).data('height', h)
-                if($(this).hasClass('OP')){
-                    $(this).toggleClass('image-thumb-OP');
-                }
-                else{
-                    $(this).toggleClass('image-thumb');
-                }
+                var img = $(this).data('image');
+                var full = '<img src="'+img+'" class="img-responsive nya-image-full" />';
+                var tag = $(full);
+                tag.find(".nya-image-full").on("click", restore_image);
+                $(this).hide();
+                $(this).parent().append(tag);
 
             });
+            
 
         </script>
     </body>
