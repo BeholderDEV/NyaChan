@@ -24,184 +24,46 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Nya Chan</a>
+                    <a class="navbar-brand" href="a.php">Nya Chan</a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="btn" data-toggle="modal" data-target="#myModal"><a>New Thread  <i class="fa fa-reply"></i></a></li>
-                        <li class="btn"><a><i class="fa fa-user"></i> Alisson</a></li>
+                        <li class="btn" data-toggle="modal" data-target="#newThreadModal"><a>New Thread  <i class="fa fa-reply"></i></a></li>
+                        <li class="btn"><a href="profile.php"><i class="fa fa-user"></i> Alisson</a></li>
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>
         </nav>
-        
+
         <div id="back-to-top-button">
             <a href="javascript:void(0);" title="Voltar ao início da página">
                 <span class="glyphicon glyphicon-chevron-up"></span>
             </a>
         </div>
-        
-        
+
+
         <div class="row" id="profile-area">
             <div class="col-md-offset-5 col-md-2" >
                 <img src="img/user.jpg" class="img-responsive img-rounded" id="profile-pic"/>
                 <h2>Alisson Steffens</h2>
                 <div class="btn-group" role="group" aria-label="...">
-                    <button type="button" class="btn btn-default" title="Alterar CSS"><i class="fa fa-code"></i></button>
-                    <button type="button" class="btn btn-default" title="Alterar Imagens Perfil"><i class="fa fa-image"></i></button>
-                    <button type="button" class="btn btn-default" title="Alterar Configurações de Perfil"><i class="fa fa-cogs"></i></button>
-                    <button type="button" class="btn btn-default">Right</button>
+                    <button type="button" class="btn btn-default btn-profile" title="Alterar CSS" data-toggle="modal" data-target="#CSSModal"><i class="fa fa-code"></i></button>
+                    <button type="button" class="btn btn-default btn-profile" title="Alterar Imagens Perfil" data-toggle="modal" data-target="#ImageModal"><i class="fa fa-image"></i></button>
+                    <button type="button" class="btn btn-default btn-profile" title="Alterar Configurações de Perfil" data-toggle="modal" data-target="#ConfigModal"><i class="fa fa-cogs"></i></button>
                 </div>
             </div>
         </div>
-        
+
         <div class="container">
-            
-            
+
+
             <?php
-                $board ="g";
-                $page = 1;
-                $fim =1;
-                if (isset($_GET["board"])){
-                    $board =$_GET["board"];
-                }
-                if (isset($_GET["page"])){
-                    if("all" === $_GET["page"]){
-                        $fim = 10;
-                    }
-                    else{
-                        $page = $_GET["page"];
-                        $fim = $page;
-                    }
-                }
-                
-                for($i=$page; $i<=$fim;$i++){
-                    $jsonurl = "http://a.4cdn.org/".$board."/".$i.".json";
-                    $json = file_get_contents($jsonurl);
-                    $json_output = json_decode($json);
-
-                    foreach ($json_output->threads as $thread) {
-                        foreach($thread->posts as $post) {
-                            if (isset($post->bumplimit)) {
-                                if (isset($post->sub)){
-                                    $sub  = $post->sub;    
-                                }
-                                else{
-                                    $sub  = "";    
-                                }
-                                $no  = $post->no;
-                                if (isset($post->com)){
-                                    $com  = $post->com;
-
-                                }
-                                else{
-                                    $com  = "";    
-                                }
-                                if (isset($post->trip)){
-                                    $trip  = $post->trip;    
-                                }
-                                else{
-                                    $trip = "";    
-                                }
-                                $ext  = $post->ext;
-                                $name  = $post->name;
-                                $tim  = $post->tim;
-
-
-
-                                echo "<div class='panel panel-default' id='".$no."'>";
-                                
-                                echo "<div class='zero-clipboard'><span class='btn-clipboard'><div class='btn-group' role='group' aria-label='...'>";
-                                
-                                echo "<button type='button' class='btn btn-default' title='Visualizar'><a href='thread.php?board=".$board."&number=".$no."'><i class='fa fa-eye'></i></a></button>";
-                                echo "<button type='button' class='btn btn-default' title='Marcar'><i class='fa fa-bookmark-o'></i></button>";
-                                echo "<button type='button' class='btn btn-default' title='Atualizar'><i class='fa fa-refresh'></i></button>";
-                                echo "<button type='button' class='btn btn-default' title='Responder'><i class='fa fa-reply'></i></button>";
-
-                                echo "</div></span></div>";
-                                echo "<div class='panel-heading'>";
-                                
-                                
-                                
-                                echo "<h3 class='panel-title'>".$sub." ~ <span> No.<a href='#".$no."'>".$no."</a> by ".$name." ".$trip."</span></h3>";
-                                
-                                echo "</div>";
-                                
-                                echo "<div class='panel-body'>";
-                                
-                                
-                                if('.webm' === $ext){
-                                    echo "<video controls width='450' height='240'><source src='http://i.4cdn.org/".$board."/".$tim.$ext."'type='video/webm' codecs='vp8, vorbis'></video>";
-
-                                }
-                                else{
-                                    echo "<img src='http://i.4cdn.org/".$board."/".$tim.$ext."' class='img-responsive main-image image-md'>";
-                                }
-
-                                echo "<p>".$com."</p></div><div class='panel-footer'>";
-                                echo "<ul class='list-group'>";
-                            }
-                            else{
-                                
-                                $hasImage=true;
-                                $no  = $post->no;
-                                if (isset($post->com)){
-                                    $com  = $post->com;
-
-                                }
-                                else{
-                                    $com  = "";    
-                                }
-                                if (isset($post->ext)){
-                                   $ext  = $post->ext;
-                                }
-                                else{
-                                    $ext  = "";
-                                    $hasImage=false;
-                                }
-                                if (isset($post->tim)){
-                                   $tim  = $post->tim;   
-                                }
-                                else{
-                                    $tim  = "";
-                                    $hasImage=false;
-                                }
-                                $name = $post->name;
-                                
-                                if(isset($post->capcode)){
-                                    echo "<div class='panel'><div class='panel-footer'>";
-                                    echo "<ul class='list-group'>";
-                                }
-                                
-                                echo "<li class='list-group-item'>";
-                                echo "<div class='zero-clipboard'><span class='com-btn-clipboard'>";
-
-                                echo "No.<a href='#".$no."'>".$no."</a> by ".$name;
-
-                                echo "</span></div>";
-                                
-                                if($hasImage){
-                                    if('.webm' === $ext){
-                                        echo "<video controls width='450' height='240'><source src='http://i.4cdn.org/".$board."/".$tim.$ext."'type='video/webm' codecs='vp8, vorbis'></video>";
-
-                                    }
-                                    else{
-                                        echo "<img src='http://i.4cdn.org/".$board."/".$tim.$ext."' class='img-responsive com-image image-sm'>";
-                                    }
-
-                                }                            
-                                echo "<p>".$com."</p></li>";
-                            }
-                        }
-                        echo "</ul></div></div>";
-                    }
-                }
+                include 'threadController.php';
+                $control->printEspecificPage(1, "a");
             ?>
         </div>
-        
-        
-        
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+
+        <div class="modal fade" id="newThreadModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -241,6 +103,94 @@
             </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
 
+        <div class="modal fade" id="ImageModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">CSS</h4>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-2 control-label">File</label>
+                        <div class="col-sm-12">
+                            <div class="fileinput fileinput-new" data-provides="fileinput">
+                                <span class="btn btn-default btn-file"><span>Choose Profile Image</span><input type="file" multiple /></span>
+                                <span class="fileinput-filename"></span><span class="fileinput-new">No file chosen</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="fileinput fileinput-new" data-provides="fileinput">
+                                <span class="btn btn-default btn-file"><span>Choose Background Image</span><input type="file" multiple /></span>
+                                <span class="fileinput-filename"></span><span class="fileinput-new">No file chosen</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-nya">Save</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+        <div class="modal fade" id="CSSModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Perfil/Background</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <textarea class="form-control" rows="10" placeholder="CSS"></textarea>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-nya">Save</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
+        <div class="modal fade" id="ConfigModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content col-sm-12">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Configuration</h4>
+                    </div>
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-label">Change Login</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" placeholder="New Login">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Change Password</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" placeholder="Old Password"></textarea>
+                                <input type="text" class="form-control" placeholder="New Password"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Change E-Mail</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" placeholder="New E-Mail"></textarea>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-nya">Save</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
 
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -257,11 +207,19 @@
                     label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
                 input.trigger('fileselect', [numFiles, label]);
             });
-            $(".main-image").click(function(){
-                $(this).toggleClass( "image-md" );
-            });
-            $(".com-image").click(function(){
-                $(this).toggleClass( "image-sm" );
+            function restore_image(){
+                $(this).parent().children(".nya-image").show();
+                $(this).remove();
+
+            }
+            $(".nya-image").click(function(){
+                var img = $(this).data('image');
+                var full = '<img src="'+img+'" class="img-responsive nya-image-full" />';
+                var tag = $(full);
+                tag.on("click", restore_image);
+                $(this).hide();
+                $(this).parent().append(tag);
+
             });
         </script>
     </body>

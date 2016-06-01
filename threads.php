@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="pt-BR">
     <head>
@@ -17,8 +15,7 @@
 
     </head>
     <body>
-
-        <nav class="navbar navbar-default navbar-fixed-top">
+         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -30,12 +27,12 @@
                     <a class="navbar-brand" href="a.php">Nya Chan</a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li class="btn" data-toggle="modal" data-target="#newThreadModal"><a>New Thread  <i class="fa fa-plus"></i></a></li>
-                        <li class="btn" data-toggle="modal" data-target="#LoginModal"><a>Login/Cadastre-se  <i class="fa fa-plus"></i></a></li>
-                        <li class="btn"><a href="profile.php"><i class="fa fa-user"></i> Alisson</a></li>
-                        <li class="btn"><a><i class="fa fa-bell-o" aria-hidden="true"></i></a></li>
-                    </ul>
+                  <ul class="nav navbar-nav navbar-right">
+                      <li class="btn" data-toggle="modal" data-target="#newThreadModal"><a>New Thread  <i class="fa fa-plus"></i></a></li>
+                      <li class="btn" data-toggle="modal" data-target="#LoginModal"><a>Login/Cadastre-se  <i class="fa fa-plus"></i></a></li>
+                      <li class="btn"><a href="profile.php"><i class="fa fa-user"></i> Alisson</a></li>
+                      <li class="btn"><a><i class="fa fa-bell-o" aria-hidden="true"></i></a></li>
+                  </ul>
                 </div><!--/.nav-collapse -->
             </div>
         </nav>
@@ -46,29 +43,16 @@
             </a>
         </div>
 
-        <div class="container">
 
+
+
+        <div class="container">
             <?php
                 include 'threadController.php';
-                $control->printAllPages();
+                $control->renderThreadPage();
             ?>
         </div>
-        <div class="container">
-            <div class="btn-group" role="group">
-                <?php
-                    echo "<button type='button' class='btn btn-default btn-page'><a href='a.php?page=all&board=".$control->board."'>All</a></button>";
-                    if($control->page>1){
-                     echo "<button type='button' class='btn btn-default btn-page'><a href='a.php?page=".($control->page-1)."&board=".$control->board."'><i class='fa fa-angle-left'></i></a></button>";
-                    }
-                    for($i=1; $i<=10;$i++){
-                        echo "<button type='button' class='btn btn-default btn-page'><a href='a.php?page=".$i."&board=".$control->board."'>".$i."</a></button>";
-                    }
-                    if($control->page<10){
-                        echo "<button type='button' class='btn btn-default btn-page'><a href='a.php?page=".($control->page+1)."&board=".$control->board."'><i class='fa fa-angle-right'></i></a></button>";
-                    }
-                    ?>
-            </div>
-        </div>
+
         <footer class="footer">
             <div class="btn-group" role="group">
                 <?php
@@ -178,6 +162,7 @@
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
+
 
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
