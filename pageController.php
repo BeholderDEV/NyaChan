@@ -43,7 +43,7 @@
                         $control->printAllPages();
                     }
                     else{
-                        
+                        $control->printCatalog();
                     }
                 echo "</div>";
                 include 'pages/pageCounter.php';

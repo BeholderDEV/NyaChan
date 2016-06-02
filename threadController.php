@@ -49,6 +49,60 @@
             echo "<div class='page-header'><h1>Board /".$board."</h1></div>";
         }
 
+        function printCatalog(){
+            $iterator =0;
+            $jsonurl = "http://a.4cdn.org/a/catalog.json";
+            $json = file_get_contents($jsonurl);
+            $json_output = json_decode($json);
+
+            foreach ($json_output as $page) {
+                foreach($page->threads as $thread) {
+
+                    if (isset($thread->sub)){
+                        $sub  = $thread->sub;
+                    //}
+                        //else{
+                        //    $sub  = "";
+                       // }
+                        $no  = $thread->no;
+                        if (isset($thread->com)){
+                            $com  = $thread->com;
+                            if(strlen ($com)>100){
+                                $com = substr($com, 0, 100)."'...</a>";
+                            }
+                        }
+                        else{
+                            $com  = "";
+                        }
+                        $ext  = $thread->ext;
+                        $name  = $thread->name;
+                        $tim  = $thread->tim;
+                        if($iterator%4==0)
+                        {
+                            echo "<div class='row'>";
+                        }
+                        echo "<div class='col-md-3 col-xs-12 nya-catalog'>";
+                        echo "<div class='panel panel-default ' id='".$no."'>";
+
+                        echo "<div class='panel-body catalog-panel'>";
+                        if('.webm' === $ext){
+                        }
+                        else{
+                            $path = "http://i.4cdn.org/".$this->board."/".$tim."s.jpg";
+                            echo "<div class='catalog-image' style='background:url(".$path.");'></div>";
+                        }
+                        echo "<h4 class='catalog-title'>".$sub."</h4><p>".$com."</p>";
+                        echo "</div></div></div>";
+                        if($iterator%4==3)
+                        {
+                            echo "</div>";
+                        }
+                        $iterator++;
+                    }
+                }
+            }
+        }
+
         function printAllPages(){
             for($i=$this->page; $i<=$this->fim;$i++){
                 $this->printPage($i);

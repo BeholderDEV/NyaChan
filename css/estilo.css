@@ -7,6 +7,23 @@ body{
     background-attachment: fixed;
     background-size: cover;
 }
+.nya-catalog{
+    padding: 2%;
+}
+.catalog-title{
+    color: #dc143c;
+}
+.catalog-panel{
+    height: 350px;
+    max-height: 350px;
+}
+.catalog-image{
+    background-image: url("http://forcaeinteligencia.com/wp-content/uploads/2013/09/batata-ou-batata-doce.png");
+    height: 150px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
 .container{
     padding-top: 40px;
 }
