@@ -54,6 +54,7 @@
                 $this->printPage($i);
             }
         }
+
         function printEspecificPage($index, $brd){
             $i = $index;
             $this->board = $brd;
