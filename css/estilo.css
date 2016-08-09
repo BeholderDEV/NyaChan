@@ -183,6 +183,13 @@ footer{
 .quote{
     color: #27ae60;
 }
+.quotelink, .deadlink{
+    color: #dc143c;
+}
+.deadlink{
+    text-decoration:line-through;
+    opacity: 0.6;
+}
 s{
     cursor: pointer;
     background-color: #ddd;
