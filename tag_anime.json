@@ -1,0 +1,33 @@
+{
+    "name": "Anime",
+    "description": "Tag Description HERE",
+    thread:[
+        {
+            "postsNumber": 15,
+            "imagesNumber": 10,
+            "usersNumber":9,
+            "pageNumber":1,
+            "subject": "Assunto Principal",
+            "isAlive": true,
+            "post":[
+                {
+                    "id": 123412,
+                    "body": "Eitaaa",
+                    "date": "2016-01-02 19:30:00",
+                    "tile": "Titulo aqui",
+                    "userName": "4N0N1M0US3",
+                    "file":[
+                        {
+                            "size": 250,
+                            "name": "fotinea",
+                            "extension": "png",
+                            "source": "",
+                            "path": ""
+                            
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
