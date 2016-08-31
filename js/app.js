@@ -5,7 +5,7 @@
         
         $scope.search = function() {
             console.log("entrou na função");
-            $http({method: 'JSON', url: "https://api.myjson.com/bins/15rbo"}).
+            $http({method: 'JSONP', url: "https://api.myjson.com/bins/15rbo"}).
                 success(function(data, status) {
                 $scope.threads = data.entries;
             }).
