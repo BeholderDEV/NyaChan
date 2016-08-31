@@ -37,68 +37,28 @@
                     "body": "Eitaasaa",
                     "date": "2016-01-02 19:32:00",
                     "tile": "Titulo afasaqui",
-                    "userName": "4N0qwN1M0US3",
-                    "file":[
-                        {
-                            "size": 250,
-                            "name": "fotinea",
-                            "extension": "",
-                            "source": "",
-                            "path": ""
-                            
-                        }
-                    ]
+                    "userName": "4N0qwN1M0US3"
                 },
                 {
                     "id": 1111411,
                     "body": "Eitaaa",
                     "date": "2016-01-02 19:33:00",
                     "tile": "Titulo qwaasdqui",
-                    "userName": "4N0N1Masdf0US3",
-                    "file":[
-                        {
-                            "size": 250,
-                            "name": "fotinea",
-                            "extension": "",
-                            "source": "",
-                            "path": ""
-                            
-                        }
-                    ]
+                    "userName": "4N0N1Masdf0US3"
                 },
                 {
                     "id": 1111711,
                     "body": "Eitaaa",
                     "date": "2016-01-02 19:34:00",
                     "tile": "Titulo aqfsdui",
-                    "userName": "4N0Nasdf1M0US3",
-                    "file":[
-                        {
-                            "size": 250,
-                            "name": "fotiasnea",
-                            "extension": "",
-                            "source": "",
-                            "path": ""
-                            
-                        }
-                    ]
+                    "userName": "4N0Nasdf1M0US3"
                 },
                 {
                     "id": 1141111,
                     "body": "Eitaaa",
                     "date": "2016-01-02 19:35:00",
                     "tile": "Titulo aquasdfsai",
-                    "userName": "4N0Nsdf1M0US3",
-                    "file":[
-                        {
-                            "size": 250,
-                            "name": "fotinea",
-                            "extension": "",
-                            "source": "",
-                            "path": ""
-                            
-                        }
-                    ]
+                    "userName": "4N0Nsdf1M0US3"
                 }
             ]
         },
@@ -171,17 +131,7 @@
                     "body": "Eitaaa",
                     "date": "2016-01-02 19:34:00",
                     "tile": "Titulo aqfsdui",
-                    "userName": "4N0Nasdf1M0US3",
-                    "file":[
-                        {
-                            "size": 250,
-                            "name": "fotiasnea",
-                            "extension": "jpg",
-                            "source": "",
-                            "path": ""
-                            
-                        }
-                    ]
+                    "userName": "4N0Nasdf1M0US3"
                 },
                 {
                     "id": 114541111,
@@ -254,17 +204,7 @@
                     "body": "Eitaaa",
                     "date": "2016-01-02 19:33:00",
                     "tile": "Titulo qwaasdqui",
-                    "userName": "4N0N1Masdf0US3",
-                    "file":[
-                        {
-                            "size": 250,
-                            "name": "fotinea",
-                            "extension": "",
-                            "source": "",
-                            "path": ""
-                            
-                        }
-                    ]
+                    "userName": "4N0N1Masdf0US3"
                 },
                 {
                     "id": 1111124711,
@@ -354,34 +294,14 @@
                     "body": "Eitaaa",
                     "date": "2016-01-02 19:33:00",
                     "tile": "Titulo qwaasdqui",
-                    "userName": "4N0N1Masdf0US3",
-                    "file":[
-                        {
-                            "size": 250,
-                            "name": "fotinea",
-                            "extension": "",
-                            "source": "",
-                            "path": ""
-                            
-                        }
-                    ]
+                    "userName": "4N0N1Masdf0US3"
                 },
                 {
                     "id": 1111711,
                     "body": "Eitaaa",
                     "date": "2016-01-02 19:34:00",
                     "tile": "Titulo aqfsdui",
-                    "userName": "4N0Nasdf1M0US3",
-                    "file":[
-                        {
-                            "size": 250,
-                            "name": "fotiasnea",
-                            "extension": "",
-                            "source": "",
-                            "path": ""
-                            
-                        }
-                    ]
+                    "userName": "4N0Nasdf1M0US3"
                 },
                 {
                     "id": 1141111,
@@ -401,7 +321,8 @@
                     ]
                 }
             ]
-        },{
+        },
+        {
             "postsNumber": 4,
             "imagesNumber": 4,
             "usersNumber":9,
