@@ -1,7 +1,7 @@
 {
     "name": "Anime",
     "description": "Tag Description HERE",
-    thread:[
+    "thread":[
         {
             "postsNumber": 4,
             "imagesNumber": 4,

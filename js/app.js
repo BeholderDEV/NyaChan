@@ -4,7 +4,7 @@
     app.controller('threadController',function($scope){
         $scope.threads = [];  
         $scope.search = function() {        
-            $http({method: 'JSONP', url: "https://raw.githubusercontent.com/BeholderDEV/NyaChan/master/js/app.js"}).
+            $http({method: 'JSONP', url: "https://raw.githubusercontent.com/BeholderDEV/NyaChan/master/tag_anime.json"}).
                 success(function(data, status) {
                 $scope.threads = data.entries;
             }).
