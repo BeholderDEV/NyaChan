@@ -1,10 +1,11 @@
 (function(){
     var app = angular.module('nya-chan',[]);
     
-    app.controller('threadController',function($scope){
-        $scope.threads = [];  
-        $scope.search = function() {        
-            $http({method: 'JSONP', url: "https://raw.githubusercontent.com/BeholderDEV/NyaChan/master/tag_anime.json"}).
+    app.controller('threadController',function($scope, $http){
+        
+        $scope.search = function() {
+            console.log("entrou na função");
+            $http({method: 'JSON', url: "https://raw.githubusercontent.com/BeholderDEV/NyaChan/master/tag_anime.json"}).
                 success(function(data, status) {
                 $scope.threads = data.entries;
             }).
@@ -12,6 +13,7 @@
                 console.log(data || "Request failed");
             });
         };
+        $scope.threads = $scope.search();  
     });
     
 })();
