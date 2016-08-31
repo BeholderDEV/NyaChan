@@ -1,7 +1,7 @@
 (function(){
     var app = angular.module('nya-chan',[]);
     
-    app.controller('threadController',function(){
+    app.controller('threadController',function($scope){
         $scope.threads = [];  
         $scope.search = function() {        
             $http({method: 'JSONP', url: "https://raw.githubusercontent.com/BeholderDEV/NyaChan/master/js/app.js"}).
