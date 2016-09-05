@@ -1,1 +1,1 @@
-web: node "Nyachan Server"/RestAPI.js
+web: node NyachanServer/RestAPI.js
