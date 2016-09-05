@@ -10,7 +10,7 @@
     "start": "node NyachanServer/RestAPI.js"
   },
   "dependencies": {
-    "express": "2.15.9"
+    "express": "4.x"
   },
   "repository": {
     "type": "git",
