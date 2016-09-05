@@ -11,9 +11,13 @@ app.use(function(req, res, next) {
 app.get('/a/threads', function (req, res) {
    res.type('application/json');
    fs.readFile( __dirname + "/" + "tag_anime.json", 'utf8', function (err, data) {
-      console.log( data );
       res.jsonp( data );
    });
+})
+
+app.get('/', function (req, res) {
+   res.type('text/html');
+   res.send("<h1>Olá</h1>");
 })
 
 var port = process.env.PORT || 3000;
