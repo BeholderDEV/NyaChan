@@ -1,0 +1,26 @@
+{
+  "name": "Nyachan Server",
+  "version": "0.0.1",
+  "description": "Nyachan Glorious Server -- Or maybe not so glorious",
+  "engines": {
+    "node": "4.5.0"
+  },
+  "main": "\"Nyachan Server\"/RestAPI.js",
+  "scripts": {
+    "start": "node \"Nyachan Server\"/RestAPI.js"
+  },
+  "dependencies": {
+    "express": "2.15.9"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BeholderDEV/NyaChan"
+  },
+  "keywords": [
+    "node",
+    "heroku",
+    "express",
+    "ImageBoard"
+  ],
+  "license": "MIT"
+}
