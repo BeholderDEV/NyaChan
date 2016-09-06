@@ -25,8 +25,10 @@ app.get('/css/estilo.css', function (req, res) {
    res.sendfile('css/estilo.css');
 })
 
-app.use('..',express.static('css'));
-app.use('..',express.static('js'));
+app.get('/js/app.js', function (req, res) {
+   res.type('text/javascript');
+   res.sendfile('js/app.js');
+})
 
 var port = process.env.PORT || 3000;
 var server = app.listen(port, function () {})
