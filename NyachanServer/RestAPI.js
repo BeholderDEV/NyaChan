@@ -16,6 +16,14 @@ app.get('/a/threads', function (req, res) {
    });
 })
 
+app.get('/a/thread/1', function (req, res) {
+   res.type('application/json');
+   fs.readFile( __dirname + "/" + "tag_anime_thread.json", 'utf8', function (err, data) {
+     console.log(data);
+      res.jsonp( data );
+   });
+})
+
 app.get('/', function (req, res) {
    res.type('text/html');
    res.sendfile('tag.html');
