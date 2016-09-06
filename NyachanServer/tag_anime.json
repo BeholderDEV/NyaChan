@@ -9,11 +9,6 @@
             "pageNumber":1,
             "subject": "Assunto Principal",
             "isAlive": true,
-            "tags":[
-                "Anime",
-                "Tecnologia",
-                "História"
-            ],
             "id": 1112111,
             "body": "Eitaaasa",
             "date": "2016-01-02 19:31:00",
@@ -28,6 +23,11 @@
                     "path": ""
 
                 }
+            ],
+            "tags":[
+                "Anime",
+                "Tecnologia",
+                "História"
             ],
             "post":[
                 {
