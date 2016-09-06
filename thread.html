@@ -51,12 +51,14 @@
               </h3>
             </div>
             <div class='panel-body'>
+              <a ng-href="{{thread.file[0].source}}" target="_blank">{{thread.file[0].name}}.{{thread.file[0].extension}}</a>
               <img ng-src="{{thread.file[0].source}}" class="img-responsive nya-image image-thumb-OP OP"/>
               {{thread.body}}
             </div>
             <div class="panel-footer">
               <ul class="list-group">
                 <li class="list-group-item" ng-repeat="p in thread.post">
+                  <a ng-href="{{p.file[0].source}}" target="_blank">{{p.file[0].name}}.{{p.file[0].extension}}</a>
                   <img ng-src="{{p.file[0].source}}" class="img-responsive nya-image image-thumb"/>
                   {{p.body}}
                 </li>
