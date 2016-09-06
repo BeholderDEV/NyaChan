@@ -18,7 +18,7 @@ app.get('/a/threads', function (req, res) {
 
 app.get('/', function (req, res) {
    res.type('text/html');
-   res.send("<h1>Olá</h1>");
+   res.sendfile('tag.html');
 })
 
 var port = process.env.PORT || 3000;
