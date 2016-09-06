@@ -41,17 +41,17 @@
     </nav>
     <div class="container">
 
-      <div ng-app = "nya-chan" ng-controller= "threadController">
+      <div ng-app = "nya-chan" ng-controller= "animeThreadController">
         <div>
           <div class='panel panel-default'>
             <div class='panel-heading'>
               <h3 class='panel-title'>
-                {{t.subject}} ~ {{t.id}} by {{t.userName}}
+                {{thread.subject}} ~ {{t.id}} by {{t.userName}}
               </h3>
             </div>
             <div class='panel-body'>
               <img ng-src="{{thread.file[0].source}}" class="img-responsive nya-image image-thumb-OP OP"/>
-              {{t.body}}
+              {{thread.body}}
             </div>
             <div class="panel-footer">
               <ul class="list-group">
