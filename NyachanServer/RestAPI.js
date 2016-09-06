@@ -28,6 +28,10 @@ app.get('/', function (req, res) {
    res.type('text/html');
    res.sendfile('tag.html');
 })
+app.get('/thread', function (req, res) {
+   res.type('text/html');
+   res.sendfile('thread.html');
+})
 app.get('/css/estilo.css', function (req, res) {
    res.type('text/css');
    res.sendfile('css/estilo.css');
