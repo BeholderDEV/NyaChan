@@ -20,9 +20,13 @@ app.get('/', function (req, res) {
    res.type('text/html');
    res.sendfile('tag.html');
 })
+app.get('/css/estilo.css', function (req, res) {
+   res.type('text/css');
+   res.sendfile('css/estilo.css');
+})
 
-app.use('/..',express.static('css'));
-app.use('/..',express.static('js'));
+app.use('..',express.static('css'));
+app.use('..',express.static('js'));
 
 var port = process.env.PORT || 3000;
 var server = app.listen(port, function () {})
