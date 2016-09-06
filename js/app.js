@@ -29,8 +29,8 @@
               //url : "http://127.0.0.1:3000/a/thread/1"
               url: "https://nyachan-server.herokuapp.com/a/thread/1"
           }).then(function mySucces(response) {
-              $scope.threads = JSON.parse(response.data);
-              console.log($scope.threads);
+              $scope.thread = JSON.parse(response.data);
+              console.log($scope.thread);
           }, function myError(response) {
                 console.log(response || "Request failed");
           });
