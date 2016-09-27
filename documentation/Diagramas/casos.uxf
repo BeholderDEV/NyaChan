@@ -215,7 +215,7 @@ Notificações</panel_attributes>
       <w>70</w>
       <h>35</h>
     </coordinates>
-    <panel_attributes>UC.07 - Cadastrar</panel_attributes>
+    <panel_attributes>UC.07 - Cadastrar-se</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -226,7 +226,7 @@ Notificações</panel_attributes>
       <w>70</w>
       <h>35</h>
     </coordinates>
-    <panel_attributes>UC.08 - Altarar
+    <panel_attributes>UC.08 - Alterar
 Configurações</panel_attributes>
     <additional_attributes/>
   </element>

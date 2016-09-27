@@ -154,7 +154,7 @@ Deletar</panel_attributes>
       <w>540</w>
       <h>330</h>
     </coordinates>
-    <panel_attributes>Diagrama de Estados</panel_attributes>
+    <panel_attributes>Diagrama de Estados da Thread</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>
