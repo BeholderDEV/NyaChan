@@ -70,48 +70,48 @@ __Público-alvo geral__: Pessoas que querem participar, ler ou buscar imagens a 
 
 ## 3.1 Requisitos Funcionais
  1. O _software_ deve dividir e exibir as _threads_ de acordo com suas _tags_, sendo que cada _tag_ contará com um subdomínio do site
- * O _software_ deve exibir as _threads_ de uma _tag_ nos formatos, lista (uma _thread_ abaixo da outra) e catálogo (lado a lado), no qual o usuário poderá acessar a _thread_
- * O _software_ deve criar uma página para cada _thread_, com seus dados (imagens e comentários) linearmente
- * O _software_ deve conter atalhos de teclado para as ações de usuário conforme a [tabela](https://github.com/BeholderDEV/nya-chan/wiki/Ap%C3%AAndice#tabela-de-atalhos)
- * O _software_ deve contar com um sistema de busca e filtragem entre as _threads_ de cada _tag_, onde haverá um campo de texto acima da página principal de cada _tag_ onde o usuário poderá digitar as palavras-chave que deseja que estejam na primeira postagem da thread. O _software_ deverá retornar todas as _threads_ que estão de acordo com a busca do usuário
- * O _software_ deve permitir a navegação entre as _threads_ a partir da pagina de uma _thread_ através do uso de um atalho ou ao clicar no botão existente na página que realiza a troca de threads
- * O _software_ deve permitir o cadastro de usuário (sendo ele opcional para a maioria das funcionalidades do site)
- * O _software_ deve permitir ao usuário cadastrado, criar uma página de perfil com suas últimas interações no site (_threads_ criadas e comentadas)
- * O _software_ deve permitir ao usuário postar _threads_ definindo sua(s) _tag(s)_ (**obrigatório**) e [arquivo(s)](https://github.com/BeholderDEV/nya-chan/wiki/Ap%C3%AAndice#gloss%C3%A1rio) (**opcional**) inicial(is)
- * O _software_ deve permitir o _download_ de todas os arquivos anexados ao comentário de um usuário
- * O _software_ deve permitir ao usuário fazer comentários com texto e/ou arquivos relacionados a uma _thread_ (o usuário pode utilizar sua identificação ou postar anonimamente)
- * O _software_ deve conter "comandos" que quando digitados em um comentário, realizam ações sobre o texto (_spoiler_ e citação)
- * O _software_ deve permitir citar outros comentários a partir de um identificador único de cada comentário
- * O _software_ deve permitir ao usuário marcar uma parte do comentário ou imagem como _spoiler_, escondendo-a, e para visualizar o conteúdo é necessário ao leitor efetuar determinada ação com o mouse
- * O _software_ deve permitir marcar parte de um comentário como citação, ao qual deverá colorir tal parte do texto
- * O _software_ deve permitir ao usuário cadastrado receber notificações das _threads_ marcadas
- * O _software_ deve permitir ao usuário modificar o tema do site (CSS ou temas prontos)
- * O _software_ deve permitir a distinção entre usuários e usuários com poderes de admistrador conforme o [anexo](https://github.com/BeholderDEV/nya-chan/wiki/Ap%C3%AAndice#poderes-de-administrador)
- * O _software_ deve ser capaz de interpretar a linguagem Markdown dentro de comentários de usuários
- * O _software_ deve permitir a criação de enquetes no momento de criação de _threads_. Cada _thread_ poderá ter exclusivamente apenas uma enquete, ao qual ficará junta a sua postagem inicial
- * O _software_ deve contar com um sistema de denúncia nos comentários, no qual o usuário poderá denunciar o comentário para que os administradores possam tomar providências
+ 2. O _software_ deve exibir as _threads_ de uma _tag_ nos formatos, lista (uma _thread_ abaixo da outra) e catálogo (lado a lado), no qual o usuário poderá acessar a _thread_
+ 3. O _software_ deve criar uma página para cada _thread_, com seus dados (imagens e comentários) linearmente
+ 4. O _software_ deve conter atalhos de teclado para as ações de usuário conforme a [tabela](https://github.com/BeholderDEV/nya-chan/wiki/Ap%C3%AAndice#tabela-de-atalhos)
+ 5. O _software_ deve contar com um sistema de busca e filtragem entre as _threads_ de cada _tag_, onde haverá um campo de texto acima da página principal de cada _tag_ onde o usuário poderá digitar as palavras-chave que deseja que estejam na primeira postagem da thread. O _software_ deverá retornar todas as _threads_ que estão de acordo com a busca do usuário
+ 6. O _software_ deve permitir a navegação entre as _threads_ a partir da pagina de uma _thread_ através do uso de um atalho ou ao clicar no botão existente na página que realiza a troca de threads
+ 7. O _software_ deve permitir o cadastro de usuário (sendo ele opcional para a maioria das funcionalidades do site)
+ 8. O _software_ deve permitir ao usuário cadastrado, criar uma página de perfil com suas últimas interações no site (_threads_ criadas e comentadas)
+ 9. O _software_ deve permitir ao usuário postar _threads_ definindo sua(s) _tag(s)_ (**obrigatório**) e [arquivo(s)](https://github.com/BeholderDEV/nya-chan/wiki/Ap%C3%AAndice#gloss%C3%A1rio) (**opcional**) inicial(is)
+ 10. O _software_ deve permitir o _download_ de todas os arquivos anexados ao comentário de um usuário
+ 11. O _software_ deve permitir ao usuário fazer comentários com texto e/ou arquivos relacionados a uma _thread_ (o usuário pode utilizar sua identificação ou postar anonimamente)
+ 12. O _software_ deve conter "comandos" que quando digitados em um comentário, realizam ações sobre o texto (_spoiler_ e citação)
+ 13. O _software_ deve permitir citar outros comentários a partir de um identificador único de cada comentário
+ 14. O _software_ deve permitir ao usuário marcar uma parte do comentário ou imagem como _spoiler_, escondendo-a, e para visualizar o conteúdo é necessário ao leitor efetuar determinada ação com o mouse
+ 15. O _software_ deve permitir marcar parte de um comentário como citação, ao qual deverá colorir tal parte do texto
+ 16. O _software_ deve permitir ao usuário cadastrado receber notificações das _threads_ marcadas
+ 17. O _software_ deve permitir ao usuário modificar o tema do site (CSS ou temas prontos)
+ 18. O _software_ deve permitir a distinção entre usuários e usuários com poderes de admistrador conforme o [anexo](https://github.com/BeholderDEV/nya-chan/wiki/Ap%C3%AAndice#poderes-de-administrador)
+ 19. O _software_ deve ser capaz de interpretar a linguagem Markdown dentro de comentários de usuários
+ 20. O _software_ deve permitir a criação de enquetes no momento de criação de _threads_. Cada _thread_ poderá ter exclusivamente apenas uma enquete, ao qual ficará junta a sua postagem inicial
+ 21. O _software_ deve contar com um sistema de denúncia nos comentários, no qual o usuário poderá denunciar o comentário para que os administradores possam tomar providências
 
 
 ## 3.2 Requisitos Não Funcionais
 ### Implementação
  1. O _software_ deve executar nos navegadores Chrome(30), Firefox(25), Opera(12)
- * O _software_ deve ser desenvolvido com arquitetura em camadas (MVC)
- * O _software_ deve ser desenvolvido utilizando somente com tecnologia _Open Source_ 
- * O _software_ deve ter seu CSS desenvolvido utilizando o _framework_ __Bootstrap__ como base
- * O _software_ deve ter seu banco de dados gerenciado pelo __MongoDB__
- * O _software_ deve ter seu servidor implementado utilizando __Node.js__
- * O _software_ deve ter sua interface implementada utilizando __AngularJS__
+ 2. O _software_ deve ser desenvolvido com arquitetura em camadas (MVC)
+ 3. O _software_ deve ser desenvolvido utilizando somente com tecnologia _Open Source_ 
+ 4. O _software_ deve ter seu CSS desenvolvido utilizando o _framework_ __Bootstrap__ como base
+ 5. O _software_ deve ter seu banco de dados gerenciado pelo __MongoDB__
+ 6. O _software_ deve ter seu servidor implementado utilizando __Node.js__
+ 7. O _software_ deve ter sua interface implementada utilizando __AngularJS__
 
 ### Segurança
  1. O _software_ deve armazenar as senhas dos usuários cadastrados, de maneira criptografada utilizando o padrão __SHA2__
- * O _software_ deve validar as postagens dos usuários através do __reCAPTCHA__
+ 2. O _software_ deve validar as postagens dos usuários através do __reCAPTCHA__
 
 ## 3.3 Regras de Negócios
  1. O _software_ não deve permitir postagens em _threads_ fechadas
- * O _software_ deve garantir que o usuário marque ao menos uma _tag_ ao abrir uma _thread_
- * O _software_ deve deletar as _threads_ que estiverem armazenadas por mais de duas semanas
- * O _software_ não deve permitir que usuários banidos façam postagens
- * O _software_ apenas deve permitir postagens do mesmo usuário a cada 30 segundos
+ 2. O _software_ deve garantir que o usuário marque ao menos uma _tag_ ao abrir uma _thread_
+ 3. O _software_ deve deletar as _threads_ que estiverem armazenadas por mais de duas semanas
+ 4. O _software_ não deve permitir que usuários banidos façam postagens
+ 5. O _software_ apenas deve permitir postagens do mesmo usuário a cada 30 segundos
 
 # 4 Diagramas
 
@@ -122,10 +122,10 @@ __Público-alvo geral__: Pessoas que querem participar, ler ou buscar imagens a 
 ### UC.01 - Navegar Pelas Boards
 #### Cenário Principal
 1. Sistemas apresenta as _threads_ em destaque e as _tags_ disponíveis
-* Usuário escolhe uma _tag_ e acessa a sua respectiva _board_
-* Sistema exibe as _threads_ disponíveis da _board_
-* Usuário escolhe uma _thread_ da _board_
-* Sistema exibe os _posts_ da _thread_
+2. Usuário escolhe uma _tag_ e acessa a sua respectiva _board_
+3. Sistema exibe as _threads_ disponíveis da _board_
+4. Usuário escolhe uma _thread_ da _board_
+5. Sistema exibe os _posts_ da _thread_
 
 #### Cenário Alternativo
 * No passo 2, o usuário pode escolher uma _thread_ em destaque e ir para o passo 5
@@ -133,10 +133,10 @@ __Público-alvo geral__: Pessoas que querem participar, ler ou buscar imagens a 
 ### UC.02 - Criar _Thread_
 #### Cenário Principal
 1. Usuário seleciona o botão __New Thread__ existente no cabeçalho do sistema
-* Sistema apresenta uma _modal_ para o usuário com os seguintes campos: Subject; Comment; área para _upload_ de arquivos; seleção de _tags_; e validação de _captcha_
-* Usuário obrigatoriamente preenche as _tags_, o _captcha_ e realiza o _upload_ de um arquivo ou o preenchimento de um dos campos de texto (Subject, Comment)
-* Usuário seleciona o botão __Post__
-* Sistema adiciona a _thread_ criada ao grupo de _threads_ ativas nas _tags_ selecionadas
+2. Sistema apresenta uma _modal_ para o usuário com os seguintes campos: Subject; Comment; área para _upload_ de arquivos; seleção de _tags_; e validação de _captcha_
+3. Usuário obrigatoriamente preenche as _tags_, o _captcha_ e realiza o _upload_ de um arquivo ou o preenchimento de um dos campos de texto (Subject, Comment)
+4. Usuário seleciona o botão __Post__
+5. Sistema adiciona a _thread_ criada ao grupo de _threads_ ativas nas _tags_ selecionadas
 
 
 #### Cenário de Exceção
