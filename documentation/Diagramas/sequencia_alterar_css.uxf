@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLSequenceAllInOne</id>
+    <coordinates>
+      <x>350</x>
+      <y>180</y>
+      <w>470</w>
+      <h>350</h>
+    </coordinates>
+    <panel_attributes>title=Alterar CSS
+obj=Usuário:Alisson~a ACTOR
+obj=Escritor de CSS~g
+obj=Cookie Controller~f
+
+on=a
+a-&gt;&gt;&gt;g : Clica botão alterar css; on=g;
+g-&gt;&gt;&gt;f : Save(); on=f; off=g
+f.&gt;a: Save_cookie(); off=f
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLSequenceAllInOne</id>
+    <coordinates>
+      <x>300</x>
+      <y>160</y>
+      <w>730</w>
+      <h>430</h>
+    </coordinates>
+    <panel_attributes>title=Responder Thread
+obj=Usuário:Alisson~a ACTOR
+obj=Escritor de Post~g
+obj=Persistencia Tags~e
+obj=Persistencia Threads~f
+
+on=a
+a-&gt;&gt;&gt;g : Clica botão Criar Thread; on=g;
+g-&gt;&gt;&gt;e : RequestTagsList(); on=e
+e.&gt;g: TagList&lt;&gt;; off=e
+g-&gt;&gt;&gt;f : Post(); on=f
+f.&gt;a : atualiza_boards;off=f
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

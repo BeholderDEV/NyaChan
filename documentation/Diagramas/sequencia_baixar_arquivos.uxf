@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLSequenceAllInOne</id>
+    <coordinates>
+      <x>300</x>
+      <y>160</y>
+      <w>550</w>
+      <h>380</h>
+    </coordinates>
+    <panel_attributes>title=Baixar Arquivos de uma Thread
+obj=Usuário:Alisson~a ACTOR
+obj=Controlador Thread~g
+obj=Persistencia Arquivos~f
+
+on=a
+a-&gt;&gt;&gt;g : Clica botão baixar arquivos da Thread; on=g;
+g-&gt;&gt;&gt;f : RequestFilesZip(); on=f; off=g
+f.&gt;a: arquivos.zip; off=f
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLSequenceAllInOne</id>
+    <coordinates>
+      <x>80</x>
+      <y>70</y>
+      <w>980</w>
+      <h>700</h>
+    </coordinates>
+    <panel_attributes>title=Alterar Configurações
+obj=Usuário:Alisson~a ACTOR
+obj=Tela Perfil ~ c CREATED_LATER
+obj=Tela alterar configuracoes ~ d CREATED_LATER
+obj=Controle de perfil~g
+obj=User Persistence~f
+
+on=a
+a-&gt;&gt;&gt;f : Clica em seu nome; on=f;
+f.&gt;g : user_data.json; on=g; off=f
+id4-&gt;id2+:CriarTela();
+off=g
+a-&gt;&gt;&gt;c : clica botao alteração de configurações; on=c
+c-&gt;&gt;&gt;g : trocarParaTelaConfiguracoes(); on=g; off=c
+id4-&gt;id3+:CriarTela();
+off=g
+a-&gt;&gt;&gt;d : botao alterar; on=d
+d-&gt;&gt;&gt;g : alterar(); on=g; off=d
+g-&gt;&gt;&gt;f : change_config(); on=f; off=g
+f-&gt;&gt;&gt;c : confim(); on=c; off=f; 
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
