@@ -5,7 +5,7 @@
     <id>UMLSequenceAllInOne</id>
     <coordinates>
       <x>80</x>
-      <y>70</y>
+      <y>0</y>
       <w>980</w>
       <h>700</h>
     </coordinates>
@@ -28,7 +28,7 @@ off=g
 a-&gt;&gt;&gt;d : botao alterar; on=d
 d-&gt;&gt;&gt;g : alterar(); on=g; off=d
 g-&gt;&gt;&gt;f : change_config(); on=f; off=g
-f-&gt;&gt;&gt;c : confim(); on=c; off=f; 
+f-&gt;&gt;&gt;c : confirm(); on=c; off=f; 
 </panel_attributes>
     <additional_attributes/>
   </element>

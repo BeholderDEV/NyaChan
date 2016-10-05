@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLSequenceAllInOne</id>
+    <coordinates>
+      <x>60</x>
+      <y>130</y>
+      <w>960</w>
+      <h>410</h>
+    </coordinates>
+    <panel_attributes>title=Receber Notificacoes
+obj=Usuário:Alisson~a ACTOR
+obj=Genrenciador de Notificacoes de usuario~g
+obj=Genrenciador de threads~b
+obj=Persistencia Threads~h
+obj=Persistencia Usuários~f
+
+b-&gt;&gt;&gt;h : lookForNewPosts(); on=h; on=b
+h.&gt;b : responsedThreads(); off=h
+b.&gt;g : responsedThreads(); on=g; off=b
+g-&gt;&gt;&gt;f : requestMarkedUsers(); on=f
+f.&gt;g : NotifieUsers[ ]; off=f
+g-&gt;a : Envia notificação; on=a; off=g
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
