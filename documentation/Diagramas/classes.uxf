@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="14.2">
-  <zoom_level>10</zoom_level>
+  <zoom_level>6</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>140</x>
-      <y>170</y>
-      <w>210</w>
-      <h>120</h>
+      <x>234</x>
+      <y>216</y>
+      <w>126</w>
+      <h>54</h>
     </coordinates>
     <panel_attributes>User
 --
 -ip : String
 --
-/+post()/
-/+createThread()/
 /+report(postId:int)/
 /+localConfig(css:String)/</panel_attributes>
     <additional_attributes/>
@@ -22,10 +20,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>460</x>
-      <y>170</y>
-      <w>210</w>
-      <h>190</h>
+      <x>486</x>
+      <y>216</y>
+      <w>126</w>
+      <h>114</h>
     </coordinates>
     <panel_attributes>RegistedUser
 --
@@ -45,21 +43,21 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>340</x>
-      <y>180</y>
-      <w>140</w>
-      <h>30</h>
+      <x>354</x>
+      <y>222</y>
+      <w>144</w>
+      <h>18</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;120.0;10.0</additional_attributes>
+    <additional_attributes>10.0;10.0;220.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>740</x>
-      <y>170</y>
-      <w>210</w>
-      <h>90</h>
+      <x>708</x>
+      <y>216</y>
+      <w>126</w>
+      <h>54</h>
     </coordinates>
     <panel_attributes>AdminUser
 --
@@ -71,21 +69,21 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>660</x>
-      <y>180</y>
-      <w>100</w>
-      <h>30</h>
+      <x>606</x>
+      <y>222</y>
+      <w>114</w>
+      <h>18</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;80.0;10.0</additional_attributes>
+    <additional_attributes>10.0;10.0;170.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>140</x>
-      <y>490</y>
-      <w>210</w>
-      <h>80</h>
+      <x>234</x>
+      <y>408</y>
+      <w>126</w>
+      <h>48</h>
     </coordinates>
     <panel_attributes>Tag
 --
@@ -96,30 +94,32 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>460</x>
-      <y>490</y>
-      <w>210</w>
-      <h>150</h>
+      <x>426</x>
+      <y>408</y>
+      <w>126</w>
+      <h>102</h>
     </coordinates>
     <panel_attributes>Thread
 --
 -postNumber: int
 -imagesNumber: int
--usersNumber: int
+-uniqueUsers: int
 -pageNumber: int
 -subject: String
 -isAlive: bool
 -pool: int
+--
+/+createThread()/
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>340</x>
-      <y>500</y>
-      <w>140</w>
-      <h>40</h>
+      <x>354</x>
+      <y>414</y>
+      <w>84</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-
 m1=1..n
@@ -129,10 +129,10 @@ m2=0..n</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>770</x>
-      <y>490</y>
-      <w>210</w>
-      <h>130</h>
+      <x>612</x>
+      <y>408</y>
+      <w>126</w>
+      <h>84</h>
     </coordinates>
     <panel_attributes>Post
 --
@@ -141,29 +141,31 @@ m2=0..n</panel_attributes>
 -files[]: File
 -title: String
 -userName: String
+--
+/+cratePost()/
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>320</x>
-      <y>280</y>
-      <w>170</w>
-      <h>240</h>
+      <x>264</x>
+      <y>264</y>
+      <w>174</w>
+      <h>162</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=1..n
 m2=0..n</panel_attributes>
-    <additional_attributes>10.0;10.0;140.0;220.0</additional_attributes>
+    <additional_attributes>10.0;10.0;270.0;250.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>660</x>
-      <y>500</y>
-      <w>130</w>
-      <h>40</h>
+      <x>546</x>
+      <y>414</y>
+      <w>78</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
 m1=1
@@ -173,10 +175,10 @@ m2=1..n	</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>960</x>
-      <y>320</y>
-      <w>210</w>
-      <h>130</h>
+      <x>726</x>
+      <y>306</y>
+      <w>126</w>
+      <h>78</h>
     </coordinates>
     <panel_attributes>File
 --
@@ -190,10 +192,10 @@ m2=1..n	</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1230</x>
-      <y>320</y>
-      <w>210</w>
-      <h>80</h>
+      <x>888</x>
+      <y>306</y>
+      <w>126</w>
+      <h>48</h>
     </coordinates>
     <panel_attributes>Image
 --
@@ -204,10 +206,10 @@ m2=1..n	</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1160</x>
-      <y>330</y>
-      <w>90</w>
-      <h>30</h>
+      <x>846</x>
+      <y>312</y>
+      <w>54</w>
+      <h>18</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;70.0;10.0</additional_attributes>
@@ -215,14 +217,38 @@ m2=1..n	</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>970</x>
-      <y>440</y>
-      <w>170</w>
-      <h>80</h>
+      <x>732</x>
+      <y>378</y>
+      <w>102</w>
+      <h>48</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=1
 m2=0..n</panel_attributes>
     <additional_attributes>10.0;60.0;150.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLFrame</id>
+    <coordinates>
+      <x>216</x>
+      <y>192</y>
+      <w>810</w>
+      <h>336</h>
+    </coordinates>
+    <panel_attributes>Diagrama de Classes</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>324</x>
+      <y>264</y>
+      <w>300</w>
+      <h>156</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1..n
+m2=0..n</panel_attributes>
+    <additional_attributes>10.0;10.0;480.0;240.0</additional_attributes>
   </element>
 </diagram>

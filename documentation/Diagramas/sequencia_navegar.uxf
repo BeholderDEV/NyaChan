@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>7</zoom_level>
+  <element>
+    <id>UMLSequenceAllInOne</id>
+    <coordinates>
+      <x>126</x>
+      <y>105</y>
+      <w>952</w>
+      <h>434</h>
+    </coordinates>
+    <panel_attributes>title=Navegar Pelas Boards
+obj=Usuário:Alisson~a ACTOR
+obj=Navegador~g
+obj=Controle Tráfico~b
+obj=Tela Tag ~ c CREATED_LATER 
+obj=Tela Threads ~ d CREATED_LATER
+obj=Persistencia Tags~e
+obj=Persistencia Threads~f
+
+on=a
+a-&gt;&gt;&gt;g : AcessaPagina; on=g;
+g-&gt;&gt;&gt;b : encaminhaAcesso(); on=b
+b-&gt;&gt;&gt;e : RequestTagsList(); on=e
+e.&gt;b: TagList&lt;&gt;; off=e
+id3-&gt;id4+:CriarTela();
+off=b
+a-&gt;c: escolheTag(); on=c;
+c-&gt;b: RequisitaTelaTag(); on=b;off=c
+b-&gt;&gt;&gt;f: RequestThreadByTag(); on=f
+f.&gt;b: ThreadList&lt;&gt;; off=f
+id3-&gt;id5+:CriarTela(); off=b
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
