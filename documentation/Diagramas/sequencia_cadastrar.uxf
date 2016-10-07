@@ -6,22 +6,20 @@
     <coordinates>
       <x>60</x>
       <y>60</y>
-      <w>730</w>
-      <h>520</h>
+      <w>500</w>
+      <h>510</h>
     </coordinates>
-    <panel_attributes>title=Criar Thread
+    <panel_attributes>title=Cadastrar-se
 obj=Usuário:Alisson~a ACTOR
-obj=Escritor de Thread~g CREATED_LATER
-obj=Persistencia Tags~e
-obj=Persistencia Threads~f
+obj=Modal de Cadastramento~g CREATED_LATER
+obj=Persistencia Usuarios~f
 
 on=a
-a-&gt;g : Clica botão Criar Thread;
+a-&gt;g : Clica botão Sign UP;
 on=g;
-g-&gt;&gt;&gt;e : RequestTagsList(); on=e
-e.&gt;g: TagList&lt;&gt;; off=e
-g-&gt;&gt;&gt;f : Post(); on=f; off=g
-f.&gt;a : atualiza_boards;off=f
+a-&gt;g : escreve dados de perfil
+g-&gt;&gt;&gt;f : Cadastrar(); on=f; off=g
+f.&gt;a : logar_usuario();off=f
 
 
 </panel_attributes>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLSequenceAllInOne</id>
+    <coordinates>
+      <x>60</x>
+      <y>60</y>
+      <w>590</w>
+      <h>370</h>
+    </coordinates>
+    <panel_attributes>title=Deletar postagens
+obj=Administrador:Alisson~a ACTOR
+obj=Gerenciador de Threads~g
+obj=Persistencia Threads~f
+
+on=a
+a : Clica em Select Post nas postagens na thread;
+a-&gt;g : aperta Delete Post; on=g
+g-&gt;&gt;&gt;f : Deletar_postagens(); on=f;
+f.&gt;g : atualiza_threads(); off=g; off=f
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

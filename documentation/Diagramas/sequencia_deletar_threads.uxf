@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLSequenceAllInOne</id>
+    <coordinates>
+      <x>0</x>
+      <y>70</y>
+      <w>770</w>
+      <h>270</h>
+    </coordinates>
+    <panel_attributes>title=Deletar_threads
+obj=Genrenciador de Threads~a ACTOR
+obj=Persistencia Threads~f
+
+on=a
+on=f
+a-&gt;f : remover_threads_arquivadas_em_tempo_limite();
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

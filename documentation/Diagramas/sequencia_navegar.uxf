@@ -4,10 +4,10 @@
   <element>
     <id>UMLSequenceAllInOne</id>
     <coordinates>
-      <x>126</x>
-      <y>105</y>
+      <x>14</x>
+      <y>77</y>
       <w>952</w>
-      <h>434</h>
+      <h>406</h>
     </coordinates>
     <panel_attributes>title=Navegar Pelas Boards
 obj=Usuário:Alisson~a ACTOR
@@ -23,13 +23,12 @@ a-&gt;&gt;&gt;g : AcessaPagina; on=g;
 g-&gt;&gt;&gt;b : encaminhaAcesso(); on=b
 b-&gt;&gt;&gt;e : RequestTagsList(); on=e
 e.&gt;b: TagList&lt;&gt;; off=e
-id3-&gt;id4+:CriarTela();
-off=b
+id3-&gt;id4:CriarTela();off=b
 a-&gt;c: escolheTag(); on=c;
 c-&gt;b: RequisitaTelaTag(); on=b;off=c
 b-&gt;&gt;&gt;f: RequestThreadByTag(); on=f
 f.&gt;b: ThreadList&lt;&gt;; off=f
-id3-&gt;id5+:CriarTela(); off=b
+id3-&gt;id5:CriarTela(); off=b
 
 
 </panel_attributes>

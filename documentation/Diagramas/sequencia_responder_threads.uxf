@@ -4,23 +4,22 @@
   <element>
     <id>UMLSequenceAllInOne</id>
     <coordinates>
-      <x>300</x>
-      <y>160</y>
-      <w>730</w>
-      <h>430</h>
+      <x>90</x>
+      <y>80</y>
+      <w>620</w>
+      <h>480</h>
     </coordinates>
     <panel_attributes>title=Responder Thread
 obj=Usuário:Alisson~a ACTOR
-obj=Escritor de Post~g
-obj=Persistencia Tags~e
+obj=Escritor de Post~g CREATED_LATER
 obj=Persistencia Threads~f
 
 on=a
-a-&gt;&gt;&gt;g : Clica botão Criar Thread; on=g;
-g-&gt;&gt;&gt;e : RequestTagsList(); on=e
-e.&gt;g: TagList&lt;&gt;; off=e
-g-&gt;&gt;&gt;f : Post(); on=f
-f.&gt;a : atualiza_boards;off=f
+a-&gt;g : Clica botão Responder Thread; 
+on=g;
+a-&gt;g : escreve post
+g-&gt;&gt;&gt;f : botaoPost(); on=f; off=g
+f.&gt;a : atualiza_thread;off=f;
 
 
 </panel_attributes>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLSequenceAllInOne</id>
+    <coordinates>
+      <x>40</x>
+      <y>70</y>
+      <w>940</w>
+      <h>510</h>
+    </coordinates>
+    <panel_attributes>title=Denunciar postagens
+obj=Usuário:Alisson~a ACTOR
+obj=Genrenciador de Threads~c
+obj=Modal de Denuncia~g CREATED_LATER
+obj=Persistencia Denuncias~e
+
+on=a;
+a-&gt;&gt;&gt;c:Clica icone ao lado do ID(); on=c
+id2-&gt;id3:Criar_model();off=c;
+on=g; 
+a-&gt;&gt;&gt;g : Responde Captcha e clica em Report;
+g-&gt;&gt;&gt;e : Salvar_Denuncia(); on=e;
+e-&gt;&gt;&gt;g : confirma(); off=e
+g-&gt;&gt;&gt;a : fecha_modal()
+off=g
+off=a</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

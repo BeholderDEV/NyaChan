@@ -7,7 +7,7 @@
       <x>60</x>
       <y>130</y>
       <w>1000</w>
-      <h>480</h>
+      <h>440</h>
     </coordinates>
     <panel_attributes>title=Gerenciar Notificacoes
 obj=Administrador:Alisson~a ACTOR
@@ -19,8 +19,7 @@ obj=Persistencia Tags~f
 a-&gt;&gt;&gt;b : clica Change_Tags; on=a; on=b
 b-&gt;&gt;&gt;f : requestTagsList(); on=f
 f.&gt;b : TagList&lt;&gt;; off=f
-id2-&gt;id3+:CriarArea();
-off=b
+id2-&gt;id3:CriarArea();off=b
 a-&gt;c: escolhe Tags; on=c
 c-&gt;&gt;&gt;h : confirm(); off=c; on=h
 h.&gt;b : update_thread(); on=b
