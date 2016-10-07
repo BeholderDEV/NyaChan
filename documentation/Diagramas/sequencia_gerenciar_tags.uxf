@@ -9,7 +9,7 @@
       <w>1000</w>
       <h>440</h>
     </coordinates>
-    <panel_attributes>title=Gerenciar Notificacoes
+    <panel_attributes>title=Gerenciar Tags
 obj=Administrador:Alisson~a ACTOR
 obj=Genrenciador de threads~b
 obj=Seletor de Tags ~ c CREATED_LATER
