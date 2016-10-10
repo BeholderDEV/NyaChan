@@ -7,10 +7,10 @@
             console.log("entrou na função");
             $http({
                 method : "GET",
-                //url : "http://127.0.0.1:3000/a/threads"
+//                url : "http://127.0.0.1:3000/a/threads"
                 url: "https://nyachan-server.herokuapp.com/a/threads"
             }).then(function mySucces(response) {
-                $scope.threads = JSON.parse(response.data);
+                $scope.threads = response.data;
                 console.log($scope.threads);
             }, function myError(response) {
                   console.log(response || "Request failed");

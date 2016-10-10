@@ -46,10 +46,12 @@ app.get('/a/threads', function (req, res) {
         console.log('Unable to connect to the mongoDB server. Error:', err);
         } else {
         console.log('Connection established to', url);
-
-        var cursor = db.collection('thread').find({ "tags": "Anime" });
-        
-        res.jsonp(cursor);
+        db.collection('thread').find( { } ).toArray(function(error, documents) {
+            if (err){
+                throw error;
+            } 
+            res.jsonp(documents);
+        });
             
         db.close();
         }
@@ -84,4 +86,5 @@ app.get('/js/app.js', function (req, res) {
 })
 
 var port = process.env.PORT || 3000;
+//var port = 3000;
 var server = app.listen(port, function () {})
