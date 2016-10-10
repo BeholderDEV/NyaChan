@@ -12,7 +12,7 @@
   "dependencies": {
     "express": "4.x",
 	"mongodb": "2.x",
-    "moongoose": "4.6.x"
+    "moongoose": "4.x"
   },
   "repository": {
     "type": "git",
