@@ -1,6 +1,26 @@
 var express = require('express');
 var app = express();
 var fs = require("fs");
+var mongodb = require('mongodb');
+var MongoClient = mongodb.MongoClient;
+
+// Connection URL
+var url = 'mongodb://alisson:123456@ds053206.mlab.com:53206/nyachan_data';
+
+// Use connect method to connect to the server
+MongoClient.connect(url, function(err, db) {
+  if (err) {
+    console.log('Unable to connect to the mongoDB server. Error:', err);
+  } else {
+    console.log('Connection established to', url);
+    
+    
+      
+    db.close();
+  }
+});
+
+
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
