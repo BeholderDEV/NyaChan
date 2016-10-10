@@ -20,7 +20,7 @@
     <![endif]-->
 
   </head>
-  <body>
+  <body ng-app = "nya-chan" ng-controller= "animeThreadController">
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
@@ -30,18 +30,18 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="a.php">Nya Chan</a>
+          <a class="navbar-brand" href="tag.html">Nya Chan</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li class="btn" data-toggle="modal" data-target="#newThreadModal"><a>New Thread  <i class="fa fa-plus"></i></a></li>
+            <li class="btn" ng-click="addPost()" data-toggle="modal" data-target=""><a>Reply <i class="fa fa-plus"></i></a></li>
           </ul>
         </div>
       </div>
     </nav>
     <div class="container">
 
-      <div ng-app = "nya-chan" ng-controller= "animeThreadController">
+      <div>
         <div>
           <div class='panel panel-default'>
             <div class='panel-heading'>

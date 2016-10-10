@@ -12,7 +12,8 @@
   "dependencies": {
     "express": "4.x",
 	"mongodb": "2.x",
-    "mongoose": "4.6.3"
+    "mongoose": "4.6.3",
+    "body-parser": "1.5.x"
   },
   "repository": {
     "type": "git",
