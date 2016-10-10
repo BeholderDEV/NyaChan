@@ -7,18 +7,25 @@ var MongoClient = mongodb.MongoClient;
 // Connection URL
 var url = 'mongodb://alisson:123456@ds053206.mlab.com:53206/nyachan_data';
 
-// Use connect method to connect to the server
-MongoClient.connect(url, function(err, db) {
-  if (err) {
-    console.log('Unable to connect to the mongoDB server. Error:', err);
-  } else {
-    console.log('Connection established to', url);
-    
-    
-      
-    db.close();
-  }
-});
+//    MongoClient.connect(url, function(err, db) {
+//        if (err) {
+//        console.log('Unable to connect to the mongoDB server. Error:', err);
+//        } else {
+//        console.log('Connection established to', url);
+//
+//        var cursor = db.collection('thread').find({ "tags": "Anime" });
+//        
+//        cursor.each(function(err, doc) {
+//            if (doc != null) {
+//                console.dir(doc);
+//            } else {
+//                console.log("SHIT");
+//            }
+//        });
+//            
+//        db.close();
+//        }
+//    });
 
 
 
@@ -29,11 +36,25 @@ app.use(function(req, res, next) {
 });
 
 app.get('/a/threads', function (req, res) {
-   res.type('application/json');
-   fs.readFile( __dirname + "/" + "tag_anime.json", 'utf8', function (err, data) {
-     console.log(data);
-      res.jsonp( data );
-   });
+//   res.type('application/json');
+//   fs.readFile( __dirname + "/" + "tag_anime.json", 'utf8', function (err, data) {
+//     console.log(data);
+//      res.jsonp( data );
+//   });
+    MongoClient.connect(url, function(err, db) {
+        if (err) {
+        console.log('Unable to connect to the mongoDB server. Error:', err);
+        } else {
+        console.log('Connection established to', url);
+
+        var cursor = db.collection('thread').find({ "tags": "Anime" });
+        
+        res.jsonp(cursor);
+            
+        db.close();
+        }
+    });
+    
 })
 
 app.get('/a/thread/1', function (req, res) {
