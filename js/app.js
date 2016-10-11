@@ -34,15 +34,24 @@
           });
       };
       $scope.thread = $scope.searchThread();
-        
-      $scope.addPost = function(){
+
+      $scope.addPost = function(i_title, i_body, i_file){
           var dataPost = {
                 id: "123123123",
                 threadid: $scope.thread._id,
-                body: "Look at this shit",
+                body: i_body,
                 date: "2016-01-02 19:33:00",
-                tile: "Help",
-                userName: "Anon"
+                tile: i_title,
+                userName: "Anon",
+                file: [
+                  {
+                      size: 250,
+                      name: "Mais 1",
+                      extension: "jpg",
+                      source: i_file,
+                      path: ""
+                  }
+              ]
           };
           $http({
               method : "PUT",
@@ -58,10 +67,10 @@
                 console.log(response || "Request failed");
           });
       }
-    
+
     });
 
-    
+
 
 
 })();

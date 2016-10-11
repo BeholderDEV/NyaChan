@@ -97,29 +97,26 @@
               <div class="form-group">
                 <label for="inputEmail3" class="col-sm-2 control-label">Subject</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" placeholder="Subject">
+                  <input type="text" class="form-control" placeholder="Subject" id="title">
                 </div>
               </div>
               <div class="form-group">
                 <label class="col-sm-2 control-label">Comment</label>
                 <div class="col-sm-10">
-                  <textarea class="form-control" rows="3" placeholder="Comment"></textarea>
+                  <textarea class="form-control" rows="3" placeholder="Comment" id="body"></textarea>
                 </div>
               </div>
               <div class="form-group">
-                <label for="inputEmail3" class="col-sm-2 control-label">File</label>
+                <label class="col-sm-2 control-label">File</label>
                 <div class="col-sm-10">
-                  <div class="fileinput fileinput-new" data-provides="fileinput">
-                    <span class="btn btn-default btn-file"><span>Choose file</span><input type="file" multiple=""></span>
-                    <span class="fileinput-filename"></span><span class="fileinput-new">No file chosen</span>
-                  </div>
+                  <input type="text" class="form-control" placeholder="File" id="file">
                 </div>
               </div>
             </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" ng-click="addPost()" class="btn btn-nya">Post</button>
+            <button type="button" ng-click="addPost(document.getElementById('title').value,document.getElementById('body').value,document.getElementById('file').value)" class="btn btn-nya">Post</button>
           </div>
         </div>
       </div>
