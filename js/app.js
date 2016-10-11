@@ -46,7 +46,7 @@
                 file: [
                   {
                       size: 250,
-                      name: "Mais 1",
+                      name: post.file,
                       extension: "jpg",
                       source: post.file,
                       path: ""
