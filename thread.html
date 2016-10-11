@@ -97,26 +97,26 @@
               <div class="form-group">
                 <label for="inputEmail3" class="col-sm-2 control-label">Subject</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" placeholder="Subject" id="title">
+                  <input type="text" class="form-control" ng-model="post.title" placeholder="Subject" id="title">
                 </div>
               </div>
               <div class="form-group">
                 <label class="col-sm-2 control-label">Comment</label>
                 <div class="col-sm-10">
-                  <textarea class="form-control" rows="3" placeholder="Comment" id="body"></textarea>
+                  <textarea class="form-control" rows="3" placeholder="Comment" ng-model="post.body" id="body"></textarea>
                 </div>
               </div>
               <div class="form-group">
                 <label class="col-sm-2 control-label">File</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" placeholder="File" id="file">
+                  <input type="text" class="form-control" placeholder="File" ng-model="post.file" id="file">
                 </div>
               </div>
             </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-nya">Post</button>
+            <button type="button" ng-click="addPost({{post}})" class="btn btn-nya">Post</button>
           </div>
         </div>
       </div>

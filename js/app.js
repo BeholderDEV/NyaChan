@@ -35,20 +35,20 @@
       };
       $scope.thread = $scope.searchThread();
 
-      $scope.addPost = function(i_title, i_body, i_file){
+      $scope.addPost = function(post){
           var dataPost = {
                 id: "123123123",
                 threadid: $scope.thread._id,
-                body: i_body,
+                body: post.body,
                 date: "2016-01-02 19:33:00",
-                tile: i_title,
+                tile: post.title,
                 userName: "Anon",
                 file: [
                   {
                       size: 250,
                       name: "Mais 1",
                       extension: "jpg",
-                      source: i_file,
+                      source: post.file,
                       path: ""
                   }
               ]
