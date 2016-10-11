@@ -59,7 +59,7 @@
               <ul class="list-group">
                 <li class="list-group-item" ng-repeat="p in thread.post">
                   <a ng-href="{{p.file[0].source}}" target="_blank">{{p.file[0].name}}.{{p.file[0].extension}}</a>
-                  <img ng-src="{{p.file[0].source}}" class="img-responsive nya-image image-thumb"/>
+                  <img ng-src="{{p.file[0].source}}" class="img-responsive nya-image image-thumb post-image"/>
                   {{p.body}}
                 </li>
               </ul>
@@ -131,8 +131,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
      <script src="js/app.js"></script>
      <script>
-         $(".nya-image").click(function(){
-             $('.nya-image').toggleClass('image-thumb');
+         $(".post-image").click(function(){
+             $('.post-image').toggleClass('image-thumb');
          });
          $(".OP").click(function(){
              $('.OP').toggleClass('image-thumb-OP');
