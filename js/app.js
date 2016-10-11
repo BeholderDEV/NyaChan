@@ -66,7 +66,7 @@
           }, function myError(response) {
                 console.log(response || "Request failed");
           });
-          window.location.url = "#";
+          window.location.reload(true);
       }
 
     });
