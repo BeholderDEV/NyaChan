@@ -6,8 +6,8 @@
     <coordinates>
       <x>60</x>
       <y>60</y>
-      <w>500</w>
-      <h>510</h>
+      <w>650</w>
+      <h>520</h>
     </coordinates>
     <panel_attributes>title=Cadastrar-se
 obj=Usuário:Alisson~a ACTOR
@@ -17,7 +17,8 @@ obj=Persistencia Usuarios~f
 on=a
 a-&gt;g : Clica botão Sign UP;
 on=g;
-a-&gt;g : escreve dados de perfil
+a-&gt;g : escreve dados de perfil;
+g.&gt;a : [dados inválidos] exibe_mensagem_erro
 g-&gt;&gt;&gt;f : Cadastrar(); on=f; off=g
 f.&gt;a : logar_usuario();off=f
 

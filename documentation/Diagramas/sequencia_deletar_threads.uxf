@@ -7,10 +7,10 @@
       <x>0</x>
       <y>70</y>
       <w>770</w>
-      <h>270</h>
+      <h>230</h>
     </coordinates>
     <panel_attributes>title=Deletar_threads
-obj=Genrenciador de Threads~a ACTOR
+obj=Genrenciador de Threads~a
 obj=Persistencia Threads~f
 
 on=a

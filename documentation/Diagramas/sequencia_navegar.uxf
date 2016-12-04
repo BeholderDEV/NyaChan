@@ -5,14 +5,14 @@
     <id>UMLSequenceAllInOne</id>
     <coordinates>
       <x>14</x>
-      <y>77</y>
+      <y>63</y>
       <w>952</w>
-      <h>406</h>
+      <h>553</h>
     </coordinates>
     <panel_attributes>title=Navegar Pelas Boards
 obj=Usuário:Alisson~a ACTOR
 obj=Navegador~g
-obj=Controle Tráfico~b
+obj=Controle Trafego~b
 obj=Tela Tag ~ c CREATED_LATER 
 obj=Tela Threads ~ d CREATED_LATER
 obj=Persistencia Tags~e
@@ -24,10 +24,12 @@ g-&gt;&gt;&gt;b : encaminhaAcesso(); on=b
 b-&gt;&gt;&gt;e : RequestTagsList(); on=e
 e.&gt;b: TagList&lt;&gt;; off=e
 id3-&gt;id4:CriarTela();off=b
-a-&gt;c: escolheTag(); on=c;
+a-&gt;c: [navegar pelas tags] escolheTag(); on=c;
 c-&gt;b: RequisitaTelaTag(); on=b;off=c
 b-&gt;&gt;&gt;f: RequestThreadByTag(); on=f
 f.&gt;b: ThreadList&lt;&gt;; off=f
+a-&gt;g: [escolhe thread em destaque] escolheThread; on=c;
+g-&gt;&gt;&gt;b :[escolhe thread em destaque] encaminhaAcesso();
 id3-&gt;id5:CriarTela(); off=b
 
 

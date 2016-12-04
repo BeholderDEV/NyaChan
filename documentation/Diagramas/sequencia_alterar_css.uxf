@@ -6,8 +6,8 @@
     <coordinates>
       <x>350</x>
       <y>180</y>
-      <w>470</w>
-      <h>350</h>
+      <w>640</w>
+      <h>460</h>
     </coordinates>
     <panel_attributes>title=Alterar CSS
 obj=Usuário:Alisson~a ACTOR
@@ -17,6 +17,8 @@ obj=Cookie Controller~f
 on=a
 a-&gt;&gt;&gt;g : Clica botão alterar css; on=g;
 g-&gt;&gt;&gt;f : Save(); on=f; off=g
+f.&gt;g : [CSS inválido] CSS_invalido_exception;
+g.&gt;a : [CSS inválido] exibe_mensagem_erro
 f.&gt;a: Save_cookie(); off=f
 
 

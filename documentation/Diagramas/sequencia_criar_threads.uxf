@@ -5,9 +5,9 @@
     <id>UMLSequenceAllInOne</id>
     <coordinates>
       <x>60</x>
-      <y>60</y>
-      <w>730</w>
-      <h>520</h>
+      <y>10</y>
+      <w>900</w>
+      <h>550</h>
     </coordinates>
     <panel_attributes>title=Criar Thread
 obj=Usuário:Alisson~a ACTOR
@@ -17,11 +17,12 @@ obj=Persistencia Threads~f
 
 on=a
 a-&gt;g : Clica botão Criar Thread;
+g.&gt;a : [preenchimento inválido de informações] exibe_mensagem_de_erro
 on=g;
 g-&gt;&gt;&gt;e : RequestTagsList(); on=e
 e.&gt;g: TagList&lt;&gt;; off=e
 g-&gt;&gt;&gt;f : Post(); on=f; off=g
-f.&gt;a : atualiza_boards;off=f
+f.&gt;g : atualiza_boards;off=f
 
 
 </panel_attributes>

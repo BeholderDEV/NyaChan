@@ -5,14 +5,14 @@
     <id>UMLSequenceAllInOne</id>
     <coordinates>
       <x>60</x>
-      <y>130</y>
-      <w>960</w>
-      <h>410</h>
+      <y>0</y>
+      <w>1190</w>
+      <h>800</h>
     </coordinates>
     <panel_attributes>title=Receber Notificacoes
 obj=Usuário:Alisson~a ACTOR
-obj=Genrenciador de Notificacoes de usuario~g
-obj=Genrenciador de threads~b
+obj=Gerenciador de Notificacoes de usuario~g
+obj=Gerenciador de threads~b
 obj=Persistencia Threads~h
 obj=Persistencia Usuários~f
 
@@ -21,7 +21,14 @@ h.&gt;b : responsedThreads(); off=h
 b.&gt;g : responsedThreads(); on=g; off=b
 g-&gt;&gt;&gt;f : requestMarkedUsers(); on=f
 f.&gt;g : NotifieUsers[ ]; off=f
-g-&gt;a : Envia notificação; on=a; off=g
+g-&gt;a : [Não existe nenhuma notificação já existente da thread] Envia notificação; on=a; off=g
+a-&gt;g : requisita Thread para visualização; on=g
+g-&gt;b : requisitarThreadEscolhida(); on=b;
+b-&gt;h : buscarThread; on=h;
+h.&gt;b : retornarThread(); off=b;
+h.&gt;g : [thread já deletada] thread_deletada_exception;
+g.&gt;a : [thread já deletada] exibe_erro; off=g;
+b.&gt;a : encaminharUsuarioParaThread();
 
 
 </panel_attributes>

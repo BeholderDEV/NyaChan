@@ -7,7 +7,7 @@
       <x>40</x>
       <y>70</y>
       <w>940</w>
-      <h>510</h>
+      <h>550</h>
     </coordinates>
     <panel_attributes>title=Denunciar postagens
 obj=Usuário:Alisson~a ACTOR
@@ -20,6 +20,7 @@ a-&gt;&gt;&gt;c:Clica icone ao lado do ID(); on=c
 id2-&gt;id3:Criar_model();off=c;
 on=g; 
 a-&gt;&gt;&gt;g : Responde Captcha e clica em Report;
+g.&gt;a : [captcha errado] exibe_mensagem_erro;
 g-&gt;&gt;&gt;e : Salvar_Denuncia(); on=e;
 e-&gt;&gt;&gt;g : confirma(); off=e
 g-&gt;&gt;&gt;a : fecha_modal()

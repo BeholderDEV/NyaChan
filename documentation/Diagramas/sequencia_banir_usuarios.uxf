@@ -7,7 +7,7 @@
       <x>0</x>
       <y>70</y>
       <w>800</w>
-      <h>520</h>
+      <h>590</h>
     </coordinates>
     <panel_attributes>title=Banir Usuário
 obj=Administrador:Alisson~a ACTOR
@@ -20,7 +20,8 @@ a-&gt;&gt;&gt;g : Clica em icone Banir Usuário em uma postagem; on=g;
 g-&gt;&gt;&gt;e : criar_tela(); off=g
 on=e
 a-&gt;&gt;&gt;e :Seleciona tempo de banimento;
-a-&gt;&gt;&gt;e :aperta Confirm;
+a-&gt;&gt;&gt;e :Aperta Confirm;
+e.&gt;a : [Confirm sem selecionar o tempo corretamente] exibe_mensagem_erro;
 e-&gt;f : banir_usuário_por_IP()
 f.&gt;e : confirma()
 

@@ -4,18 +4,22 @@
   <element>
     <id>UMLSequenceAllInOne</id>
     <coordinates>
-      <x>300</x>
-      <y>160</y>
-      <w>550</w>
-      <h>380</h>
+      <x>280</x>
+      <y>50</y>
+      <w>930</w>
+      <h>530</h>
     </coordinates>
     <panel_attributes>title=Baixar Arquivos de uma Thread
 obj=Usuário:Alisson~a ACTOR
+obj=Tela Thread~t
 obj=Controlador Thread~g
 obj=Persistencia Arquivos~f
 
 on=a
-a-&gt;&gt;&gt;g : Clica botão baixar arquivos da Thread; on=g;
+a-&gt;&gt;&gt;t : Clica botão baixar arquivos da Thread; on=g;
+t-&gt;&gt;&gt;g : RequestFiles()
+g.&gt;t : [arquivo deletado] arquivo_deletado_exception 
+t.&gt;a : [arquivo deletado] exibe_mensagem_erro
 g-&gt;&gt;&gt;f : RequestFilesZip(); on=f; off=g
 f.&gt;a: arquivos.zip; off=f
 

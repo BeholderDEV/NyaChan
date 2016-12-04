@@ -7,10 +7,10 @@
       <x>0</x>
       <y>70</y>
       <w>460</w>
-      <h>310</h>
+      <h>280</h>
     </coordinates>
     <panel_attributes>title=Arquivar_threads
-obj=Genrenciador de Threads~a ACTOR
+obj=Genrenciador de Threads~a
 obj=Persistencia Threads~f
 
 on=a
