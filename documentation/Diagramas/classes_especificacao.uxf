@@ -1,0 +1,649 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>6</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>270</x>
+      <y>114</y>
+      <w>126</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>User
+--
+-ip : String
+--
+/+report(postId:int)/
+/+localConfig(css:String)/</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>522</x>
+      <y>114</y>
+      <w>126</w>
+      <h>114</h>
+    </coordinates>
+    <panel_attributes>RegistedUser
+--
+-login: String
+-password: String
+-name: String
+-email: String
+-avatar: String
+-cloudConfig: String
+--
+/+cloudConfigurate(css:String)/
+/+bookmarkThread(threadID:int)/
+/+manageNotifications()/
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>390</x>
+      <y>120</y>
+      <w>144</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;220.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>744</x>
+      <y>114</y>
+      <w>126</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>AdminUser
+--
+/+deletePost(postID:int)/
+/+banUser(userID:int)/
+/+manageTags()/</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>642</x>
+      <y>120</y>
+      <w>114</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;170.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>264</x>
+      <y>306</y>
+      <w>126</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>Tag
+--
+-name: String
+-description: String</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>462</x>
+      <y>306</y>
+      <w>126</w>
+      <h>102</h>
+    </coordinates>
+    <panel_attributes>Thread
+--
+-postNumber: int
+-imagesNumber: int
+-uniqueUsers: int
+-pageNumber: int
+-subject: String
+-isAlive: bool
+-pool: int
+--
+/+createThread()/
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>384</x>
+      <y>312</y>
+      <w>90</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=1..n
+m2=0..n</panel_attributes>
+    <additional_attributes>10.0;10.0;130.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>648</x>
+      <y>306</y>
+      <w>126</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>Post
+--
+-body: String
+-date: int
+-files[]: File
+-title: String
+-userName: String
+--
+/+cratePost()/
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>300</x>
+      <y>162</y>
+      <w>174</w>
+      <h>162</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1..n
+m2=0..n</panel_attributes>
+    <additional_attributes>10.0;10.0;270.0;250.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>582</x>
+      <y>312</y>
+      <w>78</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m1=1
+m2=1..n	</panel_attributes>
+    <additional_attributes>10.0;10.0;110.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>762</x>
+      <y>204</y>
+      <w>126</w>
+      <h>78</h>
+    </coordinates>
+    <panel_attributes>File
+--
+-size: int
+-source: String
+-path: String
+-name: String
+-extension: String</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>924</x>
+      <y>204</y>
+      <w>126</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>Image
+--
+-width: int
+-height: int</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>882</x>
+      <y>210</y>
+      <w>54</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;70.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>768</x>
+      <y>276</y>
+      <w>102</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=0..n</panel_attributes>
+    <additional_attributes>10.0;60.0;150.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLFrame</id>
+    <coordinates>
+      <x>0</x>
+      <y>6</y>
+      <w>1122</w>
+      <h>648</h>
+    </coordinates>
+    <panel_attributes>Diagrama de Classes</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>360</x>
+      <y>162</y>
+      <w>300</w>
+      <h>156</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1..n
+m2=0..n</panel_attributes>
+    <additional_attributes>10.0;10.0;480.0;240.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>666</x>
+      <y>558</y>
+      <w>126</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>Controle Trafego
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>72</x>
+      <y>228</y>
+      <w>126</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>Gerenciador Tags
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>366</x>
+      <y>558</y>
+      <w>126</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>Gerenciador Threads
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>228</x>
+      <y>420</y>
+      <w>126</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>Persistência Threads
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>72</x>
+      <y>306</y>
+      <w>126</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>Persistência Tags
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>228</x>
+      <y>510</y>
+      <w>126</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>Escritor Threads
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>828</x>
+      <y>456</y>
+      <w>126</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>Escritor Posts
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>72</x>
+      <y>96</y>
+      <w>126</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>Escritor CSS
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>270</x>
+      <y>12</y>
+      <w>126</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>Cookie Controller
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>870</x>
+      <y>372</y>
+      <w>126</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>Persistência Denúncias
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>456</x>
+      <y>18</y>
+      <w>126</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>Persistência Usuário
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>72</x>
+      <y>30</y>
+      <w>126</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>Tela Perfil
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>522</x>
+      <y>558</y>
+      <w>126</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>Tela Thread
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>66</x>
+      <y>390</y>
+      <w>126</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>Tela Tags
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>648</x>
+      <y>12</y>
+      <w>126</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>Gerenciador Notificações
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>516</x>
+      <y>54</y>
+      <w>60</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;10.0;80.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>606</x>
+      <y>42</y>
+      <w>54</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>70.0;10.0;10.0;120.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>312</x>
+      <y>48</y>
+      <w>18</w>
+      <h>78</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;10.0;10.0;110.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>192</x>
+      <y>66</y>
+      <w>96</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;10.0;140.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>192</x>
+      <y>108</y>
+      <w>90</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;10.0;130.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>180</x>
+      <y>264</y>
+      <w>150</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;10.0;230.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>192</x>
+      <y>318</y>
+      <w>84</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;20.0;120.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>186</x>
+      <y>348</y>
+      <w>96</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;70.0;140.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>768</x>
+      <y>366</y>
+      <w>114</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>170.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>72</x>
+      <y>162</y>
+      <w>126</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>Persistência IPs Banidos
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>192</x>
+      <y>144</y>
+      <w>90</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;80.0;130.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>768</x>
+      <y>384</y>
+      <w>78</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>110.0;120.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>708</x>
+      <y>384</y>
+      <w>18</w>
+      <h>186</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;290.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>582</x>
+      <y>402</y>
+      <w>96</w>
+      <h>168</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>140.0;260.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>546</x>
+      <y>402</y>
+      <w>24</w>
+      <h>168</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>20.0;260.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>348</x>
+      <y>372</y>
+      <w>126</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;80.0;190.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>330</x>
+      <y>396</y>
+      <w>144</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;190.0;220.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>462</x>
+      <y>402</y>
+      <w>42</w>
+      <h>168</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;260.0;50.0;10.0</additional_attributes>
+  </element>
+</diagram>

@@ -4,7 +4,7 @@
   <element>
     <id>UMLSequenceAllInOne</id>
     <coordinates>
-      <x>280</x>
+      <x>100</x>
       <y>50</y>
       <w>930</w>
       <h>530</h>
@@ -12,7 +12,7 @@
     <panel_attributes>title=Baixar Arquivos de uma Thread
 obj=Usuário:Alisson~a ACTOR
 obj=Tela Thread~t
-obj=Controlador Thread~g
+obj=Gerenciador de Threads~g
 obj=Persistencia Arquivos~f
 
 on=a
