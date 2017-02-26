@@ -9,7 +9,7 @@ body {
 .nya-catalog {
   padding: 2%; }
   .nya-catalog .catalog-title {
-    color: #dc143c; }
+    color: #1abc9c; }
   .nya-catalog .catalog-panel {
     height: 350px;
     max-height: 350px; }
@@ -51,11 +51,11 @@ nav .container {
   color: #fff !important; }
 
 .navbar-right .btn a:hover {
-  color: #dc143c !important; }
+  color: #1abc9c !important; }
 
 a {
   text-decoration: none;
-  color: #dc143c; }
+  color: #1abc9c; }
 
 a:hover {
   text-decoration: none;
@@ -98,7 +98,7 @@ a:hover {
     margin-top: 10px; }
   .panel .panel-heading {
     /* Titulo OP*/
-    background-color: #dc143c !important;
+    background-color: #1abc9c !important;
     color: #fff !important;
     border: 0; }
     .panel .panel-heading .panel-title span {
@@ -125,7 +125,7 @@ a:hover {
   .panel .quote {
     color: #27ae60; }
   .panel .quotelink, .panel .deadlink {
-    color: #dc143c; }
+    color: #1abc9c; }
   .panel .deadlink {
     text-decoration: line-through;
     opacity: 0.6; }
@@ -138,21 +138,14 @@ footer {
 .label-nya {
   margin: 0 5px;
   background-color: #ddd;
-  color: #dc143c; }
-
-.btn-board {
-  padding: 2px;
-  font-size: 11px; }
-
-.btn-profile {
-  color: #fff !important; }
+  color: #1abc9c; }
 
 .btn-page, .btn-board, .btn-profile {
   background-color: rgba(68, 68, 68, 0.95) !important;
   border: 0; }
 
 .btn-page:hover, .btn-board:hover {
-  background-color: #dc143c !important; }
+  background-color: #1abc9c !important; }
 
 .btn-page a, .btn-board a {
   color: #fff !important; }
@@ -174,21 +167,26 @@ s {
   color: #ddd;
   text-decoration: none;
   padding: 2px; }
-
-s:hover {
-  color: #333; }
+  s :hover {
+    color: #333; }
 
 .btn {
   border: 0; }
 
 .btn-nya {
-  background-color: #dc143c;
+  background-color: #1abc9c;
   color: #fff;
   border: 0; }
+  .btn-nya :hover {
+    opacity: 0.8;
+    color: #fff; }
 
-.btn-nya:hover {
-  opacity: 0.8;
-  color: #fff; }
+.btn-board {
+  padding: 2px;
+  font-size: 11px; }
+
+.btn-profile {
+  color: #fff !important; }
 
 .close span {
   color: #fff; }
@@ -217,24 +215,19 @@ pre {
   bottom: 10px;
   transition: background-color 1s ease;
   background-color: #333; }
-
-#back-to-top-button span {
-  color: #fff; }
-
-#back-to-top-button:hover {
-  background-color: rgba(0, 0, 0, 0.7); }
-
-#back-to-top-button a {
-  display: inline-block; }
-
-#back-to-top-button a:focus {
-  outline: none; }
-
-#back-to-top-button span {
-  text-align: center;
-  height: 50px;
-  width: 50px;
-  padding-top: 16px; }
+  #back-to-top-button span {
+    color: #fff; }
+  #back-to-top-button :hover {
+    background-color: rgba(0, 0, 0, 0.7); }
+  #back-to-top-button a {
+    display: inline-block; }
+  #back-to-top-button a:focus {
+    outline: none; }
+  #back-to-top-button span {
+    text-align: center;
+    height: 50px;
+    width: 50px;
+    padding-top: 16px; }
 
 #profile-area {
   text-align: center;

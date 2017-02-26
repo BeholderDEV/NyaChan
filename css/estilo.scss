@@ -1,6 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Bree+Serif);
 
-$primary-color: #dc143c;
+//$primary-color: #dc143c;
+$primary-color: #1abc9c;
 $text-color: #fff;
 $dark-bg: #F5F5F5;
 
@@ -175,14 +176,7 @@ footer{
   background-color: #ddd;
   color: $primary-color;
 }
-.btn-board{
-  padding: 2px;
-  font-size: 11px;
-}
 
-.btn-profile{
-  color: $text-color !important;
-}
 
 .btn-page,  .btn-board, .btn-profile{
   background-color: rgba(68,68,68,0.95) !important;
@@ -214,21 +208,30 @@ s{
   color: #ddd;
   text-decoration: none;
   padding: 2px;
-}
-s:hover{
-  color: #333;
+  :hover{
+    color: #333;
+  }
 }
 .btn{
   border: 0;
+
 }
 .btn-nya{
   background-color: $primary-color;
   color: $text-color;
   border: 0;
+  :hover{
+    opacity: 0.8;
+    color: $text-color;
+  }
 }
-.btn-nya:hover{
-  opacity: 0.8;
-  color: $text-color;
+.btn-board{
+  padding: 2px;
+  font-size: 11px;
+}
+
+.btn-profile{
+  color: $text-color !important;
 }
 .close span{
   color: $text-color;
@@ -260,32 +263,29 @@ pre{
   bottom: 10px;
   transition: background-color 1s ease;
   background-color: #333;
-}
-#back-to-top-button span{
-  color: $text-color;
-}
-#back-to-top-button:hover
-{
-  background-color: rgba(0, 0, 0, 0.7);
+  span{
+    color: $text-color;
+  }
+  :hover{
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+  a{
+    display: inline-block;
+  }
+  a:focus
+  {
+    outline: none;
+  }
+  span
+  {
+    text-align: center;
+    height: 50px;
+    width: 50px;
+    padding-top: 16px;
+  }
+
 }
 
-#back-to-top-button a
-{
-  display: inline-block;
-}
-
-#back-to-top-button a:focus
-{
-  outline: none;
-}
-
-#back-to-top-button span
-{
-  text-align: center;
-  height: 50px;
-  width: 50px;
-  padding-top: 16px;
-}
 #profile-area
 {
   text-align: center;
