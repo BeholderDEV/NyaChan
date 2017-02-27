@@ -13,6 +13,7 @@ body{
   background-attachment: fixed;
   background-image: url("http://wallpapercraze.com/images/wallpapers/anime_duel_w1.jpeg");
   background-size: cover;
+  border-radius: 0;
 }
 
 .nya-catalog{
@@ -96,25 +97,32 @@ a:hover{
 .panel{
   border: 0;
   background-color: transparent !important;
+  border-radius: 0;
   .panel-body{ /* comentario principal OP*/
     background-color: $transparent-bg !important;
     color: $text-color !important;
     border: 0;
+    border-radius: 0;
+    p{
+      margin-top: 10px;
+    }
   }
   .panel-footer{ /* parte de traz dos comentarios*/
     background-color: $transparent-bg-2 !important;
     color: $text-color !important;
     border: 0;
+    border-radius: 0;
     li{ /* cada comentario*/
+      margin: 2px;
       background-color: $transparent-bg !important;
       color: $text-color !important;
       border: 0 !important;
+      border-radius: 0;
+      h4{
+        border-left: 2px solid $primary-color;
+        padding-left: 5px;
+      }
     }
-    p{
-      margin-top: 10px;
-    }
-  }
-  .panel-body{
     p{
       margin-top: 10px;
     }
@@ -123,6 +131,7 @@ a:hover{
     background-color: $primary-color !important;
     color: $text-color !important;
     border: 0;
+    border-radius: 0;
     .panel-title{
       span{
         font-size: 11px;
@@ -133,11 +142,7 @@ a:hover{
       color: #eee;
     }
   }
-  .list-group{
-    li{
-      margin: 2px;
-    }
-  }
+
   .image-thumb{
     max-height: 125px;
     max-width: 125px;
@@ -177,31 +182,35 @@ footer{
   margin: 0 5px ;
   background-color: #ddd;
   color: $primary-color;
+  border-radius: 0;
 }
 
 
 .btn-page,  .btn-board, .btn-profile{
   background-color: $transparent-bg !important;
   border: 0;
+  border-radius: 0;
+  :hover{
+    background-color: $primary-color !important;
+  }
+  a{
+    color: $text-color !important;
+  }
 }
 
-.btn-page:hover, .btn-board:hover{
-  background-color: $primary-color !important;
-}
-
-.btn-page a, .btn-board a{
-  color: $text-color !important;
-}
 .btn-nsfw a{
  color: #f2ca27 !important;
 }
-.btn-clipboard button, .btn-clipboard a{
-  background-color: transparent;
-  color: $text-color;
-}
-.btn-clipboard button:hover, .btn-clipboard a:hover{
-  background-color: transparent;
-  color: #333;
+.btn-clipboard{
+  border-radius: 0;
+  button, a{
+    background-color: transparent;
+    color: $text-color;
+    :hover{
+      background-color: transparent;
+      color: #333;
+    }
+  }
 }
 
 s{
@@ -215,8 +224,8 @@ s{
   }
 }
 .btn{
+  border-radius: 0;
   border: 0;
-
 }
 .btn-nya{
   background-color: $primary-color;

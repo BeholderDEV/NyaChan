@@ -1,0 +1,74 @@
+$primary-color: #dc143c;
+//$primary-color: #1abc9c;
+$text-color: #fff;
+$dark-bg: #333;
+$transparent-bg: rgba(68,68,68,0.95);
+$transparent-bg-2: rgba(34,34,34,0.75);
+
+body{
+  padding-top: 100px;
+  background-color: $dark-bg;
+  background-attachment: fixed;
+  //background-image: url("http://wallpapercraze.com/images/wallpapers/anime_duel_w1.jpeg");
+  background-size: cover;
+  border-radius: 0;
+}
+
+.btn{
+  border-radius: 0;
+}
+input, textarea{
+  border-radius: 0 !important;
+}
+.modal-content{
+  border-radius: 0;
+}
+.panel{
+  border-radius: 0;
+  .panel-heading{
+    .label{
+      background-color: $primary-color;
+      border-radius: 0;
+      margin: 0 5px;
+    }
+  }
+  .panel-footer{
+    li{
+      border-radius: 0;
+      margin: 5px;
+    }
+  }
+
+  .image-thumb{
+    max-height: 125px;
+    max-width: 125px;
+    width: auto;
+    height: auto;
+  }
+  .image-thumb-OP{
+    max-height: 250px;
+    max-width: 250px;
+    width: auto;
+    height: auto;
+  }
+  .image-md{
+    width: 300px;
+  }
+  .image-sm{
+    width: 150px;
+  }
+  .quote{
+    color: #27ae60;
+  }
+  .quotelink, .deadlink{
+    color: $primary-color;
+  }
+  .deadlink{
+    text-decoration:line-through;
+    opacity: 0.6;
+  }
+}
+footer{
+  margin-top: 20px;
+  text-align: center;
+}
