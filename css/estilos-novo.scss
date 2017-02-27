@@ -4,6 +4,7 @@ $text-color: #fff;
 $dark-bg: #333;
 $transparent-bg: rgba(68,68,68,0.95);
 $transparent-bg-2: rgba(34,34,34,0.75);
+$qoute-color: #27ae60;
 
 body{
   padding-top: 100px;
@@ -58,7 +59,7 @@ input, textarea{
     width: 150px;
   }
   .quote{
-    color: #27ae60;
+    color: $quote-color;
   }
   .quotelink, .deadlink{
     color: $primary-color;
