@@ -1,7 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Bree+Serif);
 body {
   padding-top: 60px;
-  background-color: #ff0000;
+  background-color: #F5F5F5;
   background-attachment: fixed;
   background-image: url("http://wallpapercraze.com/images/wallpapers/anime_duel_w1.jpeg");
   background-size: cover; }
@@ -9,7 +9,7 @@ body {
 .nya-catalog {
   padding: 2%; }
   .nya-catalog .catalog-title {
-    color: #1abc9c; }
+    color: #dc143c; }
   .nya-catalog .catalog-panel {
     height: 350px;
     max-height: 350px; }
@@ -51,11 +51,11 @@ nav .container {
   color: #fff !important; }
 
 .navbar-right .btn a:hover {
-  color: #1abc9c !important; }
+  color: #dc143c !important; }
 
 a {
   text-decoration: none;
-  color: #1abc9c; }
+  color: #dc143c; }
 
 a:hover {
   text-decoration: none;
@@ -76,7 +76,7 @@ a:hover {
 
 .panel {
   border: 0;
-  background-color: rgba(68, 68, 68, 0) !important; }
+  background-color: transparent !important; }
   .panel .panel-body {
     /* comentario principal OP*/
     background-color: rgba(68, 68, 68, 0.95) !important;
@@ -89,7 +89,7 @@ a:hover {
     border: 0; }
     .panel .panel-footer li {
       /* cada comentario*/
-      background-color: rgba(68, 68, 68, 0.8) !important;
+      background-color: rgba(68, 68, 68, 0.95) !important;
       color: #fff !important;
       border: 0 !important; }
     .panel .panel-footer p {
@@ -98,7 +98,7 @@ a:hover {
     margin-top: 10px; }
   .panel .panel-heading {
     /* Titulo OP*/
-    background-color: #1abc9c !important;
+    background-color: #dc143c !important;
     color: #fff !important;
     border: 0; }
     .panel .panel-heading .panel-title span {
@@ -125,7 +125,7 @@ a:hover {
   .panel .quote {
     color: #27ae60; }
   .panel .quotelink, .panel .deadlink {
-    color: #1abc9c; }
+    color: #dc143c; }
   .panel .deadlink {
     text-decoration: line-through;
     opacity: 0.6; }
@@ -138,14 +138,14 @@ footer {
 .label-nya {
   margin: 0 5px;
   background-color: #ddd;
-  color: #1abc9c; }
+  color: #dc143c; }
 
 .btn-page, .btn-board, .btn-profile {
   background-color: rgba(68, 68, 68, 0.95) !important;
   border: 0; }
 
 .btn-page:hover, .btn-board:hover {
-  background-color: #1abc9c !important; }
+  background-color: #dc143c !important; }
 
 .btn-page a, .btn-board a {
   color: #fff !important; }
@@ -174,7 +174,7 @@ s {
   border: 0; }
 
 .btn-nya {
-  background-color: #1abc9c;
+  background-color: #dc143c;
   color: #fff;
   border: 0; }
   .btn-nya :hover {
@@ -218,7 +218,7 @@ pre {
   #back-to-top-button span {
     color: #fff; }
   #back-to-top-button :hover {
-    background-color: rgba(0, 0, 0, 0.7); }
+    background-color: rgba(68, 68, 68, 0.95); }
   #back-to-top-button a {
     display: inline-block; }
   #back-to-top-button a:focus {

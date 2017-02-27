@@ -1,13 +1,15 @@
 @import url(https://fonts.googleapis.com/css?family=Bree+Serif);
 
-//$primary-color: #dc143c;
-$primary-color: #1abc9c;
+$primary-color: #dc143c;
+//$primary-color: #1abc9c;
 $text-color: #fff;
 $dark-bg: #F5F5F5;
+$transparent-bg: rgba(68,68,68,0.95);
+$transparent-bg-2: rgba(34,34,34,0.75);
 
 body{
   padding-top: 60px;
-  background-color: #ff0000;
+  background-color: $dark-bg;
   background-attachment: fixed;
   background-image: url("http://wallpapercraze.com/images/wallpapers/anime_duel_w1.jpeg");
   background-size: cover;
@@ -93,18 +95,18 @@ a:hover{
 
 .panel{
   border: 0;
-  background-color: rgba(68,68,68,0) !important;
+  background-color: transparent !important;
   .panel-body{ /* comentario principal OP*/
-    background-color: rgba(68,68,68,0.95) !important;
+    background-color: $transparent-bg !important;
     color: $text-color !important;
     border: 0;
   }
   .panel-footer{ /* parte de traz dos comentarios*/
-    background-color: rgba(34,34,34,0.75) !important;
+    background-color: $transparent-bg-2 !important;
     color: $text-color !important;
     border: 0;
     li{ /* cada comentario*/
-      background-color: rgba(68,68,68,0.8) !important;
+      background-color: $transparent-bg !important;
       color: $text-color !important;
       border: 0 !important;
     }
@@ -179,7 +181,7 @@ footer{
 
 
 .btn-page,  .btn-board, .btn-profile{
-  background-color: rgba(68,68,68,0.95) !important;
+  background-color: $transparent-bg !important;
   border: 0;
 }
 
@@ -267,7 +269,7 @@ pre{
     color: $text-color;
   }
   :hover{
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: $transparent-bg;
   }
   a{
     display: inline-block;
@@ -291,7 +293,7 @@ pre{
   text-align: center;
   color: $text-color;
   padding: 20px;
-  background-color: rgba(34,34,34,0.75) !important;
+  background-color: $transparent-bg-2 !important;
 
 }
 #profile-pic
