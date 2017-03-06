@@ -13,11 +13,16 @@
     "express": "4.x",
 	"mongodb": "2.x",
     "mongoose": "4.6.3",
-    "body-parser": "1.5.x"
+    "body-parser": "1.5.x",
+    "node-sass": "4.5.0"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/BeholderDEV/NyaChan"
+  },
+  "scripts": {
+    "sass": "node-sass -w sass/ -o css/",
+    "start": "node NyachanServer/RestAPI.js"
   },
   "keywords": [
     "node",

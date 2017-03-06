@@ -1,6 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser')
 var mongodb = require('mongodb');
+var path = require('path');
 var fs = require("fs");
 var MongoClient = mongodb.MongoClient;
 var ObjectId = require('mongodb').ObjectID;
@@ -59,20 +60,37 @@ app.get('/a/thread/1', function (req, res) {
 
 app.get('/', function (req, res) {
    res.type('text/html');
+   res.sendfile('index.html');
+})
+
+app.get('/tag', function (req, res) {
+   res.type('text/html');
    res.sendfile('tag.html');
 })
+
 app.get('/thread', function (req, res) {
    res.type('text/html');
    res.sendfile('thread.html');
 })
+
 app.get('/css/estilo.css', function (req, res) {
    res.type('text/css');
    res.sendfile('css/estilo.css');
 })
 
+app.get('/css/estilos-novo.css', function (req, res) {
+   res.type('text/css');
+   res.sendfile('css/estilos-novo.css');
+})
+
 app.get('/js/app.js', function (req, res) {
    res.type('text/javascript');
    res.sendfile('js/app.js');
+})
+
+app.get('/js/script.js', function (req, res) {
+   res.type('text/javascript');
+   res.sendfile('js/script.js');
 })
 
 app.put('/a/thread/newPost', function (req, res){

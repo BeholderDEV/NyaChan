@@ -40,57 +40,26 @@
       </div>
     </nav>
     <div class="container">
+      <div class='panel panel-default'>
+        <div class='panel-heading'>
+          <h3 class='panel-title'>
+            Index Maneiro                
+          </h3>
+        </div>
+        <div class='panel-body'>
 
-      <div ng-app = "nya-chan" ng-controller= "threadController">
-        <div ng-repeat="t in threads">
-          <div class='panel panel-default'>
-              <div class='panel-heading'>
-                  <h3 class='panel-title'>
-                    {{t.subject}} ~ {{t.id}} by {{t.userName}}
-                    <span class="label label-nya" ng-repeat="a in t.tags">{{a}}</span>
-                  </h3>
-                </div>
-                <div class='panel-body'>
-                  <a ng-href="{{t.file[0].source}}" target="_blank">{{t.file[0].name}}</a>
-                  <img ng-src="{{t.file[0].source}}" class="img-responsive nya-image image-thumb-OP"/>
-                  {{t.body}}
-                </div>
-                <div class="panel-footer">
-                  <ul class="list-group">
-                    <li class="list-group-item" ng-repeat="p in t.post">
-                      <h4>{{p.tile}}</h4>
-                      <a ng-href="{{p.file[0].source}}" target="_blank">{{p.file[0].name}}</a>
-                      <img ng-src="{{p.file[0].source}}" class="img-responsive nya-image image-thumb post-image"/>
-                      {{p.body}}
-                    </li>
-                  </ul>
-                </div>
-            </div>
-          </div>
+          <img src="https://camo.githubusercontent.com/d33091e75cebd72dcb3f6c5c50b10ce55c45fc12/687474703a2f2f692e696d6775722e636f6d2f4849436d372e676966" class="img-responsive nya-image image-thumb-OP OP"/>
+
+        </div>        
       </div>
     </div>
 
-    <footer class="footer">
-        <div class="btn-group" role="group">
-          <button type="button" class="btn btn-default btn-board"><a href="#">#a</a></button>
-          <button type="button" class="btn btn-default btn-board"><a href="#">#b</a></button>
-          <button type="button" class="btn btn-default btn-board"><a href="#">#c</a></button>
-          <button type="button" class="btn btn-default btn-board"><a href="#">#g</a></button>
-          <button type="button" class="btn btn-default btn-board"><a href="#">#h</a></button>
-          <button type="button" class="btn btn-default btn-board"><a href="#">#m</a></button>
-          <button type="button" class="btn btn-default btn-board"><a href="#">#p</a></button>
-          <button type="button" class="btn btn-default btn-board"><a href="#">#t</a></button>
-          <button type="button" class="btn btn-default btn-board"><a href="#">#tv</a></button>
-          <button type="button" class="btn btn-default btn-board"><a href="#">#v</a></button>
-        </div>
-    </footer>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Angular JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-    <script src="js/app.js"></script>
-    <script src="js/script.js"></script>
+     <script src="js/app.js"></script>
   </body>
 </html>
