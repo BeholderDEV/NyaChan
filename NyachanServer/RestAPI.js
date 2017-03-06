@@ -73,15 +73,11 @@ app.get('/thread', function (req, res) {
    res.sendfile('thread.html');
 })
 
-app.get('/css/estilo.css', function (req, res) {
+app.get('/css/styles.css', function (req, res) {
    res.type('text/css');
-   res.sendfile('css/estilo.css');
+   res.sendfile('css/styles.css');
 })
 
-app.get('/css/estilos-novo.css', function (req, res) {
-   res.type('text/css');
-   res.sendfile('css/estilos-novo.css');
-})
 
 app.get('/js/app.js', function (req, res) {
    res.type('text/javascript');
