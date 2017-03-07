@@ -4,14 +4,12 @@
     app.controller('threadController',function($scope, $http){
 
         $scope.search = function() {
-            console.log("entrou na função");
             $http({
                 method : "GET",
 //                url : "http://127.0.0.1:3000/a/threads"
                 url: "https://nyachan-server.herokuapp.com/a/threads"
             }).then(function mySucces(response) {
                 $scope.threads = response.data;
-                console.log($scope.threads);
             }, function myError(response) {
                   console.log(response || "Request failed");
             });
@@ -25,10 +23,9 @@
           $http({
               method : "GET",
 //              url : "http://127.0.0.1:3000/a/thread/1"
-              url: "https://nyachan-server.herokuapp.com/a/thread/1"
+              url: "https://nyachan-server.herokuapp.com/a/thread/2"
           }).then(function mySucces(response) {
               $scope.thread = response.data[0];
-              console.log($scope.thread);
           }, function myError(response) {
                 console.log(response || "Request failed");
           });
