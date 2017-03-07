@@ -1,7 +1,7 @@
-$('.panel-body').on('click', '.OP', function(){
+$('body').on('click', '.panel-body .OP', function(){
     $(this).toggleClass('image-thumb-OP');
 });
 
-$('.panel-footer').on('click', '.post-image', function(){
+$('body').on('click', '.panel-footer .post-image', function(){
     $(this).toggleClass('image-thumb');
 });
