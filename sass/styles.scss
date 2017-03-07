@@ -41,6 +41,10 @@ input, textarea{
   color: $text-color;
   .panel-body{
     background-color: $panel-bg;
+    .list-title{
+      text-decoration: underline;
+      text-decoration-style: wavy;
+    }
   }
   .panel-heading{
     border-radius: $border-radius;
