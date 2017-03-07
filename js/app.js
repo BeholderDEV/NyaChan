@@ -9,7 +9,7 @@
 //                url : "http://127.0.0.1:3000/a/threads"
                 url: "https://nyachan-server.herokuapp.com/a/threads"
             }).then(function mySucces(response) {
-                $scope.threads = response.data[0];
+                $scope.threads = response.data;
             }, function myError(response) {
                   console.log(response || "Request failed");
             });
@@ -25,7 +25,7 @@
 //              url : "http://127.0.0.1:3000/a/thread/1"
               url: "https://nyachan-server.herokuapp.com/a/thread/1"
           }).then(function mySucces(response) {
-              $scope.thread = response.data[0];
+              $scope.thread = response.data[1];
           }, function myError(response) {
                 console.log(response || "Request failed");
           });
