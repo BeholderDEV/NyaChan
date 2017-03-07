@@ -23,9 +23,9 @@
           $http({
               method : "GET",
 //              url : "http://127.0.0.1:3000/a/thread/1"
-              url: "https://nyachan-server.herokuapp.com/a/thread/1"
+              url: "https://nyachan-server.herokuapp.com/a/thread/2"
           }).then(function mySucces(response) {
-              $scope.thread = response.data[1];
+              $scope.thread = response.data[0];
           }, function myError(response) {
                 console.log(response || "Request failed");
           });
