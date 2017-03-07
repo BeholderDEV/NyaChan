@@ -1,5 +1,5 @@
 var express = require('express');
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
 var mongodb = require('mongodb');
 var path = require('path');
 var fs = require("fs");
