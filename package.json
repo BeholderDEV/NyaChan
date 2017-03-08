@@ -22,7 +22,7 @@
   },
   "scripts": {
     "sass": "node-sass -w sass/ -o css/",
-    "start": "node NyachanServer/RestAPI.js"
+    "start": "node NyachanServer/server.js"
   },
   "keywords": [
     "node",

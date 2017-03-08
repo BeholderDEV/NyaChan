@@ -6,7 +6,6 @@
         $scope.search = function() {
             $http({
                 method : "GET",
-//                url : "http://127.0.0.1:3000/a/threads"
                 url: "https://nyachan-server.herokuapp.com/a/threads"
             }).then(function mySucces(response) {
                 $scope.threads = response.data;
@@ -22,7 +21,6 @@
       $scope.searchThread = function() {
           $http({
               method : "GET",
-//              url : "http://127.0.0.1:3000/a/thread/1"
               url: "https://nyachan-server.herokuapp.com/a/thread/2"
           }).then(function mySucces(response) {
               $scope.thread = response.data[0];
@@ -52,7 +50,6 @@
           };
           $http({
               method : "PUT",
-//              url : "http://127.0.0.1:3000/a/thread/newPost",
               url: "https://nyachan-server.herokuapp.com/a/thread/newPost",
               data: dataPost,
               headers: {
