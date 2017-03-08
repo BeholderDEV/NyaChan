@@ -7,7 +7,7 @@ var MongoClient = mongodb.MongoClient;
 var ObjectId = require('mongodb').ObjectID;
 var app = express();
 
-// Connection URL
+// Connection URL 
 var url = 'mongodb://alisson:123456@ds053206.mlab.com:53206/nyachan_data';
 
 app.use(function(req, res, next) {
@@ -76,10 +76,12 @@ app.get('/a/thread/2', function (req, res) {
     });
 })
 
-app.get('/', function (req, res) {
-   res.type('text/html');
-   res.sendfile('index.html');
-})
+app.use(express.static(path.join(__dirname, '/../')));
+
+// app.get('/', function (req, res) {
+//    res.type('text/html');
+//    res.sendfile('index.html') ;
+// })
 
 app.get('/tag', function (req, res) {
    res.type('text/html');
@@ -91,21 +93,21 @@ app.get('/thread', function (req, res) {
    res.sendfile('thread.html');
 })
 
-app.get('/css/styles.css', function (req, res) {
-   res.type('text/css');
-   res.sendfile('css/styles.css');
-})
+// app.get('/css/styles.css', function (req, res) {
+//    res.type('text/css');
+//    res.sendfile('css/styles.css');
+// })
 
 
-app.get('/js/app.js', function (req, res) {
-   res.type('text/javascript');
-   res.sendfile('js/app.js');
-})
+// app.get('/js/app.js', function (req, res) {
+//    res.type('text/javascript');
+//    res.sendfile('js/app.js');
+// })
 
-app.get('/js/script.js', function (req, res) {
-   res.type('text/javascript');
-   res.sendfile('js/script.js');
-})
+// app.get('/js/script.js', function (req, res) {
+//    res.type('text/javascript');
+//    res.sendfile('js/script.js');
+// })
 
 app.put('/a/thread/newPost', function (req, res){
     var newPost = req.body;
@@ -133,5 +135,4 @@ app.put('/a/thread/newPost', function (req, res){
 })
 
 var port = process.env.PORT || 3000;
-//var port = 3000;
 var server = app.listen(port, function () {})
