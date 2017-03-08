@@ -11,5 +11,6 @@ module.exports = function(app, express, path){
      res.type('text/html');
      res.sendfile('thread.html');
   })
+  
 }
 
