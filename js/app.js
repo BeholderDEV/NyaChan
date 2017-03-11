@@ -1,5 +1,5 @@
 (function(){
-    var app = angular.module('nya-chan',[]);
+    var app = angular.module('nya-chan',['vcRecaptcha']);
 
     app.controller('threadController',function($scope, $http){
 
@@ -21,7 +21,7 @@
       $scope.searchThread = function() {
           $http({
               method : "GET",
-              url: "https://nyachan-server.herokuapp.com/a/thread/2"
+              url: "https://nyachan-server.herokuapp.com/a/thread/1"
           }).then(function mySucces(response) {
               $scope.thread = response.data[0];
           }, function myError(response) {

@@ -3,8 +3,8 @@ var MongoClient = mongodb.MongoClient;
 var ObjectId = require('mongodb').ObjectID;
 
 module.exports = function(app){
-	
-	// Connection URL 
+
+	// Connection URL
 	var url = 'mongodb://alisson:123456@ds053206.mlab.com:53206/nyachan_data';
 
 	app.get('/a/threads', function (req, res) {
@@ -19,7 +19,7 @@ module.exports = function(app){
 			    }
 			    res.jsonp(documents);
 			});
-		    
+
 			db.close();
 		  }
 		});
@@ -38,7 +38,7 @@ module.exports = function(app){
 		            }
 		            res.jsonp(documents);
 		        });
-		            
+
 		        db.close();
 	        }
 	    });
@@ -56,7 +56,7 @@ module.exports = function(app){
 		            }
 		            res.jsonp(documents);
 		        });
-		            
+
 		        db.close();
 	        }
 	    });
@@ -70,7 +70,7 @@ module.exports = function(app){
 	        	console.log('Unable to connect to the mongoDB server. Error:', err);
 	        } else {
 		        console.log('Connection established to', url);
-		        
+
 		        db.collection('thread', function(err, collection) {
 		            collection.update({'_id': ObjectId(newPost.threadid)},{ $push: {post: newPost}}, {safe:true}, function(err, result) {
 		                if (err) {
