@@ -7,22 +7,20 @@
   },
   "main": "NyachanServer/RestAPI.js",
   "scripts": {
-    "start": "node NyachanServer/RestAPI.js"
+    "sass": "node-sass -w sass/ -o css/",
+    "start": "node NyachanServer/server.js"
   },
   "dependencies": {
-    "express": "4.x",
-	"mongodb": "2.x",
-    "mongoose": "4.6.3",
+    "angular-recaptcha": "^4.0.3",
     "body-parser": "1.5.x",
+    "express": "4.x",
+    "mongodb": "2.x",
+    "mongoose": "4.6.3",
     "node-sass": "4.5.0"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/BeholderDEV/NyaChan"
-  },
-  "scripts": {
-    "sass": "node-sass -w sass/ -o css/",
-    "start": "node NyachanServer/server.js"
   },
   "keywords": [
     "node",
