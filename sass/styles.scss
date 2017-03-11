@@ -1,5 +1,5 @@
-//$primary-color: #dc143c;
-$primary-color: #1abc42;
+$primary-color: #dc143c;
+//$primary-color: #1abc42;
 $text-color: #fff;
 $dark-bg: #333;
 $panel-bg: rgba(68,68,68,0.75);
@@ -42,8 +42,36 @@ input, textarea{
   .panel-body{
     background-color: $panel-bg;
     .list-title{
-      text-decoration: underline;
-      text-decoration-style: wavy;
+      padding: 5px 10px;
+      border-left: 2px solid $primary-color;
+      background-color: $panel-dark-bg;
+    }
+    #nsfw{
+      .list-title{
+        border-left: 2px solid $qoute-color;
+      }
+      .tags{
+        li {
+          &:before {
+            color: $qoute-color;
+          }
+        }
+      }
+    }
+    .tags{
+      border: 1px solid $panel-dark-bg;
+      li {
+        display: block;
+        padding: 5px;
+        &:before {
+          content: "\e080";
+          font-family: 'Glyphicons Halflings';
+          font-size: 9px;
+          position: relative;
+          margin-right: 10px;
+          color: $primary-color;
+        }
+      }
     }
   }
   .panel-heading{
