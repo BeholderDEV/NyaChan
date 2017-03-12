@@ -17,8 +17,7 @@ module.exports = function(app, express, path){
 		     	dbx.filesUpload({path: '/Midia/' + file.name, contents: data, autorename: true})
 		        .then(function(response) {
 	        		dbx.sharingCreateSharedLinkWithSettings({path: response.path_lower}).then(function(sharedLinkResp){
-		                var uploadedFile = JSON.parse(sharedLinkResp);
-		                var urlFile = uploadedFile["url"];
+		                var urlFile = sharedLinkResp.links[0].url;
 		                var pos = urlFile.search("\\?dl=0");
 		                urlFile = urlFile.slice(0, pos + 1);
 		                urlFile = urlFile + "raw=1";
@@ -26,13 +25,13 @@ module.exports = function(app, express, path){
 	        		})
 	        		.catch(function(er){
         				dbx.sharingListSharedLinks({path: response.path_lower, direct_only: true}).then(function(existingSharedLink){
-			                var uploadedFile = JSON.parse(existingSharedLink);
-			                var urlFile = uploadedFile["url"];
+			                var urlFile = existingSharedLink.links[0].url;
 			                var pos = urlFile.search("\\?dl=0");
 			                urlFile = urlFile.slice(0, pos + 1);
 			                urlFile = urlFile + "raw=1";
 							res.send(urlFile);
         				}).catch(function(e){
+    						console.log(e);
     						res.send(e);
         				});
 	        		});
