@@ -8,45 +8,40 @@ module.exports = function(app, express, path){
 
   app.use(express.static(path.join(__dirname, '/../')));
 
-	app.get('/dbx', function (req, res) {
-		dbx.filesListFolder({path: ''})
-		  .then(function(response) {
-		    console.log(response);
-		  })
-		  .catch(function(error) {
-		    console.log(error);
-		  });
-	})
-
 	app.post('/dbxPost', function (req, res) {
 		var form = new formidable.IncomingForm();
 		form.keepExtensions = true;
 		form.parse(req);
 		form.on('file', function(name, file) {
 		    fs.readFile(file.path, function (err, data) {
-		     	dbx.filesUpload({path: '/' + file.name, contents: data, autorename: true})
+		     	dbx.filesUpload({path: '/Midia/' + file.name, contents: data, autorename: true})
 		        .then(function(response) {
-		          console.log('Sucesso ' + response.name);
 		          res.send(response);
 		        })
 		        .catch(function(error) {
 		          console.error('Erro ' + error);
 		          res.send(error);
 		        });
-      		});
+	  		});
 
 		});
-		// console.log(form);
-		// res.send(form);
-		// dbx.filesListFolder({path: ''})
-		//   .then(function(response) {
-		//     console.log(response);
-		//     res.send(response);
-		//   })
-		//   .catch(function(error) {
-		//     res.send({error});
-		//   });
 	})
+
+  app.get('/Midia', function (req, res) {
+     var fileName = req.query.Name;
+     dbx.filesDownload({path: '/Midia/fileName'}).then(function(response){
+		fs.readFile(response, function(err, data){
+			if (err) res.send(err);
+			// res.writeHead(200, {'Content-Type': 'image/jpeg'});
+			res.send(data); 
+		});
+				
+     })
+     .catch(function(errror){
+  		console.error('Erro ' + error);
+		res.send(error);
+     });
+  })
 
   app.get('/tag', function (req, res) {
      res.type('text/html');
