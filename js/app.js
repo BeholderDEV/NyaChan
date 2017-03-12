@@ -38,6 +38,10 @@
         xhr.onreadystatechange = function() {
             if (xhr.readyState == XMLHttpRequest.DONE) {
               var uploadedFile = JSON.parse(xhr.response);
+              var urlFile = uploadedFile["url"]; 
+              var pos = urlFile.search("\\?dl=0");
+              urlFile = urlFile.slice(0, pos + 1);
+              urlFile = urlFile + "raw=1";
               var dataPost = {
                   id: "123123123",
                   threadid: $scope.thread._id,
@@ -50,7 +54,7 @@
                         size: 250,
                         name: uploadedFile["name"],
                         extension: "jpg",
-                        source: "https://nyachan-server.herokuapp.com/Midia?Name=" + uploadedFile["name"],
+                        source: urlFile,
                     }
                   ]
               };

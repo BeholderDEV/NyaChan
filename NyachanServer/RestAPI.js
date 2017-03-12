@@ -16,7 +16,13 @@ module.exports = function(app, express, path){
 		    fs.readFile(file.path, function (err, data) {
 		     	dbx.filesUpload({path: '/Midia/' + file.name, contents: data, autorename: true})
 		        .then(function(response) {
-		          res.send(response);
+	        		dbx.sharingCreateSharedLinkWithSettings({path: response.path_lower}).then(function(sharedLinkResp){
+						res.send(sharedLinkResp);
+	        		})
+	        		.catch(function(er){
+        				console.error('Erro ' + er);
+	          			res.send(er);
+	        		});
 		        })
 		        .catch(function(error) {
 		          console.error('Erro ' + error);
@@ -26,22 +32,6 @@ module.exports = function(app, express, path){
 
 		});
 	})
-
-  app.get('/Midia', function (req, res) {
-     var fileName = req.query.Name;
-     dbx.filesDownload({path: '/Midia/fileName'}).then(function(response){
-		fs.readFile(response, function(err, data){
-			if (err) res.send(err);
-			// res.writeHead(200, {'Content-Type': 'image/jpeg'});
-			res.send(data); 
-		});
-				
-     })
-     .catch(function(errror){
-  		console.error('Erro ' + error);
-		res.send(error);
-     });
-  })
 
   app.get('/tag', function (req, res) {
      res.type('text/html');
