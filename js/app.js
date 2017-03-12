@@ -31,18 +31,36 @@
       $scope.thread = $scope.searchThread();
 
       $scope.addPost = function(post){
+
         var files = $("#file")[0].files[0];
-        var formData = new FormData();
-        formData.append("fileData",files);
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState == XMLHttpRequest.DONE) {
-              var uploadedFile = xhr.response;
-              console.log(uploadedFile);
+        if(typeof files !== "undefined"){
+          var formData = new FormData();
+          formData.append("fileData",files);
+          var xhr = new XMLHttpRequest();
+          xhr.onreadystatechange = function() {
+              if (xhr.readyState == XMLHttpRequest.DONE) {
+                var uploadedFile = xhr.response;
+                sendPost(files, uploadedFile);
+              }
+
+          }
+          xhr.open('post', '/dbxPost', true);
+          xhr.send(formData);
+        }else{
+          sendPost(null, null);
+        }
+
+        function sendPost(file, uploadedFile){
+          var postBody = post.body;
+          if(typeof postBody == "undefined"){
+            postBody = "";
+          }
+
+          if(typeof files !== "undefined"){
               var dataPost = {
                   id: "123123123",
                   threadid: $scope.thread._id,
-                  body: post.body, // Dando erros se for undefined
+                  body: postBody,
                   date: "2016-01-02 19:33:00",
                   tile: post.title,
                   userName: "Anon",
@@ -55,29 +73,34 @@
                     }
                   ]
               };
-              $http({
-                  method : "PUT",
-                  url: "https://nyachan-server.herokuapp.com/a/thread/newPost",
-                  data: dataPost,
-                  headers: {
-                        'Content-Type': 'application/json'
-                  }
-              }).then(function mySucces(response) {
-                    console.log(response.data);
-              }, function myError(response) {
-                    console.log(response || "Request failed");
-              });
-              // window.location.reload(true);
-            }
+          }else{
+              var dataPost = {
+                  id: "123123123",
+                  threadid: $scope.thread._id,
+                  body: postBody,
+                  date: "2016-01-02 19:33:00",
+                  tile: post.title,
+                  userName: "Anon",
+              };
+          }
 
+          $http({
+              method : "PUT",
+              url: "https://nyachan-server.herokuapp.com/a/thread/newPost",
+              data: dataPost,
+              headers: {
+                    'Content-Type': 'application/json'
+              }
+          }).then(function mySucces(response) {
+                console.log(response.data);
+          }, function myError(response) {
+                console.log(response || "Request failed");
+          });
+          window.location.reload(true);
         }
-        xhr.open('post', '/dbxPost', true);
-        xhr.send(formData);
+
       }
-
     });
-
-
 
 
 })();
