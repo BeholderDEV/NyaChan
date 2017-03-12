@@ -17,11 +17,24 @@ module.exports = function(app, express, path){
 		     	dbx.filesUpload({path: '/Midia/' + file.name, contents: data, autorename: true})
 		        .then(function(response) {
 	        		dbx.sharingCreateSharedLinkWithSettings({path: response.path_lower}).then(function(sharedLinkResp){
-						res.send(sharedLinkResp);
+		                var uploadedFile = JSON.parse(sharedLinkResp);
+		                var urlFile = uploadedFile["url"];
+		                var pos = urlFile.search("\\?dl=0");
+		                urlFile = urlFile.slice(0, pos + 1);
+		                urlFile = urlFile + "raw=1";
+						res.send(urlFile);
 	        		})
 	        		.catch(function(er){
-        				console.error('Erro ' + er);
-	          			res.send(er);
+        				dbx.sharingListSharedLinks({path: response.path_lower, direct_only: true}).then(function(existingSharedLink){
+			                var uploadedFile = JSON.parse(existingSharedLink);
+			                var urlFile = uploadedFile["url"];
+			                var pos = urlFile.search("\\?dl=0");
+			                urlFile = urlFile.slice(0, pos + 1);
+			                urlFile = urlFile + "raw=1";
+							res.send(urlFile);
+        				}).catch(function(e){
+    						res.send(e);
+        				});
 	        		});
 		        })
 		        .catch(function(error) {

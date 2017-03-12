@@ -37,24 +37,21 @@
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function() {
             if (xhr.readyState == XMLHttpRequest.DONE) {
-              var uploadedFile = JSON.parse(xhr.response);
-              var urlFile = uploadedFile["url"]; 
-              var pos = urlFile.search("\\?dl=0");
-              urlFile = urlFile.slice(0, pos + 1);
-              urlFile = urlFile + "raw=1";
+              var uploadedFile = xhr.response;
+              console.log(uploadedFile);
               var dataPost = {
                   id: "123123123",
                   threadid: $scope.thread._id,
-                  body: post.body,
+                  body: post.body, // Dando erros se for undefined
                   date: "2016-01-02 19:33:00",
                   tile: post.title,
                   userName: "Anon",
                   file: [
                     {
                         size: 250,
-                        name: uploadedFile["name"],
+                        name: files.name,
                         extension: "jpg",
-                        source: urlFile,
+                        source: uploadedFile,
                     }
                   ]
               };
