@@ -45,6 +45,26 @@ module.exports = function(app, express, path){
 		});
 	})
 
+  app.post('/recaptcha', function (req, res) {
+    var response = req.body.response;
+    var secretKey = "6LfogRgUAAAAADhwW9O5J7ZeBLrDxoy7M9vxHdIX";
+    var verificationUrl = "https://www.google.com/recaptcha/api/siteverify";
+    var urldata = "?secret=" + secretKey + "&response=" + $scope.response;
+    $http({
+      url: verificationUrl,
+      method: "POST",
+      data: { 'response' :  $scope.response,
+              'privatekey' : secretKey},
+      withCredentials: true,
+      headers: {
+                  'Content-Type': 'application/json; charset=utf-8'
+      }
+    }).then(function successCallback(response) {
+      res.send(response);
+    }, function errorCallback(response) {
+      console.log('erro verificação');;
+    });
+}
   app.get('/tag', function (req, res) {
      res.type('text/html');
      res.sendfile('tag.html');
@@ -54,6 +74,5 @@ module.exports = function(app, express, path){
      res.type('text/html');
      res.sendfile('thread.html');
   })
-  
-}
 
+}

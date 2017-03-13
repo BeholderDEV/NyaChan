@@ -72,20 +72,20 @@
         // $http({
         //   method: 'POST',
         //   url: verificationUrl+urldata
-        // }).then(function successCallback(response) {
-        //     valid=response.success;
-        //   }, function errorCallback(response) {
-        //     console.log('erro verificação');;
-        //   });
-          $http({
-          url: verificationUrl,
+        // }
+        $http({
+          url: "https://nyachan-server.herokuapp.com/recaptcha",
           method: "POST",
-          data: {'response' :  $scope.response, 'privatekey' : secretKey },
+          data: {'response' :  $scope.response},
           withCredentials: true,
           headers: {
                       'Content-Type': 'application/json; charset=utf-8'
-          }
-      });
+                    }
+        }).then(function successCallback(response) {
+          valid=response.success;
+        }, function errorCallback(response) {
+          console.log('erro verificação');;
+        });
         if (valid) {
             console.log('Success');
         } else {
