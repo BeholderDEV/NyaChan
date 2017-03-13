@@ -66,7 +66,7 @@
         var secretKey = "6LfogRgUAAAAADhwW9O5J7ZeBLrDxoy7M9vxHdIX";
         // req.connection.remoteAddress will provide IP address of connected user.
         console.log('sending the captcha response to the server', $scope.response);
-        var verificationUrl = "https://www.google.com/recaptcha/api/siteverify?secret=" + secretKey + "&response=" + $scope.response + "&remoteip=" + req.connection.remoteAddress;
+        var verificationUrl = "https://www.google.com/recaptcha/api/siteverify?secret=" + secretKey + "&response=" + $scope.response;
 
         request(verificationUrl,function(error,response,body) {
           body = JSON.parse(body);
