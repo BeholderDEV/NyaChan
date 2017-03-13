@@ -47,10 +47,11 @@ module.exports = function(app, express, path){
 
   app.post('/recaptcha', function (req, res) {
     var resp = req.body;
-    console.log(resp);
+    console.log("Passou 1");
     var secretKey = "6LfogRgUAAAAADhwW9O5J7ZeBLrDxoy7M9vxHdIX";
     var verificationUrl = "https://www.google.com/recaptcha/api/siteverify";
     var urldata = "?secret=" + secretKey + "&response=" + resp.response;
+      console.log("Passou 1.5");
     $http({
       url: verificationUrl+urldata,
       method: "POST",
@@ -59,8 +60,10 @@ module.exports = function(app, express, path){
                   'Content-Type': 'application/json; charset=utf-8'
       }
     }).then(function successCallback(response) {
+        console.log("Passou 2");
       res.send(response);
     }, function errorCallback(response) {
+        console.log("Passou 3");
       console.log('erro verificação');
     });
 })
