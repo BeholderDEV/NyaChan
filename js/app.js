@@ -18,6 +18,33 @@
     });
 
     app.controller('animeThreadController',function($scope, $http){
+      $scope.response = null;
+      $scope.widgetId = null;
+
+      $scope.setResponse = function (response) {
+          console.info('Response available');
+
+          $scope.response = response;
+      };
+
+      $scope.model = {
+          key: '6LfogRgUAAAAACNUIiCwMJPsPJ0NxiS7tafx-B55'
+      };
+
+      $scope.setWidgetId = function (widgetId) {
+          console.info('Created widget ID: %s', widgetId);
+
+          $scope.widgetId = widgetId;
+      };
+
+      $scope.cbExpiration = function() {
+          console.info('Captcha expired. Resetting response object');
+
+          vcRecaptchaService.reload($scope.widgetId);
+
+          $scope.response = null;
+       };
+
       $scope.searchThread = function() {
           $http({
               method : "GET",
@@ -31,6 +58,30 @@
       $scope.thread = $scope.searchThread();
 
       $scope.addPost = function(post){
+        var valid;
+        if($scope.response === undefined || $scope.response === '' || $scope.response === null) {
+          return res.json({"responseCode" : 1,"responseDesc" : "Please select captcha"});
+        }
+        // Put your secret key here.
+        var secretKey = "6LfogRgUAAAAADhwW9O5J7ZeBLrDxoy7M9vxHdIX";
+        // req.connection.remoteAddress will provide IP address of connected user.
+        console.log('sending the captcha response to the server', $scope.response);
+        var verificationUrl = "https://www.google.com/recaptcha/api/siteverify?secret=" + secretKey + "&response=" + $scope.response + "&remoteip=" + req.connection.remoteAddress;
+
+        request(verificationUrl,function(error,response,body) {
+          body = JSON.parse(body);
+          // Success will be true or false depending upon captcha validation.
+          valid=body.success;
+        });
+        if (valid) {
+            console.log('Success');
+        } else {
+            console.log('Failed validation');
+            // In case of a failed validation you need to reload the captcha
+            // because each response can be checked just once
+            vcRecaptchaService.reload($scope.widgetId);
+        }
+
         if(typeof post == "undefined"){
           post = new Object();
           post.body = " ";
