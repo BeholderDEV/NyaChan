@@ -82,7 +82,7 @@
                       'Content-Type': 'application/json; charset=utf-8'
                     }
         }).then(function successCallback(response) {
-            console.log(response);
+            console.log(response.sucess);
           valid=response.success;
             validatedPost();
         }, function errorCallback(response) {
@@ -91,85 +91,84 @@
         });
         
         
-          function validatedPost()
-          {
-             if (valid) {
+        function validatedPost()
+        {
+            if (valid) {
                 console.log('Success');
             } else {
                 console.log('Failed validation');
                 // In case of a failed validation you need to reload the captcha
                 // because each response can be checked just once
                 vcRecaptchaService.reload($scope.widgetId);
-                // return
+                //  return
             } 
-              
-              if(typeof post == "undefined"){
-          post = new Object();
-          post.body = " ";
-        }
+
+            if(typeof post == "undefined"){
+                post = new Object();
+                post.body = " ";
+            }
 
             var files = $("#file")[0].files[0];
             if(typeof files !== "undefined"){
-              var formData = new FormData();
-              formData.append("fileData",files);
-              var xhr = new XMLHttpRequest();
-              xhr.onreadystatechange = function() {
-                  if (xhr.readyState == XMLHttpRequest.DONE) {
-                    var uploadedFile = xhr.response;
-                    sendPost(files, uploadedFile);
-                  }
-
-              }
-              xhr.open('post', '/dbxPost', true);
-              xhr.send(formData);
+                var formData = new FormData();
+                formData.append("fileData",files);
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState == XMLHttpRequest.DONE) {
+                        var uploadedFile = xhr.response;
+                        sendPost(files, uploadedFile);
+                    }
+                }
+                xhr.open('post', '/dbxPost', true);
+                xhr.send(formData);
             }else{
-              sendPost(null, null);
+                sendPost(null, null);
             }
 
             function sendPost(file, uploadedFile){
-              if(typeof files !== "undefined"){
-                  var dataPost = {
-                      id: "123123123",
-                      threadid: $scope.thread._id,
-                      body: post.body,
-                      date: "2016-01-02 19:33:00",
-                      tile: post.title,
-                      userName: "Anon",
-                      file: [
-                        {
+                if(typeof files !== "undefined"){
+                    var dataPost = {
+                        id: "123123123",
+                        threadid: $scope.thread._id,
+                        body: post.body,
+                        date: "2016-01-02 19:33:00",
+                        tile: post.title,
+                        userName: "Anon",
+                        file: [
+                            {
                             size: 250,
                             name: files.name,
                             extension: "jpg",
                             source: uploadedFile,
-                        }
-                      ]
-                  };
-              }else{
-                  var dataPost = {
-                      id: "123123123",
-                      threadid: $scope.thread._id,
-                      body: post.body,
-                      date: "2016-01-02 19:33:00",
-                      tile: post.title,
-                      userName: "Anon",
-                  };
-              }
-
-              $http({
-                  method : "PUT",
-                  url: "https://nyachan-server.herokuapp.com/a/thread/newPost",
-                  data: dataPost,
-                  headers: {
-                        'Content-Type': 'application/json'
-                  }
-              }).then(function mySucces(response) {
-                    console.log(response.data);
-              }, function myError(response) {
-                    console.log(response || "Request failed");
-              });
-              window.location.reload(true);
+                            }
+                        ]
+                    };
+                }else{
+                var dataPost = {
+                    id: "123123123",
+                    threadid: $scope.thread._id,
+                    body: post.body,
+                    date: "2016-01-02 19:33:00",
+                    tile: post.title,
+                    userName: "Anon",
+                };
             }
-          }
+
+            $http({
+                method : "PUT",
+                url: "https://nyachan-server.herokuapp.com/a/thread/newPost",
+                data: dataPost,
+                headers: {
+                'Content-Type': 'application/json'
+                }
+            }).then(function mySucces(response) {
+            console.log(response.data);
+            }, function myError(response) {
+            console.log(response || "Request failed");
+            });
+            window.location.reload(true);
+            }
+        }
           
         
 
