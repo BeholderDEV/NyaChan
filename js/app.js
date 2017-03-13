@@ -70,11 +70,7 @@
 
         $http({
           method: 'POST',
-          url: verificationUrl,
-          headers: {
-              'Access-Control-Allow-Origin': '*',
-              'Access-Control-Allow-Methods': 'POST'
-          },
+          url: verificationUrl
         }).then(function successCallback(response) {
             valid=response.success;
           }, function errorCallback(response) {
@@ -92,7 +88,7 @@
             // In case of a failed validation you need to reload the captcha
             // because each response can be checked just once
             vcRecaptchaService.reload($scope.widgetId);
-            return
+            // return
         }
 
         if(typeof post == "undefined"){
