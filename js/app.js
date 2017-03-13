@@ -58,46 +58,46 @@
       $scope.thread = $scope.searchThread();
 
       $scope.addPost = function(post){
-        var valid;
+//        var valid;
         // if($scope.response === undefined || $scope.response === '' || $scope.response === null) {
         //   return res.json({"responseCode" : 1,"responseDesc" : "Please select captcha"});
         // }
         // Put your secret key here.
-        var secretKey = "6LfogRgUAAAAADhwW9O5J7ZeBLrDxoy7M9vxHdIX";
+//        var secretKey = "6LfogRgUAAAAADhwW9O5J7ZeBLrDxoy7M9vxHdIX";
         // req.connection.remoteAddress will provide IP address of connected user.
-        console.log('sending the captcha response to the server', $scope.response);
-        var verificationUrl = "https://www.google.com/recaptcha/api/siteverify";
-        var urldata = "?secret=" + secretKey + "&response=" + $scope.response;
-
-        // $http({
-        //   method: 'POST',
-        //   url: verificationUrl+urldata
-        // }
-        $http({
-          url: "https://nyachan-server.herokuapp.com/recaptcha",
-          method: "POST",
-          data: {'response' :  $scope.response},
-          withCredentials: true,
-          headers: {
-                      'Content-Type': 'application/json; charset=utf-8'
-                    }
-        }).then(function successCallback(response) {
-            console.log(response.success);
-          valid=response.success;
-        }, function errorCallback(response) {
-            console.log(response);
-          console.log('erro verificação');;
-        });
-        if (valid) {
-            console.log('Success');
-        } else {
-            console.log('Failed validation');
-            // In case of a failed validation you need to reload the captcha
-            // because each response can be checked just once
-            vcRecaptchaService.reload($scope.widgetId);
-            // return
-        }
-
+//        console.log('sending the captcha response to the server', $scope.response);
+//        var verificationUrl = "https://www.google.com/recaptcha/api/siteverify";
+//        var urldata = "?secret=" + secretKey + "&response=" + $scope.response;//
+//
+//        // $http({
+//        //   method: 'POST',
+//        //   url: verificationUrl+urldata
+//        // }
+//        $http({
+//          url: "https://nyachan-server.herokuapp.com/recaptcha",
+//          method: "POST",
+//          data: {'response' :  $scope.response},
+//          withCredentials: true,
+//          headers: {
+//                      'Content-Type': 'application/json; charset=utf-8'
+//                    }
+//        }).then(function successCallback(response) {
+//            console.log(response.success);
+//          valid=response.success;
+//        }, function errorCallback(response) {
+//            console.log(response);
+//          console.log('erro verificação');;
+//        });
+//        if (valid) {
+//            console.log('Success');
+//        } else {
+//            console.log('Failed validation');
+//            // In case of a failed validation you need to reload the captcha
+//            // because each response can be checked just once
+//            vcRecaptchaService.reload($scope.widgetId);
+//            // return
+//        }
+//
         if(typeof post == "undefined"){
           post = new Object();
           post.body = " ";
