@@ -53,7 +53,7 @@ module.exports = function(app, express, path){
     var urldata = "?secret=" + secretKey + "&response=" + resp.response;
     $http({
       url: verificationUrl+urldata,
-      method: "POST"
+      method: "POST",
       withCredentials: true,
       headers: {
                   'Content-Type': 'application/json; charset=utf-8'
