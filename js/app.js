@@ -84,6 +84,7 @@
         }).then(function successCallback(response) {
             console.log(response.success);
           valid=response.success;
+            validatedPost();
         }, function errorCallback(response) {
             console.log(response);
           console.log('erro verificação');;
