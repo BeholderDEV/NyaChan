@@ -83,6 +83,8 @@
                     }
         }).then(function successCallback(response) {
             console.log(response.sucess);
+            console.log(response.data);
+            console.log(response);
           valid=response.success;
             validatedPost();
         }, function errorCallback(response) {
