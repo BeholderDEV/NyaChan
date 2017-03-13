@@ -46,7 +46,7 @@ module.exports = function(app, express, path){
 	})
 
   app.post('/recaptcha', function (req, res) {
-    var response = req.body;
+    var resp = req.body;
     console.log(response);
     var secretKey = "6LfogRgUAAAAADhwW9O5J7ZeBLrDxoy7M9vxHdIX";
     var verificationUrl = "https://www.google.com/recaptcha/api/siteverify";
@@ -54,7 +54,7 @@ module.exports = function(app, express, path){
     $http({
       url: verificationUrl,
       method: "POST",
-      data: { 'response' :  response.response,
+      data: { 'response' :  response.resp,
               'privatekey' : secretKey},
       withCredentials: true,
       headers: {
