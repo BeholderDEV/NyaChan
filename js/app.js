@@ -1,5 +1,6 @@
 (function(){
-    var app = angular.module('nya-chan',['vcRecaptcha']);
+    var app = angular.module('nya-chan',['vcRecaptcha']);    
+    var request = require('request');
 
     app.controller('threadController',function($scope, $http){
 
