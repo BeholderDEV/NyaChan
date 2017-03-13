@@ -1,4 +1,5 @@
 var Dropbox = require('dropbox');
+var request = require("request");
 //http://dropbox.github.io/dropbox-sdk-js/Dropbox.html
 var dbx = new Dropbox({ accessToken: 'RQ4xXaH3x-AAAAAAAAAADuWlSlvLuWi5Lef3ymzTNYzSNvQY2AwDOvqmVY73I41f' });
 var formidable = require('formidable');
@@ -45,25 +46,19 @@ module.exports = function(app, express, path){
 		});
 	})
 
-  app.post('/recaptcha', function (req, res) {
-    var response = req.body;
-    console.log(response);
+  app.post('/recaptcha', function (req, res, $http) {
+    var resp = req.body;
+    console.log("Passou 1");
     var secretKey = "6LfogRgUAAAAADhwW9O5J7ZeBLrDxoy7M9vxHdIX";
     var verificationUrl = "https://www.google.com/recaptcha/api/siteverify";
-    // var urldata = "?secret=" + secretKey + "&response=" + $scope.response;
-    $http({
-      url: verificationUrl,
-      method: "POST",
-      data: { 'response' :  response.response,
-              'privatekey' : secretKey},
-      withCredentials: true,
-      headers: {
-                  'Content-Type': 'application/json; charset=utf-8'
-      }
-    }).then(function successCallback(response) {
+    var urldata = "?secret=" + secretKey + "&response=" + resp.response;
+      console.log("Passou 1.5");
+    
+
+    request(verificationUrl+urldata, function(error, response, body) {
+        console.log("Passou 2");
+        console.log(response);
       res.send(response);
-    }, function errorCallback(response) {
-      console.log('erro verificação');;
     });
 })
   app.get('/tag', function (req, res) {
