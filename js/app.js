@@ -84,16 +84,15 @@
         }).then(function successCallback(response) {
             console.log(response.success);
           valid=response.success;
-            validatedPost();
         }, function errorCallback(response) {
             console.log(response);
           console.log('erro verificação');;
         });
         
         
-        function validatedPost()
-        {
-            if (valid) {
+          function validatedPost()
+          {
+             if (valid) {
                 console.log('Success');
             } else {
                 console.log('Failed validation');
@@ -101,11 +100,12 @@
                 // because each response can be checked just once
                 vcRecaptchaService.reload($scope.widgetId);
                 // return
-            }
-            if(typeof post == "undefined"){
-              post = new Object();
-              post.body = " ";
-            }
+            } 
+              
+              if(typeof post == "undefined"){
+          post = new Object();
+          post.body = " ";
+        }
 
             var files = $("#file")[0].files[0];
             if(typeof files !== "undefined"){
@@ -168,12 +168,12 @@
               });
               window.location.reload(true);
             }
-
-          };
-        });
-    }
+          }
           
         
+
+      }
+    });
 
 
 })();
