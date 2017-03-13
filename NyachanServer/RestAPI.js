@@ -59,7 +59,7 @@ module.exports = function(app, express, path){
         console.log("Passou 2");
         console.log("response : " + response);
         console.log("body : " + body);
-      res.send(response);
+      res.send(body);
     });
 })
   app.get('/tag', function (req, res) {
