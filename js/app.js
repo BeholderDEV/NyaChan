@@ -17,12 +17,12 @@
 
     });
 
-    app.controller('animeThreadController',function($scope, $http){
+    app.controller('animeThreadController',function($scope, $http, vcRecaptchaService){
       $scope.response = null;
       $scope.widgetId = null;
 
       $scope.setResponse = function (response) {
-          console.info('Response available');
+          console.info('Response available: '+response);
 
           $scope.response = response;
       };
