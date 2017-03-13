@@ -64,7 +64,7 @@ module.exports = function(app, express, path){
     }, function errorCallback(response) {
       console.log('erro verificação');;
     });
-}
+})
   app.get('/tag', function (req, res) {
      res.type('text/html');
      res.sendfile('tag.html');
