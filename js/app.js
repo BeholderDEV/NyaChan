@@ -1,6 +1,5 @@
 (function(){
-    var app = angular.module('nya-chan',['vcRecaptcha']);    
-    var request = require('request');
+    var app = angular.module('nya-chan',['vcRecaptcha']);
 
     app.controller('threadController',function($scope, $http){
 
@@ -69,11 +68,20 @@
         console.log('sending the captcha response to the server', $scope.response);
         var verificationUrl = "https://www.google.com/recaptcha/api/siteverify?secret=" + secretKey + "&response=" + $scope.response;
 
-        request(verificationUrl,function(error,response,body) {
-          body = JSON.parse(body);
-          // Success will be true or false depending upon captcha validation.
-          valid=body.success;
-        });
+        $http({
+          method: 'POST',
+          url: verificationUrl
+        }).then(function successCallback(response) {
+            valid=response.success;
+          }, function errorCallback(response) {
+            console.log('erro verificação');;
+          });
+
+        // request(verificationUrl,function(error,response,body) {
+        //   body = JSON.parse(body);
+        //   // Success will be true or false depending upon captcha validation.
+        //
+        // });
         if (valid) {
             console.log('Success');
         } else {
