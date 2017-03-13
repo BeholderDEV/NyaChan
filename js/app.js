@@ -98,12 +98,34 @@
 //            // return
 //        }
 //
+        
+        var files = $("#file")[0].files[0];
+        
         if(typeof post == "undefined"){
           post = new Object();
           post.body = " ";
         }
-
-        var files = $("#file")[0].files[0];
+        
+        if((post.body == " " || typeof post.body == "undefined") && typeof files == "undefined"){
+          if(post.body == " " || typeof post.body == "undefined"){
+            var myEl = angular.element( document.querySelector( '#comment-group' ) );
+            myEl.addClass('has-error');
+          }
+          if(typeof files == "undefined"){
+            var myEl = angular.element( document.querySelector( '#file-group' ) );
+            myEl.addClass('has-error');
+          }
+          return;
+        }
+        else{
+          var myEl = angular.element( document.querySelector( '#comment-group' ) );
+          myEl.removeClass('has-error');
+          myEl = angular.element( document.querySelector( '#file-group' ) );
+          myEl.removeClass('has-error');
+        }
+        
+        
+        
         if(typeof files !== "undefined"){
           var formData = new FormData();
           formData.append("fileData",files);
@@ -162,7 +184,7 @@
           }, function myError(response) {
                 console.log(response || "Request failed");
           });
-          window.location.reload(true);
+          //window.location.reload(true);
         }
 
       }
