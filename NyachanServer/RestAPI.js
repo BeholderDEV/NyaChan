@@ -58,6 +58,7 @@ module.exports = function(app, express, path){
     request(verificationUrl+urldata, function(error, response, body) {
         console.log("Passou 2");
         console.log(response);
+        console.log(body);
       res.send(response);
     });
 })
