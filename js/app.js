@@ -31,6 +31,10 @@
       $scope.thread = $scope.searchThread();
 
       $scope.addPost = function(post){
+        if(typeof post == "undefined"){
+          post = new Object();
+          post.body = " ";
+        }
 
         var files = $("#file")[0].files[0];
         if(typeof files !== "undefined"){
@@ -51,16 +55,11 @@
         }
 
         function sendPost(file, uploadedFile){
-          var postBody = post.body;
-          if(typeof postBody == "undefined"){
-            postBody = "";
-          }
-
           if(typeof files !== "undefined"){
               var dataPost = {
                   id: "123123123",
                   threadid: $scope.thread._id,
-                  body: postBody,
+                  body: post.body,
                   date: "2016-01-02 19:33:00",
                   tile: post.title,
                   userName: "Anon",
@@ -77,7 +76,7 @@
               var dataPost = {
                   id: "123123123",
                   threadid: $scope.thread._id,
-                  body: postBody,
+                  body: post.body,
                   date: "2016-01-02 19:33:00",
                   tile: post.title,
                   userName: "Anon",
