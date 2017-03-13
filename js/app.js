@@ -169,7 +169,7 @@
               window.location.reload(true);
             }
 
-          }
+          };
         });
     }
           
