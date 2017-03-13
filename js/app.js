@@ -84,6 +84,7 @@
         }).then(function successCallback(response) {
           valid=response.success;
         }, function errorCallback(response) {
+            console.log(response);
           console.log('erro verificação');;
         });
         if (valid) {
