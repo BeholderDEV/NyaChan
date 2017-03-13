@@ -59,9 +59,9 @@
 
       $scope.addPost = function(post){
         var valid;
-        if($scope.response === undefined || $scope.response === '' || $scope.response === null) {
-          return res.json({"responseCode" : 1,"responseDesc" : "Please select captcha"});
-        }
+        // if($scope.response === undefined || $scope.response === '' || $scope.response === null) {
+        //   return res.json({"responseCode" : 1,"responseDesc" : "Please select captcha"});
+        // }
         // Put your secret key here.
         var secretKey = "6LfogRgUAAAAADhwW9O5J7ZeBLrDxoy7M9vxHdIX";
         // req.connection.remoteAddress will provide IP address of connected user.
