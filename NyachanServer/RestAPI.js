@@ -53,7 +53,7 @@ module.exports = function(app, express, path){
     $http({
       url: verificationUrl,
       method: "POST",
-      data: { 'response' :  $scope.response,
+      data: { 'response' :  response,
               'privatekey' : secretKey},
       withCredentials: true,
       headers: {
