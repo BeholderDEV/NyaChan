@@ -50,12 +50,10 @@ module.exports = function(app, express, path){
     console.log(response);
     var secretKey = "6LfogRgUAAAAADhwW9O5J7ZeBLrDxoy7M9vxHdIX";
     var verificationUrl = "https://www.google.com/recaptcha/api/siteverify";
-    // var urldata = "?secret=" + secretKey + "&response=" + $scope.response;
+    var urldata = "?secret=" + secretKey + "&response=" + resp.response;
     $http({
-      url: verificationUrl,
-      method: "POST",
-      data: { 'response' :  response.resp,
-              'privatekey' : secretKey},
+      url: verificationUrl+urldata,
+      method: "POST"
       withCredentials: true,
       headers: {
                   'Content-Type': 'application/json; charset=utf-8'
@@ -63,7 +61,7 @@ module.exports = function(app, express, path){
     }).then(function successCallback(response) {
       res.send(response);
     }, function errorCallback(response) {
-      console.log('erro verificação');;
+      console.log('erro verificação');
     });
 })
   app.get('/tag', function (req, res) {
