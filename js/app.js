@@ -66,21 +66,26 @@
         var secretKey = "6LfogRgUAAAAADhwW9O5J7ZeBLrDxoy7M9vxHdIX";
         // req.connection.remoteAddress will provide IP address of connected user.
         console.log('sending the captcha response to the server', $scope.response);
-        var verificationUrl = "https://www.google.com/recaptcha/api/siteverify?secret=" + secretKey + "&response=" + $scope.response;
+        var verificationUrl = "https://www.google.com/recaptcha/api/siteverify";
+        var urldata = "?secret=" + secretKey + "&response=" + $scope.response;
 
-        $http({
-          method: 'POST',
-          url: verificationUrl
-        }).then(function successCallback(response) {
-            valid=response.success;
-          }, function errorCallback(response) {
-            console.log('erro verificação');;
-          });
-        // request(verificationUrl,function(error,response,body) {
-        //   body = JSON.parse(body);
-        //   // Success will be true or false depending upon captcha validation.
-        //
-        // });
+        // $http({
+        //   method: 'POST',
+        //   url: verificationUrl+urldata
+        // }).then(function successCallback(response) {
+        //     valid=response.success;
+        //   }, function errorCallback(response) {
+        //     console.log('erro verificação');;
+        //   });
+          $http({
+          url: verificationUrl,
+          method: "POST",
+          data: {'response' :  $scope.response, 'privatekey' : secretKey },
+          withCredentials: true,
+          headers: {
+                      'Content-Type': 'application/json; charset=utf-8'
+          }
+      });
         if (valid) {
             console.log('Success');
         } else {
