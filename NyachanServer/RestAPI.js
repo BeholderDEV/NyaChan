@@ -46,14 +46,15 @@ module.exports = function(app, express, path){
 	})
 
   app.post('/recaptcha', function (req, res) {
-    var response = req.body.response;
+    var response = req.body;
+    console.log(response);
     var secretKey = "6LfogRgUAAAAADhwW9O5J7ZeBLrDxoy7M9vxHdIX";
     var verificationUrl = "https://www.google.com/recaptcha/api/siteverify";
-    var urldata = "?secret=" + secretKey + "&response=" + $scope.response;
+    // var urldata = "?secret=" + secretKey + "&response=" + $scope.response;
     $http({
       url: verificationUrl,
       method: "POST",
-      data: { 'response' :  response,
+      data: { 'response' :  response.response,
               'privatekey' : secretKey},
       withCredentials: true,
       headers: {
