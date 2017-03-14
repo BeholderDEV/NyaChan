@@ -114,14 +114,14 @@
         }).then(function successCallback(response) {
             console.log(response.data);
           valid=response.data.success;
-            validatedPost();
+            validatedPost(valid);
         }, function errorCallback(response) {
             console.log(response);
           console.log('erro verificação');;
         });
         
         
-        function validatedPost()
+        function validatedPost(valid)
         {
             var files = $("#file")[0].files[0];
             if (valid) {
