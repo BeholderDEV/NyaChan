@@ -1,11 +1,25 @@
 var mongodb = require('mongodb');
 var MongoClient = mongodb.MongoClient;
 var ObjectId = require('mongodb').ObjectID;
+var Dropbox = require('dropbox');
+//http://dropbox.github.io/dropbox-sdk-js/Dropbox.html
+var dbx = new Dropbox({ accessToken: 'RQ4xXaH3x-AAAAAAAAAADuWlSlvLuWi5Lef3ymzTNYzSNvQY2AwDOvqmVY73I41f' });
 
 module.exports = function(app){
-	
-	// Connection URL 
+
+	// Connection URL
 	var url = 'mongodb://alisson:123456@ds053206.mlab.com:53206/nyachan_data';
+
+
+	app.get('/dbx', function (req, res) {
+		dbx.filesListFolder({path: ''})
+		  .then(function(response) {
+		    console.log(response);
+		  })
+		  .catch(function(error) {
+		    console.log(error);
+		  });
+	})
 
 	app.get('/a/threads', function (req, res) {
 		MongoClient.connect(url, function(err, db) {
@@ -19,11 +33,10 @@ module.exports = function(app){
 			    }
 			    res.jsonp(documents);
 			});
-		    
+
 			db.close();
 		  }
 		});
-
 	})
 
 	app.get('/a/thread/1', function (req, res) {
@@ -38,7 +51,7 @@ module.exports = function(app){
 		            }
 		            res.jsonp(documents);
 		        });
-		            
+
 		        db.close();
 	        }
 	    });
@@ -56,7 +69,7 @@ module.exports = function(app){
 		            }
 		            res.jsonp(documents);
 		        });
-		            
+
 		        db.close();
 	        }
 	    });
@@ -70,7 +83,7 @@ module.exports = function(app){
 	        	console.log('Unable to connect to the mongoDB server. Error:', err);
 	        } else {
 		        console.log('Connection established to', url);
-		        
+
 		        db.collection('thread', function(err, collection) {
 		            collection.update({'_id': ObjectId(newPost.threadid)},{ $push: {post: newPost}}, {safe:true}, function(err, result) {
 		                if (err) {
@@ -86,5 +99,7 @@ module.exports = function(app){
 	        }
 	    });
 	})
+
+
 
 }
