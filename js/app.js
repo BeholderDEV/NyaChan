@@ -17,7 +17,7 @@
 
     });
 
-    app.controller('animeThreadController',function($scope, $http, vcRecaptchaService){
+    app.controller('animeThreadController',function($scope, $http){
       $scope.response = null;
       $scope.widgetId = null;
 
