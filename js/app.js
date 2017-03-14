@@ -1,5 +1,5 @@
 (function(){
-    var app = angular.module('nya-chan');
+    var app = angular.module('nya-chan', []);
 
     app.controller('threadController',function($scope, $http){
 
@@ -41,12 +41,12 @@
 
       $scope.addPost = function(post){
         var files = $("#file")[0].files[0];
-        
+
         if(typeof post == "undefined"){
           post = new Object();
           post.body = " ";
         }
-        
+
         if((post.body == " " || typeof post.body == "undefined") && typeof files == "undefined"){
           if(post.body == " " || typeof post.body == "undefined"){
             var myEl = angular.element( document.querySelector( '#comment-group' ) );
@@ -64,9 +64,9 @@
           myEl = angular.element( document.querySelector( '#file-group' ) );
           myEl.removeClass('has-error');
         }
-        
-        
-        
+
+
+
         if(typeof files !== "undefined"){
           var formData = new FormData();
           formData.append("fileData",files);
