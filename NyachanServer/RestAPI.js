@@ -57,8 +57,9 @@ module.exports = function(app, express, path){
 
     request(verificationUrl+urldata, function(error, response, body) {
         console.log("Passou 2");
-        console.log(response);
-      res.send(response);
+        console.log("response : " + response);
+        console.log("body : " + body);
+      res.send(body);
     });
 })
   app.get('/tag', function (req, res) {
