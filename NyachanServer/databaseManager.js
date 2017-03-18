@@ -10,17 +10,6 @@ module.exports = function(app){
 	// Connection URL
 	var url = 'mongodb://alisson:123456@ds053206.mlab.com:53206/nyachan_data';
 
-
-	app.get('/dbx', function (req, res) {
-		dbx.filesListFolder({path: ''})
-		  .then(function(response) {
-		    console.log(response);
-		  })
-		  .catch(function(error) {
-		    console.log(error);
-		  });
-	})
-
 	app.get('/a/threads', function (req, res) {
 		MongoClient.connect(url, function(err, db) {
 		if (err) {
@@ -37,6 +26,26 @@ module.exports = function(app){
 			db.close();
 		  }
 		});
+	})
+
+
+  app.get('/thread/:idThread', function (req, res) {
+
+      MongoClient.connect(url, function(err, db) {
+	        if (err) {
+	        	console.log('Unable to connect to the mongoDB server. Error:', err);
+	        } else {
+		        console.log('Connection established to', url);
+		        db.collection('thread').find( { _id: ObjectId(req.params.idThread)  } ).toArray(function(error, documents) {
+		            if (err){
+		                throw error;
+		            }
+		            res.jsonp(documents);
+		        });
+
+		        db.close();
+	        }
+	    });
 	})
 
 	app.get('/a/thread/1', function (req, res) {
