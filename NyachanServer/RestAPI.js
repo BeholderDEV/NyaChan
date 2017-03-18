@@ -63,13 +63,13 @@ module.exports = function(app, express, path){
 })
   app.get('/tag', function (req, res) {
      res.type('text/html');
-     res.sendFile('tag.html');
+     res.sendfile('tag.html');
   })
 
   app.get('/thread/:idThread', function (req, res) {
      res.type('text/html');
      // res.sendFile(path.resolve('../thread.html'));
-     res.sendFile('thread.html')
+     res.sendfile('thread.html')
   })
 
 }
