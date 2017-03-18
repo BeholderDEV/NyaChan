@@ -118,7 +118,7 @@
 
           $http({
               method : "PUT",
-              url: "https://nyachan-server.herokuapp.com/a/thread/newPost",
+              url: "https://nyachan-server.herokuapp.com/thread/newPost",
               data: dataPost,
               headers: {
                     'Content-Type': 'application/json'
