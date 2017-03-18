@@ -75,10 +75,11 @@
         </div>
         <div class='panel-body'>
           <div ng-repeat="t in threads" class="col-md-3">
+            <a ng-href="http://nyachan-server.herokuapp.com/thread/{{t._id}}">
             <div class='panel panel-default'>
               <div class='panel-heading'>
                 <h3 class='panel-title'>
-                  {{t.subject}} ~ {{t._id}}
+                  {{t.subject}}
                 </h3>
               </div>
               <div class='panel-body'>
@@ -87,6 +88,7 @@
               </div>
 
             </div>
+          </a>
         </div>
       </div>
       <!-- end popular threads -->

@@ -53,7 +53,7 @@ module.exports = function(app, express, path){
     var verificationUrl = "https://www.google.com/recaptcha/api/siteverify";
     var urldata = "?secret=" + secretKey + "&response=" + resp.response;
       console.log("Passou 1.5");
-    
+
 
     request(verificationUrl+urldata, function(error, response, body) {
         console.log("Passou 2");
@@ -66,7 +66,7 @@ module.exports = function(app, express, path){
      res.sendfile('tag.html');
   })
 
-  app.get('/thread', function (req, res) {
+  app.get('/thread/:idThread', function (req, res) {
      res.type('text/html');
      res.sendfile('thread.html');
   })

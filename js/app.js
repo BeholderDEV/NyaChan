@@ -6,7 +6,7 @@
         $scope.search = function() {
             $http({
                 method : "GET",
-                url: "https://nyachan-server.herokuapp.com/a/threads"
+                url: "https://nyachan-server.herokuapp.com/threads"
             }).then(function mySucces(response) {
                 $scope.threads = response.data;
             }, function myError(response) {
@@ -20,6 +20,8 @@
     app.controller('animeThreadController',function($scope, $http){
       $scope.response = null;
       $scope.widgetId = null;
+      var url=$(location).attr('href');
+      var searchId = url.substring(url.lastIndexOf('/') + 1);
 
       $scope.setResponse = function (response) {
           console.info('Response available');
@@ -27,17 +29,19 @@
           $scope.response = response;
       };
 
-      $scope.searchThread = function() {
+      $scope.searchThread = function(threadID) {
+        console.log(threadID);
           $http({
               method : "GET",
-              url: "https://nyachan-server.herokuapp.com/a/thread/1"
+              url: "https://nyachan-server.herokuapp.com/app/thread/"+threadID
           }).then(function mySucces(response) {
               $scope.thread = response.data[0];
           }, function myError(response) {
                 console.log(response || "Request failed");
           });
       };
-      $scope.thread = $scope.searchThread();
+
+      $scope.thread = $scope.searchThread(searchId);
 
       $scope.addPost = function(post){
         var files = $("#file")[0].files[0];

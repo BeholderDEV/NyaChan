@@ -29,50 +29,13 @@ module.exports = function(app){
 	})
 
 
-  app.get('/thread/:idThread', function (req, res) {
-
+  app.get('/app/thread/:idThread', function (req, res) {
       MongoClient.connect(url, function(err, db) {
 	        if (err) {
 	        	console.log('Unable to connect to the mongoDB server. Error:', err);
 	        } else {
 		        console.log('Connection established to', url);
 		        db.collection('thread').find( { _id: ObjectId(req.params.idThread)  } ).toArray(function(error, documents) {
-		            if (err){
-		                throw error;
-		            }
-		            res.jsonp(documents);
-		        });
-
-		        db.close();
-	        }
-	    });
-	})
-
-	app.get('/a/thread/1', function (req, res) {
-	    MongoClient.connect(url, function(err, db) {
-	        if (err) {
-	        	console.log('Unable to connect to the mongoDB server. Error:', err);
-	        } else {
-		        console.log('Connection established to', url);
-		        db.collection('thread').find( { _id: ObjectId("57fb3a3bdcba0f6a8b60f17a")  } ).toArray(function(error, documents) {
-		            if (err){
-		                throw error;
-		            }
-		            res.jsonp(documents);
-		        });
-
-		        db.close();
-	        }
-	    });
-	})
-
-	app.get('/a/thread/2', function (req, res) {
-	    MongoClient.connect(url, function(err, db) {
-	        if (err) {
-	        	console.log('Unable to connect to the mongoDB server. Error:', err);
-	        } else {
-		        console.log('Connection established to', url);
-		        db.collection('thread').find( { _id: ObjectId("57fb3ac1dcba0f6a8b60f197")  } ).toArray(function(error, documents) {
 		            if (err){
 		                throw error;
 		            }
