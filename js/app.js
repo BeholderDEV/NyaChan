@@ -30,7 +30,6 @@
       };
 
       $scope.searchThread = function(threadID) {
-        console.log("https://nyachan-server.herokuapp.com/app/thread/"+threadID);
           $http({
               method : "GET",
               url: "https://nyachan-server.herokuapp.com/app/thread/"+threadID
@@ -129,7 +128,7 @@
           }, function myError(response) {
                 console.log(response || "Request failed");
           });
-          //window.location.reload(true);
+          window.location.reload(true);
         }
 
       }
