@@ -10,7 +10,7 @@ module.exports = function(app){
 	// Connection URL
 	var url = 'mongodb://alisson:123456@ds053206.mlab.com:53206/nyachan_data';
 
-	app.get('/a/threads', function (req, res) {
+	app.get('/app/threads', function (req, res) {
 		MongoClient.connect(url, function(err, db) {
 		if (err) {
 			console.log('Unable to connect to the mongoDB server. Error:', err);
@@ -47,7 +47,7 @@ module.exports = function(app){
 	    });
 	})
 
-	app.put('/a/thread/newPost', function (req, res){
+	app.put('/thread/newPost', function (req, res){
 	    var newPost = req.body;
 	    console.log(newPost);
 	    MongoClient.connect(url, function(err, db) {
