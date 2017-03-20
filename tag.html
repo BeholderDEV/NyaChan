@@ -46,7 +46,7 @@
           <div class='panel panel-default'>
               <div class='panel-heading'>
                   <h3 class='panel-title'>
-                    {{t.subject}} ~ {{t.id}} by {{t.userName}}
+                    {{t.subject}} ~ <a ng-href="http://nyachan-server.herokuapp.com/thread/{{t._id}}">{{t._id}}</a> by {{t.userName}}
                     <span class="label label-nya" ng-repeat="a in t.tags">{{a}}</span>
                   </h3>
                 </div>
