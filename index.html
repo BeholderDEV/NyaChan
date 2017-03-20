@@ -46,28 +46,28 @@
           <div class="col-md-6">
             <div class="list-title">Work Safe</div>
             <ul class="list-group tags">
-              <li>Anime &#38; Mangá</li>
-              <li>Quadrinhos &#38; Desenhos Animados</li>
-              <li>Gif &#38; Webm</li>
-              <li>História e Ciências Humanas</li>
-              <li>Música</li>
-              <li>Tecnologia</li>
-              <li>Televisão &#38; Filmes</li>
-              <li>Vídeo Games</li>
+              <a href = "https://nyachan-server.herokuapp.com/tag/a"><li>Anime &#38; Mangá</li></a>
+              <a href = "https://nyachan-server.herokuapp.com/tag/c"><li>Quadrinhos &#38; Desenhos Animados</li></a>
+              <a href = "https://nyachan-server.herokuapp.com/tag/g"><li>Gif &#38; Webm</li></a>
+              <a href = "https://nyachan-server.herokuapp.com/tag/h"><li>História e Ciências Humanas</li></a>
+              <a href = "https://nyachan-server.herokuapp.com/tag/m"><li>Música</li></a>
+              <a href = "https://nyachan-server.herokuapp.com/tag/t"><li>Tecnologia</li></a>
+              <a href = "https://nyachan-server.herokuapp.com/tag/tv"><li>Televisão &#38; Filmes</li></a>
+              <a href = "https://nyachan-server.herokuapp.com/tag/v"><li>Vídeo Games</li></a>
             </ul>
           </div>
           <div id="nsfw" class="col-md-6">
             <div class="list-title">NSFW</div>
             <ul class="list-group tags">
-              <li>Aleatório</li>
-              <li>Politicamente Incorreto</li>
+              <a href = "https://nyachan-server.herokuapp.com/tag/b"><li>Aleatório</li></a>
+              <a href = "https://nyachan-server.herokuapp.com/tag/p"><li>Politicamente Incorreto</li></a>
             </ul>
           </div>
         </div>
       </div>
       <!-- end tags -->
       <!-- popular threads -->
-      <div class='panel panel-default' ng-app = "nya-chan" ng-controller= "threadController">
+      <div class='panel panel-default' ng-app = "nya-chan" ng-controller= "indexController">
         <div class='panel-heading'>
           <h3 class='panel-title'>
             Popular Threads
@@ -75,10 +75,11 @@
         </div>
         <div class='panel-body'>
           <div ng-repeat="t in threads" class="col-md-3">
+            <a ng-href="http://nyachan-server.herokuapp.com/thread/{{t._id}}">
             <div class='panel panel-default'>
               <div class='panel-heading'>
                 <h3 class='panel-title'>
-                  {{t.subject}} ~ {{t.id}}
+                  {{t.subject}}
                 </h3>
               </div>
               <div class='panel-body'>
@@ -87,6 +88,7 @@
               </div>
 
             </div>
+          </a>
         </div>
       </div>
       <!-- end popular threads -->

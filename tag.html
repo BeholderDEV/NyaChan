@@ -9,8 +9,10 @@
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../lib/Bootstrap-multiselect/bootstrap-multiselect.css" type="text/css"/>
     <!-- Meu CSS -->
-    <link href="css/styles.css" rel="stylesheet" type="text/css">
+    <link href="../css/styles.css" rel="stylesheet" type="text/css">
+
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -20,7 +22,7 @@
     <![endif]-->
 
   </head>
-  <body>
+  <body ng-app = "nya-chan" ng-controller= "tagController">
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
@@ -34,19 +36,20 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li class="btn" data-toggle="modal" data-target="#newThreadModal"><a>New Thread  <i class="fa fa-plus"></i></a></li>
+            <li class="btn" data-toggle="modal" data-target="#newThreadModal"><a>New Thread  <i class="fa fa-plus"></i></a></l>
+
           </ul>
         </div>
       </div>
     </nav>
     <div class="container">
 
-      <div ng-app = "nya-chan" ng-controller= "threadController">
+      <div>
         <div ng-repeat="t in threads">
           <div class='panel panel-default'>
               <div class='panel-heading'>
                   <h3 class='panel-title'>
-                    {{t.subject}} ~ {{t.id}} by {{t.userName}}
+                    {{t.subject}} ~ <a ng-href="http://nyachan-server.herokuapp.com/thread/{{t._id}}">{{t._id}}</a> by {{t.userName}}
                     <span class="label label-nya" ng-repeat="a in t.tags">{{a}}</span>
                   </h3>
                 </div>
@@ -58,7 +61,7 @@
                 <div class="panel-footer">
                   <ul class="list-group">
                     <li class="list-group-item" ng-repeat="p in t.post">
-                      <h4>{{p.tile}}</h4>
+                      <h4>{{p.title}}</h4>
                       <a ng-href="{{p.file[0].source}}" target="_blank">{{p.file[0].name}}</a>
                       <img ng-src="{{p.file[0].source}}" class="img-responsive nya-image image-thumb post-image"/>
                       {{p.body}}
@@ -84,13 +87,85 @@
           <button type="button" class="btn btn-default btn-board"><a href="#">#v</a></button>
         </div>
     </footer>
+
+    <div class="modal fade" id="newThreadModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div id="task-modal" class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+            <h4 class="modal-title">Create Thread</h4>
+          </div>
+          <div class="modal-body">
+            <form id="comment-form" name="comment-form" class="form-horizontal" method="post" enctype="multipart/form-data">
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Subject</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" ng-model="post.title" placeholder="Subject" id="title">
+                </div>
+              </div>
+              <div class="form-group" id="comment-group">
+                <label class="col-sm-2 control-label">Comment</label>
+                <div class="col-sm-10">
+                  <textarea class="form-control" rows="3" placeholder="Comment" ng-model="post.body" id="body" name="comment" id="comment-area" required></textarea>
+                </div>
+              </div>
+              <div class="form-group" id="file-group">
+                <label class="col-sm-2 control-label">File</label>
+                <div class="fileinput fileinput-new" data-provides="fileinput">
+                  <span class="btn btn-default btn-file">
+                    <span class="fileinput-new">
+                      Select file
+                    </span>
+                    <span class="fileinput-exists">
+                      Change
+                    </span>
+                    <input type="file" name="..." ng-model="post.file" id="file" name="image">
+                  </span>
+                  <span class="fileinput-filename"></span>
+                  <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">&times;</a>
+                </div>
+              </div>
+              <div>
+                <select id="selectTags" multiple="multiple">
+                    <option value="a">Anime &#38; Mangá</option>
+                    <option value="c">Quadrinhos &#38; Desenhos Animados</option>
+                    <option value="g">Gif &#38; Webm</option>
+                    <option value="h">História e Ciências Humanas</option>
+                    <option value="m">Música</option>
+                    <option value="t">Tecnologia</option>
+                    <option value="tv">Televisão &#38; Filmes</option>
+                    <option value="v">Vídeo Games</option>
+                    <option value="b">Aleatório</option>
+                    <option value="p">Politicamente Incorreto</option>
+                </select>
+              </div>
+              <!-- div
+                  vc-recaptcha
+                  theme="'light'"
+                  key="model.key"
+                  on-create="setWidgetId(widgetId)"
+                  on-success="setResponse(response)"
+                  on-expire="cbExpiration()"
+              ></div -->
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="submit" ng-click="createThread(post)" class="btn btn-nya post-button">Post</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Angular JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-    <script src="js/app.js"></script>
-    <script src="js/script.js"></script>
+    <script type="text/javascript" src="../lib/Bootstrap-multiselect/bootstrap-multiselect.js"></script>
+
+    <script src="../js/app.js"></script>
+    <script src="../js/script.js"></script>
   </body>
 </html>

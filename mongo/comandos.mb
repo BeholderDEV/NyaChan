@@ -1,9 +1,0 @@
-db.tag.save({id:1,name:"Anime",description:"Tag relacionada a animações e cultura japonesa"})
-db.tag.save({id:2,name:"Jogos",description:"Tag relacionada jogos em geral"})
-db.tag.save({id:3,name:"Televisão e Filmes",description:"Tag relacionada a filmes e séries em geral"})
-
-db.user.save({id:1,login:"alisson",password:"123",name:"Alisson Steffens",isAdmin:true})
-db.user.save({id:2,login:"ash",password:"123",name:"Alisson Steffens"})
-db.user.save({id:3,login:"adson",password:"123",name:"Adson Esteves",isAdmin:true})
-
-db.post.save({id:1,subject:"primeira Thread",body:"teste da primeira thread",date:"2016-10-07",username:"An0n", answers: [{id:2,body:"First",date:"2016-10-07",username:"Another"},{id:3,body:"Sorry",date:"2016-10-07",username:"Another One"}]})

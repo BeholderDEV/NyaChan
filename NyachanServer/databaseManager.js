@@ -10,18 +10,7 @@ module.exports = function(app){
 	// Connection URL
 	var url = 'mongodb://alisson:123456@ds053206.mlab.com:53206/nyachan_data';
 
-
-	app.get('/dbx', function (req, res) {
-		dbx.filesListFolder({path: ''})
-		  .then(function(response) {
-		    console.log(response);
-		  })
-		  .catch(function(error) {
-		    console.log(error);
-		  });
-	})
-
-	app.get('/a/threads', function (req, res) {
+	app.get('/app/threads', function (req, res) {
 		MongoClient.connect(url, function(err, db) {
 		if (err) {
 			console.log('Unable to connect to the mongoDB server. Error:', err);
@@ -39,13 +28,14 @@ module.exports = function(app){
 		});
 	})
 
-	app.get('/a/thread/1', function (req, res) {
-	    MongoClient.connect(url, function(err, db) {
+
+  app.get('/app/thread/:idThread', function (req, res) {
+      MongoClient.connect(url, function(err, db) {
 	        if (err) {
 	        	console.log('Unable to connect to the mongoDB server. Error:', err);
 	        } else {
 		        console.log('Connection established to', url);
-		        db.collection('thread').find( { _id: ObjectId("57fb3a3bdcba0f6a8b60f17a")  } ).toArray(function(error, documents) {
+		        db.collection('thread').find( { _id: ObjectId(req.params.idThread)  } ).toArray(function(error, documents) {
 		            if (err){
 		                throw error;
 		            }
@@ -57,13 +47,13 @@ module.exports = function(app){
 	    });
 	})
 
-	app.get('/a/thread/2', function (req, res) {
-	    MongoClient.connect(url, function(err, db) {
+  app.get('/app/tag/:tagName', function (req, res) {
+      MongoClient.connect(url, function(err, db) {
 	        if (err) {
 	        	console.log('Unable to connect to the mongoDB server. Error:', err);
 	        } else {
 		        console.log('Connection established to', url);
-		        db.collection('thread').find( { _id: ObjectId("57fb3ac1dcba0f6a8b60f197")  } ).toArray(function(error, documents) {
+		        db.collection('thread').find( { tags: req.params.tagName} ).toArray(function(error, documents) {
 		            if (err){
 		                throw error;
 		            }
@@ -75,7 +65,7 @@ module.exports = function(app){
 	    });
 	})
 
-	app.put('/a/thread/newPost', function (req, res){
+	app.put('/thread/newPost', function (req, res){
 	    var newPost = req.body;
 	    console.log(newPost);
 	    MongoClient.connect(url, function(err, db) {
@@ -100,6 +90,27 @@ module.exports = function(app){
 	    });
 	})
 
+	app.post('/thread/newThread', function (req, res){
+	    MongoClient.connect(url, function(err, db) {
+	        if (err) {
+	        	console.log('Unable to connect to the mongoDB server. Error:', err);
+	        } else {
+		        console.log('Connection established to', url);
 
+		        db.collection('thread', function(err, collection) {
+		            collection.insert(req.body, {safe:true}, function(err, result) {
+		                if (err) {
+		                    console.log('Error ' + err);
+		                    res.send({'error':'An error has occurred'});
+		                } else {
+		                    console.log('' + result);
+		                    res.send(result);
+		                }
+		            });
+		        });
+		        db.close();
+	        }
+	    });
+	})
 
 }
