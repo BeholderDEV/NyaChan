@@ -90,6 +90,29 @@ module.exports = function(app){
 	    });
 	})
 
+	app.post('/thread/newThread', function (req, res){
+	    var newThread = req.body;
+	    console.log(newThread);
+	    MongoClient.connect(url, function(err, db) {
+	        if (err) {
+	        	console.log('Unable to connect to the mongoDB server. Error:', err);
+	        } else {
+		        console.log('Connection established to', url);
 
+		        db.collection('thread', function(err, collection) {
+		            collection.insert({newThread}, {safe:true}, function(err, result) {
+		                if (err) {
+		                    console.log('Error ' + err);
+		                    res.send({'error':'An error has occurred'});
+		                } else {
+		                    console.log('' + result);
+		                    res.send(newThread);
+		                }
+		            });
+		        });
+		        db.close();
+	        }
+	    });
+	})
 
 }
