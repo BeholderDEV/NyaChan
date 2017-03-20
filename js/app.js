@@ -209,6 +209,11 @@
         }
 
         function sendPost(file, uploadedFile){
+            if(!validFile(files.name))
+            {
+              alert("Arquivo Invalido");
+              return;
+            }
           if(typeof files !== "undefined"){
               var dataPost = {
                   id: "123123123",
@@ -250,6 +255,12 @@
                 console.log(response || "Request failed");
           });
           window.location.reload(true);
+        }
+          
+        function validFile(filename){
+            var validFormats = ['jpg','jpeg','png', 'gif','bmp'];
+            var ext = filename.substring(filename.lastIndexOf('.') + 1).toLowerCase();
+            return validFormats.indexOf(ext) !== -1;
         }
 
       }
