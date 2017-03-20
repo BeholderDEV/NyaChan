@@ -107,7 +107,7 @@
                   id: "123123123",
                   body: post.body,
                   date: "2016-01-02 19:33:00",
-                  tile: post.title,
+                  title: post.title,
                   userName: "Anon",
                   tags: selectTags,
                   file: [
@@ -125,7 +125,7 @@
                   id: "123123123",
                   body: post.body,
                   date: "2016-01-02 19:33:00",
-                  tile: post.title,
+                  title: post.title,
                   userName: "Anon",
                   tags: selectTags
               };
@@ -215,7 +215,7 @@
                   threadid: $scope.thread._id,
                   body: post.body,
                   date: "2016-01-02 19:33:00",
-                  tile: post.title,
+                  title: post.title,
                   userName: "Anon",
                   file: [
                     {
@@ -232,7 +232,7 @@
                   threadid: $scope.thread._id,
                   body: post.body,
                   date: "2016-01-02 19:33:00",
-                  tile: post.title,
+                  title: post.title,
                   userName: "Anon",
               };
           }
