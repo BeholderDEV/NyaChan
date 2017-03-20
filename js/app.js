@@ -1,6 +1,22 @@
 (function(){
     var app = angular.module('nya-chan', []);
 
+    app.controller('indexController',function($scope, $http){
+        
+        $scope.search = function() {
+            $http({
+                method : "GET",
+                url: "https://nyachan-server.herokuapp.com/app/app/threads"
+            }).then(function mySucces(response) {
+                $scope.threads = response.data;
+            }, function myError(response) {
+                  console.log(response || "Request failed");
+            });
+        };
+        $scope.threads = $scope.search();
+    });
+
+
     app.controller('tagController',function($scope, $http){
         
         var url = $(location).attr('href');
