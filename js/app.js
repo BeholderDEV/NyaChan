@@ -198,6 +198,7 @@
           xhr.onreadystatechange = function() {
               if (xhr.readyState == XMLHttpRequest.DONE) {
                 var uploadedFile = xhr.response;
+                  console.log("a");
                 sendPost(files, uploadedFile);
               }
 
@@ -205,10 +206,22 @@
           xhr.open('post', '/dbxPost', true);
           xhr.send(formData);
         }else{
+            console.log("b");
           sendPost(null, null);
         }
-
-        function sendPost(file, uploadedFile){
+        
+        
+          function sendPost(file, uploadedFile){
+              if(!file==null)
+              {
+                if(!validFile(files.name))
+                {
+                  alert("Arquivo Invalido");
+                  return;
+                }
+              }
+            
+            console.log("c");  
           if(typeof files !== "undefined"){
               var dataPost = {
                   id: "123123123",
@@ -245,11 +258,19 @@
                     'Content-Type': 'application/json'
               }
           }).then(function mySucces(response) {
+              console.log("d");
                 console.log(response.data);
           }, function myError(response) {
-                console.log(response || "Request failed");
+              console.log("e");  
+              console.log(response || "Request failed");
           });
-          window.location.reload(true);
+          //window.location.reload(true);
+        }
+          
+        function validFile(filename){
+            var validFormats = ['jpg','jpeg','png', 'gif','bmp'];
+            var ext = filename.substring(filename.lastIndexOf('.') + 1).toLowerCase();
+            return validFormats.indexOf(ext) !== -1;
         }
 
       }
