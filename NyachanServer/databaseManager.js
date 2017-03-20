@@ -47,6 +47,24 @@ module.exports = function(app){
 	    });
 	})
 
+  app.get('/app/tag/:tagName', function (req, res) {
+      MongoClient.connect(url, function(err, db) {
+	        if (err) {
+	        	console.log('Unable to connect to the mongoDB server. Error:', err);
+	        } else {
+		        console.log('Connection established to', url);
+		        db.collection('thread').find( { tags: req.params.tagName} ).toArray(function(error, documents) {
+		            if (err){
+		                throw error;
+		            }
+		            res.jsonp(documents);
+		        });
+
+		        db.close();
+	        }
+	    });
+	})
+
 	app.put('/thread/newPost', function (req, res){
 	    var newPost = req.body;
 	    console.log(newPost);

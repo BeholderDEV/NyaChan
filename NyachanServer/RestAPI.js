@@ -61,8 +61,9 @@ module.exports = function(app, express, path){
       res.send(response);
     });
 })
-  app.get('/tag', function (req, res) {
+  app.get('/tag/:tagName', function (req, res) {
      res.type('text/html');
+     // res.sendFile(path.resolve('../tag.html'));
      res.sendfile('tag.html');
   })
 

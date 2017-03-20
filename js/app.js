@@ -1,12 +1,15 @@
 (function(){
     var app = angular.module('nya-chan', []);
 
-    app.controller('threadController',function($scope, $http){
-
+    app.controller('tagController',function($scope, $http){
+        
+        var url = $(location).attr('href');
+        var searchTag = url.substring(url.lastIndexOf('/') + 1);
         $scope.search = function() {
             $http({
                 method : "GET",
-                url: "https://nyachan-server.herokuapp.com/app/threads"
+                url: "https://nyachan-server.herokuapp.com/app/tag/" + searchTag
+                // url: "http://localhost:3000/app/tag/" + searchTag
             }).then(function mySucces(response) {
                 $scope.threads = response.data;
             }, function myError(response) {
@@ -17,10 +20,10 @@
 
     });
 
-    app.controller('animeThreadController',function($scope, $http){
+    app.controller('threadController',function($scope, $http){
       $scope.response = null;
       $scope.widgetId = null;
-      var url=$(location).attr('href');
+      var url = $(location).attr('href');
       var searchId = url.substring(url.lastIndexOf('/') + 1);
 
       $scope.setResponse = function (response) {
@@ -32,7 +35,8 @@
       $scope.searchThread = function(threadID) {
           $http({
               method : "GET",
-              url: "https://nyachan-server.herokuapp.com/app/thread/"+threadID
+              url: "https://nyachan-server.herokuapp.com/app/thread/" + threadID
+              // url: "http://localhost:3000/app/thread/" + threadID
           }).then(function mySucces(response) {
               $scope.thread = response.data[0];
           }, function myError(response) {
