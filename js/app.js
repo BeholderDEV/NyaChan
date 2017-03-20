@@ -107,7 +107,7 @@
                   id: "123123123",
                   body: post.body,
                   date: "2016-01-02 19:33:00",
-                  title: post.title,
+                  subject: post.title,
                   userName: "Anon",
                   tags: selectTags,
                   file: [
@@ -125,7 +125,7 @@
                   id: "123123123",
                   body: post.body,
                   date: "2016-01-02 19:33:00",
-                  title: post.title,
+                  subject: post.title,
                   userName: "Anon",
                   tags: selectTags
               };
