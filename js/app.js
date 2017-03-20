@@ -67,9 +67,10 @@
             return; // Mensagem erro
           }
           var selectTags = [];
-          for(i in selectedOptions){
+          for(i = 0; i < selectedOptions.length; i++){
             selectTags.push(selectedOptions[i].value);
           }
+          selectTags = JSON.stringify(selectTags);
 
 //TODO: Reaproveitar o código do addPost de maneira melhor
 
@@ -126,7 +127,7 @@
                   date: "2016-01-02 19:33:00",
                   tile: post.title,
                   userName: "Anon",
-                  tags: selectedOptions
+                  tags: selectTags
               };
           }
 
