@@ -212,11 +212,15 @@
         
         
           function sendPost(file, uploadedFile){
-            if(!validFile(files.name))
-            {
-              alert("Arquivo Invalido");
-              return;
-            }
+              if(!file==null)
+              {
+                if(!validFile(files.name))
+                {
+                  alert("Arquivo Invalido");
+                  return;
+                }
+              }
+            
             console.log("c");  
           if(typeof files !== "undefined"){
               var dataPost = {
