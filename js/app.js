@@ -50,8 +50,8 @@
         $scope.search = function() {
             $http({
                 method : "GET",
-                url: "https://nyachan-server.herokuapp.com/app/tag/" + searchTag
-                // url: "http://localhost:3000/app/tag/" + searchTag
+                // url: "https://nyachan-server.herokuapp.com/app/tag/" + searchTag
+                url: "http://localhost:3000/app/tag/" + searchTag
             }).then(function mySucces(response) {
                 $scope.threads = response.data;
             }, function myError(response) {
@@ -71,7 +71,6 @@
             console.log(i);
             selectTags.push(selectedOptions[i].value);
           }
-          selectTags = JSON.stringify(selectTags);
 
 //TODO: Reaproveitar o código do addPost de maneira melhor
 
@@ -135,6 +134,7 @@
           $http({
               method : "POST",
               url: "https://nyachan-server.herokuapp.com/thread/newThread",
+              // url: "http://localhost:3000/thread/newThread",
               data: dataPost,
               headers: {
                     'Content-Type': 'application/json'
