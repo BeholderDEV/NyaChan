@@ -6,7 +6,7 @@
         $scope.search = function() {
             $http({
                 method : "GET",
-                url: "https://nyachan-server.herokuapp.com/app/app/threads"
+                url: "https://nyachan-server.herokuapp.com/app/threads"
             }).then(function mySucces(response) {
                 $scope.threads = response.data;
             }, function myError(response) {
