@@ -68,6 +68,7 @@
           }
           var selectTags = [];
           for(i = 0; i < selectedOptions.length; i++){
+            console.log(i);
             selectTags.push(selectedOptions[i].value);
           }
           selectTags = JSON.stringify(selectTags);

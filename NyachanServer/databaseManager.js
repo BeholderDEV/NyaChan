@@ -100,7 +100,7 @@ module.exports = function(app){
 		        console.log('Connection established to', url);
 
 		        db.collection('thread', function(err, collection) {
-		            collection.insert({newThread}, {safe:true}, function(err, result) {
+		            collection.insert({req.body}, {safe:true}, function(err, result) {
 		                if (err) {
 		                    console.log('Error ' + err);
 		                    res.send({'error':'An error has occurred'});
