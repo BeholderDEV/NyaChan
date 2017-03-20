@@ -78,6 +78,13 @@ input, textarea{
     border-radius: $border-radius;
     background-color: $panel-dark-bg;
     border: none;
+    a{
+      text-decoration: underline;
+      color: #1694fd;
+    }
+    a:hover{
+      color: #9206fd;
+    }
     h3{
       color: $text-color;
     }
