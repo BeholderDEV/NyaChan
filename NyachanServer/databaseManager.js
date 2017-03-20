@@ -92,6 +92,7 @@ module.exports = function(app){
 
 	app.post('/thread/newThread', function (req, res){
 	    var newThread = req.body;
+	    newThread = JSON.parse(newThread);
 	    console.log(newThread);
 	    MongoClient.connect(url, function(err, db) {
 	        if (err) {
@@ -100,7 +101,7 @@ module.exports = function(app){
 		        console.log('Connection established to', url);
 
 		        db.collection('thread', function(err, collection) {
-		            collection.insert({JSON.parse(newThread)}, {safe:true}, function(err, result) {
+		            collection.insert({newThread}, {safe:true}, function(err, result) {
 		                if (err) {
 		                    console.log('Error ' + err);
 		                    res.send({'error':'An error has occurred'});
