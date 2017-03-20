@@ -66,6 +66,11 @@
           if(selectedOptions == 0){
             return; // Mensagem erro
           }
+          var selectTags = [];
+          for(i in selectedOptions){
+            selectTags.push(selectedOptions[i].value);
+          }
+
 //TODO: Reaproveitar o código do addPost de maneira melhor
 
           var files = $("#file")[0].files[0];
@@ -103,7 +108,7 @@
                   date: "2016-01-02 19:33:00",
                   tile: post.title,
                   userName: "Anon",
-                  tags: selectedOptions,
+                  tags: selectTags,
                   file: [
                     {
                         size: 250,
