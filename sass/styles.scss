@@ -35,6 +35,10 @@ a {
 }
 .btn{
   border-radius: $border-radius;
+  &.btn-board{
+    background-color:$panel-bg;
+    border: none;
+  }
 }
 input, textarea{
   border-radius: $border-radius !important;

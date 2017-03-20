@@ -264,7 +264,7 @@
               console.log("e");  
               console.log(response || "Request failed");
           });
-          //window.location.reload(true);
+          window.location.reload(true);
         }
           
         function validFile(filename){
