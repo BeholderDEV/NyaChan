@@ -16,6 +16,14 @@ body{
   background-size: cover;
   border-radius: $border-radius;
 }
+a {
+  text-decoration: none !important;
+  color: $text-color;
+  &:hover, &:focus {
+    color: $primary-color;
+  }
+}
+
 .navbar-default{
     background-color: $panel-dark-bg;
     border: none;
@@ -51,7 +59,7 @@ input, textarea{
   }
   .panel-body{
     background-color: $panel-bg;
-    .list-title{
+    .list-title{      
       padding: 5px 10px;
       border-left: 2px solid $primary-color;
       background-color: $panel-dark-bg;
