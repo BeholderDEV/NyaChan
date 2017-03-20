@@ -39,6 +39,16 @@ input, textarea{
   background-color: transparent;
   border: none;
   color: $text-color;
+  &.panel-index{
+    img{
+      margin: auto;
+      max-height: 150px;
+    }
+    .panel-body{
+      height: 200px;
+    }
+    display: block;
+  }
   .panel-body{
     background-color: $panel-bg;
     .list-title{
@@ -136,5 +146,4 @@ input, textarea{
 }
 footer{
   margin-top: 20px;
-  text-align: center;
 }

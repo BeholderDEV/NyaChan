@@ -74,9 +74,9 @@
           </h3>
         </div>
         <div class='panel-body'>
-          <div ng-repeat="t in threads" class="col-md-3">
+          <div ng-repeat="t in threads | limitTo:8" class="col-md-3 col-xs-6">
             <a ng-href="http://nyachan-server.herokuapp.com/thread/{{t._id}}">
-            <div class='panel panel-default'>
+            <div class='panel panel-default panel-index'>
               <div class='panel-heading'>
                 <h3 class='panel-title'>
                   {{t.subject}}
