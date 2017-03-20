@@ -50,8 +50,8 @@
         $scope.search = function() {
             $http({
                 method : "GET",
-                // url: "https://nyachan-server.herokuapp.com/app/tag/" + searchTag
-                url: "http://localhost:3000/app/tag/" + searchTag
+                url: "https://nyachan-server.herokuapp.com/app/tag/" + searchTag
+                // url: "http://localhost:3000/app/tag/" + searchTag
             }).then(function mySucces(response) {
                 $scope.threads = response.data;
             }, function myError(response) {
