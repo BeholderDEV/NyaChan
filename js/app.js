@@ -26,7 +26,7 @@
 //INDEX
 
     app.controller('indexController',function($scope, $http){
-        
+
         $scope.search = function() {
             $http({
                 method : "GET",
@@ -44,7 +44,7 @@
 //TAG
 
     app.controller('tagController',function($scope, $http){
-        
+
         var url = $(location).attr('href');
         var searchTag = url.substring(url.lastIndexOf('/') + 1);
         $scope.search = function() {
@@ -151,7 +151,7 @@
     });
 
 
-// THREAD 
+// THREAD
 
     app.controller('threadController',function($scope, $http){
       $scope.response = null;
@@ -209,19 +209,19 @@
             console.log("b");
           sendPost(null, null);
         }
-        
-        
+
+
           function sendPost(file, uploadedFile){
               if(!file==null)
               {
-                if(!validFile(files.name))
+                if(!validFile(file.name))
                 {
                   alert("Arquivo Invalido");
                   return;
                 }
               }
-            
-            console.log("c");  
+
+            console.log("c");
           if(typeof files !== "undefined"){
               var dataPost = {
                   id: "123123123",
@@ -233,7 +233,7 @@
                   file: [
                     {
                         size: 250,
-                        name: files.name,
+                        name: file.name,
                         extension: "jpg",
                         source: uploadedFile,
                     }
@@ -251,7 +251,7 @@
           }
 
           $http({
-              method : "PUT",
+              method : "POST",
               url: "https://nyachan-server.herokuapp.com/thread/newPost",
               data: dataPost,
               headers: {
@@ -261,12 +261,12 @@
               console.log("d");
                 console.log(response.data);
           }, function myError(response) {
-              console.log("e");  
+              console.log("e");
               console.log(response || "Request failed");
           });
           window.location.reload(true);
         }
-          
+
         function validFile(filename){
             var validFormats = ['jpg','jpeg','png', 'gif','bmp'];
             var ext = filename.substring(filename.lastIndexOf('.') + 1).toLowerCase();
