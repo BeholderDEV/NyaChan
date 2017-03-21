@@ -125,6 +125,9 @@ input, textarea{
       background-color: $panel-bg;
       border: none;
       margin: 5px;
+      p{
+        word-wrap: break-word;
+      }
     }
   }
 
