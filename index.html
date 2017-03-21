@@ -78,7 +78,7 @@
             <a ng-href="http://nyachan-server.herokuapp.com/thread/{{t._id}}">
             <div class='panel panel-default panel-index'>
               <div class='panel-heading'>
-                <h3 class='panel-title' ng-if="t.subject !== ''">
+                <h3 class='panel-title' ng-if="t.subject !== undefined">
                   {{t.subject}}
                 </h3>
                 <h3 class='panel-title' ng-if="t.subject === undefined">
