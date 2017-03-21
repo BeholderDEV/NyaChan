@@ -66,6 +66,7 @@ module.exports = function(app){
 	})
 
 	app.put('/thread/newPost', function (req, res){
+		console.log("aaaa");
 	    var newPost = req.body;
 	    console.log(newPost);
 	    MongoClient.connect(url, function(err, db) {
