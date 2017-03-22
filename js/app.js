@@ -141,10 +141,11 @@
               }
           }).then(function mySucces(response) {
                 console.log(response.data);
+                $scope.threads = $scope.search();
           }, function myError(response) {
                 console.log(response || "Request failed");
           });
-          $scope.threads = $scope.search();
+
         }
 
         };
@@ -259,12 +260,12 @@
               }
           }).then(function mySucces(response) {
               console.log("d");
-                console.log(response.data);
+              $scope.thread = $scope.searchThread(searchId);
           }, function myError(response) {
               console.log("e");
               console.log(response || "Request failed");
           });
-          $scope.thread = $scope.searchThread(searchId);
+
         }
 
         function validFile(filename){
