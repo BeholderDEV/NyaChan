@@ -23,6 +23,30 @@
     }
 
 
+    function getPosts() {
+        $http({
+            method : "GET",
+            url: "https://nyachan-server.herokuapp.com/app/threads"
+        }).then(function mySucces(response) {
+            return response.data;
+        }, function myError(response) {
+              console.log(response || "Request failed");
+        });
+    }
+
+    function getThreads(searchTag) {
+          $http({
+              method : "GET",
+              url: "https://nyachan-server.herokuapp.com/app/tag/" + searchTag
+              // url: "http://localhost:3000/app/tag/" + searchTag
+          }).then(function mySucces(response) {
+              return = response.data;
+          }, function myError(response) {
+                console.log(response || "Request failed");
+          });
+    }
+
+
 //INDEX
 
     app.controller('indexController',function($scope, $http){
@@ -144,9 +168,7 @@
           }, function myError(response) {
                 console.log(response || "Request failed");
           });
-          setTimeout(function(){
-            window.location.reload();
-          },1000);
+          $scope.threads = getThreads();
         }
 
         };
@@ -266,10 +288,9 @@
               console.log("e");
               console.log(response || "Request failed");
           });
-          setTimeout(function(){
-            window.location.reload();
-          },1000);
+          $scope.threads = getPosts();
         }
+
 
         function validFile(filename){
             var validFormats = ['jpg','jpeg','png', 'gif','bmp'];
