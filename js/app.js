@@ -23,30 +23,6 @@
     }
 
 
-    function getPosts($http) {
-        $http({
-            method : "GET",
-            url: "https://nyachan-server.herokuapp.com/app/threads"
-        }).then(function mySucces(response) {
-            return response.data;
-        }, function myError(response) {
-              console.log(response || "Request failed");
-        });
-    }
-
-    function getThreads(searchTag, $http) {
-          $http({
-              method : "GET",
-              url: "https://nyachan-server.herokuapp.com/app/tag/" + searchTag
-              // url: "http://localhost:3000/app/tag/" + searchTag
-          }).then(function mySucces(response) {
-              return response.data;
-          }, function myError(response) {
-                console.log(response || "Request failed");
-          });
-    }
-
-
 //INDEX
 
     app.controller('indexController',function($scope, $http){
@@ -168,7 +144,7 @@
           }, function myError(response) {
                 console.log(response || "Request failed");
           });
-          $scope.threads = getThreads();
+          $scope.threads = $scope.search();
         }
 
         };
@@ -201,7 +177,7 @@
           });
       };
 
-      $scope.thread = $scope.searchThread(searchId, $http);
+      $scope.thread = $scope.searchThread(searchId);
 
       $scope.addPost = function(post){
         var files = $("#file")[0].files[0];
@@ -238,7 +214,7 @@
           function sendPost(file, uploadedFile){
               if(!file==null)
               {
-                if(!validFile(file.name))
+                if(!validFile(files.name))
                 {
                   alert("Arquivo Invalido");
                   return;
@@ -257,7 +233,7 @@
                   file: [
                     {
                         size: 250,
-                        name: file.name,
+                        name: files.name,
                         extension: "jpg",
                         source: uploadedFile,
                     }
@@ -275,7 +251,7 @@
           }
 
           $http({
-              method : "POST",
+              method : "PUT",
               url: "https://nyachan-server.herokuapp.com/thread/newPost",
               data: dataPost,
               headers: {
@@ -288,9 +264,8 @@
               console.log("e");
               console.log(response || "Request failed");
           });
-          $scope.threads = getPosts($http);
+          $scope.thread = $scope.searchThread(searchId);
         }
-
 
         function validFile(filename){
             var validFormats = ['jpg','jpeg','png', 'gif','bmp'];
@@ -300,5 +275,6 @@
 
       }
     });
+
 
 })();
