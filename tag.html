@@ -51,7 +51,7 @@
               <div class='panel-heading'>
                   <h3 class='panel-title'>
                     {{t.subject}} ~ <a ng-href="http://nyachan-server.herokuapp.com/thread/{{t._id}}">{{t._id}}</a> by {{t.userName}}
-                    <span class="label label-nya" ng-repeat="a in t.tags"><a ng-href="http://nyachan-server.herokuapp.com/tag/{{a}}">{{a}}</a></span>
+                    <a ng-repeat="a in t.tags" ng-href="http://nyachan-server.herokuapp.com/tag/{{a}}"><span class="label label-nya">{{a}}</span></a>
                   </h3>
                 </div>
                 <div class='panel-body'>
