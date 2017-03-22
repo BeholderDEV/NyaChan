@@ -141,12 +141,11 @@
               }
           }).then(function mySucces(response) {
                 console.log(response.data);
+                $scope.threads = $scope.search();
           }, function myError(response) {
                 console.log(response || "Request failed");
           });
-          setTimeout(function(){
-            window.location.reload();
-          },1000);
+
         }
 
         };
@@ -216,7 +215,7 @@
           function sendPost(file, uploadedFile){
               if(!file==null)
               {
-                if(!validFile(file.name))
+                if(!validFile(files.name))
                 {
                   alert("Arquivo Invalido");
                   return;
@@ -235,7 +234,7 @@
                   file: [
                     {
                         size: 250,
-                        name: file.name,
+                        name: files.name,
                         extension: "jpg",
                         source: uploadedFile,
                     }
@@ -254,21 +253,19 @@
 
           $http({
               method : "POST",
-              url: "https://nyachan-server.herokuapp.com/thread/newPost",
+              url: "https://nyachan-server.herokuapp.com/app/thread/newPost",
               data: dataPost,
               headers: {
                     'Content-Type': 'application/json'
               }
           }).then(function mySucces(response) {
               console.log("d");
-                console.log(response.data);
+              $scope.thread = $scope.searchThread(searchId);
           }, function myError(response) {
               console.log("e");
               console.log(response || "Request failed");
           });
-          setTimeout(function(){
-            window.location.reload();
-          },1000);
+
         }
 
         function validFile(filename){
@@ -279,5 +276,6 @@
 
       }
     });
+
 
 })();
