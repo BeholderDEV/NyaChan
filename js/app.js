@@ -146,7 +146,7 @@
           });
           setTimeout(function(){
             window.location.reload();
-          },100); 
+          },1000);
         }
 
         };
@@ -268,7 +268,7 @@
           });
           setTimeout(function(){
             window.location.reload();
-          },100);
+          },1000);
         }
 
         function validFile(filename){
