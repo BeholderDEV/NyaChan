@@ -23,7 +23,7 @@
     }
 
 
-    function getPosts() {
+    function getPosts($http) {
         $http({
             method : "GET",
             url: "https://nyachan-server.herokuapp.com/app/threads"
@@ -34,7 +34,7 @@
         });
     }
 
-    function getThreads(searchTag) {
+    function getThreads(searchTag, $http) {
           $http({
               method : "GET",
               url: "https://nyachan-server.herokuapp.com/app/tag/" + searchTag
@@ -201,7 +201,7 @@
           });
       };
 
-      $scope.thread = $scope.searchThread(searchId);
+      $scope.thread = $scope.searchThread(searchId, $http);
 
       $scope.addPost = function(post){
         var files = $("#file")[0].files[0];
@@ -288,7 +288,7 @@
               console.log("e");
               console.log(response || "Request failed");
           });
-          $scope.threads = getPosts();
+          $scope.threads = getPosts($http);
         }
 
 
