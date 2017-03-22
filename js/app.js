@@ -40,7 +40,7 @@
               url: "https://nyachan-server.herokuapp.com/app/tag/" + searchTag
               // url: "http://localhost:3000/app/tag/" + searchTag
           }).then(function mySucces(response) {
-              return = response.data;
+              return response.data;
           }, function myError(response) {
                 console.log(response || "Request failed");
           });
