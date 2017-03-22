@@ -61,7 +61,7 @@
                 </div>
                 <div class="panel-footer">
                   <ul class="list-group">
-                    <li class="list-group-item" ng-repeat="p in t.post">
+                    <li class="list-group-item" ng-repeat="p in t.post | limitTo:5">
                       <h4 ng-if="p.title !== undefined">{{p.title}}</h4>
                       <a ng-href="{{p.file[0].source}}" target="_blank">{{p.file[0].name}}</a>
                       <img ng-src="{{p.file[0].source}}" class="img-responsive nya-image image-thumb post-image"/>
