@@ -144,7 +144,9 @@
           }, function myError(response) {
                 console.log(response || "Request failed");
           });
-          window.location.reload(true);
+          setTimeout(function(){
+            window.location.reload();
+          },100); 
         }
 
         };
@@ -264,7 +266,9 @@
               console.log("e");
               console.log(response || "Request failed");
           });
-          window.location.reload(true);
+          setTimeout(function(){
+            window.location.reload();
+          },100);
         }
 
         function validFile(filename){
@@ -275,6 +279,5 @@
 
       }
     });
-
 
 })();
