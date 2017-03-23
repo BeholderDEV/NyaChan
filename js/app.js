@@ -1,8 +1,5 @@
 (function(){
-    var app = angular.module('nya-chan', ['angular-loading-bar']);
-    .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
-      cfpLoadingBarProvider.includeSpinner = false;
-    }])
+    var app = angular.module('nya-chan', ['cfp.loadingBar']);
     function validarPost(post, files){
         if((post.body == " " || typeof post.body == "undefined") && typeof files == "undefined"){
           if(post.body == " " || typeof post.body == "undefined"){
