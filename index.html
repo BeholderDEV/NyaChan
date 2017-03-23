@@ -87,7 +87,9 @@
               </div>
               <div class='panel-body'>
                 <img ng-src="{{t.file[0].source}}" class="img-responsive"/>
-                {{t.body}}
+                <p ng-init="limit = 25; moreShown = false">
+                  {{t.body|limitTo: limit}}<span ng-show="t.body.length > limit">...</span>
+               </p>
               </div>
 
             </div>
