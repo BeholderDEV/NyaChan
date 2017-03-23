@@ -1,6 +1,8 @@
 (function(){
-    var app = angular.module('nya-chan', []);
-
+    var app = angular.module('nya-chan', ['angular-loading-bar']);
+    .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
+      cfpLoadingBarProvider.includeSpinner = false;
+    }])
     function validarPost(post, files){
         if((post.body == " " || typeof post.body == "undefined") && typeof files == "undefined"){
           if(post.body == " " || typeof post.body == "undefined"){
@@ -182,7 +184,7 @@
 
       $scope.addPost = function(post){
         var files = $("#file")[0].files[0];
-
+        cfpLoadingBar.start();
         if(typeof post == "undefined"){
           post = new Object();
           post.body = " ";
@@ -192,6 +194,7 @@
             return;
         }
 
+        cfpLoadingBar.inc();
         if(typeof files !== "undefined"){
           var formData = new FormData();
           formData.append("fileData",files);
@@ -212,6 +215,7 @@
         }
 
 
+        cfpLoadingBar.inc();
           function sendPost(file, uploadedFile){
               if(!file==null)
               {
@@ -251,6 +255,7 @@
               };
           }
 
+          cfpLoadingBar.inc();
           $http({
               method : "POST",
               url: "https://nyachan-server.herokuapp.com/app/thread/newPost",
@@ -261,6 +266,7 @@
           }).then(function mySucces(response) {
               console.log("d");
               $scope.thread = $scope.searchThread(searchId);
+              cfpLoadingBar.complete();
           }, function myError(response) {
               console.log("e");
               console.log(response || "Request failed");

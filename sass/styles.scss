@@ -16,6 +16,9 @@ body{
   background-size: cover;
   border-radius: $border-radius;
 }
+#loading-bar .bar {
+  position: relative;
+}
 a {
   text-decoration: none !important;
   color: $text-color;
