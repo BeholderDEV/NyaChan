@@ -21,8 +21,8 @@ body{
   height:3px;
 }
 #loading-bar-spinner .spinner-icon{
-  border-top-color:#29d;
-  border-left-color:#29d;
+  border-top-color:$primary-color;
+  border-left-color:$primary-color;
 }
 a {
   text-decoration: none !important;
