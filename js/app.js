@@ -1,5 +1,8 @@
 (function(){
-    var app = angular.module('nya-chan', ['angular-loading-bar']);
+    var app = angular.module('nya-chan', ['angular-loading-bar'])
+    .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
+      cfpLoadingBarProvider.includeSpinner = false;
+    }])
     function validarPost(post, files){
         if((post.body == " " || typeof post.body == "undefined") && typeof files == "undefined"){
           if(post.body == " " || typeof post.body == "undefined"){
@@ -263,7 +266,7 @@
           }).then(function mySucces(response) {
               console.log("d");
               $scope.thread = $scope.searchThread(searchId);
-              
+
           }, function myError(response) {
               console.log("e");
               console.log(response || "Request failed");
