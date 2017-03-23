@@ -18,6 +18,11 @@ body{
 }
 #loading-bar .bar{
   background:$primary-color;
+  height:3px;
+}
+#loading-bar-spinner .spinner-icon{
+  border-top-color:#29d;
+  border-left-color:#29d;
 }
 a {
   text-decoration: none !important;
