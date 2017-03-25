@@ -66,9 +66,10 @@ module.exports = function(app){
 	})
 
 	app.post('/app/thread/newPost', function (req, res){
-		console.log("aaaa");
 	    var newPost = req.body;
 	    console.log(newPost);
+			var date = new Date();
+			console.log(date.getUTCHours());
 	    MongoClient.connect(url, function(err, db) {
 	        if (err) {
 	        	console.log('Unable to connect to the mongoDB server. Error:', err);
