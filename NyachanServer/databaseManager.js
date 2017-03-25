@@ -69,8 +69,8 @@ module.exports = function(app){
 	    var newPost = req.body;
 	    console.log(newPost);
 			var date = new Date();
-			console.log("Tempo: " + date.getTime());
-	    MongoClient.connect(url, function(err, db) {
+			newPost.date =  date.getTime();
+			MongoClient.connect(url, function(err, db) {
 	        if (err) {
 	        	console.log('Unable to connect to the mongoDB server. Error:', err);
 	        } else {
@@ -93,7 +93,9 @@ module.exports = function(app){
 	})
 
 	app.post('/thread/newThread', function (req, res){
-	    MongoClient.connect(url, function(err, db) {
+			var date = new Date();
+			req.body.date =  date.getTime();
+			MongoClient.connect(url, function(err, db) {
 	        if (err) {
 	        	console.log('Unable to connect to the mongoDB server. Error:', err);
 	        } else {
