@@ -69,7 +69,7 @@ module.exports = function(app){
 	    var newPost = req.body;
 	    console.log(newPost);
 			var date = new Date();
-			console.log(date.getUTCHours());
+			console.log("Dia: " + date.getUTCDate());
 	    MongoClient.connect(url, function(err, db) {
 	        if (err) {
 	        	console.log('Unable to connect to the mongoDB server. Error:', err);
