@@ -52,7 +52,7 @@
           <div class='panel panel-default'>
               <div class='panel-heading'>
                   <h3 class='panel-title'>
-                    {{t.subject}} ~ <a ng-href="http://nyachan-server.herokuapp.com/thread/{{t._id}}">{{t._id}}</a> by {{t.userName}} on {{ 1490401890769 | date: 'MMM d, y H:mm:ss' : 'time_zone' }}
+                    {{t.subject}} ~ <a ng-href="http://nyachan-server.herokuapp.com/thread/{{t._id}}">{{t._id}}</a> by {{t.userName}} on {{ t.date | date: 'MMM d, y H:mm:ss' : 'time_zone' }}
                     <a ng-repeat="a in t.tags" ng-href="http://nyachan-server.herokuapp.com/tag/{{a}}"><span class="label label-nya">{{a}}</span></a>
                     <a ng-href="http://nyachan-server.herokuapp.com/thread/{{t._id}}"><i class="fa fa-reply pull-right"></i></a>
                   </h3>
@@ -65,6 +65,7 @@
                 <div class="panel-footer">
                   <ul class="list-group">
                     <li class="list-group-item" ng-repeat="p in t.post | limitTo:5">
+                      {{p.id}} by {{p.userName}} on {{ p.date | date: 'MMM d, y H:mm:ss' : 'time_zone' }}
                       <h4 ng-if="p.title !== undefined">{{p.title}}</h4>
                       <a ng-href="{{p.file[0].source}}" target="_blank">{{p.file[0].name}}</a>
                       <img ng-src="{{p.file[0].source}}" class="img-responsive nya-image image-thumb post-image"/>
