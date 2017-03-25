@@ -28,7 +28,7 @@
 //INDEX
 
     app.controller('indexController',function($scope, $http){
-
+        $scope.time_zone = new Date().getTimezoneOffset();
         $scope.search = function() {
             $http({
                 method : "GET",
@@ -46,7 +46,7 @@
 //TAG
 
     app.controller('tagController',function($scope, $http){
-
+        $scope.time_zone = new Date().getTimezoneOffset();
         var url = $(location).attr('href');
         var searchTag = url.substring(url.lastIndexOf('/') + 1);
         $scope.search = function() {
@@ -75,7 +75,7 @@
           }
 
 //TODO: Reaproveitar o código do addPost de maneira melhor
-
+            
           var files = $("#file")[0].files[0];
           if(typeof post == "undefined"){
             post = new Object();
@@ -157,6 +157,7 @@
 // THREAD
 
     app.controller('threadController',function($scope, $http){
+      $scope.time_zone = new Date().getTimezoneOffset();
       $scope.response = null;
       $scope.widgetId = null;
       var url = $(location).attr('href');
