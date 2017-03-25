@@ -52,7 +52,7 @@
           <div class='panel panel-default'>
               <div class='panel-heading'>
                   <h3 class='panel-title'>
-                    {{t.subject}} ~ <a ng-href="http://nyachan-server.herokuapp.com/thread/{{t._id}}">{{t._id}}</a> by {{t.userName}}
+                    {{t.subject}} ~ <a ng-href="http://nyachan-server.herokuapp.com/thread/{{t._id}}">{{t._id}}</a> by {{t.userName}} on {{ 1490401890769 | date: 'MMM d, y H:mm:ss' : 'time_zone' }}
                     <a ng-repeat="a in t.tags" ng-href="http://nyachan-server.herokuapp.com/tag/{{a}}"><span class="label label-nya">{{a}}</span></a>
                     <a ng-href="http://nyachan-server.herokuapp.com/thread/{{t._id}}"><i class="fa fa-reply pull-right"></i></a>
                   </h3>

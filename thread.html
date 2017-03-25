@@ -53,7 +53,7 @@
           <div class='panel panel-default'>
             <div class='panel-heading'>
               <h3 class='panel-title'>
-                {{thread.subject}} ~ {{thread._id}} by {{thread.userName}}
+                {{thread.subject}} ~ {{thread._id}} by {{thread.userName}} on {{ 1490401890769 | date: 'MMM d, y H:mm:ss' : 'time_zone' }}
                 <a ng-repeat="a in thread.tags" ng-href="http://nyachan-server.herokuapp.com/tag/{{a}}"><span class="label label-nya">{{a}}</span></a>
               </h3>
             </div>
