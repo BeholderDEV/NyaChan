@@ -130,16 +130,16 @@ input, textarea{
   .panel-footer{
     background-color: $panel-dark-bg;
     border: none;
-    li{
-      border-radius: $border-radius;
-      background-color: $panel-bg;
-      border: none;
-      margin: 5px;
-      p{
-        word-wrap: break-word;
-        margin: 0;
-      }
-    }
+    // li{
+    //   border-radius: $border-radius;
+    //   background-color: $panel-bg;
+    //   border: none;
+    //   margin: 5px;
+    //   p{
+    //     word-wrap: break-word;
+    //     margin: 0;
+    //   }
+    // }
   }
 
   .image-thumb{
