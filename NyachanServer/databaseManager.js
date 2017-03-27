@@ -40,7 +40,7 @@ module.exports = function(app){
 									console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA MORRI");
 		                res.status(404).send("Not Found");
 		            }
-								console.log("BBBBBBBBBBBBB");
+								return cursor;
 		        } );
 
 						data_thread.toArray(function(error, documents) {
