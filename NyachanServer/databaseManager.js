@@ -18,7 +18,7 @@ module.exports = function(app){
 			console.log('Connection established to', url);
 			db.collection('thread').find( { } ).toArray(function(error, documents) {
 			    if (err){
-			        throw error;
+			        res.status(404).send("Not Found");
 			    }
 			    res.jsonp(documents);
 			});
@@ -55,7 +55,7 @@ module.exports = function(app){
 		        console.log('Connection established to', url);
 		        db.collection('thread').find( { tags: req.params.tagName} ).toArray(function(error, documents) {
 		            if (err){
-		                throw error;
+		                res.status(404).send("Not Found");
 		            }
 		            res.jsonp(documents);
 		        });
