@@ -64,12 +64,13 @@
             </div>
             <div class="panel-footer">
               <ul class="list-group">
-                <li class="list-group-item" ng-repeat="p in thread.post" id="{{p.idPost}}">
-                  <span class="label id">{{p.idPost}} by {{p.userName}} on {{ p.date | date: 'MMM d, y H:mm:ss' : 'time_zone' }}</span>
-                  <h4 ng-if="p.title !== undefined">{{p.title}}</h4>
-                  <a ng-href="{{p.file[0].source}}" target="_blank">{{p.file[0].name}}</a>
-                  <img ng-src="{{p.file[0].source}}" class="img-responsive nya-image image-thumb post-image"/>
-                  <p>{{p.body}}</p>
+                <li class="list-group-item panel" ng-repeat="p in thread.post" id="{{p.idPost}}">
+                  <div class="panel-heading"><h4 ng-if="p.title !== undefined">{{p.title}}</h4> - <span class="label id">{{p.idPost}} by {{p.userName}} on {{ p.date | date: 'MMM d, y H:mm:ss' : 'time_zone' }}</span></div>
+                  <div class="panel-body">
+                    <a ng-href="{{p.file[0].source}}" target="_blank">{{p.file[0].name}}</a>
+                    <img ng-src="{{p.file[0].source}}" class="img-responsive nya-image image-thumb post-image"/>
+                    <p>{{p.body}}</p>
+                  </div>
                 </li>
               </ul>
             </div>
