@@ -66,10 +66,11 @@ module.exports = function(app){
 	})
 
 	app.post('/app/thread/newPost', function (req, res){
-	    var newPost = req.body;
-	    console.log(newPost);
+	    	var newPost = req.body;
+	    	console.log(newPost);
 			var date = new Date();
 			newPost.date =  date.getTime();
+			newPost.idPost = new ObjectId();
 			MongoClient.connect(url, function(err, db) {
 	        if (err) {
 	        	console.log('Unable to connect to the mongoDB server. Error:', err);

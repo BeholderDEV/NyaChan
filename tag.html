@@ -65,7 +65,7 @@
                 <div class="panel-footer">
                   <ul class="list-group">
                     <li class="list-group-item" ng-repeat="p in t.post | limitTo:5">
-                      {{p.threadid}} by {{p.userName}} on {{ p.date | date: 'MMM d, y H:mm:ss' : 'time_zone' }}
+                      {{p.idPost}} by {{p.userName}} on {{ p.date | date: 'MMM d, y H:mm:ss' : 'time_zone' }}
                       <h4 ng-if="p.title !== undefined">{{p.title}}</h4>
                       <a ng-href="{{p.file[0].source}}" target="_blank">{{p.file[0].name}}</a>
                       <img ng-src="{{p.file[0].source}}" class="img-responsive nya-image image-thumb post-image"/>
