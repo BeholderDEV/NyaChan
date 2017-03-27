@@ -64,8 +64,8 @@
                 </div>
                 <div class="panel-footer">
                   <ul class="list-group">
-                    <li class="list-group-item" ng-repeat="p in t.post | limitTo:5">
-                      {{p.idPost}} by {{p.userName}} on {{ p.date | date: 'MMM d, y H:mm:ss' : 'time_zone' }}
+                    <li class="list-group-item" ng-repeat="p in t.post | limitTo:5" id="{{p.idPost}}">
+                      <span class="id">{{p.idPost}} by {{p.userName}} on {{ p.date | date: 'MMM d, y H:mm:ss' : 'time_zone' }}</span>
                       <h4 ng-if="p.title !== undefined">{{p.title}}</h4>
                       <a ng-href="{{p.file[0].source}}" target="_blank">{{p.file[0].name}}</a>
                       <img ng-src="{{p.file[0].source}}" class="img-responsive nya-image image-thumb post-image"/>
@@ -170,7 +170,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
     <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.min.js'></script>
-    
+
     <script type="text/javascript" src="../lib/Bootstrap-multiselect/bootstrap-multiselect.js"></script>
     <!-- Jasny -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/js/jasny-bootstrap.min.js"></script>

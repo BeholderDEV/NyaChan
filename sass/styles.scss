@@ -16,6 +16,9 @@ body{
   background-size: cover;
   border-radius: $border-radius;
 }
+.id{
+  font-size: 10px;
+}
 #loading-bar .bar{
   background:$primary-color;
   height:3px;
