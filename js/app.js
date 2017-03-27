@@ -224,6 +224,7 @@
                 if(!validFile(files.name))
                 {
                   alert("Arquivo Invalido");
+                  console.log("xyz");
                   return;
                 }
               }
@@ -278,6 +279,7 @@
         }
 
         function validFile(filename){
+          console.log("Validando");
             var validFormats = ['jpg','jpeg','png', 'gif','bmp', 'webm', 'pdf' ];
             var ext = filename.substring(filename.lastIndexOf('.') + 1).toLowerCase();
             return validFormats.indexOf(ext) !== -1;
