@@ -220,7 +220,7 @@
 
           function sendPost(file, uploadedFile){
               console.log("send post antes de if");
-              if(!file==null)
+              if(file!=null)
               {
                 console.log("send post no primeiro if");
                 if(!validFile(files.name))
