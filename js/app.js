@@ -105,7 +105,7 @@
 
         function sendThread(file, uploadedFile){
           if(typeof files !== "undefined"){
-              var ext = getExtension(files.name);
+              var ext = files.name.substring(files.name.lastIndexOf('.') + 1).toLowerCase();
               var dataPost = {
                   id: "123123123",
                   body: post.body,
@@ -230,7 +230,7 @@
 
             console.log("c");
           if(typeof files !== "undefined"){
-              var ext = getExtension(files.name);
+              var ext = files.name.substring(files.name.lastIndexOf('.') + 1).toLowerCase();
               var dataPost = {
                   id: "123123123",
                   threadid: $scope.thread._id,
@@ -275,11 +275,6 @@
               console.log(response || "Request failed");
           });
 
-        }
-
-        function getExtension(filename)
-        {
-          return filename.substring(filename.lastIndexOf('.') + 1).toLowerCase();
         }
 
         function validFile(filename){
