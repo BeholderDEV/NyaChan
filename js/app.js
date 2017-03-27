@@ -176,12 +176,9 @@
               url: "https://nyachan-server.herokuapp.com/app/thread/" + threadID
               // url: "http://localhost:3000/app/thread/" + threadID
           }).then(function mySucces(response) {
-              if(response.status == 404){
-                console.log("tem erro");
-              }
               $scope.thread = response.data[0];
           }, function myError(response) {
-                console.log(response || "Request failed");
+                console.log("Request failed");
           });
       };
 
