@@ -204,7 +204,6 @@
           xhr.onreadystatechange = function() {
               if (xhr.readyState == XMLHttpRequest.DONE) {
                 var uploadedFile = xhr.response;
-                  console.log("a");
                 sendPost(files, uploadedFile);
               }
 
@@ -212,26 +211,20 @@
           xhr.open('post', '/dbxPost', true);
           xhr.send(formData);
         }else{
-            console.log("b");
             sendPost(null, null);
         }
 
 
 
           function sendPost(file, uploadedFile){
-              console.log("send post antes de if");
               if(file!=null)
               {
-                console.log("send post no primeiro if");
                 if(!validFile(files.name))
                 {
                   alert("Arquivo Invalido");
-                  console.log("xyz");
                   return;
                 }
               }
-
-            console.log("c");
           if(typeof files !== "undefined"){
               var ext = files.name.substring(files.name.lastIndexOf('.') + 1).toLowerCase();
               var dataPost = {
@@ -270,18 +263,15 @@
                     'Content-Type': 'application/json'
               }
           }).then(function mySucces(response) {
-              console.log("d");
               $scope.thread = $scope.searchThread(searchId);
 
           }, function myError(response) {
-              console.log("e");
               console.log(response || "Request failed");
           });
 
         }
 
         function validFile(filename){
-          console.log("Validando");
             var validFormats = ['jpg','jpeg','png', 'gif','bmp', 'webm', 'pdf' ];
             var ext = filename.substring(filename.lastIndexOf('.') + 1).toLowerCase();
             return validFormats.indexOf(ext) !== -1;
