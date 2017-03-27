@@ -213,14 +213,16 @@
           xhr.send(formData);
         }else{
             console.log("b");
-          sendPost(null, null);
+            sendPost(null, null);
         }
 
 
 
           function sendPost(file, uploadedFile){
+              console.log("send post antes de if");
               if(!file==null)
               {
+                console.log("send post no primeiro if");
                 if(!validFile(files.name))
                 {
                   alert("Arquivo Invalido");
