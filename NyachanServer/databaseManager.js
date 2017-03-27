@@ -45,7 +45,7 @@ module.exports = function(app){
 			            res.jsonp(documents);
 			        });
 						} catch (err) {
-						    console.error(err);
+						    console.error("AAAAAAA" + err);
 								res.status(404).send("Not Found");
 						}
 
