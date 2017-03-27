@@ -17,11 +17,7 @@ body{
   background-size: cover;
   border-radius: $border-radius;
 }
-.id{
-  font-size: 10px;
-  background-color: $id-bg;
-  color: $primary-color;
-}
+
 #loading-bar .bar{
   background:$primary-color;
   height:3px;
@@ -174,6 +170,11 @@ input, textarea{
     text-decoration:line-through;
     opacity: 0.6;
   }
+}
+.id{
+  font-size: 10px;
+  background-color: $dark-bg;
+  color: $primary-color;
 }
 footer{
   margin-top: 20px;
