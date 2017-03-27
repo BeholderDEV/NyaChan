@@ -1,5 +1,6 @@
 $primary-color: #dc143c;
 //$primary-color: #1abc42;
+$id-bg: #ccc;
 $text-color: #fff;
 $dark-bg: #333;
 $panel-bg: rgba(68,68,68,0.75);
@@ -18,6 +19,8 @@ body{
 }
 .id{
   font-size: 10px;
+  background-color: $id-bg;
+  color: $primary-color;
 }
 #loading-bar .bar{
   background:$primary-color;
