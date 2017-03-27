@@ -46,7 +46,9 @@ module.exports = function(app){
 			        });
 						} catch (err) {
 						    console.error("AAAAAAA" + err);
-								res.send("Not Found",404);
+								res.sendStatus(404);
+						    res.render('404');
+						    return;
 						}
 
 
