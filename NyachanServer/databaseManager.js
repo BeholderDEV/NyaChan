@@ -49,7 +49,7 @@ module.exports = function(app){
 		            }
 								console.log("dddddddddddddddddddddddddddddddddddddddddd");
 		            res.jsonp(documents);
-		        } ););
+		        });
 
 		        db.close();
 	        }
