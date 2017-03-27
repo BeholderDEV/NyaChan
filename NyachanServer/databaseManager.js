@@ -44,7 +44,7 @@ module.exports = function(app){
 			        });
 						} catch (err) {
 						    console.error("AAAAAAA" + err);
-								res.redirect('/*');
+								res.redirect('/');
 						}
 		        db.close();
 	        }
