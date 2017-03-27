@@ -36,7 +36,7 @@ module.exports = function(app){
 	        } else {
 		        console.log('Connection established to', url);
 		        db.collection('thread').find( { _id: ObjectId(req.params.idThread)  } ).toArray(function(error, documents) {
-		            if (err){
+		            if (error){
 		                throw error;
 		            }
 		            res.jsonp(documents);
