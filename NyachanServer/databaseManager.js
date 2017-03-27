@@ -38,20 +38,14 @@ module.exports = function(app){
 						try {
 							db.collection('thread').find( { _id: ObjectId(req.params.idThread)  }).toArray(function(error, documents) {
 			            if (error){
-										console.log("cccccccccc");
 										res.status(404).send("Not Found");
 			            }
-									console.log("dddddddddddddddddddddddddddddddddddddddddd");
 			            res.jsonp(documents);
 			        });
 						} catch (err) {
 						    console.error("AAAAAAA" + err);
-								res.sendStatus(404);
-						    res.render('404');
-						    return;
+								res.redirect('/*');
 						}
-
-
 		        db.close();
 	        }
 	    });
