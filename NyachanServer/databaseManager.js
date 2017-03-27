@@ -35,21 +35,20 @@ module.exports = function(app){
 	        	console.log('Unable to connect to the mongoDB server. Error:', err);
 	        } else {
 		        console.log('Connection established to', url);
-		        var data_thread = db.collection('thread').find( { _id: ObjectId(req.params.idThread)  }, function(error, cursor) {
-		            if (error){
-									console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA MORRI");
-		                res.status(404).send("Not Found");
-		            }
-								return cursor;
-		        } );
+						try {
+							db.collection('thread').find( { _id: ObjectId(req.params.idThread)  }).toArray(function(error, documents) {
+			            if (error){
+										console.log("cccccccccc");
+										res.status(404).send("Not Found");
+			            }
+									console.log("dddddddddddddddddddddddddddddddddddddddddd");
+			            res.jsonp(documents);
+			        });
+						} catch (err) {
+						    console.error(err);
+								res.status(404).send("Not Found");
+						}
 
-						data_thread.toArray(function(error, documents) {
-		            if (error){
-									console.log("cccccccccc");
-		            }
-								console.log("dddddddddddddddddddddddddddddddddddddddddd");
-		            res.jsonp(documents);
-		        });
 
 		        db.close();
 	        }
