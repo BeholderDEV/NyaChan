@@ -40,6 +40,7 @@ module.exports = function(app){
 									console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA MORRI");
 		                res.status(404).send("Not Found");
 		            }
+								console.log("BBBBBBBBBBBBBBBBBBBBBBBBBBB");
 		            res.jsonp(documents);
 		        });
 
