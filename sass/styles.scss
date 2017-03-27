@@ -173,7 +173,7 @@ input, textarea{
 }
 .id{
   font-size: 10px;
-  background-color: $dark-bg;
+  background-color: $dark-bg !important;
   color: $primary-color;
 }
 footer{
