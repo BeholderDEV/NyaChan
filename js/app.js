@@ -75,7 +75,7 @@
           }
 
 //TODO: Reaproveitar o código do addPost de maneira melhor
-            
+
           var files = $("#file")[0].files[0];
           if(typeof post == "undefined"){
             post = new Object();
@@ -276,7 +276,7 @@
         }
 
         function validFile(filename){
-            var validFormats = ['jpg','jpeg','png', 'gif','bmp'];
+            var validFormats = ['jpg','jpeg','png', 'gif','bmp', 'webm', 'pdf' ];
             var ext = filename.substring(filename.lastIndexOf('.') + 1).toLowerCase();
             return validFormats.indexOf(ext) !== -1;
         }
