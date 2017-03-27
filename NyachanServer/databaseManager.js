@@ -70,7 +70,7 @@ module.exports = function(app){
 	    	console.log(newPost);
 			var date = new Date();
 			newPost.date =  date.getTime();
-			newPost.idPost = new ObjectId("Number");
+			newPost.idPost = new ObjectId();
 			MongoClient.connect(url, function(err, db) {
 	        if (err) {
 	        	console.log('Unable to connect to the mongoDB server. Error:', err);
