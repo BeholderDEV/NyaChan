@@ -96,16 +96,12 @@ module.exports = function(app, express, path){
      // res.sendFile(path.resolve('../thread.html'));
      res.sendfile('404.html');
   })
-  // app.get('*', function(req, res, next) {
-  //   var err = new Error();
-  //   err.status = 404;
-  //   next();
-  // });
-  //
-  // app.use(function(err, req, res, next){
-  //   res.sendStatus(404);
-  //   res.render('404');
-  //   return;
-  // });
+  app.get('*', function(req, res, next) {
+    res.sendfile('404.html');
+  });
+
+  app.use(function(err, req, res, next){
+    res.sendfile('404.html');
+  });
 
 }
