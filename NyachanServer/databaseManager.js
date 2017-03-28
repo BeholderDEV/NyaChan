@@ -46,7 +46,8 @@ module.exports = function(app){
 						    console.error("AAAAAAA" + err);
 								// res.writeHead(404, {location: 'https://nyachan-server.herokuapp.com/app/tag/a'});
 								// res.end();
-								res.redirect("/404");
+
+								return res.redirect("/404");
 						}
 		        db.close();
 	        }
