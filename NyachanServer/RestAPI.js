@@ -74,22 +74,7 @@ module.exports = function(app, express, path){
   app.get('/thread/:idThread', function (req, res) {
      res.type('text/html');
      // res.sendFile(path.resolve('../thread.html'));
-     MongoClient.connect(url, function(err, db) {
-         if (err) {
-           console.log('Unable to connect to the mongoDB server. Error:', err);
-         } else {
-           console.log('Connection established to', url);
-           try {
-             db.collection('thread').find( { _id: ObjectId(req.params.idThread)  }).toArray(function(error, documents) {
-                 res.sendfile('thread.html');
-             });
-           } catch (err) {
-               res.sendfile('404.html');
-           }
-           db.close();
-         }
-     });
-
+     res.sendfile('thread.html');
   })
   app.get('/404', function (req, res) {
      res.type('text/html');

@@ -178,7 +178,7 @@
           }).then(function mySucces(response) {
               $scope.thread = response.data[0];
           }, function myError(response) {
-                console.log("Request failed");
+              $window.location.href = '/app';
           });
       };
 
