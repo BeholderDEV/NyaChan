@@ -45,7 +45,7 @@
 
 //TAG
 
-    app.controller('tagController',function($scope, $http){
+    app.controller('tagController',function($scope, $http, $window){
         $scope.time_zone = new Date().getTimezoneOffset();
         var url = $(location).attr('href');
         var searchTag = url.substring(url.lastIndexOf('/') + 1);
@@ -57,7 +57,7 @@
             }).then(function mySucces(response) {
                 $scope.threads = response.data;
             }, function myError(response) {
-                  console.log(response || "Request failed");
+                  $window.location.href="https://nyachan-server.herokuapp.com/404";
             });
         };
         $scope.threads = $scope.search();
@@ -178,7 +178,6 @@
           }).then(function mySucces(response) {
               $scope.thread = response.data[0];
           }, function myError(response) {
-              console.log("aqui")
               $window.location.href="https://nyachan-server.herokuapp.com/404";
           });
       };
