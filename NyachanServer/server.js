@@ -13,8 +13,9 @@ app.use(function(req, res, next) {
 
 app.use(bodyParser.json());
 
-require('./RestAPI.js')(app, express, path);
 require('./databaseManager.js')(app);
+require('./RestAPI.js')(app, express, path);
+
 
 var port = process.env.PORT || 3000;
 var server = app.listen(port, function () {})
