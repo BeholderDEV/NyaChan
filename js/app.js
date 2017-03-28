@@ -157,7 +157,7 @@
 
 // THREAD
 
-    app.controller('threadController',function($scope, $http){
+    app.controller('threadController',function($scope, $http, $location){
       $scope.time_zone = new Date().getTimezoneOffset();
       $scope.response = null;
       $scope.widgetId = null;
@@ -179,7 +179,7 @@
               $scope.thread = response.data[0];
           }, function myError(response) {
               console.log("aqui")
-              $location.path('/newValue')
+              $location.path('/404')
           });
       };
 
