@@ -179,7 +179,7 @@
               $scope.thread = response.data[0];
           }, function myError(response) {
               console.log("aqui")
-              $window.location.href = '/404';
+              $location.path('/newValue')
           });
       };
 
