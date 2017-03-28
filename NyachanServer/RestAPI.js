@@ -73,16 +73,16 @@ module.exports = function(app, express, path){
      res.sendfile('thread.html');
   })
 
-  app.get('*', function(req, res, next) {
-    var err = new Error();
-    err.status = 404;
-    next();
-  });
-
-  app.use(function(err, req, res, next){
-    res.sendStatus(404);
-    res.render('404');
-    return;
-  });
+  // app.get('*', function(req, res, next) {
+  //   var err = new Error();
+  //   err.status = 404;
+  //   next();
+  // });
+  //
+  // app.use(function(err, req, res, next){
+  //   res.sendStatus(404);
+  //   res.render('404');
+  //   return;
+  // });
 
 }
