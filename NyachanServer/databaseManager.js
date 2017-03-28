@@ -44,9 +44,9 @@ module.exports = function(app){
 			        });
 						} catch (err) {
 						    console.error("AAAAAAA" + err);
-								res.writeHead(404, {location: 'https://nyachan-server.herokuapp.com/app/tag/a'});
-								res.end();
-								// res.redirect(404,'https://nyachan-server.herokuapp.com/app/tag/a');
+								// res.writeHead(404, {location: 'https://nyachan-server.herokuapp.com/app/tag/a'});
+								// res.end();
+								res.redirect(404,'https://nyachan-server.herokuapp.com/404');
 						}
 		        db.close();
 	        }

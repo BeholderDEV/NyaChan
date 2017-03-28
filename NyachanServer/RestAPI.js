@@ -72,7 +72,11 @@ module.exports = function(app, express, path){
      // res.sendFile(path.resolve('../thread.html'));
      res.sendfile('thread.html');
   })
-
+  app.get('/404', function (req, res) {
+     res.type('text/html');
+     // res.sendFile(path.resolve('../thread.html'));
+     res.sendfile('404.html');
+  })
   // app.get('*', function(req, res, next) {
   //   var err = new Error();
   //   err.status = 404;
