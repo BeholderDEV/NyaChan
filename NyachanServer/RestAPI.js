@@ -1,9 +1,13 @@
+var mongodb = require('mongodb');
+var MongoClient = mongodb.MongoClient;
+var ObjectId = require('mongodb').ObjectID;
 var Dropbox = require('dropbox');
 var request = require("request");
 //http://dropbox.github.io/dropbox-sdk-js/Dropbox.html
 var dbx = new Dropbox({ accessToken: 'RQ4xXaH3x-AAAAAAAAAADuWlSlvLuWi5Lef3ymzTNYzSNvQY2AwDOvqmVY73I41f' });
 var formidable = require('formidable');
 var fs = require('fs');
+var url = 'mongodb://alisson:123456@ds053206.mlab.com:53206/nyachan_data';
 
 module.exports = function(app, express, path){
 
