@@ -178,6 +178,7 @@
           }).then(function mySucces(response) {
               $scope.thread = response.data[0];
           }, function myError(response) {
+              console.log("aqui")
               $location.url('https://nyachan-server.herokuapp.com/404');
           });
       };
