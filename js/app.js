@@ -264,6 +264,7 @@
               }
           }).then(function mySucces(response) {
               $scope.thread = $scope.searchThread(searchId);
+              console.log(response);
 
           }, function myError(response) {
               console.log(response || "Request failed");
