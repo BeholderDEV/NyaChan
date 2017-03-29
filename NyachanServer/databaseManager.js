@@ -77,17 +77,17 @@ module.exports = function(app){
 	    	console.log(newPost);
 			var date = new Date();
 			newPost.date =  date.getTime();
-            console.log(newPost.file);
-//            var filename = newPost.file.name;
-//        
-//            var validFormats = ['jpg','jpeg','png', 'gif','bmp', 'webm', 'pdf' ];
-//            var ext = filename.substring(filename.lastIndexOf('.') + 1).toLowerCase();
-//            
-//            if(validFormats.indexOf(ext) == -1)
-//            {
-//                res.send({'error':'An error has occurred'});
-//                return;
-//            }
+            console.log(newPost.file[0].name);
+            var filename = newPost.file[0].name;
+        
+            var validFormats = ['jpg','jpeg','png', 'gif','bmp', 'webm', 'pdf' ];
+            var ext = filename.substring(filename.lastIndexOf('.') + 1).toLowerCase();
+            
+            if(validFormats.indexOf(ext) == -1)
+            {
+                res.send({'error':'An error has occurred'});
+                return;
+            }
         
 			MongoClient.connect(url, function(err, db) {
 	        if (err) {
