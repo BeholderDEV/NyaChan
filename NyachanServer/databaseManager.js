@@ -77,7 +77,7 @@ module.exports = function(app){
 	    	console.log(newPost);
 			var date = new Date();
 			newPost.date =  date.getTime();
-            if(newPost.file!=='undefined')
+            if(newPost.file!==undefined)
             {
                 var filename = newPost.file[0].name;
 
