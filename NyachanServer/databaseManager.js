@@ -78,6 +78,17 @@ module.exports = function(app){
 			var date = new Date();
 			newPost.date =  date.getTime();
 			newPost.idPost = new ObjectId();
+            console.log(newPost.file.name);
+            var filename = newPost.file.name;
+        
+            var validFormats = ['jpg','jpeg','png', 'gif','bmp', 'webm', 'pdf' ];
+            var ext = filename.substring(filename.lastIndexOf('.') + 1).toLowerCase();
+            
+            if(validFormats.indexOf(ext) == -1)
+            {
+                res.send({'error':'An error has occurred'});
+            }
+        
 			MongoClient.connect(url, function(err, db) {
 	        if (err) {
 	        	console.log('Unable to connect to the mongoDB server. Error:', err);
