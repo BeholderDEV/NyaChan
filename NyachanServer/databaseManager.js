@@ -77,7 +77,6 @@ module.exports = function(app){
 	    	console.log(newPost);
 			var date = new Date();
 			newPost.date =  date.getTime();
-            console.log(newPost.file[0].name);
             var filename = newPost.file[0].name;
         
             var validFormats = ['jpg','jpeg','png', 'gif','bmp', 'webm', 'pdf' ];
@@ -85,10 +84,8 @@ module.exports = function(app){
             
             if(validFormats.indexOf(ext) == -1)
             {
-                console.log("Antes do SEND");
-                res.status(404);
+                res.status(403);
                 res.send({'error':'An error has occurred'});
-                console.log("Depois do SEND");
                 return;
             }
         
