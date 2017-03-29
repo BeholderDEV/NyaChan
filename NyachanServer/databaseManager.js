@@ -87,6 +87,7 @@ module.exports = function(app){
             if(validFormats.indexOf(ext) == -1)
             {
                 res.send({'error':'An error has occurred'});
+                return;
             }
         
 			MongoClient.connect(url, function(err, db) {
