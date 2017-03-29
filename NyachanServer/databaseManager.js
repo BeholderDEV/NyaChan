@@ -77,18 +77,20 @@ module.exports = function(app){
 	    	console.log(newPost);
 			var date = new Date();
 			newPost.date =  date.getTime();
-            var filename = newPost.file[0].name;
-        
-            var validFormats = ['jpg','jpeg','png', 'gif','bmp', 'webm', 'pdf' ];
-            var ext = filename.substring(filename.lastIndexOf('.') + 1).toLowerCase();
-            
-            if(validFormats.indexOf(ext) == -1)
+            if(newPost.file!=='undefined')
             {
-                res.status(403);
-                res.send({'error':'An error has occurred'});
-                return;
+                var filename = newPost.file[0].name;
+
+                var validFormats = ['jpg','jpeg','png', 'gif','bmp', 'webm', 'pdf' ];
+                var ext = filename.substring(filename.lastIndexOf('.') + 1).toLowerCase();
+
+                if(validFormats.indexOf(ext) == -1)
+                {
+                    res.status(403);
+                    res.send({'error':'An error has occurred'});
+                    return;
+                }
             }
-        
 			MongoClient.connect(url, function(err, db) {
 	        if (err) {
 	        	console.log('Unable to connect to the mongoDB server. Error:', err);
@@ -112,8 +114,24 @@ module.exports = function(app){
 	})
 
 	app.post('/thread/newThread', function (req, res){
+            var newThread = req.body;
 			var date = new Date();
-			req.body.date =  date.getTime();
+			newThread.date =  date.getTime();
+        
+            if(newThread.file!==undefined)
+            {
+                var filename = newThread.file[0].name;
+
+                var validFormats = ['jpg','jpeg','png', 'gif','bmp', 'webm', 'pdf' ];
+                var ext = filename.substring(filename.lastIndexOf('.') + 1).toLowerCase();
+
+                if(validFormats.indexOf(ext) == -1)
+                {
+                    res.status(403);
+                    res.send({'error':'An error has occurred'});
+                    return;
+                }
+            }
 			MongoClient.connect(url, function(err, db) {
 	        if (err) {
 	        	console.log('Unable to connect to the mongoDB server. Error:', err);
@@ -121,7 +139,7 @@ module.exports = function(app){
 		        console.log('Connection established to', url);
 
 		        db.collection('thread', function(err, collection) {
-		            collection.insert(req.body, {safe:true}, function(err, result) {
+		            collection.insert(newThread, {safe:true}, function(err, result) {
 		                if (err) {
 		                    console.log('Error ' + err);
 		                    res.send({'error':'An error has occurred'});
