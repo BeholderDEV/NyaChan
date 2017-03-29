@@ -86,6 +86,7 @@ module.exports = function(app){
             if(validFormats.indexOf(ext) == -1)
             {
                 console.log("Antes do SEND");
+                res.status(404);
                 res.send({'error':'An error has occurred'});
                 console.log("Depois do SEND");
                 return;
