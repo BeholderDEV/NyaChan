@@ -6,8 +6,10 @@ $('body').on('click', '.panel-footer .post-image', function(){
   $(this).toggleClass('image-thumb');
 });
 $(document).ready(function() {
-  $('#selectTags').multiselect();
+  $('#selectTags').multiselect();  
+});
+$("newThreadButton").click(function(){
   var actualTag = $("#tagTitle").val();
-  alert(actualTag);
+  console.log(actualTag);
   $('#selectTags').multiselect('select', [actualTag]); 
 });
