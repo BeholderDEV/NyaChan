@@ -8,10 +8,5 @@ $('body').on('click', '.panel-footer .post-image', function(){
 $(document).ready(function() {
   $('#selectTags').multiselect();
   var actualTag = $("#tagTitle").val();
-  $("option").each(function() {
-    if(this.attr("value")==actualTag){
-      console.log("tag: "+this.val);
-      this.attr("selected","selected");
-    }
-  });
+  $('#selectTags').multiselect('select', [actualTag]);
 });
