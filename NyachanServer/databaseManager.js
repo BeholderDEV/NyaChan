@@ -77,6 +77,7 @@ module.exports = function(app){
 	    	console.log(newPost);
 			var date = new Date();
 			newPost.date =  date.getTime();
+
             if(newPost.file!==undefined)
             {
                 var filename = newPost.file[0].name;
@@ -117,7 +118,11 @@ module.exports = function(app){
             var newThread = req.body;
 			var date = new Date();
 			newThread.date =  date.getTime();
-        
+			if(newPost.tag[0] == undefined){
+				res.status(403);
+				res.send({'error':'An error has occurred'});
+				return;
+			}
             if(newThread.file!==undefined)
             {
                 var filename = newThread.file[0].name;
