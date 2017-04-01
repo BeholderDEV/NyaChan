@@ -115,14 +115,15 @@ module.exports = function(app){
 	})
 
 	app.post('/thread/newThread', function (req, res){
-            var newThread = req.body;
+      var newThread = req.body;
 			var date = new Date();
 			newThread.date =  date.getTime();
-			if(newThread.tag == undefined){
-				res.status(403);
-				res.send({'error':'An error has occurred'});
-				return;
-			}
+			console(newThread.tag);
+			// if(newThread.tag == undefined && newThread.tag[0] == undefined){
+			// 	res.status(403);
+			// 	res.send({'error':'An error has occurred'});
+			// 	return;
+			// }
             if(newThread.file!==undefined)
             {
                 var filename = newThread.file[0].name;
