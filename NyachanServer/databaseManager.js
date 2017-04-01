@@ -118,7 +118,7 @@ module.exports = function(app){
       var newThread = req.body;
 			var date = new Date();
 			newThread.date =  date.getTime();
-			console(newThread.tag);
+			console.log(newThread.tag);
 			// if(newThread.tag == undefined && newThread.tag[0] == undefined){
 			// 	res.status(403);
 			// 	res.send({'error':'An error has occurred'});
