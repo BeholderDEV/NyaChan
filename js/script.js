@@ -7,4 +7,5 @@ $('body').on('click', '.panel-footer .post-image', function(){
 });
 $(document).ready(function() {
     $('#selectTags').multiselect();
+    
 });
