@@ -8,7 +8,7 @@ $('body').on('click', '.panel-footer .post-image', function(){
 $(document).ready(function() {
   $('#selectTags').multiselect();  
 });
-$("newThreadButton").click(function(){
+$("#newThreadButton").click(function(){
   var actualTag = $("#tagTitle").val();
   console.log(actualTag);
   $('#selectTags').multiselect('select', [actualTag]); 
