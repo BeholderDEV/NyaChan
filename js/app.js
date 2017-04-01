@@ -66,7 +66,8 @@
         $scope.createThread = function(post) {
           var selectedOptions = $('#selectTags option:selected');
           // console.log(selectedOptions[0].value);
-          if(selectedOptions == 0){
+          if(selectedOptions.lenght == 0){
+            alert("Selecione ao menos uma Tag");
             return; // Mensagem erro
           }
           var selectTags = [];
