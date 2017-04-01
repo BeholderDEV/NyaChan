@@ -9,7 +9,6 @@ $(document).ready(function() {
   $('#selectTags').multiselect();  
 });
 $("#newThreadButton").click(function(){
-  var actualTag = $("#tagTitle").val();
-  console.log(actualTag);
+  var actualTag = $("#tagTitle").attr("value");
   $('#selectTags').multiselect('select', [actualTag]); 
 });
