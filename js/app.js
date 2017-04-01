@@ -47,7 +47,6 @@
 
     app.controller('tagController',function($scope, $http, $window){
         $scope.time_zone = new Date().getTimezoneOffset();
-        
         var url = $(location).attr('href');
         var searchTag = url.substring(url.lastIndexOf('/') + 1);
         $scope.tag = searchTag;
