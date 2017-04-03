@@ -35,19 +35,37 @@ a {
 }
 
 .navbar-default{
-    background-color: $panel-dark-bg;
-    border: none;
-    .navbar-brand{
-        color: $text-color;
-        font-size: 24px;
-        margin-top: 7px;
+  background-color: $panel-dark-bg;
+  border: none;
+  .navbar-brand{
+      color: $text-color;
+      font-size: 24px;
+      margin-top: 7px;
+  }
+  li{
+    .btn{
+      a{
+        color: $text-color !important;
+        &:hover{
+          color: $primary-color !important;
+        }
+      }
     }
+  }
 }
 .btn{
   border-radius: $border-radius;
   &.btn-board{
     background-color:$panel-bg;
     border: none;
+  }
+  &.post-button{
+    background-color:$primary-color;
+    color: $text-color;
+    &:hover{
+      background-color:$panel-bg;
+      color: $text-color;
+    }
   }
 }
 input, textarea{
