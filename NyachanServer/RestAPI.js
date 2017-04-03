@@ -56,7 +56,7 @@ function resizeImage(file, callback){
 			neww=w*(125/h);
 		}
 		image.resize(neww, newh, function(err, imageResize){
-			lwip.create(imageResize.width(), imageResize.height(), 'white', function(err, canvas){
+			imgResizer.create(imageResize.width(), imageResize.height(), 'white', function(err, canvas){
 		    canvas.paste(0, 0, imageResize, function(err, imageCanvas){
 					imageCanvas.toBuffer('jpg', function(err, buffer){
 					 		return callback(buffer);
