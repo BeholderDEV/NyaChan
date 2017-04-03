@@ -1,13 +1,9 @@
-$('body').on('click', '.panel-body .OP', function(){
-  
-});
-
-$('body').on('click', '.panel-footer .post-image', function(){
+$('body').on('click', '.panel-footer .some-image', function(){
   if($(this).attr('data-is-full')=='0'){
-    $(this).attr('ng-src',$(this).attr('data-full'));
+    $(this).attr('src',$(this).attr('data-full'));
     $(this).attr('data-is-full',1);    
   }else{
-    $(this).attr('ng-src',$(this).attr('data-thumb'));
+    $(this).attr('src',$(this).attr('data-thumb'));
     $(this).attr('data-is-full',0);
   }
   
