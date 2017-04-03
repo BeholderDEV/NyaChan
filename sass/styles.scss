@@ -42,14 +42,10 @@ a {
       font-size: 24px;
       margin-top: 7px;
   }
-  li{
-    .btn{
-      a{
-        color: $text-color !important;
-        &:hover{
-          color: $primary-color !important;
-        }
-      }
+  .navbar-default .navbar-nav > li > a{
+    color: $text-color !important;
+    &:hover{
+      color: $primary-color !important;
     }
   }
 }
