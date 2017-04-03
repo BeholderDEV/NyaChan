@@ -48,7 +48,6 @@ module.exports = function(app, express, path){
 	app.post('/dbxPost', function (req, res) {
 		var form = new formidable.IncomingForm();
 		var respostaUrl = new Object();
-		var writeStream = fs.createWriteStream('C:\\Augustop\\aaa.jpg');
 		form.keepExtensions = true;
 		form.parse(req);
 		form.on('file', function(name, file) {
@@ -61,7 +60,7 @@ module.exports = function(app, express, path){
 						image.resize(125, 125, function(err, imageResize){
 							console.log("Resize");
 							imageResize.toBuffer('jpg', function(err, buffer){
-								sendDataDropbox(file.name, imageResize, function(urlThumb){
+								sendDataDropbox(file.name, buffer, function(urlThumb){
 									respostaUrl.thumbUrl = urlThumb;
 									res.send(respostaUrl);
 								});
