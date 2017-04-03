@@ -55,8 +55,11 @@ module.exports = function(app, express, path){
 		    fs.readFile(file.path, function (err, data) {
 		    	sendDataDropbox(file.name, data, function(url){
 		    		respostaUrl.mainUrl = url;
-	    		    imgResizer.open(data, 'png', function(err, image){
+		    		console.log("Before");
+	    		    imgResizer.open(data, function(err, image){
+	    		    	console.log("Open");
 						image.resize(125, 125, function(err, imageResize){
+							console.log("Resize");
 							sendDataDropbox(file.name, imageResize, function(urlThumb){
 								respostaUrl.thumbUrl = urlThumb;
 								res.send(respostaUrl);
