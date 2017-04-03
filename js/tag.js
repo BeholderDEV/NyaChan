@@ -77,7 +77,8 @@
                         size: 250,
                         name: files.name,
                         extension: ext,
-                        source: uploadedFile,
+                        source: uploadedFile.mainUrl,
+                        thumb: uploadedFile.thumbUrl
                     }
                   ]
 

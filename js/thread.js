@@ -52,14 +52,14 @@
           xhr.onreadystatechange = function() {
               if (xhr.readyState == XMLHttpRequest.DONE) {
                 var uploadedFile = JSON.parse(xhr.response);
-                // sendPost(files, uploadedFile);
+                sendPost(files, uploadedFile);
               }
 
           };
           xhr.open('post', '/dbxPost', true);
           xhr.send(formData);
         }else{
-            // sendPost(null, null);
+            sendPost(null, null);
         }
 
 

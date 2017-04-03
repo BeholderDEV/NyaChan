@@ -41,6 +41,16 @@ function sendDataDropbox(name, data, callback){
     });
 }
 
+function resizeImage(file, callback){
+    imgResizer.open(file.path, function(err, image){
+		image.resize(125, 125, function(err, imageResize){
+			imageResize.toBuffer('jpg', function(err, buffer){
+				return callback(buffer);
+		    });
+		});		
+	});
+}
+
 module.exports = function(app, express, path){
 
 	app.use(express.static(path.join(__dirname, '/../')));
@@ -54,19 +64,12 @@ module.exports = function(app, express, path){
 		    fs.readFile(file.path, function (err, data) {
 		    	sendDataDropbox(file.name, data, function(url){
 		    		respostaUrl.mainUrl = url;
-		    		console.log("Before");
-	    		    imgResizer.open(file.path, function(err, image){
-	    		    	console.log("Open");
-						image.resize(125, 125, function(err, imageResize){
-							console.log("Resize");
-							imageResize.toBuffer('jpg', function(err, buffer){
-								sendDataDropbox(file.name, buffer, function(urlThumb){
-									respostaUrl.thumbUrl = urlThumb;
-									res.send(respostaUrl);
-								});
-						    });
-						});		
-				   	});
+		    		resizeImage(file, function(buffer){
+						sendDataDropbox(file.name, buffer, function(urlThumb){
+							respostaUrl.thumbUrl = urlThumb;
+							res.send(respostaUrl);
+						});
+		    		});
 		    	});
 	  		});
 		});
