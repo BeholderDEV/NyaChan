@@ -55,8 +55,8 @@ module.exports = function(app, express, path){
 		    fs.readFile(file.path, function (err, data) {
 		    	sendDataDropbox(file.name, data, function(url){
 		    		respostaUrl.mainUrl = url;
-	    		    lwip.open(buffer, 'png', function(err, image){
-						lwip.resize(125, 125, function(err, imageResize){
+	    		    imgResizer.open(buffer, 'png', function(err, image){
+						imgResizer.resize(125, 125, function(err, imageResize){
 							sendDataDropbox(file.name, imageResize, function(urlThumb){
 								respostaUrl.thumbUrl = urlThumb;
 								res.send(respostaUrl);
