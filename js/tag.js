@@ -52,7 +52,7 @@
           var xhr = new XMLHttpRequest();
           xhr.onreadystatechange = function() {
               if (xhr.readyState == XMLHttpRequest.DONE) {
-                var uploadedFile = xhr.response;
+                var uploadedFile = JSON.parse(xhr.response);
                 sendThread(files, uploadedFile);
               }
 
