@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/css/jasny-bootstrap.min.css">
-    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.min.css' type='text/css' media='all' />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.min.css" type="text/css" media="all" />
     <link rel="stylesheet" href="../lib/Bootstrap-multiselect/bootstrap-multiselect.css" type="text/css"/>
     <!-- Meu CSS -->
     <link href="../css/styles.css" rel="stylesheet" type="text/css">
@@ -39,7 +39,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li id="newThreadButton" class="btn" data-toggle="modal" data-target="#newThreadModal"><a>New Thread  <i class="fa fa-plus"></i></a></l>
+            <li id="newThreadButton" class="btn" data-toggle="modal" data-target="#newThreadModal"><a>New Thread  <i class="fa fa-plus"></i></a></li>
 
           </ul>
         </div>
@@ -49,15 +49,15 @@
       <h1 class="" id="tagTitle" value="{{tag}}">{{tag}}</h1>
       <div>
         <div ng-repeat="t in threads">
-          <div class='panel panel-default'>
-              <div class='panel-heading'>
-                  <h3 class='panel-title'>
+          <div class="panel panel-default">
+              <div class="panel-heading">
+                  <h3 class="panel-title">
                     {{t.subject}} ~ <span class="label id"><a ng-href="http://nyachan-server.herokuapp.com/thread/{{t._id}}">{{t._id}}</a> by {{t.userName}} on {{ t.date | date: 'MMM d, y H:mm:ss' : 'time_zone' }}</span>
                     <a ng-repeat="a in t.tags" ng-href="http://nyachan-server.herokuapp.com/tag/{{a}}"><span class="label label-nya">{{a}}</span></a>
                     <a ng-href="http://nyachan-server.herokuapp.com/thread/{{t._id}}"><i class="fa fa-reply pull-right"></i></a>
                   </h3>
                 </div>
-                <div class='panel-body'>
+                <div class="panel-body">
                   <a ng-href="{{t.file[0].source}}" target="_blank">{{t.file[0].name}}</a>
                   <img ng-src="{{t.file[0].source}}" class="img-responsive nya-image image-thumb-OP OP"/>
                   {{t.body}}
@@ -170,13 +170,14 @@
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
-    <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.min.js'></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.min.js"></script>
 
     <script type="text/javascript" src="../lib/Bootstrap-multiselect/bootstrap-multiselect.js"></script>
     <!-- Jasny -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/js/jasny-bootstrap.min.js"></script>
 
     <script src="../js/app.js"></script>
+    <script src="../js/tag.js"></script>
     <script src="../js/script.js"></script>
   </body>
 </html>

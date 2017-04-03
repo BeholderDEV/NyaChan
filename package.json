@@ -19,8 +19,10 @@
     "node-sass": "4.5.0",
     "dropbox": "2.5.2",
     "formidable":"1.1.1",
-    "request":"*"
+    "request":"*",
+    "lwip": "*"
   },
+
   "repository": {
     "type": "git",
     "url": "https://github.com/BeholderDEV/NyaChan"
