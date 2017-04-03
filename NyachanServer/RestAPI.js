@@ -41,30 +41,34 @@ function sendDataDropbox(name, data, callback){
     });
 }
 
-function resizeImage(file, callback){
-    imgResizer.open(file.path, function(err, image){
-		var w = image.width();
-		var h = image.height();
-		var neww = w;
-		var newh = h;
-		if(w>h){
-			neww=125;
-			newh=h*(125/w);
+function resizeImage(file, op, callback){
+		var baseH = 125;
+		if(op == 1){
+			baseH = 250;
 		}
-		else if(w>125 || h>125){
-			newh=125;
-			neww=w*(125/h);
-		}
-		image.resize(neww, newh, function(err, imageResize){
-			imgResizer.create(imageResize.width(), imageResize.height(), 'white', function(err, canvas){
-		    canvas.paste(0, 0, imageResize, function(err, imageCanvas){
-					imageCanvas.toBuffer('jpg', function(err, buffer){
-					 		return callback(buffer);
-					 });
-		    });
-			});
+		imgResizer.open(file.path, function(err, image){
+			var w = image.width();
+			var h = image.height();
+			var neww = w;
+			var newh = h;
+			if(w > h){
+				neww = baseH;
+				newh = h * (baseH / w);
+			}
+			else if(w > baseH || h > baseH){
+				newh = baseH;
+				neww = w * (baseH / h);
+			}
+			image.resize(neww, newh, function(err, imageResize){
+				imgResizer.create(imageResize.width(), imageResize.height(), 'white', function(err, canvas){
+			    canvas.paste(0, 0, imageResize, function(err, imageCanvas){
+						imageCanvas.toBuffer('jpg', function(err, buffer){
+						 		return callback(buffer);
+						 });
+			    });
+				});
 
-		});
+			});
 	});
 }
 
@@ -81,7 +85,7 @@ module.exports = function(app, express, path){
 		    fs.readFile(file.path, function (err, data) {
 		    	sendDataDropbox(file.name, data, function(url){
 		    		respostaUrl.mainUrl = url;
-		    		resizeImage(file, function(buffer){
+		    		resizeImage(file, req.params.op ,function(buffer){
 						sendDataDropbox(file.name, buffer, function(urlThumb){
 							respostaUrl.thumbUrl = urlThumb;
 							res.send(respostaUrl);
