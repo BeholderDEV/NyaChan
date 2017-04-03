@@ -4,7 +4,7 @@
     .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
       cfpLoadingBarProvider.includeSpinner = false;
     }]);
-    
+
     app.controller('tagController',function($scope, $http, $window){
         $scope.time_zone = new Date().getTimezoneOffset();
         var url = $(location).attr('href');
@@ -23,7 +23,7 @@
         };
         $scope.threads = $scope.search();
 
-        
+
         $scope.createThread = function(post) {
           var selectedOptions = $('#selectTags option:selected');
           // console.log(selectedOptions[0].value);
@@ -58,7 +58,7 @@
               }
 
           };
-          xhr.open('post', '/dbxPost', true);
+          xhr.open('post', '/dbxPost/1', true);
           xhr.send(formData);
         }else{
           sendThread(null, null);

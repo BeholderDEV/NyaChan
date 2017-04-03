@@ -43,11 +43,28 @@ function sendDataDropbox(name, data, callback){
 
 function resizeImage(file, callback){
     imgResizer.open(file.path, function(err, image){
-		image.resize(125, 125, function(err, imageResize){
-			imageResize.toBuffer('jpg', function(err, buffer){
-				return callback(buffer);
+		var w = image.width();
+		var h = image.height();
+		var neww = w;
+		var newh = h;
+		if(w>h){
+			neww=125;
+			newh=h*(125/w);
+		}
+		else if(w>125 || h>125){
+			newh=125;
+			neww=w*(125/h);
+		}
+		image.resize(neww, newh, function(err, imageResize){
+			lwip.create(imageResize.width(), imageResize.height(), 'white', function(err, canvas){
+		    canvas.paste(0, 0, imageResize, function(err, imageCanvas){
+					imageCanvas.toBuffer('jpg', function(err, buffer){
+					 		return callback(buffer);
+					 });
 		    });
-		});		
+			});
+
+		});
 	});
 }
 
@@ -55,7 +72,7 @@ module.exports = function(app, express, path){
 
 	app.use(express.static(path.join(__dirname, '/../')));
 
-	app.post('/dbxPost', function (req, res) {
+	app.post('/dbxPost/:op', function (req, res) {
 		var form = new formidable.IncomingForm();
 		var respostaUrl = new Object();
 		form.keepExtensions = true;

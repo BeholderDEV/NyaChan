@@ -4,7 +4,7 @@
     .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
       cfpLoadingBarProvider.includeSpinner = false;
     }]);
-    
+
     app.controller('threadController',function($scope, $http, $window){
       $scope.time_zone = new Date().getTimezoneOffset();
       $scope.response = null;
@@ -31,7 +31,7 @@
       };
 
       $scope.thread = $scope.searchThread(searchId);
-      
+
 
       $scope.addPost = function(post){
         var files = $("#file")[0].files[0];
@@ -57,7 +57,7 @@
               }
 
           };
-          xhr.open('post', '/dbxPost', true);
+          xhr.open('post', '/dbxPost/0', true);
           xhr.send(formData);
         }else{
             sendPost(null, null);
