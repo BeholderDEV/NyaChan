@@ -42,13 +42,9 @@ a {
       font-size: 24px;
       margin-top: 7px;
   }
-  .navbar-default .navbar-nav > li > a{
-    color: $text-color !important;
-    &:hover{
-      color: $primary-color !important;
-    }
-  }
+  
 }
+
 .btn{
   border-radius: $border-radius;
   &.btn-board{
@@ -188,4 +184,10 @@ input, textarea{
 }
 footer{
   margin-top: 20px;
+}
+.navbar-default .navbar-nav > li > a{
+  color: $text-color !important;
+  &:hover{
+    color: $primary-color !important;
+  }
 }
