@@ -60,10 +60,12 @@ module.exports = function(app, express, path){
 	    		    	console.log("Open");
 						image.resize(125, 125, function(err, imageResize){
 							console.log("Resize");
-							sendDataDropbox(file.name, imageResize, function(urlThumb){
-								respostaUrl.thumbUrl = urlThumb;
-								res.send(respostaUrl);
-							});
+							imageResize.toBuffer('jpg', function(err, buffer){
+								sendDataDropbox(file.name, imageResize, function(urlThumb){
+									respostaUrl.thumbUrl = urlThumb;
+									res.send(respostaUrl);
+								});
+						    });
 						});		
 				   	});
 		    	});
