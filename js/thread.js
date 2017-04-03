@@ -32,6 +32,10 @@
 
       $scope.thread = $scope.searchThread(searchId);
 
+      $scope.toggleImage = function (post){
+        post.file[0].thumb = post.file[0].source;
+      };
+
       $scope.addPost = function(post){
         var files = $("#file")[0].files[0];
 

@@ -19,3 +19,7 @@ function validarPost(post, files){
       return true;
     }
 }
+
+function toggleThumb(post){
+  console.log("aaa");
+}
