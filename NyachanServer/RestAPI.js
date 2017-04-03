@@ -56,7 +56,7 @@ module.exports = function(app, express, path){
 		    	sendDataDropbox(file.name, data, function(url){
 		    		respostaUrl.mainUrl = url;
 		    		console.log("Before");
-	    		    imgResizer.open(data, function(err, image){
+	    		    imgResizer.open(file.path, function(err, image){
 	    		    	console.log("Open");
 						image.resize(125, 125, function(err, imageResize){
 							console.log("Resize");
