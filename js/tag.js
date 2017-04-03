@@ -23,10 +23,6 @@
         };
         $scope.threads = $scope.search();
 
-        $scope.toggleImage = function (post){
-          post.file[0].thumb = post.file[0].source;
-        };
-
         
         $scope.createThread = function(post) {
           var selectedOptions = $('#selectTags option:selected');

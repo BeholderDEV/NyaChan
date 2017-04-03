@@ -1,4 +1,4 @@
-$('body').on('click', '.panel-footer .some-image', function(){
+$('body').on('click', '.some-image', function(){
   if($(this).attr('data-is-full')=='0'){
     $(this).attr('src',$(this).attr('data-full'));
     $(this).attr('data-is-full',1);    
