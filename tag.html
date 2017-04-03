@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/css/jasny-bootstrap.min.css">
-    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.min.css' type='text/css' media='all' />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.min.css" type="text/css" media="all" />
     <link rel="stylesheet" href="../lib/Bootstrap-multiselect/bootstrap-multiselect.css" type="text/css"/>
     <!-- Meu CSS -->
     <link href="../css/styles.css" rel="stylesheet" type="text/css">
@@ -39,36 +39,38 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li class="btn" data-toggle="modal" data-target="#newThreadModal"><a>New Thread  <i class="fa fa-plus"></i></a></l>
+            <li id="newThreadButton" class="btn" data-toggle="modal" data-target="#newThreadModal"><a>New Thread  <i class="fa fa-plus"></i></a></li>
 
           </ul>
         </div>
       </div>
     </nav>
     <div class="container">
-
+      <h1 class="" id="tagTitle" value="{{tag}}">{{tag}}</h1>
       <div>
         <div ng-repeat="t in threads">
-          <div class='panel panel-default'>
-              <div class='panel-heading'>
-                  <h3 class='panel-title'>
-                    {{t.subject}} ~ <a ng-href="http://nyachan-server.herokuapp.com/thread/{{t._id}}">{{t._id}}</a> by {{t.userName}}
+          <div class="panel panel-default">
+              <div class="panel-heading">
+                  <h3 class="panel-title">
+                    {{t.subject}} ~ <span class="label id"><a ng-href="http://nyachan-server.herokuapp.com/thread/{{t._id}}">{{t._id}}</a> by {{t.userName}} on {{ t.date | date: 'MMM d, y H:mm:ss' : 'time_zone' }}</span>
                     <a ng-repeat="a in t.tags" ng-href="http://nyachan-server.herokuapp.com/tag/{{a}}"><span class="label label-nya">{{a}}</span></a>
                     <a ng-href="http://nyachan-server.herokuapp.com/thread/{{t._id}}"><i class="fa fa-reply pull-right"></i></a>
                   </h3>
                 </div>
-                <div class='panel-body'>
+                <div class="panel-body">
                   <a ng-href="{{t.file[0].source}}" target="_blank">{{t.file[0].name}}</a>
-                  <img ng-src="{{t.file[0].source}}" class="img-responsive nya-image image-thumb-OP OP"/>
+                  <img data-full="{{t.file[0].source}}" data-thumb="{{t.file[0].thumb}}" data-is-full="0" ng-src="{{t.file[0].thumb}}" class="img-responsive some-image"/>
                   {{t.body}}
                 </div>
                 <div class="panel-footer">
                   <ul class="list-group">
-                    <li class="list-group-item" ng-repeat="p in t.post | limitTo:5">
-                      <h4 ng-if="p.title !== undefined">{{p.title}}</h4>
-                      <a ng-href="{{p.file[0].source}}" target="_blank">{{p.file[0].name}}</a>
-                      <img ng-src="{{p.file[0].source}}" class="img-responsive nya-image image-thumb post-image"/>
-                      <p>{{p.body}}</p>
+                    <li class="list-group-item panel" ng-repeat="p in t.post" id="{{p.idPost}}">
+                      <div class="panel-heading">{{p.title}} - <span class="label id">{{p.idPost}} by {{p.userName}} on {{ p.date | date: 'MMM d, y H:mm:ss' : 'time_zone' }}</span></div>
+                      <div class="panel-body">
+                        <a ng-href="{{p.file[0].source}}" target="_blank">{{p.file[0].name}}</a>
+                        <img data-full="{{p.file[0].source}}" data-thumb="{{p.file[0].thumb}}" data-is-full="0" ng-src="{{p.file[0].thumb}}" class="img-responsive some-image"/>
+                        <p>{{p.body}}</p>
+                      </div>
                     </li>
                   </ul>
                 </div>
@@ -79,16 +81,16 @@
 
     <footer class="footer text-center">
         <div class="btn-group" role="group">
-          <button type="button" class="btn btn-default btn-board"><a href="#">#a</a></button>
-          <button type="button" class="btn btn-default btn-board"><a href="#">#b</a></button>
-          <button type="button" class="btn btn-default btn-board"><a href="#">#c</a></button>
-          <button type="button" class="btn btn-default btn-board"><a href="#">#g</a></button>
-          <button type="button" class="btn btn-default btn-board"><a href="#">#h</a></button>
-          <button type="button" class="btn btn-default btn-board"><a href="#">#m</a></button>
-          <button type="button" class="btn btn-default btn-board"><a href="#">#p</a></button>
-          <button type="button" class="btn btn-default btn-board"><a href="#">#t</a></button>
-          <button type="button" class="btn btn-default btn-board"><a href="#">#tv</a></button>
-          <button type="button" class="btn btn-default btn-board"><a href="#">#v</a></button>
+          <button type="button" class="btn btn-default btn-board"><a href="https://nyachan-server.herokuapp.com/tag/a">#a</a></button>
+          <button type="button" class="btn btn-default btn-board"><a href="https://nyachan-server.herokuapp.com/tag/b">#b</a></button>
+          <button type="button" class="btn btn-default btn-board"><a href="https://nyachan-server.herokuapp.com/tag/c">#c</a></button>
+          <button type="button" class="btn btn-default btn-board"><a href="https://nyachan-server.herokuapp.com/tag/g">#g</a></button>
+          <button type="button" class="btn btn-default btn-board"><a href="https://nyachan-server.herokuapp.com/tag/h">#h</a></button>
+          <button type="button" class="btn btn-default btn-board"><a href="https://nyachan-server.herokuapp.com/tag/m">#m</a></button>
+          <button type="button" class="btn btn-default btn-board"><a href="https://nyachan-server.herokuapp.com/tag/p">#p</a></button>
+          <button type="button" class="btn btn-default btn-board"><a href="https://nyachan-server.herokuapp.com/tag/t">#t</a></button>
+          <button type="button" class="btn btn-default btn-board"><a href="https://nyachan-server.herokuapp.com/tag/tv">#tv</a></button>
+          <button type="button" class="btn btn-default btn-board"><a href="https://nyachan-server.herokuapp.com/tag/v">#v</a></button>
         </div>
     </footer>
 
@@ -123,14 +125,14 @@
                     <span class="fileinput-exists">
                       Change
                     </span>
-                    <input type="file" name="..." ng-model="post.file" id="file" name="image">
+                    <input type="file" name="..." ng-model="post.file" id="file" name="image" multiple="multiple" accept="image/gif, image/jpg, image/png, image/bmp, image/jpeg, application/pdf, video/webm">
                   </span>
                   <span class="fileinput-filename"></span>
                   <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">&times;</a>
                 </div>
               </div>
               <div>
-                <select id="selectTags" multiple="multiple">
+                <select id="selectTags" multiple="multiple" required>
                     <option value="a">Anime &#38; Mangá</option>
                     <option value="c">Quadrinhos &#38; Desenhos Animados</option>
                     <option value="g">Gif &#38; Webm</option>
@@ -168,13 +170,14 @@
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
-    <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.min.js'></script>
-    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.min.js"></script>
+
     <script type="text/javascript" src="../lib/Bootstrap-multiselect/bootstrap-multiselect.js"></script>
     <!-- Jasny -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/js/jasny-bootstrap.min.js"></script>
 
     <script src="../js/app.js"></script>
+    <script src="../js/tag.js"></script>
     <script src="../js/script.js"></script>
   </body>
 </html>

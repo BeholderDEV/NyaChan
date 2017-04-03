@@ -1,5 +1,6 @@
 $primary-color: #dc143c;
 //$primary-color: #1abc42;
+$id-bg: #ccc;
 $text-color: #fff;
 $dark-bg: #333;
 $panel-bg: rgba(68,68,68,0.75);
@@ -16,6 +17,7 @@ body{
   background-size: cover;
   border-radius: $border-radius;
 }
+
 #loading-bar .bar{
   background:$primary-color;
   height:3px;
@@ -33,19 +35,29 @@ a {
 }
 
 .navbar-default{
-    background-color: $panel-dark-bg;
-    border: none;
-    .navbar-brand{
-        color: $text-color;
-        font-size: 24px;
-        margin-top: 7px;
-    }
+  background-color: $panel-dark-bg;
+  border: none;
+  .navbar-brand{
+      color: $text-color;
+      font-size: 24px;
+      margin-top: 7px;
+  }
+  
 }
+
 .btn{
   border-radius: $border-radius;
   &.btn-board{
     background-color:$panel-bg;
     border: none;
+  }
+  &.post-button{
+    background-color:$primary-color;
+    color: $text-color;
+    &:hover{
+      background-color:$panel-bg;
+      color: $text-color;
+    }
   }
 }
 input, textarea{
@@ -130,13 +142,9 @@ input, textarea{
     border: none;
     li{
       border-radius: $border-radius;
-      background-color: $panel-bg;
       border: none;
       margin: 5px;
-      p{
-        word-wrap: break-word;
-        margin: 0;
-      }
+      padding: 0;
     }
   }
 
@@ -169,6 +177,17 @@ input, textarea{
     opacity: 0.6;
   }
 }
+.id{
+  font-size: 11px;
+  background-color: $dark-bg !important;
+  color: $text-color;
+}
 footer{
   margin-top: 20px;
+}
+.navbar-default .navbar-nav > li > a{
+  color: $text-color !important;
+  &:hover{
+    color: $primary-color !important;
+  }
 }
