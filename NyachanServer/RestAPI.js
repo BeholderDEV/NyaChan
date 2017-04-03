@@ -41,13 +41,34 @@ function sendDataDropbox(name, data, callback){
     });
 }
 
-function resizeImage(file, callback){
-    imgResizer.open(file.path, function(err, image){
-		image.resize(125, 125, function(err, imageResize){
-			imageResize.toBuffer('jpg', function(err, buffer){
-				return callback(buffer);
-		    });
-		});		
+function resizeImage(file, op, callback){
+		var baseH = 125;
+		if(op == 1){
+			baseH = 250;
+		}
+		imgResizer.open(file.path, function(err, image){
+			var w = image.width();
+			var h = image.height();
+			var neww = w;
+			var newh = h;
+			if(w > h){
+				neww = baseH;
+				newh = h * (baseH / w);
+			}
+			else if(w > baseH || h > baseH){
+				newh = baseH;
+				neww = w * (baseH / h);
+			}
+			image.resize(neww, newh, function(err, imageResize){
+				imgResizer.create(imageResize.width(), imageResize.height(), 'white', function(err, canvas){
+			    canvas.paste(0, 0, imageResize, function(err, imageCanvas){
+						imageCanvas.toBuffer('jpg', function(err, buffer){
+						 		return callback(buffer);
+						 });
+			    });
+				});
+
+			});
 	});
 }
 
@@ -55,7 +76,7 @@ module.exports = function(app, express, path){
 
 	app.use(express.static(path.join(__dirname, '/../')));
 
-	app.post('/dbxPost', function (req, res) {
+	app.post('/dbxPost/:op', function (req, res) {
 		var form = new formidable.IncomingForm();
 		var respostaUrl = new Object();
 		form.keepExtensions = true;
@@ -64,7 +85,7 @@ module.exports = function(app, express, path){
 		    fs.readFile(file.path, function (err, data) {
 		    	sendDataDropbox(file.name, data, function(url){
 		    		respostaUrl.mainUrl = url;
-		    		resizeImage(file, function(buffer){
+		    		resizeImage(file, req.params.op ,function(buffer){
 						sendDataDropbox(file.name, buffer, function(urlThumb){
 							respostaUrl.thumbUrl = urlThumb;
 							res.send(respostaUrl);
