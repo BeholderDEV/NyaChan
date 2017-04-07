@@ -72,7 +72,7 @@
                     }
         }).then(function successCallback(response) {
             console.log(response.data);
-          	valid=response.body.success;
+          	valid=response.data.body.success;
             validatedPost(valid);
         }, function errorCallback(response) {
             console.log(response);
