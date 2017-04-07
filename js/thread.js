@@ -61,8 +61,6 @@
 
 
       $scope.addPost = function(post){
-				var valid;
-
 				$http({
           url: "https://nyachan-server.herokuapp.com/recaptcha",
           method: "POST",
@@ -72,8 +70,7 @@
                     }
         }).then(function successCallback(response) {
             console.log(response.data.body);
-          	valid=response.data.body;
-            validatedPost(valid);
+            validatedPost(response.data.body);
         }, function errorCallback(response) {
             console.log(response);
           	console.log('erro verificação');
