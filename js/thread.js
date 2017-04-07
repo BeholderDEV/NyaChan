@@ -76,7 +76,8 @@
             validatedPost(valid);
         }, function errorCallback(response) {
             console.log(response);
-          	console.log('erro verificação');;
+          	console.log('erro verificação');
+						return;
         });
 
 				function validatedPost(valid)
