@@ -67,9 +67,8 @@
           url: "https://nyachan-server.herokuapp.com/recaptcha",
           method: "POST",
           data: {'response' :  $scope.response},
-          withCredentials: true,
           headers: {
-                      'Content-Type': 'application/x-www-form-urlencoded'
+                      'Content-Type': 'application/json; charset=utf-8'
                     }
         }).then(function successCallback(response) {
             console.log(response.data);
