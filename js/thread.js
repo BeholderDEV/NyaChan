@@ -72,8 +72,6 @@
                     }
         }).then(function successCallback(response) {
             console.log(response.data.body);
-						console.log(response.data.body.success);
-						console.log(response.data.body[0].success);
           	valid=response.data.body;
             validatedPost(valid);
         }, function errorCallback(response) {
