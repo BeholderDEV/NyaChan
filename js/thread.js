@@ -110,6 +110,14 @@
 									}
 
 							};
+							xhr.upload.addEventListener("progress", function (evt)
+              {
+                if (evt.lengthComputable)
+                {
+                    var percentComplete = evt.loaded / evt.total;
+                    $('#loader').width(Math.round(percentComplete * 100)+'%');
+                }
+              }, false);
 							xhr.open('post', '/dbxPost/0', true);
 							xhr.send(formData);
 						}else{
