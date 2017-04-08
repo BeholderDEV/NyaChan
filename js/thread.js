@@ -69,7 +69,6 @@
                       'Content-Type': 'application/json; charset=utf-8'
                     }
         }).then(function successCallback(response) {
-            console.log(JSON.parse(response.data.body).success);
             validatedPost(JSON.parse(response.data.body).success);
         }, function errorCallback(response) {
             console.log(response);
