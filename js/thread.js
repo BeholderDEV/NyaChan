@@ -116,6 +116,9 @@
                 {
                     var percentComplete = evt.loaded / evt.total;
                     $('#loader').width(Math.round(percentComplete * 100)+'%');
+										if(Math.round(percentComplete * 100)==100){
+											$('#newThreadModal').modal('hide');
+										}
                 }
               }, false);
 							xhr.open('post', '/dbxPost/0', true);
