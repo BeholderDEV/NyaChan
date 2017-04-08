@@ -93,6 +93,9 @@
             <h4 class="modal-title">Reply Thread</h4>
           </div>
           <div class="modal-body">
+            <div class="progress">
+              <div id="loader" class="progress-bar bg-info" role="progressbar" style="width: 0%; height: 3px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
             <form id="comment-form" name="comment-form" class="form-horizontal" method="post" enctype="multipart/form-data">
               <div class="form-group">
                 <label class="col-sm-2 control-label">Subject</label>
@@ -134,7 +137,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="submit" ng-click="addPost(post)" class="btn btn-nya post-button" data-dismiss="modal">Post</button>
+          <button type="submit" ng-click="addPost(post)" class="btn btn-nya post-button">Post</button>
         </div>
       </div>
     </div>
