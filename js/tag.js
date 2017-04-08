@@ -77,7 +77,15 @@
 
 					function validatedPost(valid)
 	        {
-
+						if (valid) {
+								console.log('Success');
+						} else {
+								console.log('Failed validation');
+								// In case of a failed validation you need to reload the captcha
+								// because each response can be checked just once
+								vcRecaptchaService.reload($scope.widgetId);
+								return;
+						}
 	          var selectedOptions = $('#selectTags option:selected');
 	          // console.log(selectedOptions[0].value);
 	          if(selectedOptions.lenght === 0){
@@ -158,6 +166,7 @@
 		          }).then(function mySucces(response) {
 		                console.log(response.data);
 		                $scope.threads = $scope.search();
+										vcRecaptchaService.reload($scope.widgetId);
 		          }, function myError(response) {
 		                console.log(response || "Request failed");
 		          });

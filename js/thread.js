@@ -78,6 +78,15 @@
 
 				function validatedPost(valid)
         {
+						if (valid) {
+								console.log('Success');
+						} else {
+								console.log('Failed validation');
+								// In case of a failed validation you need to reload the captcha
+								// because each response can be checked just once
+								vcRecaptchaService.reload($scope.widgetId);
+								return;
+						}
 		        var files = $("#file")[0].files[0];
 
 		        if(typeof post == "undefined"){
@@ -88,15 +97,7 @@
 		        if(!validarPost(post, files)){
 		            return;
 		        }
-						if (valid) {
-								console.log('Success');
-						} else {
-								console.log('Failed validation');
-								// In case of a failed validation you need to reload the captcha
-								// because each response can be checked just once
-								vcRecaptchaService.reload($scope.widgetId);
-								return;
-						}
+
 
 						if(typeof files !== "undefined"){
 							var formData = new FormData();
@@ -180,6 +181,7 @@
 										}
 								}).then(function mySucces(response) {
 										$scope.thread = $scope.searchThread(searchId);
+										vcRecaptchaService.reload($scope.widgetId);
 										console.log(response);
 
 								}, function myError(response) {
