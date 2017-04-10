@@ -15,6 +15,10 @@ module.exports = function(app){
 	  var ipAddr = req.headers["x-forwarded-for"];
 	  if (ipAddr){
 	    var list = ipAddr.split(",");
+			console.log("aaaaaaaaaaaaaaaaa");
+			for (var i = 0; i < list.length; i++) {
+				console.log("Here Dude: " + list[i]);
+			};
 	    ipAddr = list[list.length-1];
 	  } else {
 	    ipAddr = req.connection.remoteAddress;
