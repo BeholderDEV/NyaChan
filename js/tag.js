@@ -9,7 +9,42 @@
         $scope.time_zone = new Date().getTimezoneOffset();
         var url = $(location).attr('href');
         var searchTag = url.substring(url.lastIndexOf('/') + 1);
-        $scope.tag = searchTag;
+				var tagName = 'Anime';
+				switch(searchTag) {
+			    case 'a':
+		        tagName = 'Anime & Mangá';
+		        break;
+					case 'c':
+		        tagName = 'Quadrinhos & Desenhos Animados';
+		        break;
+					case 'g':
+		        tagName = 'Gif & Webm';
+		        break;
+					case 'h':
+		        tagName = 'História e Ciências Humanas';
+		        break;
+					case 'm':
+						tagName = 'História e Ciências Humanas';
+						break;
+					case 't':
+		        tagName = 'Tecnologia';
+		        break;
+					case 'tv':
+		        tagName = 'Televisão & Filmes';
+		        break;
+					case 'v':
+		        tagName = 'Vídeo Games';
+		        break;
+					case 'b':
+		        tagName = 'Aleatório';
+		        break;
+					case 'p':
+		        tagName = 'Politicamente Incorreto';
+		        break;
+			    default:
+		        tagName = 'Aleatório';
+				}
+        $scope.tag = tagName;
 
 				$scope.response = null;
 	      $scope.widgetId = null;
