@@ -51,7 +51,6 @@
 
 	      $scope.setResponse = function (response) {
 	          console.info('Response available');
-
 	          $scope.response = response;
 	      };
 
