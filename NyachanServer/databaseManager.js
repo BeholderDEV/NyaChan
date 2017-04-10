@@ -11,7 +11,16 @@ module.exports = function(app){
 	var url = 'mongodb://alisson:123456@ds053206.mlab.com:53206/nyachan_data';
 
 	app.get('/app/threads', function (req, res) {
-		console.log("------------------> IP: " + req.headers['x-forwarded-for']);
+
+	  var ipAddr = req.headers["x-forwarded-for"];
+	  if (ipAddr){
+	    var list = ipAddr.split(",");
+	    ipAddr = list[list.length-1];
+	  } else {
+	    ipAddr = req.connection.remoteAddress;
+	  }
+
+		console.log("------------------> IP: " + ipAddr);
 		MongoClient.connect(url, function(err, db) {
 		if (err) {
 			console.log('Unable to connect to the mongoDB server. Error:', err);
