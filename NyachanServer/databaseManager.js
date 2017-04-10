@@ -28,8 +28,23 @@ module.exports = function(app){
 		});
 	})
 
+	app.get('/app/threads', function (req, res) {
+		MongoClient.connect(url, function(err, db) {
+		if (err) {
+			console.log('Unable to connect to the mongoDB server. Error:', err);
+		} else {
+			console.log('Connection established to', url);
+			db.collection('thread').find( { } ).toArray(function(error, documents) {
+					if (err){
+							throw error;
+					}
+					res.jsonp(documents);
+			});
 
-
+			db.close();
+			}
+		});
+	})
 
   app.get('/app/thread/:idThread', function (req, res) {
       MongoClient.connect(url, function(err, db) {
@@ -68,15 +83,36 @@ module.exports = function(app){
 	})
 
 	app.post('/app/thread/newPost', function (req, res){
-	    var newPost = req.body;
-	    console.log(newPost);
+			var newThread = req.body;
+			var date = new Date();
+			newThread.date =  date.getTime();
+			if(newThread.tags[0] == undefined){
+				res.status(403);
+				res.send({'error':'An error has occurred'});
+					return;
+			}
+			if(newThread.file!==undefined)
+			{
+					var filename = newThread.file[0].name;
+
+					var validFormats = ['jpg','jpeg','png', 'gif','bmp', 'webm', 'pdf' ];
+					var ext = filename.substring(filename.lastIndexOf('.') + 1).toLowerCase();
+
+					if(validFormats.indexOf(ext) == -1)
+					{
+							res.status(403);
+							res.send({'error':'An error has occurred'});
+							return;
+					}
+			}
+
 	    MongoClient.connect(url, function(err, db) {
 	        if (err) {
 	        	console.log('Unable to connect to the mongoDB server. Error:', err);
 	        } else {
 		        console.log('Connection established to', url);
 						db.collection('thread').update({'_id': ObjectId(newPost.threadid)}, { $inc: {numberOfPosts: 1}});
-
+						db.collection('thread').update({'_id': ObjectId(newPost.threadid)}, { lastDate: newThread.date });
 		        db.collection('thread', function(err, collection) {
 		            collection.update({'_id': ObjectId(newPost.threadid)}, { $push: {post: newPost}} , function(err, result) {
 		                if (err) {
@@ -94,14 +130,38 @@ module.exports = function(app){
 	})
 
 	app.post('/thread/newThread', function (req, res){
-	    MongoClient.connect(url, function(err, db) {
+			var newThread = req.body;
+			var date = new Date();
+			newThread.date =  date.getTime();
+			if(newThread.tags[0] == undefined){
+				res.status(403);
+				res.send({'error':'An error has occurred'});
+					return;
+
+			if(newThread.file!==undefined)
+			{
+					var filename = newThread.file[0].name;
+
+					var validFormats = ['jpg','jpeg','png', 'gif','bmp', 'webm', 'pdf' ];
+					var ext = filename.substring(filename.lastIndexOf('.') + 1).toLowerCase();
+
+					if(validFormats.indexOf(ext) == -1)
+					{
+							res.status(403);
+							res.send({'error':'An error has occurred'});
+							return;
+					}
+			}
+
+			MongoClient.connect(url, function(err, db) {
 	        if (err) {
 	        	console.log('Unable to connect to the mongoDB server. Error:', err);
 	        } else {
 		        console.log('Connection established to', url);
-						req.body.numberOfPosts = 1;
+						newThread.numberOfPosts = 1;
+						newThread.lastDate = newThread.date;
 		        db.collection('thread', function(err, collection) {
-		            collection.insert(req.body, {safe:true}, function(err, result) {
+		            collection.insert(newThread, {safe:true}, function(err, result) {
 		                if (err) {
 		                    console.log('Error ' + err);
 		                    res.send({'error':'An error has occurred'});
