@@ -44,7 +44,8 @@
 			    default:
 		        tagName = 'Aleatório';
 				}
-        $scope.tag = tagName;
+        $scope.tag = searchTag;
+				$scope.tagName = tagName;
 
 				$scope.response = null;
 	      $scope.widgetId = null;
