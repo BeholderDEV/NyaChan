@@ -119,6 +119,14 @@
 		              }
 
 		          };
+							xhr.upload.addEventListener("progress", function (evt)
+              {
+                if (evt.lengthComputable)
+                {
+                    var percentComplete = evt.loaded / evt.total;
+                    $('#loader').width(Math.round(percentComplete * 100)+'%');
+                }
+              }, false);
 		          xhr.open('post', '/dbxPost/1', true);
 		          xhr.send(formData);
 		        }else{
@@ -167,6 +175,8 @@
 		                console.log(response.data);
 		                $scope.threads = $scope.search();
 										vcRecaptchaService.reload($scope.widgetId);
+										$('#newThreadModal').modal('hide');
+										$('#loader').width('0%');
 		          }, function myError(response) {
 		                console.log(response || "Request failed");
 		          });

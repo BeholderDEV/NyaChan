@@ -116,13 +116,6 @@
                 {
                     var percentComplete = evt.loaded / evt.total;
                     $('#loader').width(Math.round(percentComplete * 100)+'%');
-										if(Math.round(percentComplete * 100)==100){
-											setTimeout(function(){
-												$('#newThreadModal').modal('hide');
-												$('#loader').width('0%');
-											}, 500);
-
-										}
                 }
               }, false);
 							xhr.open('post', '/dbxPost/0', true);
@@ -182,6 +175,8 @@
 								}).then(function mySucces(response) {
 										$scope.thread = $scope.searchThread(searchId);
 										vcRecaptchaService.reload($scope.widgetId);
+										$('#newThreadModal').modal('hide');
+										$('#loader').width('0%');
 										console.log(response);
 
 								}, function myError(response) {
