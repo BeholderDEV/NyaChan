@@ -35,7 +35,7 @@ module.exports = function(app){
 			console.log('Unable to connect to the mongoDB server. Error:', err);
 		} else {
 			console.log('Connection established to', url);
-			db.collection('thread').find( { } ).sort( {sortType: 1 } ).toArray(function(error, documents) {
+			db.collection('thread').find( { } ).sort( {sortType: -1 } ).toArray(function(error, documents) {
 					if (err){
 							throw error;
 					}
