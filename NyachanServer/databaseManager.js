@@ -68,7 +68,6 @@ module.exports = function(app){
 	})
 
 	app.post('/app/thread/newPost', function (req, res){
-		console.log("aaaa");
 	    var newPost = req.body;
 	    console.log(newPost);
 	    MongoClient.connect(url, function(err, db) {
@@ -78,7 +77,7 @@ module.exports = function(app){
 		        console.log('Connection established to', url);
 
 		        db.collection('thread', function(err, collection) {
-		            collection.update({'_id': ObjectId(newPost.threadid)},{ $push: {post: newPost}}, {$inc: {numberOfPosts: 1}}, function(err, result) {
+		            collection.update({'_id': ObjectId(newPost.threadid)}, {$inc: {numberOfPosts: 1}, { $push: {post: newPost}}}, function(err, result) {
 		                if (err) {
 		                    console.log('Error ' + err);
 		                    res.send({'error':'An error has occurred'});
