@@ -12,19 +12,6 @@ module.exports = function(app){
 
 	app.get('/app/threads', function (req, res) {
 
-	  var ipAddr = req.headers["x-forwarded-for"];
-	  if (ipAddr){
-	    var list = ipAddr.split(",");
-			console.log("aaaaaaaaaaaaaaaaa");
-			for (var i = 0; i < list.length; i++) {
-				console.log("Here Dude: " + list[i]);
-			};
-	    ipAddr = list[list.length-1];
-	  } else {
-	    ipAddr = req.connection.remoteAddress;
-	  }
-
-		console.log("------------------> IP: " + ipAddr);
 		MongoClient.connect(url, function(err, db) {
 		if (err) {
 			console.log('Unable to connect to the mongoDB server. Error:', err);
@@ -101,6 +88,7 @@ module.exports = function(app){
 
 	app.post('/app/thread/newPost', function (req, res){
 			var newPost = req.body;
+			newPost.userIP = req.headers["x-forwarded-for"];
 			var date = new Date();
 			newPost.date =  date.getTime();
 			if(newPost.file!==undefined)
@@ -143,6 +131,7 @@ module.exports = function(app){
 
 	app.post('/thread/newThread', function (req, res){
 			var newThread = req.body;
+			newThread.userIP = req.headers["x-forwarded-for"];
 			var date = new Date();
 			newThread.date =  date.getTime();
 			if(newThread.tags[0] == undefined){
