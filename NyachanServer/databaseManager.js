@@ -107,7 +107,7 @@ module.exports = function(app){
 	        } else {
 		        console.log('Connection established to', url);
 						db.collection('thread').update({'_id': ObjectId(newPost.threadid)}, { $inc: {numberOfPosts: 1}});
-						db.collection('thread').update({'_id': ObjectId(newPost.threadid)}, { lastDate: newPost.date });
+						db.collection('thread').update({'_id': ObjectId(newPost.threadid)}, { $push: {lastDate: newPost.date} });
 		        db.collection('thread', function(err, collection) {
 		            collection.update({'_id': ObjectId(newPost.threadid)}, { $push: {post: newPost}} , function(err, result) {
 		                if (err) {
