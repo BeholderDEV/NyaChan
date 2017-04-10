@@ -11,6 +11,7 @@ module.exports = function(app){
 	var url = 'mongodb://alisson:123456@ds053206.mlab.com:53206/nyachan_data';
 
 	app.get('/app/threads', function (req, res) {
+		console.log("------------------> IP: " + req.connection.remoteAddress);
 		MongoClient.connect(url, function(err, db) {
 		if (err) {
 			console.log('Unable to connect to the mongoDB server. Error:', err);
