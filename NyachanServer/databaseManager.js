@@ -30,12 +30,14 @@ module.exports = function(app){
 
 	app.get('/app/threads/:sortType', function (req, res) {
 		var sortType = req.params.sortType;
+		var query = {};
+		query[sortType]= -1;
 		MongoClient.connect(url, function(err, db) {
 		if (err) {
 			console.log('Unable to connect to the mongoDB server. Error:', err);
 		} else {
 			console.log('Connection established to', url);
-			db.collection('thread').find( { } ).sort( {lastDate: -1 } ).toArray(function(error, documents) {
+			db.collection('thread').find( { } ).sort(query).toArray(function(error, documents) {
 					if (err){
 							throw error;
 					}
