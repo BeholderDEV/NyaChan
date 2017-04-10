@@ -10,7 +10,7 @@
 	    $scope.search = function() {
 	        $http({
 	            method : "GET",
-	            url: "https://nyachan-server.herokuapp.com/app/threads/lastDate"
+	            url: "https://nyachan-server.herokuapp.com/app/threads/numberOfPosts"
 	        }).then(function mySucces(response) {
 	            $scope.threads = response.data;
 	        }, function myError(response) {
