@@ -28,13 +28,14 @@ module.exports = function(app){
 		});
 	})
 
-	app.get('/app/threads', function (req, res) {
+	app.get('/app/threads/:sortType', function (req, res) {
+		var sortType = req.params.sortType;
 		MongoClient.connect(url, function(err, db) {
 		if (err) {
 			console.log('Unable to connect to the mongoDB server. Error:', err);
 		} else {
 			console.log('Connection established to', url);
-			db.collection('thread').find( { } ).toArray(function(error, documents) {
+			db.collection('thread').find( { } ).sort( {sortType: 1 } ).toArray(function(error, documents) {
 					if (err){
 							throw error;
 					}
