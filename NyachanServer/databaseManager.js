@@ -137,7 +137,7 @@ module.exports = function(app){
 				res.status(403);
 				res.send({'error':'An error has occurred'});
 					return;
-
+		  }
 			if(newThread.file!==undefined)
 			{
 					var filename = newThread.file[0].name;
