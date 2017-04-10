@@ -42,7 +42,7 @@ a {
       font-size: 24px;
       margin-top: 7px;
   }
-  
+
 }
 
 .btn{
@@ -190,4 +190,12 @@ footer{
   &:hover{
     color: $primary-color !important;
   }
+}
+@-webkit-keyframes progress-bar-stripes {
+ from  { background-position: 0 0; }
+ to    { background-position: 40px 0; }
+}
+@-moz-keyframes progress-bar-stripes {
+ from  { background-position: 0 0; }
+ to    { background-position: 40px 0; }
 }

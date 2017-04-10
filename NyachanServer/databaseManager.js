@@ -15,9 +15,10 @@ module.exports = function(app){
 		if (err) {
 			console.log('Unable to connect to the mongoDB server. Error:', err);
 		} else {
+			console.log('Connection established to', url);
 			db.collection('thread').find( { } ).toArray(function(error, documents) {
 			    if (err){
-			        res.status(404).send("Not Found");
+			        throw error;
 			    }
 			    res.jsonp(documents);
 			});
@@ -25,38 +26,38 @@ module.exports = function(app){
 			db.close();
 		  }
 		});
-	});
+	})
 
+	app.get('/app/threads/:sortType', function (req, res) {
+		var sortType = req.params.sortType;
+		var query = {};
+		query[sortType]= -1;
+		MongoClient.connect(url, function(err, db) {
+		if (err) {
+			console.log('Unable to connect to the mongoDB server. Error:', err);
+		} else {
+			console.log('Connection established to', url);
+			db.collection('thread').find( { } ).sort(query).toArray(function(error, documents) {
+					if (err){
+							throw error;
+					}
+					res.jsonp(documents);
+			});
+
+			db.close();
+			}
+		});
+	})
 
   app.get('/app/thread/:idThread', function (req, res) {
       MongoClient.connect(url, function(err, db) {
 	        if (err) {
 	        	console.log('Unable to connect to the mongoDB server. Error:', err);
 	        } else {
-				try {
-					db.collection('thread').find( { _id: ObjectId(req.params.idThread)  }).toArray(function(error, documents) {
-			            if (error){
-							res.status(404).send("Not Found");
-			            }
-			            res.jsonp(documents);
-	        		});
-				} catch (err) {
-
-					res.status(404).send("Not Found");
-				}
-		        db.close();
-	        }
-	    });
-	});
-
-  app.get('/app/tag/:tagName', function (req, res) {
-      MongoClient.connect(url, function(err, db) {
-	        if (err) {
-	        	console.log('Unable to connect to the mongoDB server. Error:', err);
-	        } else {
-		        db.collection('thread').find( { tags: req.params.tagName} ).toArray(function(error, documents) {
+		        console.log('Connection established to', url);
+		        db.collection('thread').find( { _id: ObjectId(req.params.idThread)  } ).toArray(function(error, documents) {
 		            if (err){
-		                res.status(404).send("Not Found");
+		                throw error;
 		            }
 		            res.jsonp(documents);
 		        });
@@ -64,35 +65,54 @@ module.exports = function(app){
 		        db.close();
 	        }
 	    });
-	});
+	})
 
-	app.post('/app/thread/newPost', function (req, res){
-	    	var newPost = req.body;
-	    	console.log(newPost);
-			var date = new Date();
-			newPost.date =  date.getTime();
-
-            if(newPost.file!==undefined)
-            {
-                var filename = newPost.file[0].name;
-
-                var validFormats = ['jpg','jpeg','png', 'gif','bmp', 'webm', 'pdf' ];
-                var ext = filename.substring(filename.lastIndexOf('.') + 1).toLowerCase();
-
-                if(validFormats.indexOf(ext) == -1)
-                {
-                    res.status(403);
-                    res.send({'error':'An error has occurred'});
-                    return;
-                }
-            }
-			MongoClient.connect(url, function(err, db) {
+  app.get('/app/tag/:tagName', function (req, res) {
+      MongoClient.connect(url, function(err, db) {
 	        if (err) {
 	        	console.log('Unable to connect to the mongoDB server. Error:', err);
 	        } else {
+		        console.log('Connection established to', url);
+		        db.collection('thread').find( { tags: req.params.tagName} ).toArray(function(error, documents) {
+		            if (err){
+		                throw error;
+		            }
+		            res.jsonp(documents);
+		        });
 
+		        db.close();
+	        }
+	    });
+	})
+
+	app.post('/app/thread/newPost', function (req, res){
+			var newPost = req.body;
+			var date = new Date();
+			newPost.date =  date.getTime();
+			if(newPost.file!==undefined)
+			{
+					var filename = newPost.file[0].name;
+
+					var validFormats = ['jpg','jpeg','png', 'gif','bmp', 'webm', 'pdf' ];
+					var ext = filename.substring(filename.lastIndexOf('.') + 1).toLowerCase();
+
+					if(validFormats.indexOf(ext) == -1)
+					{
+							res.status(403);
+							res.send({'error':'An error has occurred'});
+							return;
+					}
+			}
+
+	    MongoClient.connect(url, function(err, db) {
+	        if (err) {
+	        	console.log('Unable to connect to the mongoDB server. Error:', err);
+	        } else {
+		        console.log('Connection established to', url);
+						db.collection('thread').update({'_id': ObjectId(newPost.threadid)}, { $inc: {numberOfPosts: 1}});
+						db.collection('thread').update({'_id': ObjectId(newPost.threadid)}, { $set: {lastDate: newPost.date}});
 		        db.collection('thread', function(err, collection) {
-		            collection.update({'_id': ObjectId(newPost.threadid)},{ $push: {post: newPost}}, function(err, result) {
+		            collection.update({'_id': ObjectId(newPost.threadid)}, { $push: {post: newPost}} , function(err, result) {
 		                if (err) {
 		                    console.log('Error ' + err);
 		                    res.send({'error':'An error has occurred'});
@@ -105,36 +125,39 @@ module.exports = function(app){
 		        db.close();
 	        }
 	    });
-	});
+	})
 
 	app.post('/thread/newThread', function (req, res){
-      var newThread = req.body;
+			var newThread = req.body;
 			var date = new Date();
 			newThread.date =  date.getTime();
 			if(newThread.tags[0] == undefined){
 				res.status(403);
 				res.send({'error':'An error has occurred'});
-				return;
+					return;
+		  }
+			if(newThread.file!==undefined)
+			{
+					var filename = newThread.file[0].name;
+
+					var validFormats = ['jpg','jpeg','png', 'gif','bmp', 'webm', 'pdf' ];
+					var ext = filename.substring(filename.lastIndexOf('.') + 1).toLowerCase();
+
+					if(validFormats.indexOf(ext) == -1)
+					{
+							res.status(403);
+							res.send({'error':'An error has occurred'});
+							return;
+					}
 			}
-            if(newThread.file!==undefined)
-            {
-                var filename = newThread.file[0].name;
 
-                var validFormats = ['jpg','jpeg','png', 'gif','bmp', 'webm', 'pdf' ];
-                var ext = filename.substring(filename.lastIndexOf('.') + 1).toLowerCase();
-
-                if(validFormats.indexOf(ext) == -1)
-                {
-                    res.status(403);
-                    res.send({'error':'An error has occurred'});
-                    return;
-                }
-            }
 			MongoClient.connect(url, function(err, db) {
 	        if (err) {
 	        	console.log('Unable to connect to the mongoDB server. Error:', err);
 	        } else {
-
+		        console.log('Connection established to', url);
+						newThread.numberOfPosts = 1;
+						newThread.lastDate = newThread.date;
 		        db.collection('thread', function(err, collection) {
 		            collection.insert(newThread, {safe:true}, function(err, result) {
 		                if (err) {
@@ -149,6 +172,6 @@ module.exports = function(app){
 		        db.close();
 	        }
 	    });
-	});
+	})
 
-};
+}
