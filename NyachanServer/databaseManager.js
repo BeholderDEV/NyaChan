@@ -77,7 +77,7 @@ module.exports = function(app){
 		        console.log('Connection established to', url);
 
 		        db.collection('thread', function(err, collection) {
-		            collection.update({'_id': ObjectId(newPost.threadid)}, {$inc: {numberOfPosts: 1}} ,{ $push: {post: newPost}}, , function(err, result) {
+		            collection.update({'_id': ObjectId(newPost.threadid)}, {$inc: {numberOfPosts: 1}} , { $push: {post: newPost}} , function(err, result) {
 		                if (err) {
 		                    console.log('Error ' + err);
 		                    res.send({'error':'An error has occurred'});
