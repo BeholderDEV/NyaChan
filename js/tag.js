@@ -9,14 +9,49 @@
         $scope.time_zone = new Date().getTimezoneOffset();
         var url = $(location).attr('href');
         var searchTag = url.substring(url.lastIndexOf('/') + 1);
+				var tagName = 'Anime';
+				switch(searchTag) {
+			    case 'a':
+		        tagName = 'Anime & Mangá';
+		        break;
+					case 'c':
+		        tagName = 'Quadrinhos & Desenhos Animados';
+		        break;
+					case 'g':
+		        tagName = 'Gif & Webm';
+		        break;
+					case 'h':
+		        tagName = 'História e Ciências Humanas';
+		        break;
+					case 'm':
+						tagName = 'História e Ciências Humanas';
+						break;
+					case 't':
+		        tagName = 'Tecnologia';
+		        break;
+					case 'tv':
+		        tagName = 'Televisão & Filmes';
+		        break;
+					case 'v':
+		        tagName = 'Vídeo Games';
+		        break;
+					case 'b':
+		        tagName = 'Aleatório';
+		        break;
+					case 'p':
+		        tagName = 'Politicamente Incorreto';
+		        break;
+			    default:
+		        tagName = 'Aleatório';
+				}
         $scope.tag = searchTag;
+				$scope.tagName = tagName;
 
 				$scope.response = null;
 	      $scope.widgetId = null;
 
 	      $scope.setResponse = function (response) {
 	          console.info('Response available');
-
 	          $scope.response = response;
 	      };
 
@@ -47,7 +82,7 @@
         $scope.search = function() {
             $http({
                 method : "GET",
-                url: "https://nyachan-server.herokuapp.com/app/tag/" + searchTag
+                url: "https://nyachan-server.herokuapp.com/app/tag/" + searchTag+"/lastDate"
                 // url: "http://localhost:3000/app/tag/" + searchTag
             }).then(function mySucces(response) {
                 $scope.threads = response.data;

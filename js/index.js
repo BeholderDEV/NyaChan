@@ -4,13 +4,13 @@
     .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
       cfpLoadingBarProvider.includeSpinner = false;
     }]);
-    
+
 	app.controller('indexController',function($scope, $http){
 	    $scope.time_zone = new Date().getTimezoneOffset();
 	    $scope.search = function() {
 	        $http({
 	            method : "GET",
-	            url: "https://nyachan-server.herokuapp.com/app/threads"
+	            url: "https://nyachan-server.herokuapp.com/app/threads/numberOfPosts"
 	        }).then(function mySucces(response) {
 	            $scope.threads = response.data;
 	        }, function myError(response) {

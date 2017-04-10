@@ -86,6 +86,27 @@ module.exports = function(app){
 	    });
 	})
 
+	app.get('/app/tag/:tagName/:sortType', function (req, res) {
+			var sortType = req.params.sortType;
+			var query = {};
+			query[sortType]= -1;
+			MongoClient.connect(url, function(err, db) {
+					if (err) {
+						console.log('Unable to connect to the mongoDB server. Error:', err);
+					} else {
+						console.log('Connection established to', url);
+						db.collection('thread').find( { tags: req.params.tagName} ).sort(query).toArray(function(error, documents) {
+								if (err){
+										throw error;
+								}
+								res.jsonp(documents);
+						});
+
+						db.close();
+					}
+			});
+	})
+
 	app.post('/app/thread/newPost', function (req, res){
 			var newPost = req.body;
 			newPost.userIP = req.headers["x-forwarded-for"];
