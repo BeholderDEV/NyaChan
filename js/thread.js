@@ -72,16 +72,14 @@
             validatedPost(JSON.parse(response.data.body).success);
         }, function errorCallback(response) {
             console.log(response);
-          	console.log('erro verificação');
 						return;
         });
 
 				function validatedPost(valid)
         {
 						if (valid) {
-								console.log('Success');
+
 						} else {
-								console.log('Failed validation');
 								// In case of a failed validation you need to reload the captcha
 								// because each response can be checked just once
 								vcRecaptchaService.reload($scope.widgetId);
@@ -97,7 +95,7 @@
 		        if(!validarPost(post, files)){
 		            return;
 		        }
-						
+
 						if(files!=null)
 						{
 							if(!validFile(files.name))
@@ -177,7 +175,6 @@
 										vcRecaptchaService.reload($scope.widgetId);
 										$('#newThreadModal').modal('hide');
 										$('#loader').width('0%');
-										console.log(response);
 
 								}, function myError(response) {
 										console.log(response || "Request failed");

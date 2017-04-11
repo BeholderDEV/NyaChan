@@ -106,16 +106,15 @@
 	            validatedPost(JSON.parse(response.data.body).success);
 	        }, function errorCallback(response) {
 	            console.log(response);
-	          	console.log('erro verificação');
 							return;
 	        });
 
 					function validatedPost(valid)
 	        {
 						if (valid) {
-								console.log('Success');
+
 						} else {
-								console.log('Failed validation');
+							
 								// In case of a failed validation you need to reload the captcha
 								// because each response can be checked just once
 								vcRecaptchaService.reload($scope.widgetId);
@@ -129,7 +128,6 @@
 	          }
 	          var selectTags = [];
 	          for(i = 0; i < selectedOptions.length; i++){
-	            console.log(i);
 	            selectTags.push(selectedOptions[i].value);
 	          }
 
@@ -215,7 +213,6 @@
 		                    'Content-Type': 'application/json'
 		              }
 		          }).then(function mySucces(response) {
-		                console.log(response.data);
 		                $scope.threads = $scope.search();
 										vcRecaptchaService.reload($scope.widgetId);
 										$('#newThreadModal').modal('hide');
