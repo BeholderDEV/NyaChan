@@ -18,13 +18,13 @@ $(".some-image").click(function(){
     var img = $(this).data('full');
     var full = '<img src="'+img+'" class="img-responsive nya-image-full" />';
     var tag = $(full);
-    tag.on("click", restore_image);
+    $(tag).on("click", restore_image);
     var w =  $(this).attr('width');
-    tag.attr('width', $(this).data('width'));
-    tag.data('width', w);
+    $(tag).attr('width', $(this).data('width'));
+    $(tag).data('width', w);
     var h =  $(this).attr('height');
-    tag.attr('height', $(this).data('height'));
-    tag.data('height', h);
+    $(tag).attr('height', $(this).data('height'));
+    $(tag).data('height', h);
     $(this).hide();
     $(this).parent().append(tag);
 
