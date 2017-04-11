@@ -12,7 +12,7 @@
 function restore_image(){
     $(this).parent().children(".some-image").show();
     $(this).remove();
-    alert(aqui)
+    alert('aqui')
 }
 $(".some-image").click(function(){
     var img = $(this).data('full');
