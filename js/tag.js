@@ -114,7 +114,7 @@
 						if (valid) {
 
 						} else {
-							
+
 								// In case of a failed validation you need to reload the captcha
 								// because each response can be checked just once
 								vcRecaptchaService.reload($scope.widgetId);
@@ -185,9 +185,11 @@
 		                  tags: selectTags,
 		                  file: [
 		                    {
-		                        size: 250,
+		                        size: uploadedFile.size,
 		                        name: files.name,
 		                        extension: ext,
+														height: uploadedFile.height,
+														width: uploadedFile.width,
 		                        source: uploadedFile.mainUrl,
 		                        thumb: uploadedFile.thumbUrl
 		                    }

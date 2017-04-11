@@ -72,6 +72,17 @@ function resizeImage(file, op, callback){
 	});
 }
 
+function setImageSizeDimension(file, callback){
+	var properties = new Object();
+	imgResizer.open(file.path, function(err, image){
+		properties.width = image.width();
+		properties.height = image.height();
+		var stats = fs.statSync(file.path);
+		properties.size = stats.size
+		return callback(properties);
+	});
+}
+
 module.exports = function(app, express, path){
 
 	app.use(express.static(path.join(__dirname, '/../')));
@@ -83,15 +94,20 @@ module.exports = function(app, express, path){
 		form.parse(req);
 		form.on('file', function(name, file) {
 		    fs.readFile(file.path, function (err, data) {
-		    	sendDataDropbox(file.name, data, function(url){
-		    		respostaUrl.mainUrl = url;
-		    		resizeImage(file, req.params.op ,function(buffer){
-						sendDataDropbox(file.name, buffer, function(urlThumb){
-							respostaUrl.thumbUrl = urlThumb;
-							res.send(respostaUrl);
+					setImageSizeDimension(file, function (properties){
+						respostaUrl.width = properties.width;
+						respostaUrl.height = properties.height;
+						respostaUrl.size = properties.size;
+						sendDataDropbox(file.name, data, function(url){
+							respostaUrl.mainUrl = url;
+							resizeImage(file, req.params.op ,function(buffer){
+								sendDataDropbox(file.name, buffer, function(urlThumb){
+									respostaUrl.thumbUrl = urlThumb;
+									res.send(respostaUrl);
+								});
+							});
 						});
-		    		});
-		    	});
+					});
 	  		});
 		});
 	});
