@@ -97,7 +97,15 @@
 		        if(!validarPost(post, files)){
 		            return;
 		        }
-
+						
+						if(files!=null)
+						{
+							if(!validFile(files.name))
+							{
+								alert("Arquivo Invalido");
+								return;
+							}
+						}
 
 						if(typeof files !== "undefined"){
 							var formData = new FormData();
@@ -125,15 +133,7 @@
 						}
 
 						function sendPost(file, uploadedFile){
-										if(file!=null)
-										{
-											if(!validFile(files.name))
-											{
-												alert("Arquivo Invalido");
-												return;
-											}
-										}
-								if(typeof files !== "undefined"){
+								if(typeof files !==undefined){
 										var ext = files.name.substring(files.name.lastIndexOf('.') + 1).toLowerCase();
 										var dataPost = {
 												id: "123123123",

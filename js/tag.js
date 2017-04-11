@@ -143,7 +143,15 @@
 	            return;
 	          }
 
-		        if(typeof files !== "undefined"){
+						if(files!=null)
+						{
+							if(!validFile(files.name))
+							{
+								alert("Arquivo Invalido");
+								return;
+							}
+						}
+		        if(typeof files !== undefined){
 		          var formData = new FormData();
 		          formData.append("fileData",files);
 		          var xhr = new XMLHttpRequest();
