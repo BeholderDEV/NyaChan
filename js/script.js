@@ -8,21 +8,11 @@
 //   }
 //
 // });
-// $(".some-image").click(function(){
-//     var img = $(this).attr('src');
-//     $(this).attr('src', $(this).data('full'));
-//     $(this).data('image', img);
-//     var w =  $(this).attr('width');
-//     $(this).attr('width', $(this).data('width'));
-//     $(this).data('width', w);
-//     var h =  $(this).attr('height');
-//     $(this).attr('height', $(this).data('height'));
-//     $(this).data('height', h);
-// });
+
 function restore_image(){
     $(this).parent().children(".some-image").show();
     $(this).remove();
-
+    alert(aqui)
 }
 $(".some-image").click(function(){
     var img = $(this).data('full');
