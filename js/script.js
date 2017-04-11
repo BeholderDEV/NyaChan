@@ -9,7 +9,7 @@
 //
 // });
 function restore_image(){
-    $(this).parent().children(".nya-image").show();
+    $(this).parent().children(".some-image").show();
     $(this).remove();
 
 }
