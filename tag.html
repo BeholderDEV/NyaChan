@@ -59,8 +59,12 @@
                 </div>
                 <div class="panel-body">
                   <a ng-href="{{t.file[0].source}}" target="_blank">{{t.file[0].name}}</a>
-                  <img data-full="{{t.file[0].source}}" data-thumb="{{t.file[0].thumb}}" data-is-full="0" ng-src="{{t.file[0].thumb}}" class="img-responsive some-image"/>
-                  {{t.body}}
+                  <div class="col-md-12">
+                    <img onclick="toggle($(this))" data-width="{{t.file[0].width}}" data-height="{{t.file[0].height}}" data-full="{{t.file[0].source}}" data-thumb="{{t.file[0].thumb}}" data-is-full="0"  ng-src="{{t.file[0].thumb}}" class="img-responsive some-image"/>
+                  </div>
+                  <div class="col-md-12">
+                    {{t.body}}
+                  </div>
                 </div>
                 <div class="panel-footer">
                   <ul class="list-group">
@@ -68,7 +72,7 @@
                       <div class="panel-heading">{{p.title}} - <span class="label id">{{p.idPost}} by {{p.userName}} on {{ p.date | date: 'MMM d, y H:mm:ss' : 'time_zone' }}</span></div>
                       <div class="panel-body">
                         <a ng-href="{{p.file[0].source}}" target="_blank">{{p.file[0].name}}</a>
-                        <img data-full="{{p.file[0].source}}" data-thumb="{{p.file[0].thumb}}" data-is-full="0" ng-src="{{p.file[0].thumb}}" class="img-responsive some-image"/>
+                        <img onclick="toggle($(this))" data-width="{{p.file[0].width}}" data-height="{{p.file[0].height}}" data-full="{{p.file[0].source}}" data-thumb="{{p.file[0].thumb}}" data-is-full="0"  ng-src="{{thread.file[0].thumb}}" class="img-responsive some-image"/>
                         <p>{{p.body}}</p>
                       </div>
                     </li>

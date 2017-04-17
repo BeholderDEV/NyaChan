@@ -12,7 +12,6 @@
 function restore_image(){
     $(this).parent().children(".some-image").show();
     $(this).remove();
-    alert('aqui')
 }
 function toggle(obj){
     var img = obj.data('full');
