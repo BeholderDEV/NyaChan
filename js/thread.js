@@ -181,7 +181,7 @@
 					          alertHtml = alertHtml.replace('${kind}', 'success');
 					          alertHtml = alertHtml.replace('${mensagem}', 'postado com sucesso');
 										$('body').append(alertHtml).show(200);
-										setTimeout(function(){$('.alert').fadeOut(100);}, 1000);
+										setTimeout(function(){$('.alert').hide();$('.alert').remove();}, 1000);
 
 								}, function myError(response) {
 										console.log(response || "Request failed");
