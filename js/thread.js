@@ -178,8 +178,8 @@
 										$('#newThreadModal').modal('hide');
 										$('#loader').width('0%');
 										var alertHtml = $("#alert-model").html();
-					          alertHtml = cardHtml.replace('${kind}', 'success');
-					          alertHtml = cardHtml.replace('${mensagem}', 'postado com sucesso');
+					          alertHtml = alertHtml.replace('${kind}', 'success');
+					          alertHtml = alertHtml.replace('${mensagem}', 'postado com sucesso');
 										$('body').append(alertHtml)
 								}, function myError(response) {
 										console.log(response || "Request failed");
