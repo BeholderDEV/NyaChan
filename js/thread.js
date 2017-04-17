@@ -142,11 +142,13 @@
 												userName: "Anon",
 												file: [
 													{
-															size: 250,
-															name: files.name,
-															extension: ext,
-															source: uploadedFile.mainUrl,
-															thumb: uploadedFile.thumbUrl
+														size: uploadedFile.size,
+		                        name: files.name,
+		                        extension: ext,
+														height: uploadedFile.height,
+														width: uploadedFile.width,
+		                        source: uploadedFile.mainUrl,
+		                        thumb: uploadedFile.thumbUrl
 													}
 												]
 										};
