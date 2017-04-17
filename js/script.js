@@ -28,7 +28,7 @@ function toggle(){
     $(this).hide();
     $(this).parent().append(tag);
 
-});
+}
 
 $(document).ready(function() {
   $('#selectTags').multiselect();
