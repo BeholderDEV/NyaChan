@@ -14,19 +14,19 @@ function restore_image(){
     $(this).remove();
     alert('aqui')
 }
-function toggle(){
-    var img = $(this).data('full');
+function toggle(obj){
+    var img = obj.data('full');
     var full = '<img src="'+img+'" class="img-responsive"/>';
     var tag = $(full);
     $(tag).on("click", restore_image);
-    var w =  $(this).attr('width');
-    $(tag).attr('width', $(this).data('width'));
+    var w =  obj.attr('width');
+    $(tag).attr('width', obj.data('width'));
     $(tag).data('width', w);
-    var h =  $(this).attr('height');
-    $(tag).attr('height', $(this).data('height'));
+    var h =  obj.attr('height');
+    $(tag).attr('height', obj.data('height'));
     $(tag).data('height', h);
-    $(this).hide();
-    $(this).parent().append(tag);
+    obj.hide();
+    obj.parent().append(tag);
 
 }
 
