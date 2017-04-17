@@ -26,7 +26,6 @@ function toggle(obj){
     $(tag).data('height', h);
     obj.hide();
     obj.parent().append(tag);
-
 }
 
 $(document).ready(function() {

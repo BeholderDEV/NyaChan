@@ -131,7 +131,7 @@
 						}
 
 						function sendPost(file, uploadedFile){
-								if(typeof files !==undefined){
+								if(typeof files !=="undefined"){
 										var ext = files.name.substring(files.name.lastIndexOf('.') + 1).toLowerCase();
 										var dataPost = {
 												id: "123123123",
@@ -177,7 +177,10 @@
 										vcRecaptchaService.reload($scope.widgetId);
 										$('#newThreadModal').modal('hide');
 										$('#loader').width('0%');
-
+										var alertHtml = $("#alert-model").html();
+					          cardHtml = cardHtml.replace('${kind}', 'success');
+					          cardHtml = cardHtml.replace('${mensagem}', 'postado com sucesso');
+										$('body').append(cardHtml)
 								}, function myError(response) {
 										console.log(response || "Request failed");
 								});
