@@ -180,7 +180,7 @@
 										var alertHtml = $("#alert-model").html();
 					          alertHtml = alertHtml.replace('${kind}', 'success');
 					          alertHtml = alertHtml.replace('${mensagem}', 'postado com sucesso');
-										$('body').append(alertHtml)
+										$('body').append(alertHtml).show(200);										
 								}, function myError(response) {
 										console.log(response || "Request failed");
 								});
