@@ -77,7 +77,7 @@
 
 				function validatedPost(valid)
         {
-						if (valid) {
+						if (true) {
 
 						} else {
 								// In case of a failed validation you need to reload the captcha
