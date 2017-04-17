@@ -178,9 +178,9 @@
 										$('#newThreadModal').modal('hide');
 										$('#loader').width('0%');
 										var alertHtml = $("#alert-model").html();
-					          cardHtml = cardHtml.replace('${kind}', 'success');
-					          cardHtml = cardHtml.replace('${mensagem}', 'postado com sucesso');
-										$('body').append(cardHtml)
+					          alertHtml = cardHtml.replace('${kind}', 'success');
+					          alertHtml = cardHtml.replace('${mensagem}', 'postado com sucesso');
+										$('body').append(alertHtml)
 								}, function myError(response) {
 										console.log(response || "Request failed");
 								});
