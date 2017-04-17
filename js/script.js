@@ -14,7 +14,7 @@ function restore_image(){
     $(this).remove();
     alert('aqui')
 }
-$(".some-image").click(function(){
+function toggle(){
     var img = $(this).data('full');
     var full = '<img src="'+img+'" class="img-responsive"/>';
     var tag = $(full);
