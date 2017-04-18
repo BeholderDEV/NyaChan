@@ -149,7 +149,7 @@
 								return;
 							}
 						}
-		        if(typeof files !== undefined){
+		        if(typeof files !== "undefined"){
 		          var formData = new FormData();
 		          formData.append("fileData",files);
 		          var xhr = new XMLHttpRequest();

@@ -77,7 +77,7 @@
 
 				function validatedPost(valid)
         {
-						if (valid) {
+						if (true) {
 
 						} else {
 								// In case of a failed validation you need to reload the captcha
@@ -131,7 +131,7 @@
 						}
 
 						function sendPost(file, uploadedFile){
-								if(typeof files !==undefined){
+								if(typeof files !=="undefined"){
 										var ext = files.name.substring(files.name.lastIndexOf('.') + 1).toLowerCase();
 										var dataPost = {
 												id: "123123123",
@@ -177,6 +177,19 @@
 										vcRecaptchaService.reload($scope.widgetId);
 										$('#newThreadModal').modal('hide');
 										$('#loader').width('0%');
+										var alertHtml = $("#alert-model").html();
+					          alertHtml = alertHtml.replace('${kind}', 'success');
+					          alertHtml = alertHtml.replace('${mensagem}', 'Postado com sucesso');
+										setTimeout(function(){
+											$('.alert-success').animate({ "left": "+=600px" }, "slow",
+												function(){
+											    $('.alert-success').remove();
+											  }
+											)
+										}, 3000);
+										$('body').append(alertHtml);
+										$('.alert-success').animate({ "left": "-=600px" }, "slow" );
+
 
 								}, function myError(response) {
 										console.log(response || "Request failed");
