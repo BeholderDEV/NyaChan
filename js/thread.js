@@ -188,6 +188,9 @@
 											)
 										}, 1000);
 										$('body').append(alertHtml).show(200);
+										animate({
+					            right: '600px',
+					        });
 
 
 								}, function myError(response) {
