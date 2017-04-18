@@ -181,14 +181,14 @@
 					          alertHtml = alertHtml.replace('${kind}', 'success');
 					          alertHtml = alertHtml.replace('${mensagem}', 'postado com sucesso');
 										setTimeout(function(){
-											$('.alert-success').hide("slow",
+											$('.alert-success').animate({ "left": "-=600px" }, "slow",
 												function(){
 											    $('.alert-success').remove();
 											  }
 											)
-										}, 1000);
+										}, 3000);
 										$('body').append(alertHtml);
-										$('.alert-success').animate({ "left": "-=600px" }, "slow" );;
+										$('.alert-success').animate({ "left": "-=600px" }, "slow" );
 
 
 								}, function myError(response) {
