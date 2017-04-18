@@ -187,10 +187,7 @@
 											  }
 											)
 										}, 1000);
-										$('body').append(alertHtml).show(200);
-										animate({
-					            right: '600px',
-					        });
+										$('body').append(alertHtml).animate({ "left": "-=600px" }, "slow" );;
 
 
 								}, function myError(response) {
