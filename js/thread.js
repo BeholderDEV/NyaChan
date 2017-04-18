@@ -181,7 +181,7 @@
 										$("#alert-model").append(alertHtml);
 					          alertHtml = alertHtml.replace('${kind}', 'success');
 					          alertHtml = alertHtml.replace('${mensagem}', 'postado com sucesso');
-										setTimeout(function(){$(alertHtml).slideRight("slow");}, 1000);
+										setTimeout(function(){$('.alert').hide("slow");}, 1000);
 										$('body').append(alertHtml).show(200);
 
 
