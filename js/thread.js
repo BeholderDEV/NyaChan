@@ -181,9 +181,9 @@
 					          alertHtml = alertHtml.replace('${kind}', 'success');
 					          alertHtml = alertHtml.replace('${mensagem}', 'postado com sucesso');
 										setTimeout(function(){
-											$('.alert-sucess').hide("slow",
+											$('.alert-success').hide("slow",
 												function(){
-											    $('.alert-sucess').remove();
+											    $('.alert-success').remove();
 											  }
 											)
 										}, 1000);
