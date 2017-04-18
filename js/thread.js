@@ -179,7 +179,7 @@
 										$('#loader').width('0%');
 										var alertHtml = $("#alert-model").html();
 					          alertHtml = alertHtml.replace('${kind}', 'success');
-					          alertHtml = alertHtml.replace('${mensagem}', 'postado com sucesso');
+					          alertHtml = alertHtml.replace('${mensagem}', 'Postado com sucesso');
 										setTimeout(function(){
 											$('.alert-success').animate({ "left": "+=600px" }, "slow",
 												function(){
