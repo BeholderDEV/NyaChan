@@ -187,7 +187,8 @@
 											  }
 											)
 										}, 1000);
-										$('body').append(alertHtml).animate({ "left": "-=600px" }, "slow" );;
+										$('body').append(alertHtml);
+										$('.alert-success').animate({ "left": "-=600px" }, "slow" );;
 
 
 								}, function myError(response) {
