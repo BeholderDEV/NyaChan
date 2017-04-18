@@ -1,7 +1,5 @@
 #NyaChan
 
-[![Build Status](https://travis-ci.org/BeholderDEV/NyaChan.svg?branch=master)](https://travis-ci.org/BeholderDEV/NyaChan)
-
 __NyaChan__ _(Nyarlathotep Channel)_ is a imageboard project developed by [Adson](https://github.com/AdsonEsteves), [Alisson](https://github.com/AlissonSteffens) and [Augusto](https://github.com/Augus-top) for a Software Engineering class.
 
 
