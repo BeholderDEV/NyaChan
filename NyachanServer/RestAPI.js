@@ -115,8 +115,8 @@ module.exports = function(app, express, path){
 			var form = new formidable.IncomingForm();
 			form.keepExtensions = true;
 			form.parse(req, function(err, fields, files) {
-					console.log("FIELDS: " + fields);
-					console.log("FILES" + files);
+					console.log("FIELDS: " + JSON.parse(fields));
+					console.log("FILES" + JSON.parse(files));
 					res.send("Batata");
 			});
 
