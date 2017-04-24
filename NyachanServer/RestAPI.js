@@ -114,18 +114,23 @@ module.exports = function(app, express, path){
 	app.post('/dbxAvatar', function (req, res) {
 			var form = new formidable.IncomingForm();
 			form.keepExtensions = true;
-			form.parse(req);
-			form.on('file', function(name, file) {
-				console.log("EXTENSION: " + file.extension);
-				console.log("aa");
-				fs.readFile(file.path, function (err, data) {
-					resizeImage(data, 0 , function(buffer){
-						sendDataDropbox(file.name, buffer, function(url){
-							res.send(url);
-						});
-					});
-				});
+			form.parse(req, function(err, fields, files) {
+					console.log("FIELDS: " + fields);
+					console.log("FILES" + files);
+					res.send("Batata");
 			});
+
+			// form.on('file', function(name, file) {
+			// 	console.log("EXTENSION: " + file.extension);
+			// 	console.log("aa");
+			// 	fs.readFile(file.path, function (err, data) {
+			// 		resizeImage(data, 0 , function(buffer){
+			// 			sendDataDropbox(file.name, buffer, function(url){
+			// 				res.send(url);
+			// 			});
+			// 		});
+			// 	});
+			// });
 	});
 
 	app.post('/recaptcha', function (req, res, $http) {
