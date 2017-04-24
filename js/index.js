@@ -70,7 +70,7 @@ function base64ToBlob(base64, mime)
 
 				if(typeof avatar !== "undefined"){
 					var formData = new FormData();
-					var base64ImageContent = avatar.replace(/^data:image\/(png|jpg);base64,/, "");
+					var base64ImageContent = avatar.replace(/^data:image\/(png|jpeg);base64,/, "");
 					var blob = base64ToBlob(base64ImageContent, 'image/png');
 
 
