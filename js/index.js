@@ -6,23 +6,6 @@
     }]);
 
 	app.controller('indexController',function($scope, $http){
-
-			$scope.myImage='';
-			$scope.myCroppedImage='';
-
-			var handleFileSelect=function(evt) {
-				var file=evt.currentTarget.files[0];
-				var reader = new FileReader();
-				reader.onload = function (evt) {
-					$scope.$apply(function($scope){
-						$scope.myImage=evt.target.result;
-					});
-				};
-				reader.readAsDataURL(file);
-			};
-			angular.element(document.querySelector('#fileInput')).on('change',handleFileSelect);
-
-			
 	    $scope.time_zone = new Date().getTimezoneOffset();
 	    $scope.search = function() {
 	        $http({
@@ -38,32 +21,60 @@
 
 
 	    $scope.registerUser = function(post){
-	    	var dataUser = {
+				var dataUser = {
 							login: post.login,
 							password: post.password,
 							email: post.email
 				};
-				$http({
-						method : "POST",
-						url: "https://nyachan-server.herokuapp.com/registerUser",
-						// url: "http://localhost:3000/registerUser",
-						data: dataUser,
-						headers: {
-									'Content-Type': 'application/json'
+				var avatar = post.file;
+				if(typeof avatar !== "undefined"){
+					var formData = new FormData();
+					formData.append("fileData", avatar);
+					var xhr = new XMLHttpRequest();
+					xhr.onreadystatechange = function() {
+							if (xhr.readyState == XMLHttpRequest.DONE) {
+								var uploadedFile = JSON.parse(xhr.response);
+								dataUser.avatar = uploadedFile;
+								sendUser(dataUser);
+							}
+					};
+					xhr.upload.addEventListener("progress", function (evt)
+					{
+						if (evt.lengthComputable)
+						{
+								var percentComplete = evt.loaded / evt.total;
+								$('#loader').width(Math.round(percentComplete * 100)+'%');
 						}
-				}).then(function mySucces(response) {
-						console.log("Success");
-						console.log(response);
-				}, function myError(response) {
-						console.log(response || "Request failed");
-				});
+					}, false);
+						xhr.open('post', '/dbxPost/0', true);
+						xhr.send(formData);
+				}else{
+						sendUser(dataUser);
+				}
+
+				function sendUser(dataUser){
+					$http({
+							method : "POST",
+							url: "https://nyachan-server.herokuapp.com/registerUser",
+							// url: "http://localhost:3000/registerUser",
+							data: dataUser,
+							headers: {
+										'Content-Type': 'application/json'
+							}
+					}).then(function mySucces(response) {
+							console.log("Success");
+							console.log(response);
+					}, function myError(response) {
+							console.log(response || "Request failed");
+					});
+				}
 
 	    	};
 
     	$scope.loginUser = function(post){
 	    	var dataUser = {
 							login: post.login,
-							password: post.password,
+							password: post.password
 				};
 				$http({
 						method : "POST",

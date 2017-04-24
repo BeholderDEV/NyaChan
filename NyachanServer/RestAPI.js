@@ -111,6 +111,22 @@ module.exports = function(app, express, path){
 		});
 	});
 
+	app.post('/dbxAvatar', function (req, res) {
+			var form = new formidable.IncomingForm();
+			form.keepExtensions = true;
+			form.parse(req);
+			form.on('file', function(name, file) {
+				console.log("EXTENSION: " + file.extension);
+				fs.readFile(file.path, function (err, data) {
+					resizeImage(data,0, function(buffer){
+						sendDataDropbox(file.name, buffer, function(url){
+							res.send(url);
+						});
+					});
+				});
+			});
+	});
+
 	app.post('/recaptcha', function (req, res, $http) {
 	    var resp = req.body;
 	    console.log("Passou 1");
