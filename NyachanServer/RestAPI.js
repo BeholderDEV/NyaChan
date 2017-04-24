@@ -115,11 +115,15 @@ module.exports = function(app, express, path){
 			var form = new formidable.IncomingForm();
 			form.keepExtensions = true;
 			form.parse(req);
+			console.log("AAAAAAAAAAAAA");
 			form.on('file', function(name, file) {
-				console.log("EXTENSION: " + file.extension);
+				// console.log("EXTENSION: " + file.extension);
+				console.log("0000000000");
 				fs.readFile(file.path, function (err, data) {
-					resizeImage(data,0, function(buffer){
+					console.log("BBBBBBBBB");
+					resizeImage(data, 0 , function(buffer){
 						sendDataDropbox(file.name, buffer, function(url){
+							console.log("CCCCCCCCCCC");
 							res.send(url);
 						});
 					});
