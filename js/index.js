@@ -44,7 +44,7 @@
 							email: post.email
 				};
 				var avatar = new Object();
-				var avatar.file = $scope.myCroppedImage;
+			  avatar.file = $scope.myCroppedImage;
 				if(typeof avatar !== "undefined"){
 					var formData = new FormData();
 					formData.append("fileData", avatar);
