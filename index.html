@@ -22,7 +22,7 @@
     <![endif]-->
 
   </head>
-  <body>
+  <body  ng-app = "nya-chan" ng-controller= "indexController">
     <div id="loading-bar-container"></div>
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
@@ -35,6 +35,14 @@
           </button>
           <a class="navbar-brand" href="http://nyachan-server.herokuapp.com/">Nya Chan</a>
         </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li class="btn" data-toggle="modal" data-target="#signUpModal"><a>Sign Up <i class="fa fa-plus"></i></a></li>
+            <li class="btn" data-toggle="modal" data-target="#loginModal"><a>Login <i class="fa fa-plus"></i></a></li>
+            <li class="btn" ng-click="logoutUser()" ><a>Logout <i class="fa fa-plus"></i></a></li>
+            <li class="btn" ng-click="testUser()" ><a>Test Login <i class="fa fa-plus"></i></a></li>
+          </ul>
+/        </div>
       </div>
     </nav>
     <div class="container">
@@ -101,6 +109,115 @@
       </div>
       <!-- end popular threads -->
     </div>
+
+    <div class="modal fade" id="signUpModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
+      <div id="task-modal" class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+            <h4 class="modal-title">Registration</h4>
+          </div>
+          <div class="modal-body">
+            <div class="progress">
+              <div id="loader" class="progress-bar progress-bar-striped active" role="progressbar" style="width: 0%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <form id="comment-form" name="comment-form" class="form-horizontal" method="post" enctype="multipart/form-data">
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Login</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" ng-model="post.login" placeholder="Your login name" id="loginSign">
+                </div>
+              </div>
+              <div class="form-group" id="comment-group">
+                <label class="col-sm-2 control-label">Password</label>
+                <div class="col-sm-10">
+                  <input type="Password" class="form-control" ng-model="post.password" placeholder="Your Password" id="PasswordSign">
+                </div>
+              </div>
+              <div class="form-group" id="comment-group">
+                <label class="col-sm-2 control-label">E-mail</label>
+                <div class="col-sm-10">
+                  <input type="email" class="form-control" ng-model="post.email" placeholder="Your e-mail" id="emailSign">
+                </div>
+              </div>
+              <div class="form-group" id="file-group">
+                <label class="col-sm-2 control-label">Avatar</label>
+                <div class="fileinput fileinput-new" data-provides="fileinput">
+                  <span class="btn btn-default btn-file">
+                    <span class="fileinput-new">
+                      Select file
+                    </span>
+                    <span class="fileinput-exists">
+                      Change
+                    </span>
+                    <input type="file" name="..." ng-model="post.file" id="file" name="image"  accept="image/gif, image/jpg, image/png, image/bmp, image/jpeg">
+                  </span>
+                  <span class="fileinput-filename"></span>
+                  <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">&times;</a>
+                </div>
+              </div>
+              <div
+              vc-recaptcha
+              theme="'light'"
+              key="model.key"
+              on-create="setWidgetId(widgetId)"
+              on-success="setResponse(response)"
+              on-expire="cbExpiration()"
+            ></div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="submit" ng-click="registerUser(post)" class="btn btn-nya post-button">Register</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
+      <div id="task-modal" class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+            <h4 class="modal-title">Login</h4>
+          </div>
+          <div class="modal-body">
+            <div class="progress">
+              <div id="loader" class="progress-bar progress-bar-striped active" role="progressbar" style="width: 0%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <form id="comment-form" name="comment-form" class="form-horizontal" method="post" enctype="multipart/form-data">
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Login</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" ng-model="post.login" placeholder="Your login name" id="loginSign">
+                </div>
+              </div>
+              <div class="form-group" id="comment-group">
+                <label class="col-sm-2 control-label">Password</label>
+                <div class="col-sm-10">
+                  <input type="Password" class="form-control" ng-model="post.password" placeholder="Your Password" id="PasswordSign">
+                </div>
+              </div>
+
+              <div
+              vc-recaptcha
+              theme="'light'"
+              key="model.key"
+              on-create="setWidgetId(widgetId)"
+              on-success="setResponse(response)"
+              on-expire="cbExpiration()"
+            ></div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="submit" ng-click="loginUser(post)" class="btn btn-nya post-button">Register</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

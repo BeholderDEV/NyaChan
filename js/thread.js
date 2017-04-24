@@ -61,7 +61,7 @@
 
 
       $scope.addPost = function(post){
-				$http({
+		$http({
           url: "https://nyachan-server.herokuapp.com/recaptcha",
           method: "POST",
           data: {'response' :  $scope.response},
@@ -134,7 +134,6 @@
 								if(typeof files !=="undefined"){
 										var ext = files.name.substring(files.name.lastIndexOf('.') + 1).toLowerCase();
 										var dataPost = {
-												id: "123123123",
 												threadid: $scope.thread._id,
 												body: post.body,
 												date: "2016-01-02 19:33:00",
@@ -154,7 +153,6 @@
 										};
 								}else{
 										var dataPost = {
-												id: "123123123",
 												threadid: $scope.thread._id,
 												body: post.body,
 												date: "2016-01-02 19:33:00",

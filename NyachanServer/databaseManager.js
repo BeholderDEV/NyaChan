@@ -2,13 +2,17 @@ var mongodb = require('mongodb');
 var MongoClient = mongodb.MongoClient;
 var ObjectId = require('mongodb').ObjectID;
 var Dropbox = require('dropbox');
-//http://dropbox.github.io/dropbox-sdk-js/Dropbox.html
+var User = require('./user');
+var mongoose = require('mongoose');
 var dbx = new Dropbox({ accessToken: 'RQ4xXaH3x-AAAAAAAAAADuWlSlvLuWi5Lef3ymzTNYzSNvQY2AwDOvqmVY73I41f' });
+var LocalStrategy = require('passport-local').Strategy;
+var bCrypt = require('bcrypt-nodejs');
 
-module.exports = function(app){
+module.exports = function(app, passport){
 
 	// Connection URL
 	var url = 'mongodb://alisson:123456@ds053206.mlab.com:53206/nyachan_data';
+	mongoose.connect(url);
 
 	app.get('/app/threads', function (req, res) {
 
@@ -27,7 +31,7 @@ module.exports = function(app){
 			db.close();
 		  }
 		});
-	})
+	});
 
 	app.get('/app/threads/:sortType', function (req, res) {
 		var sortType = req.params.sortType;
@@ -48,7 +52,7 @@ module.exports = function(app){
 			db.close();
 			}
 		});
-	})
+	});
 
   app.get('/app/thread/:idThread', function (req, res) {
       MongoClient.connect(url, function(err, db) {
@@ -66,7 +70,7 @@ module.exports = function(app){
 		        db.close();
 	        }
 	    });
-	})
+	});
 
   app.get('/app/tag/:tagName', function (req, res) {
       MongoClient.connect(url, function(err, db) {
@@ -84,7 +88,7 @@ module.exports = function(app){
 		        db.close();
 	        }
 	    });
-	})
+	});
 
 	app.get('/app/tag/:tagName/:sortType', function (req, res) {
 			var sortType = req.params.sortType;
@@ -105,7 +109,7 @@ module.exports = function(app){
 						db.close();
 					}
 			});
-	})
+	});
 
 	app.post('/app/thread/newPost', function (req, res){
 			var newPost = req.body;
@@ -148,7 +152,7 @@ module.exports = function(app){
 		        db.close();
 	        }
 	    });
-	})
+	});
 
 	app.post('/thread/newThread', function (req, res){
 			var newThread = req.body;
@@ -196,6 +200,138 @@ module.exports = function(app){
 		        db.close();
 	        }
 	    });
-	})
+	});
 
-}
+	
+	// PASSPORT
+
+
+	passport.serializeUser(function(user, done) {
+		console.log("Serialize");
+	  done(null, user._id);
+	});
+	 
+	passport.deserializeUser(function(id, done) {
+		  console.log("Deserialize");
+		  User.findById(id, function(err, user) {
+		    done(err, user);
+		  });
+	});
+
+	 passport.use('signup', new LocalStrategy({
+        usernameField : 'login',
+        passwordField : 'password',
+        passReqToCallback : true 
+    },function(req, login, password, done) {
+		    findOrCreateUser = function(){
+		      User.findOne({'login': login},function(err, user) {
+		        if (err){
+		          console.log('Error in SignUp: '+err);
+		          return done(err);
+		        }
+		        if (user) {
+		          console.log('User already exists');
+		          return done(null, false);
+		        } else {
+		          var newUser = new User();
+		          newUser.login = login;
+		          newUser.password = createHash(password);
+		          newUser.email = req.param('email');
+		 
+		          newUser.save(function(err) {
+		            if (err){
+		              console.log('Error in Saving user: '+err);  
+		              throw err;  
+		            }
+		            console.log('User Registration succesful');    
+		            return done(null, newUser);
+		          });
+		        }
+		      });
+		    };
+     
+    		process.nextTick(findOrCreateUser);
+	}));
+
+ 	 passport.use('login', new LocalStrategy({
+        usernameField : 'login',
+        passwordField : 'password',
+        passReqToCallback : true 
+    },function(req, login, password, done) {
+		    findOrCreateUser = function(){
+		      User.findOne({'login': login},function(err, user) {
+		        if (err){
+		          console.log('Error in Login: ' + err);
+		          return done(err);
+		        }
+		        if (!user){
+          		console.log('User Not Found with username ' + username);
+        			return done(null, false);                 
+        		}
+        		return done(null, user);
+		      });
+		    };
+     
+    		process.nextTick(findOrCreateUser);
+	}));
+
+	var createHash = function(password){
+		return bCrypt.hashSync(password, bCrypt.genSaltSync(10), null);
+	};
+
+	var isValidPassword = function(user, password){
+			return bCrypt.compareSync(password, user.password);
+	};
+
+  app.post('/registerUser', function(req, res){
+	  passport.authenticate('signup', function(err, user) {
+	    if (err) { return res.send(err); }
+	    if(!user){
+	    	res.status(403);
+	    	res.send("Existing user");
+	    }else{
+	    	res.send(user.login);
+	    }
+	  })(req, res);
+  });
+
+  app.post('/loginUser', function(req, res){
+	  passport.authenticate('login', function(err, user) {
+	    if (err) { return res.send(err); }
+	    if(!user){
+	    	res.status(403);
+	    	res.send("User not found");
+	    }else{
+	    	if(!isValidPassword(user, req.body.password)){
+  				res.status(403);
+	    		res.send("Password does not match");
+	    	}else{
+  		    req.logIn(user, function(err) {
+			      if (err) { return next(err); }
+			      return res.send(user.login);
+			    });
+	    	}
+	    }
+	  })(req, res);
+  });
+
+  var isAuthenticated = function (req, res, next) {
+  	if(req.isAuthenticated()) { return next(); }
+  	res.redirect('/');
+	};
+
+	app.get('/logout', function(req, res) {
+  	req.logout();
+  	res.redirect('/');
+	});
+
+	app.get('/testLogin', function(req, res) {
+  	if (req.user) {
+    	console.log("Is signed");
+		} else {
+			console.log("Is not signed");
+		}
+		res.send(req.user);
+	});
+
+};
