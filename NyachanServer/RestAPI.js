@@ -115,9 +115,8 @@ module.exports = function(app, express, path){
 			var form = new formidable.IncomingForm();
 			form.keepExtensions = true;
 			form.parse(req);
-			console.log(req.body);
 			form.on('file', function(name, file) {
-				// console.log("EXTENSION: " + file.extension);
+				console.log("EXTENSION: " + file.extension);
 				console.log("aa");
 				fs.readFile(file.path, function (err, data) {
 					resizeImage(data, 0 , function(buffer){
