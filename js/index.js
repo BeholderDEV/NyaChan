@@ -43,7 +43,7 @@
 							password: post.password,
 							email: post.email
 				};
-				var avatar = new Object
+				var avatar = new Object();
 				var avatar.file = $scope.myCroppedImage;
 				if(typeof avatar !== "undefined"){
 					var formData = new FormData();
