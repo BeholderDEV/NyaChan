@@ -1,28 +1,11 @@
 (function(){
 
-	var app = angular.module('nya-chan', ['angular-loading-bar','ngImgCrop'])
+	var app = angular.module('nya-chan', ['angular-loading-bar'])
     .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
       cfpLoadingBarProvider.includeSpinner = false;
     }]);
 
 	app.controller('indexController',function($scope, $http){
-
-		$scope.myImage='';
-		$scope.myCroppedImage='';
-
-		var handleFileSelect=function(evt) {
-			console.log('entrou');
-			var file=evt.currentTarget.files[0];
-			var reader = new FileReader();
-			reader.onload = function (evt) {
-				$scope.$apply(function($scope){
-					$scope.myImage=evt.target.result;
-				});
-			};
-			reader.readAsDataURL(file);
-		};
-		angular.element(document.querySelector('#fileInput')).on('change',handleFileSelect);
-
 	    $scope.time_zone = new Date().getTimezoneOffset();
 	    $scope.search = function() {
 	        $http({
@@ -63,7 +46,7 @@
 								$('#loader').width(Math.round(percentComplete * 100)+'%');
 						}
 					}, false);
-						xhr.open('post', '/dbxPost/0', true);
+						xhr.open('post', '/dbxAvatar', true);
 						xhr.send(formData);
 				}else{
 						sendUser(dataUser);
