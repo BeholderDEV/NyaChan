@@ -120,12 +120,13 @@ module.exports = function(app, express, path){
 			// });
 
 			form.on('file', function(name, file) {
+				console.log("aaa");
 				fs.readFile(file.path, function (err, data) {
 						console.log(file.name);
-=						sendDataDropbox(file.name, data, function(url){
+						sendDataDropbox(file.name, data, function(url){
 							res.send(url);
 						});
-=				});
+				});
 			});
 	});
 
