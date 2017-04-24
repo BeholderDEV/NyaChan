@@ -120,15 +120,12 @@ module.exports = function(app, express, path){
 			// });
 
 			form.on('file', function(name, file) {
-				console.log("EXTENSION: " + file.extension);
-				console.log("aa");
 				fs.readFile(file.path, function (err, data) {
-					resizeImage(data, 0 , function(buffer){
-						sendDataDropbox(file.name, buffer, function(url){
+						console.log(file.name);
+=						sendDataDropbox(file.name, data, function(url){
 							res.send(url);
 						});
-					});
-				});
+=				});
 			});
 	});
 
