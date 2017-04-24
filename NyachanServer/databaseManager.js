@@ -202,7 +202,7 @@ module.exports = function(app, passport){
 	    });
 	});
 
-	
+
 	// PASSPORT
 
 
@@ -210,7 +210,7 @@ module.exports = function(app, passport){
 		console.log("Serialize");
 	  done(null, user._id);
 	});
-	 
+
 	passport.deserializeUser(function(id, done) {
 		  console.log("Deserialize");
 		  User.findById(id, function(err, user) {
@@ -221,7 +221,7 @@ module.exports = function(app, passport){
 	 passport.use('signup', new LocalStrategy({
         usernameField : 'login',
         passwordField : 'password',
-        passReqToCallback : true 
+        passReqToCallback : true
     },function(req, login, password, done) {
 		    findOrCreateUser = function(){
 		      User.findOne({'login': login},function(err, user) {
@@ -237,26 +237,26 @@ module.exports = function(app, passport){
 		          newUser.login = login;
 		          newUser.password = createHash(password);
 		          newUser.email = req.param('email');
-		 
+
 		          newUser.save(function(err) {
 		            if (err){
-		              console.log('Error in Saving user: '+err);  
-		              throw err;  
+		              console.log('Error in Saving user: '+err);
+		              throw err;
 		            }
-		            console.log('User Registration succesful');    
+		            console.log('User Registration succesful');
 		            return done(null, newUser);
 		          });
 		        }
 		      });
 		    };
-     
+
     		process.nextTick(findOrCreateUser);
 	}));
 
  	 passport.use('login', new LocalStrategy({
         usernameField : 'login',
         passwordField : 'password',
-        passReqToCallback : true 
+        passReqToCallback : true
     },function(req, login, password, done) {
 		    findOrCreateUser = function(){
 		      User.findOne({'login': login},function(err, user) {
@@ -265,13 +265,13 @@ module.exports = function(app, passport){
 		          return done(err);
 		        }
 		        if (!user){
-          		console.log('User Not Found with username ' + username);
-        			return done(null, false);                 
+          		console.log('User Not Found with username ' + user);
+        			return done(null, false);
         		}
         		return done(null, user);
 		      });
 		    };
-     
+
     		process.nextTick(findOrCreateUser);
 	}));
 
