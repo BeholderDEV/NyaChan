@@ -142,19 +142,12 @@
               </div>
               <div class="form-group" id="file-group">
                 <label class="col-sm-2 control-label">Avatar</label>
-                <div class="fileinput fileinput-new" data-provides="fileinput">
-                  <span class="btn btn-default btn-file">
-                    <span class="fileinput-new">
-                      Select file
-                    </span>
-                    <span class="fileinput-exists">
-                      Change
-                    </span>
-                    <input type="file" name="..." ng-model="post.file" id="file" name="image"  accept="image/gif, image/jpg, image/png, image/bmp, image/jpeg">
-                  </span>
-                  <span class="fileinput-filename"></span>
-                  <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">&times;</a>
+                <div>Select an image file: <input type="file" id="fileInput" /></div>
+                <div class="cropArea">
+                  <img-crop image="myImage" result-image="myCroppedImage"></img-crop>
                 </div>
+                <div>Cropped Image:</div>
+                <div><img ng-src="{{myCroppedImage}}" /></div>
               </div>
               <div
               vc-recaptcha
@@ -212,7 +205,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="submit" ng-click="loginUser(post)" class="btn btn-nya post-button">Register</button>
+          <button type="submit" ng-click="loginUser(post)" class="btn btn-nya post-button">Login</button>
         </div>
       </div>
     </div>

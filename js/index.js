@@ -6,6 +6,23 @@
     }]);
 
 	app.controller('indexController',function($scope, $http){
+
+			$scope.myImage='';
+			$scope.myCroppedImage='';
+
+			var handleFileSelect=function(evt) {
+				var file=evt.currentTarget.files[0];
+				var reader = new FileReader();
+				reader.onload = function (evt) {
+					$scope.$apply(function($scope){
+						$scope.myImage=evt.target.result;
+					});
+				};
+				reader.readAsDataURL(file);
+			};
+			angular.element(document.querySelector('#fileInput')).on('change',handleFileSelect);
+
+			
 	    $scope.time_zone = new Date().getTimezoneOffset();
 	    $scope.search = function() {
 	        $http({
@@ -40,7 +57,7 @@
 				}, function myError(response) {
 						console.log(response || "Request failed");
 				});
-					
+
 	    	};
 
     	$scope.loginUser = function(post){
