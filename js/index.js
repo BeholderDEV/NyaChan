@@ -1,11 +1,32 @@
 (function(){
 
-	var app = angular.module('nya-chan', ['angular-loading-bar'])
+	var app = angular.module('nya-chan', ['angular-loading-bar','ngImgCrop'])
     .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
       cfpLoadingBarProvider.includeSpinner = false;
     }]);
 
 	app.controller('indexController',function($scope, $http){
+<<<<<<< HEAD
+=======
+
+			$scope.myImage='';
+			$scope.myCroppedImage='';
+
+			var handleFileSelect=function(evt) {
+				console.log('entrou');
+				var file=evt.currentTarget.files[0];
+				var reader = new FileReader();
+				reader.onload = function (evt) {
+					$scope.$apply(function($scope){
+						$scope.myImage=evt.target.result;
+					});
+				};
+				reader.readAsDataURL(file);
+			};
+			angular.element(document.querySelector('#fileInput')).on('change',handleFileSelect);
+
+
+>>>>>>> Login_Passport
 	    $scope.time_zone = new Date().getTimezoneOffset();
 	    $scope.search = function() {
 	        $http({

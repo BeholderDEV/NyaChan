@@ -10,7 +10,10 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/css/jasny-bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="lib/img-crop/ng-img-crop.css">
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.min.css' type='text/css' media='all' />
+
     <!-- Meu CSS -->
     <link href="css/styles.css" rel="stylesheet" type="text/css">
 
@@ -142,12 +145,22 @@
               </div>
               <div class="form-group" id="file-group">
                 <label class="col-sm-2 control-label">Avatar</label>
-                <div>Select an image file: <input type="file" id="fileInput" /></div>
-                <div class="cropArea">
+                <div class="fileinput fileinput-new" data-provides="fileinput">
+                  <span class="btn btn-default btn-file">
+                    <span class="fileinput-new">
+                      Select file
+                    </span>
+                    <span class="fileinput-exists">
+                      Change
+                    </span>
+                    <input type="file" name="..." ng-model="post.file" id="fileInput" name="image" multiple="multiple" accept="image/gif, image/jpg, image/png, image/bmp, image/jpeg, application/pdf, video/webm">
+                  </span>
+                  <span class="fileinput-filename"></span>
+                  <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">&times;</a>
+                </div>
+                <div class="cropArea col-md-12">
                   <img-crop image="myImage" result-image="myCroppedImage"></img-crop>
                 </div>
-                <div>Cropped Image:</div>
-                <div><img ng-src="{{myCroppedImage}}" /></div>
               </div>
               <div
               vc-recaptcha
@@ -218,6 +231,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <!-- Jasny -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/js/jasny-bootstrap.min.js"></script>
+    <script src="lib/img-crop/ng-img-crop.js"></script>
 
     <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.min.js'></script>
     <script src="js/index.js"></script>

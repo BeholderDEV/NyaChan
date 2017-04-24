@@ -5,8 +5,16 @@ body{padding-top:100px;background-color:#333;background-attachment:fixed;backgro
 }
 
 
+
 @-moz-keyframes progress-bar-stripes {
  from  { background-position: 0 0; }
  to    { background-position: 40px 0; }
+}
+
+.cropArea {
+  background: #E4E4E4;
+  overflow: hidden;
+  width:500px;
+  height:350px;
 }
 /*# sourceMappingURL=styles.css.map */
