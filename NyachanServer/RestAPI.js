@@ -123,8 +123,10 @@ module.exports = function(app, express, path){
 				console.log("aaa");
 				fs.readFile(file.path, function (err, data) {
 						console.log(file.name);
-						sendDataDropbox(file.name, data, function(url){
-							res.send(url);
+						sendDataDropbox(file.name + ".jpeg", data, function(url){
+							var respostaUrl = new Object();
+							respostaUrl = url;
+							res.send(respostaUrl);
 						});
 				});
 			});
