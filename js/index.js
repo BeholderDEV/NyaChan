@@ -90,7 +90,7 @@ function base64ToBlob(base64, mime)
 								$('#loader').width(Math.round(percentComplete * 100)+'%');
 						}
 					}, false);
-						xhr.open('post', '/dbxAvatar', true);
+						xhr.open('post', '/dbxAvatar/' + dataUser.login, true);
 						xhr.send(formData);
 				}else{
 						sendUser(dataUser);

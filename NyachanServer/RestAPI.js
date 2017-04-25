@@ -111,7 +111,7 @@ module.exports = function(app, express, path){
 		});
 	});
 
-	app.post('/dbxAvatar', function (req, res) {
+	app.post('/dbxAvatar/:user', function (req, res) {
 			var form = new formidable.IncomingForm();
 			form.keepExtensions = true;
 			form.parse(req);
@@ -123,7 +123,7 @@ module.exports = function(app, express, path){
 				console.log("aaa");
 				fs.readFile(file.path, function (err, data) {
 						console.log(file.name);
-						sendDataDropbox(file.name + ".jpeg", data, function(url){
+						sendDataDropbox(req.params.user + ".jpeg", data, function(url){
 							var respostaUrl = new Object();
 							respostaUrl = url;
 							res.send(respostaUrl);
