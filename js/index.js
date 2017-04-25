@@ -64,7 +64,8 @@ function base64ToBlob(base64, mime)
 				var dataUser = {
 							login: post.login,
 							password: post.password,
-							email: post.email
+							email: post.email,
+							avatar: "aaaa"
 				};
 				var avatar = $scope.myCroppedImage;
 
@@ -73,13 +74,11 @@ function base64ToBlob(base64, mime)
 					var base64ImageContent = avatar.replace(/^data:image\/(png|jpeg);base64,/, "");
 					var blob = base64ToBlob(base64ImageContent, 'image/jpeg');
 
-
-
 					formData.append("fileData", blob);
 					var xhr = new XMLHttpRequest();
 					xhr.onreadystatechange = function() {
 							if (xhr.readyState == XMLHttpRequest.DONE) {
-								var uploadedFile = JSON.parse(xhr.response);
+								var uploadedFile = xhr.response;
 								dataUser.avatar = uploadedFile;
 								sendUser(dataUser);
 							}
