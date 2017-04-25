@@ -64,8 +64,7 @@ function base64ToBlob(base64, mime)
 				var dataUser = {
 							login: post.login,
 							password: post.password,
-							email: post.email,
-							avatar: "aaaa"
+							email: post.email
 				};
 				var avatar = $scope.myCroppedImage;
 

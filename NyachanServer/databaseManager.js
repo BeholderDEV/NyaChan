@@ -237,6 +237,7 @@ module.exports = function(app, passport){
 		          newUser.login = login;
 		          newUser.password = createHash(password);
 		          newUser.email = req.param('email');
+							newUser.avatar = req.param('avatar');
 
 		          newUser.save(function(err) {
 		            if (err){
