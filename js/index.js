@@ -108,6 +108,8 @@ function base64ToBlob(base64, mime)
 					}).then(function mySucces(response) {
 							console.log("Success");
 							console.log(response);
+							$('#signUpModal').modal('hide');
+							$('#loader').width('0%');
 					}, function myError(response) {
 							console.log(response || "Request failed");
 					});
