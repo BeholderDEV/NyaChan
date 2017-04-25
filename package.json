@@ -20,7 +20,11 @@
     "dropbox": "2.5.2",
     "formidable":"1.1.1",
     "request":"*",
-    "lwip": "*"
+    "lwip": "*",
+    "passport": "0.3.2",
+    "passport-local": "1.0.0",
+    "express-session": "1.15.2",
+    "bcrypt-nodejs": "0.0.3"
   },
 
   "repository": {

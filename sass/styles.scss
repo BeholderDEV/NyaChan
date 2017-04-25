@@ -17,7 +17,11 @@ body{
   background-size: cover;
   border-radius: $border-radius;
 }
-
+.cropArea {
+  background: #E4E4E4;
+  overflow: hidden;
+  height:350px;
+}
 #loading-bar .bar{
   background:$primary-color;
   height:3px;

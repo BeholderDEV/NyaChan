@@ -4,7 +4,6 @@ var ObjectId = require('mongodb').ObjectID;
 var Dropbox = require('dropbox');
 var request = require("request");
 var imgResizer = require("lwip");
-//http://dropbox.github.io/dropbox-sdk-js/Dropbox.html
 var dbx = new Dropbox({ accessToken: 'RQ4xXaH3x-AAAAAAAAAADuWlSlvLuWi5Lef3ymzTNYzSNvQY2AwDOvqmVY73I41f' });
 var formidable = require('formidable');
 var fs = require('fs');
@@ -112,6 +111,27 @@ module.exports = function(app, express, path){
 		});
 	});
 
+	app.post('/dbxAvatar/:user', function (req, res) {
+			var form = new formidable.IncomingForm();
+			form.keepExtensions = true;
+			form.parse(req);
+			// form.parse(req, function(err, fields, files) {
+			// 		res.send("Batata");
+			// });
+
+			form.on('file', function(name, file) {
+				console.log("aaa");
+				fs.readFile(file.path, function (err, data) {
+						console.log(file.name);
+						sendDataDropbox(req.params.user + ".jpeg", data, function(url){
+							var respostaUrl = new Object();
+							respostaUrl = url;
+							res.send(respostaUrl);
+						});
+				});
+			});
+	});
+
 	app.post('/recaptcha', function (req, res, $http) {
 	    var resp = req.body;
 	    console.log("Passou 1");
@@ -144,6 +164,8 @@ module.exports = function(app, express, path){
      // res.sendFile(path.resolve('../404.html'));
      res.sendfile('404.html');
   });
+
+
 
   // app.get('*', function(req, res, next) {
   //   res.sendfile('404.html');

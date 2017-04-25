@@ -3,6 +3,17 @@ var bodyParser = require('body-parser');
 var path = require('path');
 var fs = require("fs");
 var app = express();
+var passport = require('passport');
+var expressSession = require('express-session');
+
+app.use(expressSession({
+  secret: 'Nyahahahaha',
+  resave: false,
+  saveUninitialized: true
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -13,7 +24,7 @@ app.use(function(req, res, next) {
 
 app.use(bodyParser.json());
 
-require('./databaseManager.js')(app);
+require('./databaseManager.js')(app, passport);
 require('./RestAPI.js')(app, express, path);
 
 
