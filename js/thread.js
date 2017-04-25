@@ -7,19 +7,11 @@
 
     app.controller('threadController',function($scope, $http, $window, vcRecaptchaService){
       $scope.time_zone = new Date().getTimezoneOffset();
-      $scope.response = null;
-      $scope.widgetId = null;
       var url = $(location).attr('href');
       var searchId = url.substring(url.lastIndexOf('/') + 1);
 
 			$scope.response = null;
       $scope.widgetId = null;
-
-      $scope.setResponse = function (response) {
-          console.info('Response available');
-
-          $scope.response = response;
-      };
 
       $scope.model = {
           key: '6LfogRgUAAAAACNUIiCwMJPsPJ0NxiS7tafx-B55'
@@ -61,19 +53,19 @@
 
 
       $scope.addPost = function(post){
-		$http({
-          url: "https://nyachan-server.herokuapp.com/recaptcha",
-          method: "POST",
-          data: {'response' :  $scope.response},
-          headers: {
-                      'Content-Type': 'application/json; charset=utf-8'
-                    }
-        }).then(function successCallback(response) {
-            validatedPost(JSON.parse(response.data.body).success);
-        }, function errorCallback(response) {
-            console.log(response);
-						return;
-        });
+			$http({
+	          url: "https://nyachan-server.herokuapp.com/recaptcha",
+	          method: "POST",
+	          data: {'response' :  $scope.response},
+	          headers: {
+	                      'Content-Type': 'application/json; charset=utf-8'
+	                    }
+	        }).then(function successCallback(response) {
+	            validatedPost(JSON.parse(response.data.body).success);
+	        }, function errorCallback(response) {
+	            console.log(response);
+							return;
+	        });
 
 				function validatedPost(valid)
         {
