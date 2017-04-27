@@ -125,6 +125,7 @@ module.exports = function(app, passport){
 								}
 								Thread = documents;
 								console.log("DOCUMENTS "+documents[0].numberOfPosts);
+								console.log("DOCUMENTS "+Thread[0].archived);
 						});
 						db.close();
 
