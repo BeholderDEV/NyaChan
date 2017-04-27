@@ -22,7 +22,7 @@ module.exports = function(app, passport){
 		} else {
 			console.log('Connection established to', url);
 			db.collection('thread').find( { } ).toArray(function(error, documents) {
-			    if (err){
+			    if (error){
 			        throw error;
 			    }
 			    res.jsonp(documents);
@@ -43,7 +43,7 @@ module.exports = function(app, passport){
 		} else {
 			console.log('Connection established to', url);
 			db.collection('thread').find( { } ).sort(query).toArray(function(error, documents) {
-					if (err){
+					if (error){
 							throw error;
 					}
 					res.jsonp(documents);
@@ -61,7 +61,7 @@ module.exports = function(app, passport){
 	        } else {
 		        console.log('Connection established to', url);
 		        db.collection('thread').find( { _id: ObjectId(req.params.idThread)  } ).toArray(function(error, documents) {
-		            if (err){
+		            if (error){
 		                throw error;
 		            }
 		            res.jsonp(documents);
@@ -79,7 +79,7 @@ module.exports = function(app, passport){
 	        } else {
 		        console.log('Connection established to', url);
 		        db.collection('thread').find( { tags: req.params.tagName} ).toArray(function(error, documents) {
-		            if (err){
+		            if (error){
 		                throw error;
 		            }
 		            res.jsonp(documents);
@@ -100,7 +100,7 @@ module.exports = function(app, passport){
 					} else {
 						console.log('Connection established to', url);
 						db.collection('thread').find( { tags: req.params.tagName} ).sort(query).toArray(function(error, documents) {
-								if (err){
+								if (error){
 										throw error;
 								}
 								res.jsonp(documents);
@@ -111,7 +111,36 @@ module.exports = function(app, passport){
 			});
 	});
 
+	function checkPumpLimit(threadid)
+	{
+			var Thread;
+			MongoClient.connect(url, function(err, db) {
+					if (err) {
+						console.log('Unable to connect to the mongoDB server. Error:', err);
+					} else {
+						console.log('Connection established to', url);
+						db.collection('thread').find( { _id: ObjectId(threadid)  } ).toArray(function(error, documents) {
+								if (error){
+										throw error;
+								}
+								Thread = JSON.parse(documents);
+								console.log(Thread);
+								if(Thread.numberOfPosts>=5)
+								{
+									return true;
+								}
+								else{
+									return false;
+								}
+						});
+						db.close();
+					}
+			});
+	}
+
 	app.post('/app/thread/newPost', function (req, res){
+			var isAtPumpLimit = checkPumpLimit();
+			console.log(isAtPumpLimit);
 			var newPost = req.body;
 			newPost.userIP = req.headers["x-forwarded-for"];
 			var date = new Date();
