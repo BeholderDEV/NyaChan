@@ -123,7 +123,7 @@ module.exports = function(app, passport){
 								if (error){
 										throw error;
 								}
-								Thread = documents;
+								Thread = JSON.parse(documents);
 								console.log("AAAAAAAAAAAA"+Thread);
 								if(Thread.numberOfPosts>=5)
 								{
