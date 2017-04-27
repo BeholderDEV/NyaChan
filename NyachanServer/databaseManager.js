@@ -139,9 +139,9 @@ module.exports = function(app, passport){
 	}
 
 	app.post('/app/thread/newPost', function (req, res){
-			var isAtPumpLimit = checkPumpLimit();
-			console.log("BBBBBBB"+isAtPumpLimit);
 			var newPost = req.body;
+			var isAtPumpLimit = checkPumpLimit(newPost.threadid);
+			console.log("BBBBBBB"+isAtPumpLimit);
 			newPost.userIP = req.headers["x-forwarded-for"];
 			var date = new Date();
 			newPost.date =  date.getTime();
