@@ -113,7 +113,6 @@ module.exports = function(app, passport){
 
 	function checkPumpLimit(threadid, callback, res)
 	{
-			var Thread;
 			MongoClient.connect(url, function(err, db) {
 					if (err) {
 						console.log('Unable to connect to the mongoDB server. Error:', err);
@@ -123,21 +122,18 @@ module.exports = function(app, passport){
 								if (error){
 										throw error;
 								}
-								Thread = documents;
-								console.log("DOCUMENTS "+documents[0].numberOfPosts);
-								console.log("DOCUMENTS "+Thread[0].archived);
-								if(Thread[0].archived)
+								if(documents[0].archived)
 								{
 									res.status(403);
 									res.send({'error':'Archived Thread'});
 								}
 								else {
-									if(Thread[0].numberOfPosts<5)
+									if(documents[0].numberOfPosts<5)
 									{
-										callback(false);
+										callback(false);//não atualiza atributo Archived na Thread
 									}
 									else{
-										callback(true);
+										callback(true);//atualiza atributo Archived na Thread
 									}
 								}
 						});
