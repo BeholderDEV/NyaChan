@@ -111,7 +111,7 @@ module.exports = function(app, passport){
 			});
 	});
 
-	function checkPumpLimit(threadid, callback)
+	function checkPumpLimit(threadid, callback, res)
 	{
 			var Thread;
 			MongoClient.connect(url, function(err, db) {
@@ -125,17 +125,24 @@ module.exports = function(app, passport){
 								}
 								Thread = documents;
 								console.log("DOCUMENTS "+documents[0].numberOfPosts);
-								console.log("AAAAAAAAAAAA"+Thread.numberOfPosts);
-								if(Thread.numberOfPosts>=5)
-								{
-									return true;
-								}
-								else{
-									return false;
-								}
 						});
 						db.close();
-						callback();
+
+						if(Thread[0].archived)
+						{
+							res.status(403);
+							res.send({'error':'Archived Thread'});
+						}
+						else {
+							if(Thread[0].numberOfPosts<5)
+							{
+								callback(false);
+							}
+							else{
+								callback(true);
+							}
+						}
+
 					}
 			});
 	}
@@ -159,7 +166,7 @@ module.exports = function(app, passport){
 							return;
 					}
 			}
-			var saveOnServer = function(){
+			var saveOnServer = function(pumpReached){
 				MongoClient.connect(url, function(err, db) {
 		        if (err) {
 		        	console.log('Unable to connect to the mongoDB server. Error:', err);
@@ -167,6 +174,9 @@ module.exports = function(app, passport){
 			        console.log('Connection established to', url);
 							db.collection('thread').update({'_id': ObjectId(newPost.threadid)}, { $inc: {numberOfPosts: 1}});
 							db.collection('thread').update({'_id': ObjectId(newPost.threadid)}, { $set: {lastDate: newPost.date}});
+							if(pumpReached == true){
+								db.collection('thread').update({'_id': ObjectId(newPost.threadid)}, { $set: {archived: true}});
+							}
 			        db.collection('thread', function(err, collection) {
 			            collection.update({'_id': ObjectId(newPost.threadid)}, { $push: {post: newPost}} , function(err, result) {
 			                if (err) {
@@ -182,7 +192,7 @@ module.exports = function(app, passport){
 		        }
 		    });
 			};
-			checkPumpLimit(newPost.threadid, saveOnServer);
+			checkPumpLimit(newPost.threadid, saveOnServer, res);
 
 	});
 
