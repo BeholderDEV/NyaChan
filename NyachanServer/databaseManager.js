@@ -123,8 +123,8 @@ module.exports = function(app, passport){
 								if (error){
 										throw error;
 								}
-								Thread = JSON.parse(documents);
-								console.log(Thread);
+								Thread = documents;
+								console.log("AAAAAAAAAAAA"+Thread);
 								if(Thread.numberOfPosts>=5)
 								{
 									return true;
@@ -140,7 +140,7 @@ module.exports = function(app, passport){
 
 	app.post('/app/thread/newPost', function (req, res){
 			var isAtPumpLimit = checkPumpLimit();
-			console.log(isAtPumpLimit);
+			console.log("BBBBBBB"+isAtPumpLimit);
 			var newPost = req.body;
 			newPost.userIP = req.headers["x-forwarded-for"];
 			var date = new Date();
