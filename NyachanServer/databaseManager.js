@@ -111,7 +111,7 @@ module.exports = function(app, passport){
 			});
 	});
 
-	function checkPumpLimit(threadid)
+	function checkPumpLimit(threadid, callback)
 	{
 			var Thread;
 			MongoClient.connect(url, function(err, db) {
@@ -124,6 +124,7 @@ module.exports = function(app, passport){
 										throw error;
 								}
 								Thread = documents;
+								console.log("DOCUMENTS "+documents);
 								console.log("AAAAAAAAAAAA"+Thread.numberOfPosts);
 								if(Thread.numberOfPosts>=5)
 								{
@@ -134,13 +135,13 @@ module.exports = function(app, passport){
 								}
 						});
 						db.close();
+						callback();
 					}
 			});
 	}
 
 	app.post('/app/thread/newPost', function (req, res){
 			var newPost = req.body;
-			var isAtPumpLimit = checkPumpLimit(newPost.threadid);
 			console.log("BBBBBBB"+isAtPumpLimit);
 			newPost.userIP = req.headers["x-forwarded-for"];
 			var date = new Date();
@@ -159,28 +160,31 @@ module.exports = function(app, passport){
 							return;
 					}
 			}
+			var saveOnServer = function(){
+				MongoClient.connect(url, function(err, db) {
+		        if (err) {
+		        	console.log('Unable to connect to the mongoDB server. Error:', err);
+		        } else {
+			        console.log('Connection established to', url);
+							db.collection('thread').update({'_id': ObjectId(newPost.threadid)}, { $inc: {numberOfPosts: 1}});
+							db.collection('thread').update({'_id': ObjectId(newPost.threadid)}, { $set: {lastDate: newPost.date}});
+			        db.collection('thread', function(err, collection) {
+			            collection.update({'_id': ObjectId(newPost.threadid)}, { $push: {post: newPost}} , function(err, result) {
+			                if (err) {
+			                    console.log('Error ' + err);
+			                    res.send({'error':'An error has occurred'});
+			                } else {
+			                    console.log('' + result);
+			                    res.send(newPost);
+			                }
+			            });
+			        });
+			        db.close();
+		        }
+		    });
+			};
+			checkPumpLimit(newPost.threadid, saveOnServer);
 
-	    MongoClient.connect(url, function(err, db) {
-	        if (err) {
-	        	console.log('Unable to connect to the mongoDB server. Error:', err);
-	        } else {
-		        console.log('Connection established to', url);
-						db.collection('thread').update({'_id': ObjectId(newPost.threadid)}, { $inc: {numberOfPosts: 1}});
-						db.collection('thread').update({'_id': ObjectId(newPost.threadid)}, { $set: {lastDate: newPost.date}});
-		        db.collection('thread', function(err, collection) {
-		            collection.update({'_id': ObjectId(newPost.threadid)}, { $push: {post: newPost}} , function(err, result) {
-		                if (err) {
-		                    console.log('Error ' + err);
-		                    res.send({'error':'An error has occurred'});
-		                } else {
-		                    console.log('' + result);
-		                    res.send(newPost);
-		                }
-		            });
-		        });
-		        db.close();
-	        }
-	    });
 	});
 
 	app.post('/thread/newThread', function (req, res){
