@@ -126,24 +126,22 @@ module.exports = function(app, passport){
 								Thread = documents;
 								console.log("DOCUMENTS "+documents[0].numberOfPosts);
 								console.log("DOCUMENTS "+Thread[0].archived);
+								if(Thread[0].archived)
+								{
+									res.status(403);
+									res.send({'error':'Archived Thread'});
+								}
+								else {
+									if(Thread[0].numberOfPosts<5)
+									{
+										callback(false, db);
+									}
+									else{
+										callback(true, db);
+									}
+								}
 						});
 						db.close();
-
-						if(Thread[0].archived)
-						{
-							res.status(403);
-							res.send({'error':'Archived Thread'});
-						}
-						else {
-							if(Thread[0].numberOfPosts<5)
-							{
-								callback(false);
-							}
-							else{
-								callback(true);
-							}
-						}
-
 					}
 			});
 	}
@@ -167,31 +165,24 @@ module.exports = function(app, passport){
 							return;
 					}
 			}
-			var saveOnServer = function(pumpReached){
-				MongoClient.connect(url, function(err, db) {
-		        if (err) {
-		        	console.log('Unable to connect to the mongoDB server. Error:', err);
-		        } else {
-			        console.log('Connection established to', url);
-							db.collection('thread').update({'_id': ObjectId(newPost.threadid)}, { $inc: {numberOfPosts: 1}});
-							db.collection('thread').update({'_id': ObjectId(newPost.threadid)}, { $set: {lastDate: newPost.date}});
-							if(pumpReached == true){
-								db.collection('thread').update({'_id': ObjectId(newPost.threadid)}, { $set: {archived: true}});
-							}
-			        db.collection('thread', function(err, collection) {
-			            collection.update({'_id': ObjectId(newPost.threadid)}, { $push: {post: newPost}} , function(err, result) {
-			                if (err) {
-			                    console.log('Error ' + err);
-			                    res.send({'error':'An error has occurred'});
-			                } else {
-			                    console.log('' + result);
-			                    res.send(newPost);
-			                }
-			            });
-			        });
-			        db.close();
-		        }
-		    });
+			var saveOnServer = function(pumpReached, db){
+				db.collection('thread').update({'_id': ObjectId(newPost.threadid)}, { $inc: {numberOfPosts: 1}});
+				db.collection('thread').update({'_id': ObjectId(newPost.threadid)}, { $set: {lastDate: newPost.date}});
+				if(pumpReached == true){
+					db.collection('thread').update({'_id': ObjectId(newPost.threadid)}, { $set: {archived: true}});
+				}
+				db.collection('thread', function(err, collection) {
+						collection.update({'_id': ObjectId(newPost.threadid)}, { $push: {post: newPost}} , function(err, result) {
+								if (err) {
+										console.log('Error ' + err);
+										res.send({'error':'An error has occurred'});
+								} else {
+										console.log('' + result);
+										res.send(newPost);
+								}
+						});
+				});
+				db.close();
 			};
 			checkPumpLimit(newPost.threadid, saveOnServer, res);
 
