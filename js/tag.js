@@ -180,6 +180,7 @@
 		              var dataPost = {
 		                  body: post.body,
 		                  date: "2016-01-02 19:33:00",
+											archived: false,
 		                  subject: post.title,
 		                  userName: "Anon",
 		                  tags: selectTags,
