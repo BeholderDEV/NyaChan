@@ -214,7 +214,7 @@ module.exports = function(app, passport){
 													console.log('Unable to connect to the mongoDB server. Error:', err);
 												} else {
 													console.log('Connection established to', url);
-													db2.collection('thread').update({'_id': ObjectId(documents[documents.length-1]._id)}, { $set: {archived: true}});													
+													db2.collection('thread').update({'_id': ObjectId(documents[documents.length-1]._id)}, { $set: {archived: true}});
 												}
 										});
 								}
@@ -229,6 +229,7 @@ module.exports = function(app, passport){
 			newThread.userIP = req.headers["x-forwarded-for"];
 			var date = new Date();
 			newThread.date =  date.getTime();
+			console.log("COMECOULLLLLLLLLLLLLLLLL");
 			if(newThread.tags[0] == undefined){
 				res.status(403);
 				res.send({'error':'An error has occurred'});
@@ -248,7 +249,7 @@ module.exports = function(app, passport){
 							return;
 					}
 			}
-
+			console.log("AAAAAAAAAAAAAAAAAAAAAAAAA");
 			newThread.tags.forEach(function(tag)
 			{
 					checkTagLimit(tag);
@@ -261,6 +262,7 @@ module.exports = function(app, passport){
 		        console.log('Connection established to', url);
 						newThread.numberOfPosts = 1;
 						newThread.lastDate = newThread.date;
+						console.log("DATABASE");
 		        db.collection('thread', function(err, collection) {
 		            collection.insert(newThread, {safe:true}, function(err, result) {
 		                if (err) {
