@@ -214,12 +214,7 @@ module.exports = function(app, passport){
 													console.log('Unable to connect to the mongoDB server. Error:', err);
 												} else {
 													console.log('Connection established to', url);
-													db2.collection('thread').remove({_id: ObjectId(documents[documents.length-1]._id)}, function(err, result) {
-														if (err) {
-								                console.log(err);
-								            }
-														console.log(result);
-													});
+													db2.collection('thread').update({'_id': ObjectId(documents[documents.length-1]._id)}, { $set: {archived: true}});													
 												}
 										});
 								}
