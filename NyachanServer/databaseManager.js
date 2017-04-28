@@ -92,7 +92,8 @@ module.exports = function(app, passport){
 
 	app.get('/app/tag/:tagName/:sortType/:archived', function (req, res) {
 			var sortType = req.params.sortType;
-			console.log(req.params.archived);
+			var onlyArchived = (req.params.archived == 'true');
+			console.log(onlyArchived);
 			var query = {};
 			query[sortType]= -1;
 			MongoClient.connect(url, function(err, db) {
@@ -100,7 +101,7 @@ module.exports = function(app, passport){
 						console.log('Unable to connect to the mongoDB server. Error:', err);
 					} else {
 						console.log('Connection established to', url);
-						db.collection('thread').find( { tags: req.params.tagName, archived: false} ).sort(query).toArray(function(error, documents) {
+						db.collection('thread').find( { tags: req.params.tagName, archived: onlyArchived} ).sort(query).toArray(function(error, documents) {
 								if (error){
 										throw error;
 								}
