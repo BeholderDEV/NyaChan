@@ -92,6 +92,7 @@ module.exports = function(app, passport){
 
 	app.get('/app/tag/:tagName/:sortType/:archived', function (req, res) {
 			var sortType = req.params.sortType;
+			console.log(req.params.archived);
 			var query = {};
 			query[sortType]= -1;
 			MongoClient.connect(url, function(err, db) {
