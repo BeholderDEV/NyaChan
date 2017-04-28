@@ -209,7 +209,7 @@ module.exports = function(app, passport){
 								if(documents.length>4)
 								{
 										console.log(documents[documents.length-1]._id);
-										db.collection('thread').remove({_id: ObjectID(documents[documents.length-1]._id)}, function(err, result) {
+										db.collection('thread').remove({_id: ObjectId(documents[documents.length-1]._id)}, function(err, result) {
 											if (err) {
 					                console.log(err);
 					            }
