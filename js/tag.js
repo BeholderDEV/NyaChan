@@ -82,7 +82,7 @@
         $scope.search = function() {
             $http({
                 method : "GET",
-                url: "https://nyachan-server.herokuapp.com/app/tag/" + searchTag+"/lastDate"
+                url: "https://nyachan-server.herokuapp.com/app/tag/" + searchTag+"/lastDate/false"
                 // url: "http://localhost:3000/app/tag/" + searchTag
             }).then(function mySucces(response) {
                 $scope.threads = response.data;

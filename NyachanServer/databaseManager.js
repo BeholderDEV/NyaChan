@@ -72,13 +72,13 @@ module.exports = function(app, passport){
 	    });
 	});
 
-  app.get('/app/tag/:tagName', function (req, res) {
+  app.get('/app/tag/:tagName/:archived', function (req, res) {
       MongoClient.connect(url, function(err, db) {
 	        if (err) {
 	        	console.log('Unable to connect to the mongoDB server. Error:', err);
 	        } else {
 		        console.log('Connection established to', url);
-		        db.collection('thread').find( { tags: req.params.tagName, archived: false} ).toArray(function(error, documents) {
+		        db.collection('thread').find( { tags: req.params.tagName, archived: req.params.archived} ).toArray(function(error, documents) {
 		            if (error){
 		                throw error;
 		            }
@@ -90,7 +90,7 @@ module.exports = function(app, passport){
 	    });
 	});
 
-	app.get('/app/tag/:tagName/:sortType', function (req, res) {
+	app.get('/app/tag/:tagName/:sortType/:archived', function (req, res) {
 			var sortType = req.params.sortType;
 			var query = {};
 			query[sortType]= -1;
@@ -99,7 +99,7 @@ module.exports = function(app, passport){
 						console.log('Unable to connect to the mongoDB server. Error:', err);
 					} else {
 						console.log('Connection established to', url);
-						db.collection('thread').find( { tags: req.params.tagName, archived: false} ).sort(query).toArray(function(error, documents) {
+						db.collection('thread').find( { tags: req.params.tagName, archived: req.params.archived} ).sort(query).toArray(function(error, documents) {
 								if (error){
 										throw error;
 								}
