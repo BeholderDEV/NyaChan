@@ -209,11 +209,18 @@ module.exports = function(app, passport){
 								if(documents.length>4)
 								{
 										console.log(documents[documents.length-1]._id);
-										documents.remove({_id: ObjectId(documents[documents.length-1]._id)}, function(err, result) {
-											if (err) {
-					                console.log(err);
-					            }
-											console.log(result);
+										MongoClient.connect(url, function(err, db2) {
+												if (err) {
+													console.log('Unable to connect to the mongoDB server. Error:', err);
+												} else {
+													console.log('Connection established to', url);
+													db2.remove({_id: ObjectId(documents[documents.length-1]._id)}, function(err, result) {
+														if (err) {
+								                console.log(err);
+								            }
+														console.log(result);
+													});
+												}
 										});
 								}
 						});
