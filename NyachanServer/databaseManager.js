@@ -93,7 +93,6 @@ module.exports = function(app, passport){
 	app.get('/app/tag/:tagName/:sortType/:archived', function (req, res) {
 			var sortType = req.params.sortType;
 			var onlyArchived = (req.params.archived == 'true');
-			console.log(onlyArchived);
 			var query = {};
 			query[sortType]= -1;
 			MongoClient.connect(url, function(err, db) {
@@ -193,6 +192,36 @@ module.exports = function(app, passport){
 
 	});
 
+	function checkTagLimit(tag)
+	{
+			var query = {};
+			query['lastDate']= -1;
+			MongoClient.connect(url, function(err, db) {
+					if (err) {
+						console.log('Unable to connect to the mongoDB server. Error:', err);
+					} else {
+						console.log('Connection established to', url);
+						db.collection('thread').find( { tags: tag, archived: false} ).sort(query).toArray(function(error, documents) {
+								if (error){
+										throw error;
+								}
+								console.log(documents.length);
+								if(documents.length>4)
+								{
+										console.log(documents[documents.length-1]._id);
+										db.collection('thread').remove({_id: ObjectID(documents[documents.length-1]._id)}, function(err, result) {
+											if (err) {
+					                console.log(err);
+					            }
+											console.log(result);
+										});
+								}
+						});
+						db.close();
+					}
+			});
+	}
+
 	app.post('/thread/newThread', function (req, res){
 			var newThread = req.body;
 			newThread.userIP = req.headers["x-forwarded-for"];
@@ -217,6 +246,11 @@ module.exports = function(app, passport){
 							return;
 					}
 			}
+
+			newThread.tags.forEach(function(tag)
+			{
+					checkTagLimit(tag);
+			});
 
 			MongoClient.connect(url, function(err, db) {
 	        if (err) {
