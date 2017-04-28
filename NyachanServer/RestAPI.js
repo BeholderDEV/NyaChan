@@ -82,33 +82,66 @@ function setImageSizeDimension(file, callback){
 	});
 }
 
+function checkPumpLimit(threadid, callback, res)
+{
+		MongoClient.connect(url, function(err, db) {
+				if (err) {
+					console.log('Unable to connect to the mongoDB server. Error:', err);
+				} else {
+					console.log('Connection established to', url);
+					db.collection('thread').find( { _id: ObjectId(threadid)  } ).toArray(function(error, documents) {
+							if (error){
+									throw error;
+							}
+							if(documents[0].archived)
+							{
+								res.status(403);
+								res.send({'error':'Archived Thread'});
+							}
+					});
+					db.close();
+				}
+		});
+}
+
 module.exports = function(app, express, path){
 
 	app.use(express.static(path.join(__dirname, '/../')));
 
-	app.post('/dbxPost/:op', function (req, res) {
-		var form = new formidable.IncomingForm();
-		var respostaUrl = new Object();
-		form.keepExtensions = true;
-		form.parse(req);
-		form.on('file', function(name, file) {
-		    fs.readFile(file.path, function (err, data) {
-					setImageSizeDimension(file, function (properties){
-						respostaUrl.width = properties.width;
-						respostaUrl.height = properties.height;
-						respostaUrl.size = properties.size;
-						sendDataDropbox(file.name, data, function(url){
-							respostaUrl.mainUrl = url;
-							resizeImage(file, req.params.op ,function(buffer){
-								sendDataDropbox(file.name, buffer, function(urlThumb){
-									respostaUrl.thumbUrl = urlThumb;
-									res.send(respostaUrl);
+	app.post('/dbxPost/:op/:idThread', function (req, res) {
+		var saveOnDropBox = function()
+		{
+				var form = new formidable.IncomingForm();
+				var respostaUrl = new Object();
+				form.keepExtensions = true;
+				form.parse(req);
+				form.on('file', function(name, file) {
+				    fs.readFile(file.path, function (err, data) {
+							setImageSizeDimension(file, function (properties){
+								respostaUrl.width = properties.width;
+								respostaUrl.height = properties.height;
+								respostaUrl.size = properties.size;
+								sendDataDropbox(file.name, data, function(url){
+									respostaUrl.mainUrl = url;
+									resizeImage(file, req.params.op ,function(buffer){
+										sendDataDropbox(file.name, buffer, function(urlThumb){
+											respostaUrl.thumbUrl = urlThumb;
+											res.send(respostaUrl);
+										});
+									});
 								});
 							});
-						});
-					});
-	  		});
-		});
+			  		});
+				});
+		};
+		if(req.params.op==0)
+		{
+			checkPumpLimit(req.params.idThread, saveOnDropBox, res);
+		}
+		else
+		{
+			saveOnDropBox();
+		}
 	});
 
 	app.post('/dbxAvatar/:user', function (req, res) {

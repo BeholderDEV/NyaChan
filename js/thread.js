@@ -116,7 +116,7 @@
                     $('#loader').width(Math.round(percentComplete * 100)+'%');
                 }
               }, false);
-							xhr.open('post', '/dbxPost/0', true);
+							xhr.open('post', '/dbxPost/0/'+$scope.thread._id, true);
 							xhr.send(formData);
 						}else{
 								sendPost(null, null);

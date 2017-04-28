@@ -168,7 +168,7 @@
                     $('#loader').width(Math.round(percentComplete * 100)+'%');
                 }
               }, false);
-		          xhr.open('post', '/dbxPost/1', true);
+		          xhr.open('post', '/dbxPost/1/0', true);
 		          xhr.send(formData);
 		        }else{
 		          sendThread(null, null);
