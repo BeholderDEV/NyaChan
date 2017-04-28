@@ -21,7 +21,7 @@ module.exports = function(app, passport){
 			console.log('Unable to connect to the mongoDB server. Error:', err);
 		} else {
 			console.log('Connection established to', url);
-			db.collection('thread').find( { archived : false } ).toArray(function(error, documents) {
+			db.collection('thread').find( { archived : true } ).toArray(function(error, documents) {
 			    if (error){
 			        throw error;
 			    }
@@ -42,7 +42,7 @@ module.exports = function(app, passport){
 			console.log('Unable to connect to the mongoDB server. Error:', err);
 		} else {
 			console.log('Connection established to', url);
-			db.collection('thread').find( { archived : false } ).sort(query).toArray(function(error, documents) {
+			db.collection('thread').find( { archived : true } ).sort(query).toArray(function(error, documents) {
 					if (error){
 							throw error;
 					}
