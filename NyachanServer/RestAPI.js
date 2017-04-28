@@ -98,6 +98,9 @@ function checkPumpLimit(threadid, callback, res)
 								res.status(403);
 								res.send({'error':'Archived Thread'});
 							}
+							else{
+									callback();
+							}							
 					});
 					db.close();
 				}
