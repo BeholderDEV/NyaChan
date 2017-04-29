@@ -33,8 +33,17 @@ module.exports = function(app, passport){
 		});
 	});
 
-	app.get('/app/threads/:sortType', function (req, res) {
-		var sortType = req.params.sortType;
+	app.get('/app/threads', function (req, res) {
+		var sortType = 'numberOfPosts';
+		if(req.query.sortType){
+			console.log('AAAA');
+			sortType = req.query.sortType;
+		}
+		var arch = false;
+		if(req.query.archived != undefined){
+			console.log('AAA');
+			arch = (req.query.archived == 'true');
+		}
 		var query = {};
 		query[sortType]= -1;
 		MongoClient.connect(url, function(err, db) {
@@ -42,7 +51,7 @@ module.exports = function(app, passport){
 			console.log('Unable to connect to the mongoDB server. Error:', err);
 		} else {
 			console.log('Connection established to', url);
-			db.collection('thread').find( { archived : false } ).sort(query).toArray(function(error, documents) {
+			db.collection('thread').find( { archived : arch } ).sort(query).toArray(function(error, documents) {
 					if (error){
 							throw error;
 					}
@@ -54,7 +63,7 @@ module.exports = function(app, passport){
 		});
 	});
 
-  app.get('/app/thread/:idThread', function (req, res) {
+  app.get('/api/thread/:idThread', function (req, res) {
       MongoClient.connect(url, function(err, db) {
 	        if (err) {
 	        	console.log('Unable to connect to the mongoDB server. Error:', err);
@@ -72,27 +81,17 @@ module.exports = function(app, passport){
 	    });
 	});
 
-  app.get('/app/tag/:tagName/:archived', function (req, res) {
-      MongoClient.connect(url, function(err, db) {
-	        if (err) {
-	        	console.log('Unable to connect to the mongoDB server. Error:', err);
-	        } else {
-		        console.log('Connection established to', url);
-		        db.collection('thread').find( { tags: req.params.tagName, archived: req.params.archived} ).toArray(function(error, documents) {
-		            if (error){
-		                throw error;
-		            }
-		            res.jsonp(documents);
-		        });
-
-		        db.close();
-	        }
-	    });
-	});
-
-	app.get('/app/tag/:tagName/:sortType/:archived', function (req, res) {
-			var sortType = req.params.sortType;
-			var onlyArchived = (req.params.archived == 'true');
+	app.get('/api/tag/:tagName', function (req, res) {
+			var sortType = 'numberOfPosts';
+			if(req.query.sortType){
+				console.log('AbAAA');
+				sortType = req.query.sortType;
+			}
+			var arch = false;
+			if(req.query.archived != undefined){
+				console.log('ABAA');
+				arch = (req.query.archived == 'true');
+			}
 			var query = {};
 			query[sortType]= -1;
 			MongoClient.connect(url, function(err, db) {
@@ -100,7 +99,7 @@ module.exports = function(app, passport){
 						console.log('Unable to connect to the mongoDB server. Error:', err);
 					} else {
 						console.log('Connection established to', url);
-						db.collection('thread').find( { tags: req.params.tagName, archived: onlyArchived} ).sort(query).toArray(function(error, documents) {
+						db.collection('thread').find( { tags: req.params.tagName, archived: arch} ).sort(query).toArray(function(error, documents) {
 								if (error){
 										throw error;
 								}
@@ -143,7 +142,7 @@ module.exports = function(app, passport){
 			});
 	}
 
-	app.post('/app/thread/newPost', function (req, res){
+	app.post('/api/thread/newPost', function (req, res){
 			var newPost = req.body;
 			newPost.userIP = req.headers["x-forwarded-for"];
 			var date = new Date();
@@ -224,7 +223,7 @@ module.exports = function(app, passport){
 			});
 	}
 
-	app.post('/thread/newThread', function (req, res){
+	app.post('/api/thread/newThread', function (req, res){
 			var newThread = req.body;
 			newThread.userIP = req.headers["x-forwarded-for"];
 			var date = new Date();

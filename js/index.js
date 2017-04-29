@@ -76,7 +76,7 @@ function base64ToBlob(base64, mime)
 	    $scope.search = function() {
 	        $http({
 	            method : "GET",
-	            url: "https://nyachan-server.herokuapp.com/app/threads/numberOfPosts"
+	            url: "https://nyachan-server.herokuapp.com/api/threads?sortType=numberOfPosts"
 	        }).then(function mySucces(response) {
 	            $scope.threads = response.data;
 	        }, function myError(response) {

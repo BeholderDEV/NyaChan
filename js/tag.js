@@ -82,7 +82,7 @@
         $scope.search = function() {
             $http({
                 method : "GET",
-                url: "https://nyachan-server.herokuapp.com/app/tag/" + searchTag+"/lastDate/false"
+                url: "https://nyachan-server.herokuapp.com/api/tag/" + searchTag+"?sortType=lastDate&archived=false"
                 // url: "http://localhost:3000/app/tag/" + searchTag
             }).then(function mySucces(response) {
                 $scope.threads = response.data;
@@ -210,7 +210,7 @@
 
 		          $http({
 		              method : "POST",
-		              url: "https://nyachan-server.herokuapp.com/thread/newThread",
+		              url: "https://nyachan-server.herokuapp.com/api/thread/newThread",
 		              // url: "http://localhost:3000/thread/newThread",
 		              data: dataPost,
 		              headers: {
