@@ -100,7 +100,7 @@ function checkPumpLimit(threadid, callback, res)
 							}
 							else{
 									callback();
-							}							
+							}
 					});
 					db.close();
 				}
@@ -187,6 +187,12 @@ module.exports = function(app, express, path){
      res.type('text/html');
      // res.sendFile(path.resolve('../tag.html'));
      res.sendfile('tag.html');
+  });
+
+	app.get('/archived/:tagName', function (req, res) {
+     res.type('text/html');
+     // res.sendFile(path.resolve('../tag.html'));
+     res.sendfile('archived.html');
   });
 
   app.get('/thread/:idThread', function (req, res) {
