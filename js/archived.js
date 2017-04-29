@@ -1,6 +1,6 @@
 (function(){
 
-	var app = angular.module('nya-chan', ['angular-loading-bar', 'vcRecaptcha'])
+	var app = angular.module('nya-chan', ['angular-loading-bar'])
     .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
       cfpLoadingBarProvider.includeSpinner = false;
     }]);
