@@ -5,7 +5,7 @@
       cfpLoadingBarProvider.includeSpinner = false;
     }]);
 
-    app.controller('archivedController',function($scope, $http){
+    app.controller('archivedController',function($scope, $http, $window){
       var url = $(location).attr('href');
       var searchTag = url.substring(url.lastIndexOf('/') + 1);
       $http({
