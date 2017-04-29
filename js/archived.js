@@ -10,7 +10,7 @@
       var searchTag = url.substring(url.lastIndexOf('/') + 1);
       $http({
           method : "GET",
-          url: "https://nyachan-server.herokuapp.com/api/threads/" + searchTag+"?sortType=lastDate&archived=true"
+          url: "https://nyachan-server.herokuapp.com/api/tag/" + searchTag+"?sortType=lastDate&archived=true"
       }).then(function mySucces(response) {
           $scope.threads = response.data;
       }, function myError(response) {
