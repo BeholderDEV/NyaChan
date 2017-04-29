@@ -33,7 +33,7 @@ module.exports = function(app, passport){
 		});
 	});
 
-	app.get('/app/threads', function (req, res) {
+	app.get('/api/threads', function (req, res) {
 		var sortType = 'numberOfPosts';
 		if(req.query.sortType){
 			console.log('AAAA');
