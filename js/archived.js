@@ -6,7 +6,7 @@
     }]);
 
     app.controller('archivedController',function($scope, $http){
-      ar url = $(location).attr('href');
+      var url = $(location).attr('href');
       var searchTag = url.substring(url.lastIndexOf('/') + 1);
       $http({
           method : "GET",
