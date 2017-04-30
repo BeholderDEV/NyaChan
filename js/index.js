@@ -45,6 +45,26 @@ function base64ToBlob(base64, mime)
 				key: '6LfogRgUAAAAACNUIiCwMJPsPJ0NxiS7tafx-B55'
 		};
 
+		function testUserLogin(){
+			$http({
+					method : "GET",
+					url: "https://nyachan-server.herokuapp.com/testLogin",
+					// url: "http://localhost:3000/testLogin",
+					headers: {
+								'Content-Type': 'application/json'
+					}
+			}).then(function mySucces(response) {
+				if(response.data != undefined){
+					$scope.userName = response.data.login;
+					$scope.userImage = response.data.avatar;
+					$scope.isUserLogged = true;
+					$('#loginModal').modal('hide');
+				}
+			}, function myError(response) {
+					console.log(response || "Request failed");
+			});
+		}
+		testUserLogin();
 		$scope.setWidgetId = function (widgetId) {
 				console.info('Created widget ID: %s', widgetId);
 
@@ -182,21 +202,7 @@ function base64ToBlob(base64, mime)
 									'Content-Type': 'application/json'
 						}
 				}).then(function mySucces(response) {
-					$http({
-							method : "GET",
-							url: "https://nyachan-server.herokuapp.com/testLogin",
-							// url: "http://localhost:3000/testLogin",
-							headers: {
-										'Content-Type': 'application/json'
-							}
-					}).then(function mySucces(response) {
-							$scope.userName = response.data.login;
-							$scope.userImage = response.data.avatar;
-							$scope.isUserLogged = true;
-							$('#loginModal').modal('hide');
-					}, function myError(response) {
-							console.log(response || "Request failed");
-					});
+					testUserLogin();
 				}, function myError(response) {
 						console.log(response || "Request failed");
 				});
