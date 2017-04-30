@@ -38,5 +38,11 @@
     "mongodb",
     "ImageBoard"
   ],
+  "standard": {
+    "globals": ["$", "FormData", "XMLHttpRequest", "angular", "alert", "location", "Blob", "FileReader"],
+    "ignore": [
+      "/lib/"
+    ]
+  },
   "license": "MIT"
 }
