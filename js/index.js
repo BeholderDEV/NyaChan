@@ -31,6 +31,7 @@ function base64ToBlob(base64, mime)
 	app.controller('indexController',function($scope, $http, vcRecaptchaService){
 
 		$scope.init = function(){
+			console.log("AAAA");
 			$scope.isUserLogged = false;
 		  $http({
 		      method : "GET",
@@ -40,10 +41,12 @@ function base64ToBlob(base64, mime)
 		            'Content-Type': 'application/json'
 		      }
 		  }).then(function mySucces(response) {
+		  	console.log("BB" + response.data);
 		    if(response.data.login != undefined){
 		      $scope.userName = response.data.login;
 		      $scope.userImage = response.data.avatar;
 		      $scope.isUserLogged = true;
+		      console.log("CC");
 		    }
 		  }, function myError(response) {
 		      console.log(response || "Request failed");
