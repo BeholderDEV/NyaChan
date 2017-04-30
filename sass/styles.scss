@@ -17,6 +17,9 @@ body{
   background-size: cover;
   border-radius: $border-radius;
 }
+img{
+  border-radius: $border-radius;
+}
 .cropArea {
   background: #E4E4E4;
   overflow: hidden;
@@ -127,7 +130,7 @@ input, textarea{
     }
   }
   .panel-heading{
-    border-radius: $border-radius;
+    border-radius: $border-radius $border-radius 0px 0px;
     background-color: $panel-dark-bg;
     border: none;
     a{
