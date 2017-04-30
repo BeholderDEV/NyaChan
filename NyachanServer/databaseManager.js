@@ -386,8 +386,7 @@ module.exports = function(app, passport){
   		    req.logIn(user, function(err) {
 			      if (err) { return next(err); }
 			      console.log(user);
-			      req.session.user = user;
-			      return res.send(user.login);
+			      return res.send(user);
 			    });
 	    	}
 	    }

@@ -8,23 +8,14 @@
     app.controller('tagController',function($scope, $http, $window, vcRecaptchaService){
         
         $scope.init = function(){
+          var user = JSON.stringify($cookies.get('user'));
           $scope.isUserLogged = false;
-          $http({
-              method : "GET",
-              url: "https://nyachan-server.herokuapp.com/testLogin",
-              // url: "http://localhost:3000/testLogin",
-              headers: {
-                    'Content-Type': 'application/json'
-              }
-          }).then(function mySucces(response) {
-            if(response.data.login != undefined){
-              $scope.userName = response.data.login;
-              $scope.userImage = response.data.avatar;
-              $scope.isUserLogged = true;
-            }
-          }, function myError(response) {
-              console.log(response || "Request failed");
-          });
+          console.log("AA");
+          if(user != undefined){
+            $scope.userName = user.login;
+            $scope.userImage = user.avatar;
+            $scope.isUserLogged = true;
+          }
         };
 
         $scope.time_zone = new Date().getTimezoneOffset();

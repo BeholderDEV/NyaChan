@@ -29,29 +29,16 @@ function base64ToBlob(base64, mime)
 	}
 
 	app.controller('indexController',function($scope, $http, $cookies, $cookieStore, vcRecaptchaService){
+		
 		$scope.init = function(){
-			console.log("Look " + JSON.stringify($cookies.get('user')));
-			console.log("AAAA");
+			var user = JSON.stringify($cookies.get('user'));
 			$scope.isUserLogged = false;
-		  $http({
-		      method : "GET",
-		      url: "https://nyachan-server.herokuapp.com/testLogin",
-		      // url: "http://localhost:3000/testLogin",
-		      headers: {
-		            'Content-Type': 'application/json'
-		      }
-		  }).then(function mySucces(response) {
-		  	console.log("BB" + response.data);
-		    if(response.data.login != undefined){
-		    	$cookieStore.put('user', response.data);
-		      $scope.userName = response.data.login;
-		      $scope.userImage = response.data.avatar;
-		      $scope.isUserLogged = true;
-		      console.log("CC");
-		    }
-		  }, function myError(response) {
-		      console.log(response || "Request failed");
-		  });
+			console.log("AA");
+			if(user != undefined){
+				$scope.userName = user.login;
+				$scope.userImage = user.avatar;
+				$scope.isUserLogged = true;
+			}
 		};
 
 		$scope.myImage='';
@@ -204,8 +191,8 @@ function base64ToBlob(base64, mime)
 									'Content-Type': 'application/json'
 						}
 				}).then(function mySucces(response) {
-		      $('#loginModal').modal('hide');
-		      	$scope.init();
+		      	$('#loginModal').modal('hide');
+		      	$cookieStore.put('user', response.data);
 					}, function myError(response) {
 						console.log(response || "Request failed");
 				});
@@ -221,6 +208,7 @@ function base64ToBlob(base64, mime)
 						}
 				}).then(function mySucces(response) {
 						$scope.isUserLogged = false;
+						$cookieStore.remove('user');
 				}, function myError(response) {
 						console.log(response || "Request failed");
 				});
