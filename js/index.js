@@ -31,9 +31,9 @@ function base64ToBlob(base64, mime)
 	app.controller('indexController',function($scope, $http, $cookies, $cookieStore, vcRecaptchaService){
 		
 		$scope.init = function(){
-			var user = JSON.stringify($cookies.get('user'));
+			var user = $cookies.get('user');
 			$scope.isUserLogged = false;
-			console.log("AA");
+			console.log("AA " + user);
 			if(user != undefined){
 				$scope.userName = user.login;
 				$scope.userImage = user.avatar;
@@ -192,10 +192,10 @@ function base64ToBlob(base64, mime)
 						}
 				}).then(function mySucces(response) {
 		      	$('#loginModal').modal('hide');
-		      	var newUser = JSON.stringify(response.data);
-		      	$cookieStore.put('user', newUser);
-  					$scope.userName = newUser.login;
-						$scope.userImage = newUser.avatar;
+		      	$cookieStore.put('user', response.data);
+  					$scope.userName = response.data.login;
+						$scope.userImage = response.data.avatar;
+						$scope.isUserLogged = true;
 						$scope.isUserLogged = true;
 					}, function myError(response) {
 						console.log(response || "Request failed");
