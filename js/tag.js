@@ -1,11 +1,11 @@
 (function(){
 
-	var app = angular.module('nya-chan', ['angular-loading-bar', 'vcRecaptcha'])
+	var app = angular.module('nya-chan', ['angular-loading-bar', 'ngCookies', 'vcRecaptcha'])
     .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
       cfpLoadingBarProvider.includeSpinner = false;
     }]);
 
-    app.controller('tagController',function($scope, $http, $window, vcRecaptchaService){
+    app.controller('tagController',function($scope, $http, $window, $cookies, $cookieStore, vcRecaptchaService){
         
         $scope.init = function(){
           $scope.isUserLogged = false;
