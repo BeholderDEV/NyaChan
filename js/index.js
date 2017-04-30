@@ -28,9 +28,10 @@ function base64ToBlob(base64, mime)
 	    return new Blob(byteArrays, {type: mime});
 	}
 
-	app.controller('indexController',function($scope, $http, vcRecaptchaService){
-
+	app.controller('indexController',function($scope, $http, $cookies, vcRecaptchaService){
+		
 		$scope.init = function(){
+			console.log("Look" + JSON.stringify($cookies.get('user')));
 			console.log("AAAA");
 			$scope.isUserLogged = false;
 		  $http({
