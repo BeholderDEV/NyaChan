@@ -6,8 +6,8 @@ $dark-bg: #333;
 $panel-bg: rgba(68,68,68,0.75);
 $panel-dark-bg: rgba(34,34,34,0.75);
 $qoute-color: #27ae60;
-$border-radius: 0px;
-$img-bg: "https://www.dropbox.com/s/yr9pk0u393ecreh/maxresdefault.jpg?raw=1";
+$border-radius: 10px;
+$img-bg: "/img/bg.jpg";
 
 body{
   padding-top: 100px;
@@ -15,6 +15,9 @@ body{
   background-attachment: fixed;
   background-image: url($img-bg);
   background-size: cover;
+  border-radius: $border-radius;
+}
+img{
   border-radius: $border-radius;
 }
 .cropArea {
@@ -30,6 +33,11 @@ body{
   border-top-color:$primary-color;
   border-left-color:$primary-color;
 }
+
+#tagTitle{
+  color: $text-color;
+}
+
 a {
   text-decoration: none !important;
   color: $text-color;
@@ -75,6 +83,11 @@ input, textarea{
   background-color: transparent;
   border: none;
   color: $text-color;
+  &.lone{
+    .panel-body{
+      border-radius: 0px 0px $border-radius $border-radius;
+    }
+  }
   &.panel-index{
     img{
       margin: auto;
@@ -83,6 +96,7 @@ input, textarea{
 
     .panel-body{
       height: 200px;
+      border-radius: 0px 0px $border-radius $border-radius;
     }
     display: block;
   }
@@ -122,7 +136,7 @@ input, textarea{
     }
   }
   .panel-heading{
-    border-radius: $border-radius;
+    border-radius: $border-radius $border-radius 0px 0px;
     background-color: $panel-dark-bg;
     border: none;
     a{
@@ -144,7 +158,11 @@ input, textarea{
   .panel-footer{
     background-color: $panel-dark-bg;
     border: none;
+    border-radius: 0px 0px $border-radius $border-radius;
     li{
+      .panel-body{
+        border-radius: 0px 0px $border-radius $border-radius;
+      }
       border-radius: $border-radius;
       border: none;
       margin: 5px;

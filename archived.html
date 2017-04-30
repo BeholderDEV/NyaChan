@@ -31,7 +31,7 @@
   </style>
 
   </head>
-  <body ng-app = "nya-chan" ng-controller= "tagController" data-ng-init="init()" ng-cloak>
+  <body ng-app = "nya-chan" ng-controller= "archivedController" ng-cloak>
     <div id="loading-bar-container"></div>
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
@@ -46,12 +46,6 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li id="newThreadButton" class="btn" data-toggle="modal" data-target="#newThreadModal"><a>New Thread  <i class="fa fa-plus"></i></a></li>
-            <li class="btn dropdown-toggle" ng-if="isUserLogged" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><a><img ng-src="{{userImage}}" class="img-circle" height="30px"/>    {{userName}} <span class="caret"></span></a></li>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-              <li><a href="#">Profile</a></li>
-              <li><a ng-click="logoutUser()" href="#">Logout</a></li>
-            </ul>
           </ul>
         </div>
       </div>
@@ -109,78 +103,6 @@
         </div>
     </footer>
 
-    <div class="modal fade" id="newThreadModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-      <div id="task-modal" class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-            <h4 class="modal-title">Create Thread</h4>
-          </div>
-          <div class="modal-body">
-            <div class="progress">
-              <div id="loader" class="progress-bar progress-bar-striped active" role="progressbar" style="width: 0%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-            <form id="comment-form" name="comment-form" class="form-horizontal" method="post" enctype="multipart/form-data">
-              <div class="form-group">
-                <label class="col-sm-2 control-label">Subject</label>
-                <div class="col-sm-10">
-                  <input type="text" class="form-control" ng-model="post.title" placeholder="Subject" id="title">
-                </div>
-              </div>
-              <div class="form-group" id="comment-group">
-                <label class="col-sm-2 control-label">Comment</label>
-                <div class="col-sm-10">
-                  <textarea class="form-control" rows="3" placeholder="Comment" ng-model="post.body" id="body" name="comment" id="comment-area" required></textarea>
-                </div>
-              </div>
-              <div class="form-group" id="file-group">
-                <label class="col-sm-2 control-label">File</label>
-                <div class="fileinput fileinput-new" data-provides="fileinput">
-                  <span class="btn btn-default btn-file">
-                    <span class="fileinput-new">
-                      Select file
-                    </span>
-                    <span class="fileinput-exists">
-                      Change
-                    </span>
-                    <input type="file" name="..." ng-model="post.file" id="file" name="image" multiple="multiple" accept="image/gif, image/jpg, image/png, image/bmp, image/jpeg, application/pdf, video/webm">
-                  </span>
-                  <span class="fileinput-filename"></span>
-                  <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">&times;</a>
-                </div>
-              </div>
-              <div>
-                <select id="selectTags" multiple="multiple" required>
-                    <option value="a">Anime &#38; Mangá</option>
-                    <option value="c">Quadrinhos &#38; Desenhos Animados</option>
-                    <option value="g">Gif &#38; Webm</option>
-                    <option value="h">História e Ciências Humanas</option>
-                    <option value="m">Música</option>
-                    <option value="t">Tecnologia</option>
-                    <option value="tv">Televisão &#38; Filmes</option>
-                    <option value="v">Vídeo Games</option>
-                    <option value="b">Aleatório</option>
-                    <option value="p">Politicamente Incorreto</option>
-                </select>
-              </div>
-              <div
-                  vc-recaptcha
-                  theme="'light'"
-                  key="model.key"
-                  on-create="setWidgetId(widgetId)"
-                  on-success="setResponse(response)"
-                  on-expire="cbExpiration()"
-              ></div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="submit" ng-click="createThread(post)" class="btn btn-nya post-button">Post</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Angular JS -->
@@ -191,13 +113,28 @@
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.min.js"></script>
 
-    <script type="text/javascript" src="../lib/Bootstrap-multiselect/bootstrap-multiselect.js"></script>
-    <!-- Jasny -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/js/jasny-bootstrap.min.js"></script>
-
     <script src="../js/app.js"></script>
-    <script src="../js/tag.js"></script>
-    <script src="../js/script.js"></script>
-    <script src="../js/angular-recaptcha.min.js"></script>
+    <script src="../js/archived.js"></script>
+    <script>
+    function restore_image(){
+        $(this).parent().children(".some-image").show();
+        $(this).remove();
+    }
+    function toggle(obj){
+        var img = obj.data('full');
+        var full = '<img src="'+img+'" class="img-responsive"/>';
+        var tag = $(full);
+        $(tag).on("click", restore_image);
+        var w =  obj.attr('width');
+        $(tag).attr('width', obj.data('width'));
+        $(tag).data('width', w);
+        var h =  obj.attr('height');
+        $(tag).attr('height', obj.data('height'));
+        $(tag).data('height', h);
+        obj.hide();
+        obj.parent().append(tag);
+    }
+    </script>
+
   </body>
 </html>

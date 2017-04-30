@@ -1,6 +1,6 @@
 (function(){
 
-	var app = angular.module('nya-chan', ['angular-loading-bar','ngImgCrop', 'vcRecaptcha'])
+	var app = angular.module('nya-chan', ['angular-loading-bar','ngImgCrop', 'ngCookies', 'vcRecaptcha'])
     .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
       cfpLoadingBarProvider.includeSpinner = false;
     }]);
@@ -28,7 +28,17 @@ function base64ToBlob(base64, mime)
 	    return new Blob(byteArrays, {type: mime});
 	}
 
-	app.controller('indexController',function($scope, $http, vcRecaptchaService){
+	app.controller('indexController',function($scope, $http, $cookies, $cookieStore, vcRecaptchaService){
+		
+		$scope.init = function(){
+			$scope.isUserLogged = false;
+			if($cookies.get('user') != undefined){
+				var user = JSON.parse($cookies.get('user'));
+				$scope.userName = user.login;
+				$scope.userImage = user.avatar;
+				$scope.isUserLogged = true;
+			}
+		};
 
 		$scope.myImage='';
 		$scope.myCroppedImage='';
@@ -76,7 +86,7 @@ function base64ToBlob(base64, mime)
 	    $scope.search = function() {
 	        $http({
 	            method : "GET",
-	            url: "https://nyachan-server.herokuapp.com/app/threads/numberOfPosts"
+	            url: "https://nyachan-server.herokuapp.com/api/threads?sortType=numberOfPosts"
 	        }).then(function mySucces(response) {
 	            $scope.threads = response.data;
 	        }, function myError(response) {
@@ -180,9 +190,13 @@ function base64ToBlob(base64, mime)
 									'Content-Type': 'application/json'
 						}
 				}).then(function mySucces(response) {
-						console.log("Login successful");
-						console.log(response);
-				}, function myError(response) {
+		      	$('#loginModal').modal('hide');
+		      	$cookieStore.put('user', response.data);
+  					$scope.userName = response.data.login;
+						$scope.userImage = response.data.avatar;
+						$scope.isUserLogged = true;
+						$scope.isUserLogged = true;
+					}, function myError(response) {
 						console.log(response || "Request failed");
 				});
     	};
@@ -196,28 +210,14 @@ function base64ToBlob(base64, mime)
 									'Content-Type': 'application/json'
 						}
 				}).then(function mySucces(response) {
-						console.log("Logout successful");
-						console.log(response);
+						$scope.isUserLogged = false;
+						$cookieStore.remove('user');
 				}, function myError(response) {
 						console.log(response || "Request failed");
 				});
     	};
 
-    	$scope.testUser = function(){
-				$http({
-						method : "GET",
-						url: "https://nyachan-server.herokuapp.com/testLogin",
-						// url: "http://localhost:3000/testLogin",
-						headers: {
-									'Content-Type': 'application/json'
-						}
-				}).then(function mySucces(response) {
-						console.log("Testing User");
-						console.log(response);
-				}, function myError(response) {
-						console.log(response || "Request failed");
-				});
-    	};
+
 
 		});
 

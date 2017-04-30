@@ -1,15 +1,27 @@
 (function(){
 
-	var app = angular.module('nya-chan', ['angular-loading-bar', 'vcRecaptcha'])
+	var app = angular.module('nya-chan', ['angular-loading-bar', 'ngCookies', 'vcRecaptcha'])
     .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
       cfpLoadingBarProvider.includeSpinner = false;
     }]);
 
-    app.controller('tagController',function($scope, $http, $window, vcRecaptchaService){
+    app.controller('tagController',function($scope, $http, $window, $cookies, $cookieStore, vcRecaptchaService){
+        
+        $scope.init = function(){
+          $scope.isUserLogged = false;
+          if($cookies.get('user') != undefined){
+            var user = JSON.parse($cookies.get('user'));
+            $scope.userName = user.login;
+            $scope.userImage = user.avatar;
+            $scope.isUserLogged = true;
+          }
+        };
+
         $scope.time_zone = new Date().getTimezoneOffset();
         var url = $(location).attr('href');
         var searchTag = url.substring(url.lastIndexOf('/') + 1);
 				var tagName = 'Anime';
+
 				switch(searchTag) {
 			    case 'a':
 		        tagName = 'Anime & Mangá';
@@ -82,7 +94,7 @@
         $scope.search = function() {
             $http({
                 method : "GET",
-                url: "https://nyachan-server.herokuapp.com/app/tag/" + searchTag+"/lastDate"
+                url: "https://nyachan-server.herokuapp.com/api/tag/" + searchTag+"?sortType=lastDate&archived=false"
                 // url: "http://localhost:3000/app/tag/" + searchTag
             }).then(function mySucces(response) {
                 $scope.threads = response.data;
@@ -168,7 +180,7 @@
                     $('#loader').width(Math.round(percentComplete * 100)+'%');
                 }
               }, false);
-		          xhr.open('post', '/dbxPost/1', true);
+		          xhr.open('post', '/dbxPost/1/0', true);
 		          xhr.send(formData);
 		        }else{
 		          sendThread(null, null);
@@ -180,6 +192,7 @@
 		              var dataPost = {
 		                  body: post.body,
 		                  date: "2016-01-02 19:33:00",
+											archived: false,
 		                  subject: post.title,
 		                  userName: "Anon",
 		                  tags: selectTags,
@@ -200,6 +213,7 @@
 		              var dataPost = {
 		                  body: post.body,
 		                  date: "2016-01-02 19:33:00",
+											archived: false,
 		                  subject: post.title,
 		                  userName: "Anon",
 		                  tags: selectTags
@@ -208,7 +222,7 @@
 
 		          $http({
 		              method : "POST",
-		              url: "https://nyachan-server.herokuapp.com/thread/newThread",
+		              url: "https://nyachan-server.herokuapp.com/api/thread/newThread",
 		              // url: "http://localhost:3000/thread/newThread",
 		              data: dataPost,
 		              headers: {

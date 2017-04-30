@@ -9,7 +9,8 @@ var expressSession = require('express-session');
 app.use(expressSession({
   secret: 'Nyahahahaha',
   resave: false,
-  saveUninitialized: true
+  saveUninitialized: true,
+  cookie: { secure: false }
 }));
 
 app.use(passport.initialize());

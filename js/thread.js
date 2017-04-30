@@ -1,15 +1,25 @@
 (function(){
 
-	var app = angular.module('nya-chan', ['angular-loading-bar', 'vcRecaptcha'])
+	var app = angular.module('nya-chan', ['angular-loading-bar', 'ngCookies', 'vcRecaptcha'])
     .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
       cfpLoadingBarProvider.includeSpinner = false;
     }]);
 
-    app.controller('threadController',function($scope, $http, $window, vcRecaptchaService){
+    app.controller('threadController',function($scope, $http, $window, $cookies, $cookieStore, vcRecaptchaService){
+      	
+			$scope.init = function(){
+				$scope.isUserLogged = false;
+				if($cookies.get('user') != undefined){
+					var user = JSON.parse($cookies.get('user'));
+					$scope.userName = user.login;
+					$scope.userImage = user.avatar;
+					$scope.isUserLogged = true;
+				}
+			};
+
       $scope.time_zone = new Date().getTimezoneOffset();
       var url = $(location).attr('href');
       var searchId = url.substring(url.lastIndexOf('/') + 1);
-
 			$scope.response = null;
       $scope.widgetId = null;
 
@@ -22,6 +32,7 @@
 
           $scope.widgetId = widgetId;
       };
+
 
       $scope.cbExpiration = function() {
           console.info('Captcha expired. Resetting response object');
@@ -40,7 +51,7 @@
       $scope.searchThread = function(threadID) {
           $http({
               method : "GET",
-              url: "https://nyachan-server.herokuapp.com/app/thread/" + threadID
+              url: "https://nyachan-server.herokuapp.com/api/thread/" + threadID
               // url: "http://localhost:3000/app/thread/" + threadID
           }).then(function mySucces(response) {
               $scope.thread = response.data[0];
@@ -116,7 +127,7 @@
                     $('#loader').width(Math.round(percentComplete * 100)+'%');
                 }
               }, false);
-							xhr.open('post', '/dbxPost/0', true);
+							xhr.open('post', '/dbxPost/0/'+$scope.thread._id, true);
 							xhr.send(formData);
 						}else{
 								sendPost(null, null);
@@ -156,7 +167,7 @@
 
 								$http({
 										method : "POST",
-										url: "https://nyachan-server.herokuapp.com/app/thread/newPost",
+										url: "https://nyachan-server.herokuapp.com/api/thread/newPost",
 										// url: "http://localhost:3000/app/thread/newPost",
 										data: dataPost,
 										headers: {

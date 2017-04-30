@@ -27,10 +27,10 @@
       right: -600px;
       padding: 20px;
     }
-    
+
     </style>
   </head>
-  <body ng-app = "nya-chan" ng-controller= "threadController" ng-cloak>
+  <body ng-app = "nya-chan" ng-controller= "threadController" data-ng-init="init()" ng-cloak>
     <div id="loading-bar-container"></div>
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
@@ -46,6 +46,11 @@
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
             <li class="btn" data-toggle="modal" data-target="#newThreadModal"><a>Reply <i class="fa fa-plus"></i></a></li>
+            <li class="btn dropdown-toggle" ng-if="isUserLogged" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><a><img ng-src="{{userImage}}" class="img-circle" height="30px"/>    {{userName}} <span class="caret"></span></a></li>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+              <li><a href="#">Profile</a></li>
+              <li><a ng-click="logoutUser()" href="#">Logout</a></li>
+            </ul>
           </ul>
         </div>
       </div>
@@ -168,6 +173,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <!-- Angular JS -->
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-cookies.js"></script>
   <!-- Latest compiled and minified JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
   <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.min.js'></script>
