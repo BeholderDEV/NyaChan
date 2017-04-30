@@ -42,7 +42,7 @@
           <ul class="nav navbar-nav navbar-right">
             <li class="btn" data-toggle="modal" data-target="#signUpModal"  ng-if="!isUserLogged"><a>Sign Up <i class="fa fa-plus"></i></a></li>
             <li class="btn" data-toggle="modal" data-target="#loginModal"  ng-if="!isUserLogged"><a>Login <i class="fa fa-plus"></i></a></li>
-            <li class="btn" ng-click="logoutUser()" ng-if="isUserLogged"><img ng-src="{{userImage}}" class="img-rounded" height="20px"/>{{userName}}</li>
+            <li class="btn" ng-click="logoutUser()" ng-if="isUserLogged"><a><img ng-src="{{userImage}}" class="img-rounded" height="20px"/> {{userName}}</a></li>
             <li class="btn" ng-if="isUserLogged"><a>Logout <i class="fa fa-plus"></i></a></li>
           </ul>
         </div>
