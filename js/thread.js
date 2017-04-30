@@ -11,7 +11,7 @@
       var searchId = url.substring(url.lastIndexOf('/') + 1);
 
 			$scope.isUserLogged = false;
-			testUserLogin();
+			testUserLogin($scope);
 			$scope.response = null;
       $scope.widgetId = null;
 

@@ -28,7 +28,7 @@ function validFile(filename){
 function toggleThumb(post){
   console.log("aaa");
 }
-function testUserLogin(){
+function testUserLogin(scopo){
   $http({
       method : "GET",
       url: "https://nyachan-server.herokuapp.com/testLogin",
@@ -38,9 +38,9 @@ function testUserLogin(){
       }
   }).then(function mySucces(response) {
     if(response.data.login != undefined){
-      $scope.userName = response.data.login;
-      $scope.userImage = response.data.avatar;
-      $scope.isUserLogged = true;
+      scopo.userName = response.data.login;
+      scopo.userImage = response.data.avatar;
+      scopo.isUserLogged = true;
     }
   }, function myError(response) {
       console.log(response || "Request failed");
