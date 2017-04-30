@@ -83,6 +83,11 @@ input, textarea{
   background-color: transparent;
   border: none;
   color: $text-color;
+  &.lone{
+    .panel-body{
+      border-radius: 0px 0px $border-radius $border-radius;
+    }
+  }
   &.panel-index{
     img{
       margin: auto;
