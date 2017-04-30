@@ -77,7 +77,7 @@ function setImageSizeDimension(file, callback){
 		properties.width = image.width();
 		properties.height = image.height();
 		var stats = fs.statSync(file.path);
-		properties.size = stats.size
+		properties.size = stats.size;
 		return callback(properties);
 	});
 }

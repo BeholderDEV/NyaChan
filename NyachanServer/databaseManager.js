@@ -385,6 +385,8 @@ module.exports = function(app, passport){
 	    	}else{
   		    req.logIn(user, function(err) {
 			      if (err) { return next(err); }
+			      console.log(user);
+			      req.session.user = user;
 			      return res.send(user.login);
 			    });
 	    	}
@@ -403,6 +405,7 @@ module.exports = function(app, passport){
 	});
 
 	app.get('/testLogin', function(req, res) {
+		console.log("Test test " + req.session.user);
   	if (req.user) {
     	console.log("Is signed");
 		} else {
