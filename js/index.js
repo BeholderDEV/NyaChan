@@ -30,7 +30,7 @@ function base64ToBlob(base64, mime)
 
 	app.controller('indexController',function($scope, $http, $cookies, vcRecaptchaService){
 		$scope.init = function(){
-			// console.log("Look" + JSON.stringify($cookies.get('user')));
+			console.log("Look" + JSON.stringify($cookies.get('user')));
 			console.log("AAAA");
 			$scope.isUserLogged = false;
 		  $http({
