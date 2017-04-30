@@ -54,7 +54,7 @@ function base64ToBlob(base64, mime)
 								'Content-Type': 'application/json'
 					}
 			}).then(function mySucces(response) {
-				if(response.data != undefined){
+				if(response.data.login != undefined){
 					$scope.userName = response.data.login;
 					$scope.userImage = response.data.avatar;
 					$scope.isUserLogged = true;
