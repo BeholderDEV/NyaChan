@@ -166,6 +166,25 @@ function base64ToBlob(base64, mime)
 				}
 	    };
 
+			$scope.isUserLogged = false;
+
+    	$scope.testUser = function(){
+				$http({
+						method : "GET",
+						url: "https://nyachan-server.herokuapp.com/testLogin",
+						// url: "http://localhost:3000/testLogin",
+						headers: {
+									'Content-Type': 'application/json'
+						}
+				}).then(function mySucces(response) {
+						$scope.isUserLogged = false;
+						console.log("Testing User");
+						console.log(response);
+				}, function myError(response) {
+						console.log(response || "Request failed");
+				});
+    	};
+
     	$scope.loginUser = function(post){
 	    	var dataUser = {
 							login: post.login,
@@ -182,6 +201,7 @@ function base64ToBlob(base64, mime)
 				}).then(function mySucces(response) {
 						console.log("Login successful");
 						console.log(response);
+						$scope.testUser();
 				}, function myError(response) {
 						console.log(response || "Request failed");
 				});
@@ -203,23 +223,7 @@ function base64ToBlob(base64, mime)
 				});
     	};
 
-			$scope.isUserLogged = false;
 
-    	$scope.testUser = function(){
-				$http({
-						method : "GET",
-						url: "https://nyachan-server.herokuapp.com/testLogin",
-						// url: "http://localhost:3000/testLogin",
-						headers: {
-									'Content-Type': 'application/json'
-						}
-				}).then(function mySucces(response) {
-						console.log("Testing User");
-						console.log(response);
-				}, function myError(response) {
-						console.log(response || "Request failed");
-				});
-    	};
 
 		});
 
