@@ -168,25 +168,6 @@ function base64ToBlob(base64, mime)
 
 			$scope.isUserLogged = false;
 
-    	$scope.testUser = function(){
-				$http({
-						method : "GET",
-						url: "https://nyachan-server.herokuapp.com/testLogin",
-						// url: "http://localhost:3000/testLogin",
-						headers: {
-									'Content-Type': 'application/json'
-						}
-				}).then(function mySucces(response) {
-						console.log("Testing User");
-						console.log(response);
-						$scope.userName = response.data.login;
-						$scope.userImage = response.data.avatar;
-						$scope.isUserLogged = true;
-				}, function myError(response) {
-						console.log(response || "Request failed");
-				});
-    	};
-
     	$scope.loginUser = function(post){
 	    	var dataUser = {
 							login: post.login,
@@ -201,9 +182,20 @@ function base64ToBlob(base64, mime)
 									'Content-Type': 'application/json'
 						}
 				}).then(function mySucces(response) {
-						console.log("Login successful");
-						console.log(response);
-						$scope.testUser();
+					$http({
+							method : "GET",
+							url: "https://nyachan-server.herokuapp.com/testLogin",
+							// url: "http://localhost:3000/testLogin",
+							headers: {
+										'Content-Type': 'application/json'
+							}
+					}).then(function mySucces(response) {
+							$scope.userName = response.data.login;
+							$scope.userImage = response.data.avatar;
+							$scope.isUserLogged = true;
+					}, function myError(response) {
+							console.log(response || "Request failed");
+					});
 				}, function myError(response) {
 						console.log(response || "Request failed");
 				});
@@ -218,8 +210,7 @@ function base64ToBlob(base64, mime)
 									'Content-Type': 'application/json'
 						}
 				}).then(function mySucces(response) {
-						console.log("Logout successful");
-						console.log(response);
+						$scope.isUserLogged = false;
 				}, function myError(response) {
 						console.log(response || "Request failed");
 				});
