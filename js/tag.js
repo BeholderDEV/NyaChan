@@ -8,10 +8,9 @@
     app.controller('tagController',function($scope, $http, $window, vcRecaptchaService){
         
         $scope.init = function(){
-          var user = JSON.stringify($cookies.get('user'));
           $scope.isUserLogged = false;
-          console.log("AA");
-          if(user != undefined){
+          if($cookies.get('user') != undefined){
+            var user = JSON.parse($cookies.get('user'));
             $scope.userName = user.login;
             $scope.userImage = user.avatar;
             $scope.isUserLogged = true;

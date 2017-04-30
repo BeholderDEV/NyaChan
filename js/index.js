@@ -31,10 +31,9 @@ function base64ToBlob(base64, mime)
 	app.controller('indexController',function($scope, $http, $cookies, $cookieStore, vcRecaptchaService){
 		
 		$scope.init = function(){
-			var user = $cookies.get('user');
 			$scope.isUserLogged = false;
-			console.log("AA " + user);
-			if(user != undefined){
+			if($cookies.get('user') != undefined){
+				var user = JSON.parse($cookies.get('user'));
 				$scope.userName = user.login;
 				$scope.userImage = user.avatar;
 				$scope.isUserLogged = true;

@@ -8,14 +8,13 @@
     app.controller('threadController',function($scope, $http, $window, vcRecaptchaService){
       	
 			$scope.init = function(){
-      		var user = JSON.stringify($cookies.get('user'));
-          $scope.isUserLogged = false;
-          console.log("AA");
-          if(user != undefined){
-            $scope.userName = user.login;
-            $scope.userImage = user.avatar;
-            $scope.isUserLogged = true;
-          }
+				$scope.isUserLogged = false;
+				if($cookies.get('user') != undefined){
+					var user = JSON.parse($cookies.get('user'));
+					$scope.userName = user.login;
+					$scope.userImage = user.avatar;
+					$scope.isUserLogged = true;
+				}
 			};
 
       $scope.time_zone = new Date().getTimezoneOffset();
