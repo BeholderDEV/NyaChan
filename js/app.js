@@ -28,3 +28,21 @@ function validFile(filename){
 function toggleThumb(post){
   console.log("aaa");
 }
+function testUserLogin(){
+  $http({
+      method : "GET",
+      url: "https://nyachan-server.herokuapp.com/testLogin",
+      // url: "http://localhost:3000/testLogin",
+      headers: {
+            'Content-Type': 'application/json'
+      }
+  }).then(function mySucces(response) {
+    if(response.data.login != undefined){
+      $scope.userName = response.data.login;
+      $scope.userImage = response.data.avatar;
+      $scope.isUserLogged = true;
+    }
+  }, function myError(response) {
+      console.log(response || "Request failed");
+  });
+}

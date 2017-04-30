@@ -9,24 +9,6 @@
         $scope.time_zone = new Date().getTimezoneOffset();
         var url = $(location).attr('href');
         var searchTag = url.substring(url.lastIndexOf('/') + 1);
-				function testUserLogin(){
-					$http({
-							method : "GET",
-							url: "https://nyachan-server.herokuapp.com/testLogin",
-							// url: "http://localhost:3000/testLogin",
-							headers: {
-										'Content-Type': 'application/json'
-							}
-					}).then(function mySucces(response) {
-						if(response.data.login != undefined){
-							$scope.userName = response.data.login;
-							$scope.userImage = response.data.avatar;
-							$scope.isUserLogged = true;
-						}
-					}, function myError(response) {
-							console.log(response || "Request failed");
-					});
-				}
 				$scope.isUserLogged = false;
 				testUserLogin();
 				var tagName = 'Anime';
