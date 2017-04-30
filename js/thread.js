@@ -9,7 +9,7 @@
       $scope.time_zone = new Date().getTimezoneOffset();
       var url = $(location).attr('href');
       var searchId = url.substring(url.lastIndexOf('/') + 1);
-
+			testUserLogin();
 			$scope.response = null;
       $scope.widgetId = null;
 

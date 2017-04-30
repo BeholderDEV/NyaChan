@@ -9,7 +9,9 @@
         $scope.time_zone = new Date().getTimezoneOffset();
         var url = $(location).attr('href');
         var searchTag = url.substring(url.lastIndexOf('/') + 1);
+				testUserLogin();
 				var tagName = 'Anime';
+
 				switch(searchTag) {
 			    case 'a':
 		        tagName = 'Anime & Mangá';

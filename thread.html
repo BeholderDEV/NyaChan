@@ -27,7 +27,7 @@
       right: -600px;
       padding: 20px;
     }
-    
+
     </style>
   </head>
   <body ng-app = "nya-chan" ng-controller= "threadController" ng-cloak>
@@ -46,6 +46,11 @@
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
             <li class="btn" data-toggle="modal" data-target="#newThreadModal"><a>Reply <i class="fa fa-plus"></i></a></li>
+            <li class="btn dropdown-toggle" ng-if="isUserLogged" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><a><img ng-src="{{userImage}}" class="img-circle" height="30px"/>    {{userName}} <span class="caret"></span></a></li>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+              <li><a href="#">Profile</a></li>
+              <li><a ng-click="logoutUser()" href="#">Logout</a></li>
+            </ul>
           </ul>
         </div>
       </div>
