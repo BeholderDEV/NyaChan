@@ -9,7 +9,7 @@
 //
 // });
 
-function restore_image () {
+function restoreImage () {
   $(this).parent().children('.some-image').show()
   $(this).remove()
 }
@@ -17,7 +17,7 @@ function toggle (obj) {
   var img = obj.data('full')
   var full = '<img src="' + img + '" class="img-responsive"/>'
   var tag = $(full)
-  $(tag).on('click', restore_image)
+  $(tag).on('click', restoreImage)
   var w = obj.attr('width')
   $(tag).attr('width', obj.data('width'))
   $(tag).data('width', w)

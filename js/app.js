@@ -20,7 +20,7 @@ function validarPost (post, files) {
 }
 function validFile (filename) {
   console.log('validando')
-  var validFormats = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webm', 'pdf' ]
+  var validFormats = [ 'jpg', 'jpeg', 'png', 'gif', 'bmp', 'webm', 'pdf' ]
   var ext = filename.substring(filename.lastIndexOf('.') + 1).toLowerCase()
   return validFormats.indexOf(ext) !== -1
 }
