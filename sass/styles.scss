@@ -91,6 +91,7 @@ input, textarea{
 
     .panel-body{
       height: 200px;
+      border-radius: 0px 0px $border-radius $border-radius;
     }
     display: block;
   }
@@ -152,6 +153,7 @@ input, textarea{
   .panel-footer{
     background-color: $panel-dark-bg;
     border: none;
+    border-radius: 0px 0px $border-radius $border-radius;
     li{
       border-radius: $border-radius;
       border: none;
