@@ -203,6 +203,8 @@ function base64ToBlob(base64, mime)
 				});
     	};
 
+			$scope.isUserLogged = false;
+
     	$scope.testUser = function(){
 				$http({
 						method : "GET",
