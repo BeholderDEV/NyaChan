@@ -30,6 +30,11 @@ body{
   border-top-color:$primary-color;
   border-left-color:$primary-color;
 }
+
+#tagTitle{
+  color: $text-color;
+}
+
 a {
   text-decoration: none !important;
   color: $text-color;
