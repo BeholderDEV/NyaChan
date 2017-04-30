@@ -181,7 +181,7 @@ function base64ToBlob(base64, mime)
 						console.log("Testing User");
 						console.log(response);
 						$scope.userName = response.data.login;
-						$scope.userImage = response.date.avatar;
+						$scope.userImage = response.data.avatar;
 				}, function myError(response) {
 						console.log(response || "Request failed");
 				});
