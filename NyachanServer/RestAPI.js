@@ -58,10 +58,10 @@ function resizeImage (file, op, callback) {
     }
     image.resize(neww, newh, function (err, imageResize) {
       imgResizer.create(imageResize.width(), imageResize.height(), 'white', function (err, canvas) {
-			  canvas.paste(0, 0, imageResize, function (err, imageCanvas) {
+        canvas.paste(0, 0, imageResize, function (err, imageCanvas) {
           imageCanvas.toBuffer('jpg', function (err, buffer) {
-				 		return callback(buffer)
-				  })
+            return callback(buffer)
+          })
         })
       })
     })
@@ -69,7 +69,7 @@ function resizeImage (file, op, callback) {
 }
 
 function setImageSizeDimension (file, callback) {
-  var properties = new Object()
+  var properties = {}
   imgResizer.open(file.path, function (err, image) {
     properties.width = image.width()
     properties.height = image.height()
@@ -107,7 +107,7 @@ module.exports = function (app, express, path) {
   app.post('/dbxPost/:op/:idThread', function (req, res) {
     var saveOnDropBox = function () {
       var form = new formidable.IncomingForm()
-      var respostaUrl = new Object()
+      var respostaUrl = {}
       form.keepExtensions = true
       form.parse(req)
       form.on('file', function (name, file) {
@@ -145,7 +145,7 @@ module.exports = function (app, express, path) {
       fs.readFile(file.path, function (err, data) {
         console.log(file.name)
         sendDataDropbox(req.params.user + '.jpeg', data, function (url) {
-          var respostaUrl = new Object()
+          var respostaUrl = {}
           respostaUrl = url
           res.send(respostaUrl)
         })

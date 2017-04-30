@@ -39,7 +39,7 @@
     "ImageBoard"
   ],
   "standard": {
-    "globals": ["$", "FormData", "XMLHttpRequest", "angular", "alert", "location", "Blob", "FileReader"],
+    "globals": ["$", "FormData", "XMLHttpRequest","next", "angular", "alert", "location", "Blob", "FileReader"],
     "ignore": [
       "/lib/"
     ]

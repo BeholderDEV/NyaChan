@@ -83,7 +83,7 @@
         var files = $('#file')[0].files[0]
 
         if (typeof post === 'undefined') {
-          post = new Object()
+          post = {}
           post.body = ' '
         }
 

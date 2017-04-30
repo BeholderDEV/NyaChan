@@ -9,7 +9,6 @@ var LocalStrategy = require('passport-local').Strategy
 var bCrypt = require('bcrypt-nodejs')
 
 module.exports = function (app, passport) {
-	// Connection URL
   var url = 'mongodb://alisson:123456@ds053206.mlab.com:53206/nyachan_data'
   mongoose.connect(url)
 
@@ -233,7 +232,7 @@ module.exports = function (app, passport) {
 
     MongoClient.connect(url, function (err, db) {
       if (err) {
-      	console.log('Unable to connect to the mongoDB server. Error:', err)
+        console.log('Unable to connect to the mongoDB server. Error:', err)
       } else {
         console.log('Connection established to', url)
         newThread.numberOfPosts = 1
