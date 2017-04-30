@@ -1,6 +1,6 @@
 (function(){
 
-	var app = angular.module('nya-chan', ['angular-loading-bar','ngImgCrop', 'ngCookies','vcRecaptcha'])
+	var app = angular.module('nya-chan', ['angular-loading-bar','ngImgCrop', 'ngCookies', 'vcRecaptcha'])
     .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
       cfpLoadingBarProvider.includeSpinner = false;
     }]);
@@ -29,7 +29,6 @@ function base64ToBlob(base64, mime)
 	}
 
 	app.controller('indexController',function($scope, $http, $cookies, vcRecaptchaService){
-
 		$scope.init = function(){
 			console.log("Look" + JSON.stringify($cookies.get('user')));
 			console.log("AAAA");
