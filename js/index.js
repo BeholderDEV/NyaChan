@@ -177,7 +177,7 @@ function base64ToBlob(base64, mime)
 									'Content-Type': 'application/json'
 						}
 				}).then(function mySucces(response) {
-						$scope.isUserLogged = false;
+						$scope.isUserLogged = true;
 						console.log("Testing User");
 						console.log(response);
 						$scope.userName = response.data.login;
