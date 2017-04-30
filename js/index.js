@@ -49,7 +49,7 @@ function base64ToBlob(base64, mime)
 		      console.log(response || "Request failed");
 		  });
 		};
-		
+
 		$scope.myImage='';
 		$scope.myCroppedImage='';
 		$scope.response = null;
@@ -201,8 +201,8 @@ function base64ToBlob(base64, mime)
 						}
 				}).then(function mySucces(response) {
 		      $('#loginModal').modal('hide');
-					testUserLogin();
-				}, function myError(response) {
+		      
+					}, function myError(response) {
 						console.log(response || "Request failed");
 				});
     	};
