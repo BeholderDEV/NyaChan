@@ -177,15 +177,11 @@ function base64ToBlob(base64, mime)
 									'Content-Type': 'application/json'
 						}
 				}).then(function mySucces(response) {
-
-
 						console.log("Testing User");
 						console.log(response);
 						$scope.userName = response.data.login;
 						$scope.userImage = response.data.avatar;
-						$scope.$apply(function() {
-							$scope.isUserLogged = true;
-            });
+						$scope.isUserLogged = true;
 				}, function myError(response) {
 						console.log(response || "Request failed");
 				});
