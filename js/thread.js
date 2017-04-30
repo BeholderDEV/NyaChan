@@ -27,7 +27,6 @@
 						console.log(response || "Request failed");
 				});
 			}
-			testUserLogin();
 			$scope.response = null;
       $scope.widgetId = null;
 
@@ -41,6 +40,7 @@
           $scope.widgetId = widgetId;
       };
 
+			testUserLogin();
       $scope.cbExpiration = function() {
           console.info('Captcha expired. Resetting response object');
 
