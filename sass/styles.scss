@@ -155,6 +155,9 @@ input, textarea{
     border: none;
     border-radius: 0px 0px $border-radius $border-radius;
     li{
+      .panel-body{
+        border-radius: 0px 0px $border-radius $border-radius;
+      }
       border-radius: $border-radius;
       border: none;
       margin: 5px;
