@@ -192,7 +192,11 @@ function base64ToBlob(base64, mime)
 						}
 				}).then(function mySucces(response) {
 		      	$('#loginModal').modal('hide');
-		      	$cookieStore.put('user', response.data);
+		      	var newUser = JSON.stringify(response.data);
+		      	$cookieStore.put('user', newUser);
+  					$scope.userName = newUser.login;
+						$scope.userImage = newUser.avatar;
+						$scope.isUserLogged = true;
 					}, function myError(response) {
 						console.log(response || "Request failed");
 				});
