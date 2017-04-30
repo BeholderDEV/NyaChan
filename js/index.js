@@ -201,7 +201,7 @@ function base64ToBlob(base64, mime)
 						}
 				}).then(function mySucces(response) {
 		      $('#loginModal').modal('hide');
-		      
+		      	$scope.init();
 					}, function myError(response) {
 						console.log(response || "Request failed");
 				});
