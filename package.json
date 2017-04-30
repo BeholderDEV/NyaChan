@@ -38,5 +38,12 @@
     "mongodb",
     "ImageBoard"
   ],
-  "license": "MIT"
+  "license": "MIT",
+
+  "standard": {
+    "globals": ["$", "FormData", "XMLHttpRequest", "angular", "alert", "location", "Blob", "FileReader"],
+    "ignore": [
+      "/lib/"
+    ]
+  }
 }

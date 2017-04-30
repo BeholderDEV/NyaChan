@@ -11,7 +11,7 @@ var url = 'mongodb://alisson:123456@ds053206.mlab.com:53206/nyachan_data'
 
 function sendDataDropbox (name, data, callback) {
   console.log('Sending')
- 	dbx.filesUpload({path: '/Midia/' + name, contents: data, autorename: true})
+  dbx.filesUpload({ path: '/Midia/' + name, contents: data, autorename: true })
     .then(function (response) {
       dbx.sharingCreateSharedLinkWithSettings({path: response.path_lower}).then(function (sharedLinkResp) {
         var urlFile = sharedLinkResp.links[0].url
@@ -19,21 +19,19 @@ function sendDataDropbox (name, data, callback) {
         urlFile = urlFile.slice(0, pos + 1)
         urlFile = urlFile + 'raw=1'
         return callback(urlFile)
+      }).catch(function (er) {
+        dbx.sharingListSharedLinks({path: response.path_lower, direct_only: true}).then(function (existingSharedLink) {
+          var urlFile = existingSharedLink.links[0].url
+          var pos = urlFile.search('\\?dl=0')
+          urlFile = urlFile.slice(0, pos + 1)
+          urlFile = urlFile + 'raw=1'
+          return callback(urlFile)
+        }).catch(function (e) {
+          console.error('Erro ' + e)
+          return callback('Erro')
+        })
       })
-		.catch(function (er) {
-  dbx.sharingListSharedLinks({path: response.path_lower, direct_only: true}).then(function (existingSharedLink) {
-    var urlFile = existingSharedLink.links[0].url
-    var pos = urlFile.search('\\?dl=0')
-    urlFile = urlFile.slice(0, pos + 1)
-    urlFile = urlFile + 'raw=1'
-    return callback(urlFile)
-  }).catch(function (e) {
-    console.error('Erro ' + e)
-    return callback('Erro')
-  })
-})
-    })
-    .catch(function (error) {
+    }).catch(function (error) {
       console.error('Erro ' + error)
       return callback('Erro')
     })
@@ -41,10 +39,10 @@ function sendDataDropbox (name, data, callback) {
 
 function resizeImage (file, op, callback) {
   var baseH = 125
-  if (op == 1) {
+  if (op === 1) {
     baseH = 250
   }
-  imgResizer.open(file.path, function (err, image) {
+  imgResizer.open(file.path, function (error, image) {
     var w = image.width()
     var h = image.height()
     var neww = w
@@ -56,21 +54,21 @@ function resizeImage (file, op, callback) {
       newh = baseH
       neww = w * (baseH / h)
     }
-    image.resize(neww, newh, function (err, imageResize) {
-      imgResizer.create(imageResize.width(), imageResize.height(), 'white', function (err, canvas) {
-			    canvas.paste(0, 0, imageResize, function (err, imageCanvas) {
-      imageCanvas.toBuffer('jpg', function (err, buffer) {
-						 		return callback(buffer)
-						 })
-			    })
+    image.resize(neww, newh, function (error, imageResize) {
+      imgResizer.create(imageResize.width(), imageResize.height(), 'white', function (error, canvas) {
+        canvas.paste(0, 0, imageResize, function (error, imageCanvas) {
+          imageCanvas.toBuffer('jpg', function (error, buffer) {
+            return callback(buffer)
+          })
+        })
       })
     })
   })
 }
 
 function setImageSizeDimension (file, callback) {
-  var properties = new Object()
-  imgResizer.open(file.path, function (err, image) {
+  var properties = {}
+  imgResizer.open(file.path, function (error, image) {
     properties.width = image.width()
     properties.height = image.height()
     var stats = fs.statSync(file.path)
@@ -80,16 +78,16 @@ function setImageSizeDimension (file, callback) {
 }
 
 function checkPumpLimit (threadid, callback, res) {
-  MongoClient.connect(url, function (err, db) {
-    if (err) {
-      console.log('Unable to connect to the mongoDB server. Error:', err)
+  MongoClient.connect(url, function (error, db) {
+    if (error) {
+      console.log('Unable to connect to the mongoDB server. Error:', error)
     } else {
       console.log('Connection established to', url)
       db.collection('thread').find({ _id: ObjectId(threadid) }).toArray(function (error, documents) {
         if (error) {
           throw error
         }
-        if (documents[0].archived)							{
+        if (documents[0].archived) {
           res.status(403)
           res.send({'error': 'Archived Thread'})
         } else {
@@ -105,33 +103,33 @@ module.exports = function (app, express, path) {
   app.use(express.static(path.join(__dirname, '/../')))
 
   app.post('/dbxPost/:op/:idThread', function (req, res) {
-    var saveOnDropBox = function ()		{
+    var saveOnDropBox = function () {
       var form = new formidable.IncomingForm()
-      var respostaUrl = new Object()
+      var respostaUrl = {}
       form.keepExtensions = true
       form.parse(req)
       form.on('file', function (name, file) {
-				    fs.readFile(file.path, function (err, data) {
-      setImageSizeDimension(file, function (properties) {
-        respostaUrl.width = properties.width
-        respostaUrl.height = properties.height
-        respostaUrl.size = properties.size
-        sendDataDropbox(file.name, data, function (url) {
-          respostaUrl.mainUrl = url
-          resizeImage(file, req.params.op, function (buffer) {
-            sendDataDropbox(file.name, buffer, function (urlThumb) {
-              respostaUrl.thumbUrl = urlThumb
-              res.send(respostaUrl)
+        fs.readFile(file.path, function (error, data) {
+          setImageSizeDimension(file, function (properties) {
+            respostaUrl.width = properties.width
+            respostaUrl.height = properties.height
+            respostaUrl.size = properties.size
+            sendDataDropbox(file.name, data, function (url) {
+              respostaUrl.mainUrl = url
+              resizeImage(file, req.params.op, function (buffer) {
+                sendDataDropbox(file.name, buffer, function (urlThumb) {
+                  respostaUrl.thumbUrl = urlThumb
+                  res.send(respostaUrl)
+                })
+              })
             })
           })
         })
       })
-			  		})
-      })
     }
-    if (req.params.op == 0)		{
+    if (req.params.op === 0) {
       checkPumpLimit(req.params.idThread, saveOnDropBox, res)
-    } else		{
+    } else {
       saveOnDropBox()
     }
   })
@@ -140,16 +138,12 @@ module.exports = function (app, express, path) {
     var form = new formidable.IncomingForm()
     form.keepExtensions = true
     form.parse(req)
-			// form.parse(req, function(err, fields, files) {
-			// 		res.send("Batata");
-			// });
-
     form.on('file', function (name, file) {
       console.log('aaa')
-      fs.readFile(file.path, function (err, data) {
+      fs.readFile(file.path, function (error, data) {
         console.log(file.name)
         sendDataDropbox(req.params.user + '.jpeg', data, function (url) {
-          var respostaUrl = new Object()
+          var respostaUrl = {}
           respostaUrl = url
           res.send(respostaUrl)
         })
@@ -158,17 +152,17 @@ module.exports = function (app, express, path) {
   })
 
   app.post('/recaptcha', function (req, res, $http) {
-	    var resp = req.body
-	    console.log('Passou 1')
-	    var secretKey = '6LfogRgUAAAAADhwW9O5J7ZeBLrDxoy7M9vxHdIX'
-	    var verificationUrl = 'https://www.google.com/recaptcha/api/siteverify'
-	    var urldata = '?secret=' + secretKey + '&response=' + resp.response
-	      console.log('Passou 1.5')
+    var resp = req.body
+    console.log('Passou 1')
+    var secretKey = '6LfogRgUAAAAADhwW9O5J7ZeBLrDxoy7M9vxHdIX'
+    var verificationUrl = 'https://www.google.com/recaptcha/api/siteverify'
+    var urldata = '?secret=' + secretKey + '&response=' + resp.response
+    console.log('Passou 1.5')
 
-	    request(verificationUrl + urldata, function (error, response, body) {
-	        console.log('Passou 2')
-	      	res.send(response)
-	    })
+    request(verificationUrl + urldata, function (error, response, body) {
+      console.log('Passou 2')
+      res.send(response)
+    })
   })
 
   app.get('/tag/:tagName', function (req, res) {
@@ -199,7 +193,7 @@ module.exports = function (app, express, path) {
   //   res.sendfile('404.html');
   // });
   //
-  // app.use(function(err, req, res, next){
+  // app.use(function(error, req, res, next){
   //   res.sendfile('404.html');
   // });
 }

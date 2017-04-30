@@ -161,10 +161,10 @@
           formData.append('fileData', files)
           var xhr = new XMLHttpRequest()
           xhr.onreadystatechange = function () {
-              if (xhr.readyState === XMLHttpRequest.DONE) {
-                var uploadedFile = JSON.parse(xhr.response)
-                sendThread(files, uploadedFile)
-              }
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+              var uploadedFile = JSON.parse(xhr.response)
+              sendThread(files, uploadedFile)
+            }
           }
           xhr.upload.addEventListener('progress', function (evt) {
             if (evt.lengthComputable) {

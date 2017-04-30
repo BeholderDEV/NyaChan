@@ -94,7 +94,7 @@
         }
 
         if (!validarPost(post, files)) {
-            return
+          return
         }
 
         if (files !== null) {
@@ -169,12 +169,10 @@
             $('#newThreadModal').modal('hide')
             $('#loader').width('0%')
             var alertHtml = $('#alert-model').html()
-	          alertHtml = alertHtml.replace('${kind}','success')
-	          alertHtml = alertHtml.replace('${mensagem}', 'Postado com sucesso')
+            alertHtml = alertHtml.replace('${kind}', 'success')
+            alertHtml = alertHtml.replace('${mensagem}', 'Postado com sucesso')
             setTimeout(function () {
-              $('.alert-success').animate({ 'left': '+=600px' }, 'slow', function () {
-							    $('.alert-success').remove()
-						  })
+              $('.alert-success').animate({ 'left': '+=600px' }, 'slow', function () { $('.alert-success').remove() })
             }, 3000)
             $('body').append(alertHtml)
             $('.alert-success').animate({ 'left': '-=600px' }, 'slow')

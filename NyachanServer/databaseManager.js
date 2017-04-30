@@ -13,9 +13,9 @@ module.exports = function (app, passport) {
   mongoose.connect(url)
 
   app.get('/app/threads', function (req, res) {
-    MongoClient.connect(url, function (err, db) {
-      if (err) {
-        console.log('Unable to connect to the mongoDB server. Error:', err)
+    MongoClient.connect(url, function (error, db) {
+      if (error) {
+        console.log('Unable to connect to the mongoDB server. Error:', error)
       } else {
         console.log('Connection established to', url)
         db.collection('thread').find({ archived: false }).toArray(function (error, documents) {
@@ -43,9 +43,9 @@ module.exports = function (app, passport) {
     }
     var query = {}
     query[sortType] = -1
-    MongoClient.connect(url, function (err, db) {
-      if (err) {
-        console.log('Unable to connect to the mongoDB server. Error:', err)
+    MongoClient.connect(url, function (error, db) {
+      if (error) {
+        console.log('Unable to connect to the mongoDB server. Error:', error)
       } else {
         console.log('Connection established to', url)
         db.collection('thread').find({ archived: arch }).sort(query).toArray(function (error, documents) {
@@ -61,9 +61,9 @@ module.exports = function (app, passport) {
   })
 
   app.get('/api/thread/:idThread', function (req, res) {
-    MongoClient.connect(url, function (err, db) {
-      if (err) {
-        console.log('Unable to connect to the mongoDB server. Error:', err)
+    MongoClient.connect(url, function (error, db) {
+      if (error) {
+        console.log('Unable to connect to the mongoDB server. Error:', error)
       } else {
         console.log('Connection established to', url)
         db.collection('thread').find({ _id: ObjectId(req.params.idThread) }).toArray(function (error, documents) {
@@ -91,12 +91,12 @@ module.exports = function (app, passport) {
     }
     var query = {}
     query[sortType] = -1
-    MongoClient.connect(url, function (err, db) {
-      if (err) {
-        console.log('Unable to connect to the mongoDB server. Error:', err)
+    MongoClient.connect(url, function (error, db) {
+      if (error) {
+        console.log('Unable to connect to the mongoDB server. Error:', error)
       } else {
         console.log('Connection established to', url)
-        db.collection('thread').find({ tags: req.params.tagName, archived: arch}).sort(query).toArray(function (error, documents) {
+        db.collection('thread').find({ tags: req.params.tagName, archived: arch }).sort(query).toArray(function (error, documents) {
           if (error) {
             throw error
           }
@@ -109,9 +109,9 @@ module.exports = function (app, passport) {
   })
 
   function checkPumpLimit (threadid, callback, res) {
-    MongoClient.connect(url, function (err, db) {
-      if (err) {
-        console.log('Unable to connect to the mongoDB server. Error:', err)
+    MongoClient.connect(url, function (error, db) {
+      if (error) {
+        console.log('Unable to connect to the mongoDB server. Error:', error)
       } else {
         console.log('Connection established to', url)
         db.collection('thread').find({ _id: ObjectId(threadid) }).toArray(function (error, documents) {
@@ -142,7 +142,7 @@ module.exports = function (app, passport) {
     if (newPost.file !== undefined) {
       var filename = newPost.file[0].name
 
-      var validFormats = ['jpg','jpeg','png','gif','bmp','webm','pdf']
+      var validFormats = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webm', 'pdf']
       var ext = filename.substring(filename.lastIndexOf('.') + 1).toLowerCase()
 
       if (validFormats.indexOf(ext) === -1) {
@@ -152,20 +152,20 @@ module.exports = function (app, passport) {
       }
     }
     var saveOnServer = function (pumpReached) {
-      MongoClient.connect(url, function (err, db) {
-        if (err) {
-          console.log('Unable to connect to the mongoDB server. Error:', err)
+      MongoClient.connect(url, function (error, db) {
+        if (error) {
+          console.log('Unable to connect to the mongoDB server. Error:', error)
         } else {
           console.log('Connection established to', url)
-          db.collection('thread').update({'_id': ObjectId(newPost.threadid)}, { $inc: {numberOfPosts: 1}})
-          db.collection('thread').update({'_id': ObjectId(newPost.threadid)}, { $set: {lastDate: newPost.date}})
+          db.collection('thread').update({ '_id': ObjectId(newPost.threadid) }, { $inc: { numberOfPosts: 1 } })
+          db.collection('thread').update({ '_id': ObjectId(newPost.threadid) }, { $set: { lastDate: newPost.date } })
           if (pumpReached === true) {
-            db.collection('thread').update({'_id': ObjectId(newPost.threadid)}, { $set: {archived: true}})
+            db.collection('thread').update({ '_id': ObjectId(newPost.threadid) }, { $set: { archived: true } })
           }
-          db.collection('thread', function (err, collection) {
-            collection.update({'_id': ObjectId(newPost.threadid)}, { $push: {post: newPost}}, function (err, result) {
-              if (err) {
-                console.log('Error ' + err)
+          db.collection('thread', function (error, collection) {
+            collection.update({ '_id': ObjectId(newPost.threadid) }, { $push: { post: newPost } }, function (error, result) {
+              if (error) {
+                console.log('Error ' + error)
                 res.send({'error': 'An error has occurred'})
               } else {
                 console.log('' + result)
@@ -183,24 +183,24 @@ module.exports = function (app, passport) {
   function checkTagLimit (tag) {
     var query = {}
     query['lastDate'] = -1
-    MongoClient.connect(url, function (err, db) {
-      if (err) {
-        console.log('Unable to connect to the mongoDB server. Error:', err)
+    MongoClient.connect(url, function (error, db) {
+      if (error) {
+        console.log('Unable to connect to the mongoDB server. Error:', error)
       } else {
         console.log('Connection established to', url)
-        db.collection('thread').find({ tags: tag, archived: false}).sort(query).toArray(function (error, documents) {
+        db.collection('thread').find({ tags: tag, archived: false }).sort(query).toArray(function (error, documents) {
           if (error) {
             throw error
           }
           console.log(documents.length)
           if (documents.length > 4) {
             console.log(documents[documents.length - 1]._id)
-            MongoClient.connect(url, function (err, db2) {
-              if (err) {
-                console.log('Unable to connect to the mongoDB server. Error:', err)
+            MongoClient.connect(url, function (error, db2) {
+              if (error) {
+                console.log('Unable to connect to the mongoDB server. Error:', error)
               } else {
                 console.log('Connection established to', url)
-                db2.collection('thread').update({'_id': ObjectId(documents[documents.length - 1]._id)},{$set:{archived: true}})
+                db2.collection('thread').update({'_id': ObjectId(documents[documents.length - 1]._id)}, {$set: {archived: true}})
               }
             })
           }
@@ -224,7 +224,7 @@ module.exports = function (app, passport) {
     if (newThread.file !== undefined) {
       var filename = newThread.file[0].name
 
-      var validFormats = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webm', 'pdf' ]
+      var validFormats = [ 'jpg', 'jpeg', 'png', 'gif', 'bmp', 'webm', 'pdf' ]
       var ext = filename.substring(filename.lastIndexOf('.') + 1).toLowerCase()
 
       if (validFormats.indexOf(ext) === -1) {
@@ -234,104 +234,99 @@ module.exports = function (app, passport) {
       }
     }
     console.log('AAAAAAAAAAAAAAAAAAAAAAAAA')
-    newThread.tags.forEach(function (tag)			{
+    newThread.tags.forEach(function (tag) {
       checkTagLimit(tag)
     })
 
-    MongoClient.connect(url, function (err, db) {
-	        if (err) {
-	        	console.log('Unable to connect to the mongoDB server. Error:', err)
-	        } else {
-		        console.log('Connection established to', url)
-          newThread.numberOfPosts = 1
-          newThread.lastDate = newThread.date
-          console.log('DATABASE')
-		        db.collection('thread', function (err, collection) {
-		            collection.insert(newThread, {safe: true}, function (err, result) {
-		                if (err) {
-		                    console.log('Error ' + err)
-		                    res.send({'error': 'An error has occurred'})
-		                } else {
-		                    console.log('' + result)
-		                    res.send(result)
-		                }
-		            })
-		        })
-		        db.close()
-	        }
-	    })
+    MongoClient.connect(url, function (error, db) {
+      if (error) {
+        console.log('Unable to connect to the mongoDB server. Error:', error)
+      } else {
+        console.log('Connection established to', url)
+        newThread.numberOfPosts = 1
+        newThread.lastDate = newThread.date
+        console.log('DATABASE')
+        db.collection('thread', function (error, collection) {
+          collection.insert(newThread, {safe: true}, function (error, result) {
+            if (error) {
+              console.log('Error ' + error)
+              res.send({'error': 'An error has occurred'})
+            } else {
+              console.log('' + result)
+              res.send(result)
+            }
+          })
+        })
+        db.close()
+      }
+    })
   })
-
-	// PASSPORT
 
   passport.serializeUser(function (user, done) {
     console.log('Serialize')
-	  done(null, user._id)
+    done(null, user._id)
   })
 
   passport.deserializeUser(function (id, done) {
-		  console.log('Deserialize')
-		  User.findById(id, function (err, user) {
-		    done(err, user)
-		  })
+    console.log('Deserialize')
+    User.findById(id, function (error, user) {
+      done(error, user)
+    })
   })
 
-	 passport.use('signup', new LocalStrategy({
-   usernameField: 'login',
-   passwordField: 'password',
-   passReqToCallback: true
- }, function (req, login, password, done) {
-		    findOrCreateUser = function () {
-		      User.findOne({'login': login}, function (err, user) {
-		        if (err) {
-		          console.log('Error in SignUp: ' + err)
-		          return done(err)
-		        }
-		        if (user) {
-		          console.log('User already exists')
-		          return done(null, false)
-		        } else {
-		          var newUser = new User()
-		          newUser.login = login
-		          newUser.password = createHash(password)
-		          newUser.email = req.param('email')
-          newUser.avatar = req.param('avatar')
-
-		          newUser.save(function (err) {
-		            if (err) {
-		              console.log('Error in Saving user: ' + err)
-		              throw err
-		            }
-		            console.log('User Registration succesful')
-		            return done(null, newUser)
-		          })
-		        }
-		      })
-		    }
-
-    		process.nextTick(findOrCreateUser)
- }))
-
- 	 passport.use('login', new LocalStrategy({
+  passport.use('signup', new LocalStrategy({
     usernameField: 'login',
     passwordField: 'password',
     passReqToCallback: true
   }, function (req, login, password, done) {
-		    findOrCreateUser = function () {
-		      User.findOne({'login': login}, function (err, user) {
-		        if (err) {
-		          console.log('Error in Login: ' + err)
-		          return done(err)
-		        }
-		        if (!user) {
-          		console.log('User Not Found with username ' + user)
-        			return done(null, false)
-        		}
-        		return done(null, user)
-		      })
-		    }
+    findOrCreateUser = function () {
+      User.findOne({'login': login}, function (error, user) {
+        if (error) {
+          console.log('Error in SignUp: ' + error)
+          return done(error)
+        }
+        if (user) {
+          console.log('User already exists')
+          return done(null, false)
+        } else {
+          var newUser = new User()
+          newUser.login = login
+          newUser.password = createHash(password)
+          newUser.email = req.param('email')
+          newUser.avatar = req.param('avatar')
+          newUser.save(function (error) {
+            if (error) {
+              console.log('Error in Saving user: ' + error)
+              throw error
+            }
+            console.log('User Registration succesful')
+            return done(null, newUser)
+          })
+        }
+      })
+    }
+    process.nextTick(findOrCreateUser)
+  }))
 
-    		process.nextTick(findOrCreateUser)
+  passport.use('login', new LocalStrategy({
+    usernameField: 'login',
+    passwordField: 'password',
+    passReqToCallback: true
+  }, function (req, login, password, done) {
+    findOrCreateUser = function () {
+      User.findOne({'login': login}, function (error, user) {
+        if (error) {
+          console.log('Error in Login: ' + error)
+          return done(error)
+        }
+        if (!user) {
+          console.log('User Not Found with username ' + user)
+          return done(null, false)
+        }
+        return done(null, user)
+      })
+    }
+    process.nextTick(findOrCreateUser)
   }))
 
   var createHash = function (password) {
@@ -343,53 +338,53 @@ module.exports = function (app, passport) {
   }
 
   app.post('/registerUser', function (req, res) {
-	  passport.authenticate('signup', function (err, user) {
-	    if (err) { return res.send(err) }
-	    if (!user) {
-	    	res.status(403)
-	    	res.send('Existing user')
-	    } else {
-	    	res.send(user.login)
-	    }
-	  })(req, res)
+    passport.authenticate('signup', function (error, user) {
+      if (error) { return res.send(error) }
+      if (!user) {
+        res.status(403)
+        res.send('Existing user')
+      } else {
+        res.send(user.login)
+      }
+    })(req, res)
   })
 
   app.post('/loginUser', function (req, res) {
-	  passport.authenticate('login', function (err, user) {
-	    if (err) { return res.send(err) }
-	    if (!user) {
-	    	res.status(403)
-	    	res.send('User not found')
-	    } else {
-	    	if (!isValidPassword(user, req.body.password)) {
-  				res.status(403)
-	    		res.send('Password does not match')
-	    	} else {
-  		    req.logIn(user, function (err) {
-			      if (err) { return next(err) }
-			      return res.send(user.login)
-			    })
-	    	}
-	    }
-	  })(req, res)
+    passport.authenticate('login', function (error, user) {
+      if (error) { return res.send(error) }
+      if (!user) {
+        res.status(403)
+        res.send('User not found')
+      } else {
+        if (!isValidPassword(user, req.body.password)) {
+          res.status(403)
+          res.send('Password does not match')
+        } else {
+          req.logIn(user, function (error) {
+            if (error) { return next(error) }
+            return res.send(user.login)
+          })
+        }
+      }
+    })(req, res)
   })
 
   var isAuthenticated = function (req, res, next) {
-  	if (req.isAuthenticated()) { return next() }
-  	res.redirect('/')
+    if (req.isAuthenticated()) { return next() }
+    res.redirect('/')
   }
 
   app.get('/logout', function (req, res) {
-  	req.logout()
-  	res.redirect('/')
+    req.logout()
+    res.redirect('/')
   })
 
   app.get('/testLogin', function (req, res) {
-  	if (req.user) {
-    	console.log('Is signed')
-  } else {
-    console.log('Is not signed')
-  }
+    if (req.user) {
+      console.log('Is signed')
+    } else {
+      console.log('Is not signed')
+    }
     res.send(req.user)
   })
 }

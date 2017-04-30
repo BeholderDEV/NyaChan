@@ -136,7 +136,7 @@
           formData.append('fileData', blob)
           var xhr = new XMLHttpRequest()
           xhr.onreadystatechange = function () {
-            if (xhr.readyState == XMLHttpRequest.DONE) {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
               var uploadedFile = xhr.response
               dataUser.avatar = uploadedFile
               sendUser(dataUser)
@@ -175,7 +175,7 @@
     }
 
     $scope.loginUser = function (post) {
-      var dataUser = {login:post.login, password:post.password}
+      var dataUser = {login: post.login, password: post.password}
       $http({
         method: 'POST',
         url: 'https://nyachan-server.herokuapp.com/loginUser',
@@ -185,7 +185,7 @@
           'Content-Type': 'application/json'
         }
       }).then(function mySucces (response) {
-		    $('#loginModal').modal('hide')
+        $('#loginModal').modal('hide')
         testUserLogin()
       }, function myError (response) {
         console.log(response || 'Request failed')
