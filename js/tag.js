@@ -27,6 +27,7 @@
 							console.log(response || "Request failed");
 					});
 				}
+				$scope.isUserLogged = false;
 				testUserLogin();
 				var tagName = 'Anime';
 

@@ -64,6 +64,7 @@ function base64ToBlob(base64, mime)
 					console.log(response || "Request failed");
 			});
 		}
+		$scope.isUserLogged = false;
 		testUserLogin();
 		$scope.setWidgetId = function (widgetId) {
 				console.info('Created widget ID: %s', widgetId);
@@ -185,8 +186,6 @@ function base64ToBlob(base64, mime)
 						}
 				}
 	    };
-
-			$scope.isUserLogged = false;
 
     	$scope.loginUser = function(post){
 	    	var dataUser = {

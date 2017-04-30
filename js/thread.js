@@ -27,6 +27,7 @@
 						console.log(response || "Request failed");
 				});
 			}
+			$scope.isUserLogged = false;
 			$scope.response = null;
       $scope.widgetId = null;
 
