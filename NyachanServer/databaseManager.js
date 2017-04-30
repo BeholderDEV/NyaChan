@@ -36,12 +36,10 @@ module.exports = function(app, passport){
 	app.get('/api/threads', function (req, res) {
 		var sortType = 'numberOfPosts';
 		if(req.query.sortType){
-			console.log('AAAA');
 			sortType = req.query.sortType;
 		}
 		var arch = false;
 		if(req.query.archived != undefined){
-			console.log('AAA');
 			arch = (req.query.archived == 'true');
 		}
 		var query = {};
@@ -84,12 +82,10 @@ module.exports = function(app, passport){
 	app.get('/api/tag/:tagName', function (req, res) {
 			var sortType = 'numberOfPosts';
 			if(req.query.sortType){
-				console.log('AbAAA');
 				sortType = req.query.sortType;
 			}
 			var arch = false;
 			if(req.query.archived != undefined){
-				console.log('ABAA');
 				arch = (req.query.archived == 'true');
 			}
 			var query = {};
@@ -228,7 +224,6 @@ module.exports = function(app, passport){
 			newThread.userIP = req.headers["x-forwarded-for"];
 			var date = new Date();
 			newThread.date =  date.getTime();
-			console.log("COMECOULLLLLLLLLLLLLLLLL");
 			if(newThread.tags[0] == undefined){
 				res.status(403);
 				res.send({'error':'An error has occurred'});
@@ -248,7 +243,6 @@ module.exports = function(app, passport){
 							return;
 					}
 			}
-			console.log("AAAAAAAAAAAAAAAAAAAAAAAAA");
 			newThread.tags.forEach(function(tag)
 			{
 					checkTagLimit(tag);
@@ -261,7 +255,6 @@ module.exports = function(app, passport){
 		        console.log('Connection established to', url);
 						newThread.numberOfPosts = 1;
 						newThread.lastDate = newThread.date;
-						console.log("DATABASE");
 		        db.collection('thread', function(err, collection) {
 		            collection.insert(newThread, {safe:true}, function(err, result) {
 		                if (err) {
@@ -385,7 +378,6 @@ module.exports = function(app, passport){
 	    	}else{
   		    req.logIn(user, function(err) {
 			      if (err) { return next(err); }
-			      console.log(user);
 			      return res.send(user);
 			    });
 	    	}
@@ -404,7 +396,6 @@ module.exports = function(app, passport){
 	});
 
 	app.get('/testLogin', function(req, res) {
-		console.log("Test test " + req.session.user);
   	if (req.user) {
     	console.log("Is signed");
 		} else {
