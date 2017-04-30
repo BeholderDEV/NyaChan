@@ -26,7 +26,6 @@
 			      console.log(response || "Request failed");
 			  });
 			};
-			init();
 
       $scope.time_zone = new Date().getTimezoneOffset();
       var url = $(location).attr('href');

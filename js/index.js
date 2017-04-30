@@ -49,8 +49,7 @@ function base64ToBlob(base64, mime)
 		      console.log(response || "Request failed");
 		  });
 		};
-		init();
-
+		
 		$scope.myImage='';
 		$scope.myCroppedImage='';
 		$scope.response = null;
