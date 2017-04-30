@@ -40,9 +40,10 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li class="btn" data-toggle="modal" data-target="#signUpModal"><a>Sign Up <i class="fa fa-plus"></i></a></li>
-            <li class="btn" data-toggle="modal" data-target="#loginModal"><a>Login <i class="fa fa-plus"></i></a></li>
-            <li class="btn" ng-click="logoutUser()" ng-show={{isUserLogged}}><a>Logout <i class="fa fa-plus"></i></a></li>
+            <li class="btn" data-toggle="modal" data-target="#signUpModal"  ng-show={{isUserLogged}}><a>Sign Up <i class="fa fa-plus"></i></a></li>
+            <li class="btn" data-toggle="modal" data-target="#loginModal"  ng-show={{isUserLogged}}><a>Login <i class="fa fa-plus"></i></a></li>
+            <li class="btn" ng-click="logoutUser()" ng-show={{isUserLogged}}><img ng-src="{{userImage}}" class="img-rounded" height="20px"/>{{userName}}</li>
+            <li class="btn" ng-show={{isUserLogged}}><a>Logout <i class="fa fa-plus"></i></a></li>
           </ul>
         </div>
       </div>
