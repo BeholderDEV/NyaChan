@@ -22,7 +22,6 @@
 						$scope.userName = response.data.login;
 						$scope.userImage = response.data.avatar;
 						$scope.isUserLogged = true;
-						$('#loginModal').modal('hide');
 					}
 				}, function myError(response) {
 						console.log(response || "Request failed");
