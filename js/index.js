@@ -30,21 +30,8 @@ function base64ToBlob(base64, mime)
 
 	app.controller('indexController',function($scope, $http, vcRecaptchaService){
 
-		$scope.myImage='';
-		$scope.myCroppedImage='';
-		$scope.response = null;
-		$scope.widgetId = null;
-
-		$scope.setResponse = function (response) {
-				console.info('Response available');
-
-				$scope.response = response;
-		};
-
-		$scope.model = {
-				key: '6LfogRgUAAAAACNUIiCwMJPsPJ0NxiS7tafx-B55'
-		};
-		function testUserLogin(){
+		$scope.init = function(){
+			$scope.isUserLogged = false;
 		  $http({
 		      method : "GET",
 		      url: "https://nyachan-server.herokuapp.com/testLogin",
@@ -61,9 +48,24 @@ function base64ToBlob(base64, mime)
 		  }, function myError(response) {
 		      console.log(response || "Request failed");
 		  });
-		}
-		$scope.isUserLogged = false;
-		testUserLogin();
+		};
+		init();
+
+		$scope.myImage='';
+		$scope.myCroppedImage='';
+		$scope.response = null;
+		$scope.widgetId = null;
+
+		$scope.setResponse = function (response) {
+				console.info('Response available');
+
+				$scope.response = response;
+		};
+
+		$scope.model = {
+				key: '6LfogRgUAAAAACNUIiCwMJPsPJ0NxiS7tafx-B55'
+		};
+
 		$scope.setWidgetId = function (widgetId) {
 				console.info('Created widget ID: %s', widgetId);
 

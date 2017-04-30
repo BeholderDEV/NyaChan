@@ -6,10 +6,9 @@
     }]);
 
     app.controller('threadController',function($scope, $http, $window, vcRecaptchaService){
-      $scope.time_zone = new Date().getTimezoneOffset();
-      var url = $(location).attr('href');
-      var searchId = url.substring(url.lastIndexOf('/') + 1);
-			function testUserLogin(){
+      	
+			$scope.init = function(){
+				$scope.isUserLogged = false;
 			  $http({
 			      method : "GET",
 			      url: "https://nyachan-server.herokuapp.com/testLogin",
@@ -26,9 +25,12 @@
 			  }, function myError(response) {
 			      console.log(response || "Request failed");
 			  });
-			}
-			$scope.isUserLogged = false;
-			testUserLogin();
+			};
+			init();
+
+      $scope.time_zone = new Date().getTimezoneOffset();
+      var url = $(location).attr('href');
+      var searchId = url.substring(url.lastIndexOf('/') + 1);
 			$scope.response = null;
       $scope.widgetId = null;
 
