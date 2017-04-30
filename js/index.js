@@ -44,8 +44,24 @@ function base64ToBlob(base64, mime)
 		$scope.model = {
 				key: '6LfogRgUAAAAACNUIiCwMJPsPJ0NxiS7tafx-B55'
 		};
-
-
+		function testUserLogin(){
+		  $http({
+		      method : "GET",
+		      url: "https://nyachan-server.herokuapp.com/testLogin",
+		      // url: "http://localhost:3000/testLogin",
+		      headers: {
+		            'Content-Type': 'application/json'
+		      }
+		  }).then(function mySucces(response) {
+		    if(response.data != undefined){
+		      $scope.userName = response.data.login;
+		      $scope.userImage = response.data.avatar;
+		      $scope.isUserLogged = true;
+		    }
+		  }, function myError(response) {
+		      console.log(response || "Request failed");
+		  });
+		}
 		$scope.isUserLogged = false;
 		testUserLogin();
 		$scope.setWidgetId = function (widgetId) {
@@ -184,7 +200,7 @@ function base64ToBlob(base64, mime)
 						}
 				}).then(function mySucces(response) {
 		      $('#loginModal').modal('hide');
-					testUserLogin($scope);
+					testUserLogin();
 				}, function myError(response) {
 						console.log(response || "Request failed");
 				});
