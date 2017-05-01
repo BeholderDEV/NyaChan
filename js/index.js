@@ -1,5 +1,5 @@
 (function () {
-  var app = angular.module('nya-chan', ['angular-loading-bar', 'ngImgCrop', 'ngCookies', 'vcRecaptcha'])
+  var app = angular.module('nya-chan', ['angular-loading-bar', 'ngImgCrop', 'ngCookies', 'vcRecaptcha', 'toastr'])
   .config(['cfpLoadingBarProvider', function (cfpLoadingBarProvider) {
     cfpLoadingBarProvider.includeSpinner = false
   }])
@@ -22,7 +22,7 @@
     return new Blob(byteArrays, {type: mime})
   }
 
-  app.controller('indexController', function ($scope, $http, $cookies, $cookieStore, vcRecaptchaService) {
+  app.controller('indexController', function ($scope, $http, $cookies, $cookieStore, vcRecaptchaService, toastr) {
     $scope.init = function () {
       $scope.isUserLogged = false
       if ($cookies.get('user') !== undefined) {
@@ -94,6 +94,7 @@
         }
       }).then(function successCallback (response) {
         validatedPost(JSON.parse(response.data.body).success)
+        toastr.success('Congratulations', 'Now you are a Nyan')
       }, function errorCallback (response) {
         console.log(response)
       })
@@ -175,8 +176,10 @@
         $scope.userImage = response.data.avatar
         $scope.isUserLogged = true
         $scope.isUserLogged = true
+        toastr.success('Wellcome back', 'We were wainting for you')
       }, function myError (response) {
         console.log(response || 'Request failed')
+        toastr.error('Something went wrong', 'Is this your real name?')
       })
     }
 
@@ -190,6 +193,7 @@
       }).then(function mySucces (response) {
         $scope.isUserLogged = false
         $cookieStore.remove('user')
+        toastr.success('Goodbye', 'See you soon')
       }, function myError (response) {
         console.log(response || 'Request failed')
       })

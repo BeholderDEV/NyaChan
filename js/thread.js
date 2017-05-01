@@ -1,10 +1,10 @@
 (function () {
-  var app = angular.module('nya-chan', ['angular-loading-bar', 'ngCookies', 'vcRecaptcha'])
+  var app = angular.module('nya-chan', ['angular-loading-bar', 'ngCookies', 'vcRecaptcha', 'toastr'])
     .config(['cfpLoadingBarProvider', function (cfpLoadingBarProvider) {
       cfpLoadingBarProvider.includeSpinner = false
     }])
 
-  app.controller('threadController', function ($scope, $http, $window, $cookies, $cookieStore, vcRecaptchaService) {
+  app.controller('threadController', function ($scope, $http, $window, $cookies, $cookieStore, vcRecaptchaService, toastr) {
     $scope.init = function () {
       $scope.isUserLogged = false
       if ($cookies.get('user') !== undefined) {
@@ -69,8 +69,10 @@
         }
       }).then(function successCallback (response) {
         validatedPost(JSON.parse(response.data.body).success)
+        toastr.success('Right in the Post', 'You\'ve just answered it')
       }, function errorCallback (response) {
         console.log(response)
+        toastr.error('O my gof', 'Why is it happening? Try again')
       })
 
       function validatedPost (valid) {
@@ -161,16 +163,7 @@
             vcRecaptchaService.reload($scope.widgetId)
             $('#newThreadModal').modal('hide')
             $('#loader').width('0%')
-            var alertHtml = $('#alert-model').html()
-            alertHtml = alertHtml.replace('${kind}', 'success')
-            alertHtml = alertHtml.replace('${mensagem}', 'Postado com sucesso')
-            setTimeout(function () {
-              $('.alert-success').animate({ 'left': '+=600px' }, 'slow', function () {
-                $('.alert-success').remove()
-              })
-            }, 3000)
-            $('body').append(alertHtml)
-            $('.alert-success').animate({ 'left': '-=600px' }, 'slow')
+            toastr.success('You\'ve posted it', 'Why?')
           }, function myError (response) {
             console.log(response || 'Request failed')
           })
