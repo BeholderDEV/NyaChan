@@ -1,218 +1,55 @@
-$primary-color: #dc143c;
-//$primary-color: #1abc42;
-$id-bg: #ccc;
-$text-color: #fff;
-$dark-bg: #333;
-$panel-bg: rgba(68,68,68,0.75);
-$panel-dark-bg: rgba(34,34,34,0.75);
-$qoute-color: #27ae60;
-$border-radius: 10px;
-$img-bg: "/img/bg.jpg";
+$primary-color: '#fee';
+@import url(//fonts.googleapis.com/css?family=Vibur);
 
-body{
-  padding-top: 100px;
-  background-color: $dark-bg;
-  background-attachment: fixed;
-  background-image: url($img-bg);
-  background-size: cover;
-  border-radius: $border-radius;
-}
-img{
-  border-radius: $border-radius;
-}
-.cropArea {
-  background: #E4E4E4;
-  overflow: hidden;
-  height:350px;
-}
-#loading-bar .bar{
-  background:$primary-color;
-  height:3px;
-}
-#loading-bar-spinner .spinner-icon{
-  border-top-color:$primary-color;
-  border-left-color:$primary-color;
+.logo {
+  text-align: center;
+  width: 65%;
+  height: 250px;
 }
 
-#tagTitle{
-  color: $text-color;
+.logo b{
+  font: 100 15vh "Vibur";
+  color: $primary-color;
+  text-shadow: 0 -40px 100px, 0 0 2px, 0 0 1em #ff4444, 0 0 0.5em #ff4444, 0 0 0.1em #ff4444, 0 10px 3px #000;
+}
+.logo b span{
+  animation: blink linear infinite 2s;
 }
 
-a {
-  text-decoration: none !important;
-  color: $text-color;
-  &:hover, &:focus {
-    color: $primary-color;
+@keyframes blink {
+  78% {
+    color: inherit;
+    text-shadow: inherit;
+  }
+  79%{
+     color: #333;
+  }
+  80% {
+
+    text-shadow: none;
+  }
+  81% {
+    color: inherit;
+    text-shadow: inherit;
+  }
+  82% {
+    color: #333;
+    text-shadow: none;
+  }
+  83% {
+    color: inherit;
+    text-shadow: inherit;
+  }
+  92% {
+    color: #333;
+    text-shadow: none;
+  }
+  92.5% {
+    color: inherit;
+    text-shadow: inherit;
   }
 }
 
-.navbar-default{
-  background-color: $panel-dark-bg;
-  border: none;
-  .navbar-brand{
-      color: $text-color;
-      font-size: 24px;
-      margin-top: 7px;
-  }
-
-}
-
-.btn{
-  border-radius: $border-radius;
-  &.btn-board{
-    background-color:$panel-bg;
-    border: none;
-  }
-  &.post-button{
-    background-color:$primary-color;
-    color: $text-color;
-    &:hover{
-      background-color:$panel-bg;
-      color: $text-color;
-    }
-  }
-}
-input, textarea{
-  border-radius: $border-radius !important;
-}
-.modal-content{
-  border-radius: $border-radius;
-}
-.panel{
-  border-radius: $border-radius;
-  background-color: transparent;
-  border: none;
-  color: $text-color;
-  &.lone{
-    .panel-body{
-      border-radius: 0px 0px $border-radius $border-radius;
-    }
-  }
-  &.panel-index{
-    img{
-      margin: auto;
-      max-height: 150px;
-    }
-
-    .panel-body{
-      height: 200px;
-      border-radius: 0px 0px $border-radius $border-radius;
-    }
-    display: block;
-  }
-  .panel-body{
-    background-color: $panel-bg;
-    .list-title{
-      padding: 5px 10px;
-      border-left: 2px solid $primary-color;
-      background-color: $panel-dark-bg;
-    }
-    #nsfw{
-      .list-title{
-        border-left: 2px solid $qoute-color;
-      }
-      .tags{
-        li {
-          &:before {
-            color: $qoute-color;
-          }
-        }
-      }
-    }
-    .tags{
-      border: 1px solid $panel-dark-bg;
-      li {
-        display: block;
-        padding: 5px;
-        &:before {
-          content: "\e080";
-          font-family: 'Glyphicons Halflings';
-          font-size: 9px;
-          position: relative;
-          margin-right: 10px;
-          color: $primary-color;
-        }
-      }
-    }
-  }
-  .panel-heading{
-    border-radius: $border-radius $border-radius 0px 0px;
-    background-color: $panel-dark-bg;
-    border: none;
-    a{
-      text-decoration: underline;
-      color: #1694fd;
-    }
-    a:hover{
-      color: #9206fd;
-    }
-    h3{
-      color: $text-color;
-    }
-    .label{
-      background-color: $primary-color;
-      border-radius: $border-radius;
-      margin: 0 5px;
-    }
-  }
-  .panel-footer{
-    background-color: $panel-dark-bg;
-    border: none;
-    border-radius: 0px 0px $border-radius $border-radius;
-    li{
-      .panel-body{
-        border-radius: 0px 0px $border-radius $border-radius;
-      }
-      border-radius: $border-radius;
-      border: none;
-      margin: 5px;
-      padding: 0;
-    }
-  }
-
-  .image-thumb{
-    max-height: 125px;
-    max-width: 125px;
-    width: auto;
-    height: auto;
-  }
-  .image-thumb-OP{
-    max-height: 250px;
-    max-width: 250px;
-    width: auto;
-    height: auto;
-  }
-  .image-md{
-    width: 300px;
-  }
-  .image-sm{
-    width: 150px;
-  }
-  .quote{
-    color: $qoute-color;
-  }
-  .quotelink, .deadlink{
-    color: $primary-color;
-  }
-  .deadlink{
-    text-decoration:line-through;
-    opacity: 0.6;
-  }
-}
-.id{
-  font-size: 11px;
-  background-color: $dark-bg !important;
-  color: $text-color;
-}
-footer{
-  margin-top: 20px;
-}
-.navbar-default .navbar-nav > li > a{
-  color: $text-color !important;
-  &:hover{
-    color: $primary-color !important;
-  }
-}
 @-webkit-keyframes progress-bar-stripes {
  from  { background-position: 0 0; }
  to    { background-position: 40px 0; }
