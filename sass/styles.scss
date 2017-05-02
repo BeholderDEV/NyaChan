@@ -1,19 +1,28 @@
 $primary-color: '#fee';
+$bg-color: '#000';
 @import url(//fonts.googleapis.com/css?family=Vibur);
 
+body{
+  color: #fff;
+  background-color: $bg-color;
+}
+nav{
+  &.navbar-default{
+    background-color: transparent;
+  }
+}
 .logo {
   text-align: center;
   width: 65%;
   height: 250px;
-}
-
-.logo b{
-  font: 100 15vh "Vibur";
-  color: $primary-color;
-  text-shadow: 0 -40px 100px, 0 0 2px, 0 0 1em #ff4444, 0 0 0.5em #ff4444, 0 0 0.1em #ff4444, 0 10px 3px #000;
-}
-.logo b span{
-  animation: blink linear infinite 2s;
+  b{
+    font: 100 15vh "Vibur";
+    color: $primary-color;
+    text-shadow: 0 -40px 100px, 0 0 2px, 0 0 1em #ff4444, 0 0 0.5em #ff4444, 0 0 0.1em #ff4444, 0 10px 3px #000;
+    b span{
+      animation: blink linear infinite 2s;
+    }
+  }
 }
 
 @keyframes blink {
