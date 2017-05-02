@@ -1,10 +1,11 @@
 @import url(//fonts.googleapis.com/css?family=Vibur);
 body {
   color: #fff;
-  background-color: "#000"; }
+  background: "#000"; }
 
 nav.navbar-default {
-  background-color: transparent; }
+  background-color: transparent;
+  border: none; }
 
 .logo {
   text-align: center;

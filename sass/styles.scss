@@ -4,11 +4,12 @@ $bg-color: '#000';
 
 body{
   color: #fff;
-  background-color: $bg-color;
+  background: $bg-color;
 }
 nav{
   &.navbar-default{
     background-color: transparent;
+    border: none;
   }
 }
 .logo {
