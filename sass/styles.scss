@@ -25,6 +25,33 @@ nav{
     }
   }
 }
+.panel-dafault {
+  display: block;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  z-index: 1;
+  color: #fff;
+  max-width: 100%;
+  overflow: visible;
+  width: 700px;
+  &:before {
+    box-shadow: 0 0 15px 4px #0080e2,0 0 120px 2px #004097,inset 0 0 15px 4px #0080e2,inset 0 0 100px 2px #004097;
+    border-color: #bde1ff;
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border: 2px solid #fff;
+    border-radius: 8px;
+    transition: opacity .05s ease;
+    z-index: -1;
+  }
+}
 
 @keyframes blink {
   78% {
