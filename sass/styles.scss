@@ -20,6 +20,9 @@ body{
 img{
   border-radius: $border-radius;
 }
+.navbar-right .dropdown-menu {
+  right: auto;
+}
 .cropArea {
   background: #E4E4E4;
   overflow: hidden;
