@@ -18,7 +18,8 @@ nav.navbar-default {
     .logo b b span {
       animation: blink linear infinite 2s; }
 
-.panel-dafault {
+.panel-default {
+  background-color: transparent;
   display: block;
   position: relative;
   margin-left: auto;
@@ -29,7 +30,7 @@ nav.navbar-default {
   max-width: 100%;
   overflow: visible;
   width: 700px; }
-  .panel-dafault:before {
+  .panel-default:before {
     box-shadow: 0 0 15px 4px #0080e2,0 0 120px 2px #004097,inset 0 0 15px 4px #0080e2,inset 0 0 100px 2px #004097;
     border-color: #bde1ff;
     content: "";
