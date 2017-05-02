@@ -42,8 +42,11 @@
           <ul class="nav navbar-nav navbar-right">
             <li class="btn" data-toggle="modal" data-target="#signUpModal"  ng-if="!isUserLogged"><a>Sign Up <i class="fa fa-plus"></i></a></li>
             <li class="btn" data-toggle="modal" data-target="#loginModal"  ng-if="!isUserLogged"><a>Login <i class="fa fa-plus"></i></a></li>
-            <li class="btn dropdown-toggle" ng-if="isUserLogged" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><a><img ng-src="{{userImage}}" class="img-circle" height="30px"/>    {{userName}} <span class="caret"></span></a></li>
+            <li class="btn dropdown-toggle" ng-if="isUserLogged" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><a><img ng-src="{{userImage}}" class="img-circle" height="20px"/><span class="caret"></span></a></li>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+              <li>Signed in as:</li>
+              <li>{{userName}}</li>
+              <li role="separator" class="divider"></li>
               <li><a href="#">Profile</a></li>
               <li><a ng-click="logoutUser()" href="#">Logout</a></li>
             </ul>
