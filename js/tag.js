@@ -1,10 +1,10 @@
 (function () {
-  var app = angular.module('nya-chan', ['angular-loading-bar', 'ngCookies', 'vcRecaptcha'])
+  var app = angular.module('nya-chan', ['angular-loading-bar', 'ngCookies', 'vcRecaptcha', 'toastr'])
     .config(['cfpLoadingBarProvider', function (cfpLoadingBarProvider) {
       cfpLoadingBarProvider.includeSpinner = false
     }])
 
-  app.controller('tagController', function ($scope, $http, $window, $cookies, $cookieStore, vcRecaptchaService) {
+  app.controller('tagController', function ($scope, $http, $window, $cookies, $cookieStore, vcRecaptchaService, toastr) {
     $scope.init = function () {
       $scope.isUserLogged = false
       if ($cookies.get('user') !== undefined) {
@@ -212,8 +212,10 @@
             vcRecaptchaService.reload($scope.widgetId)
             $('#newThreadModal').modal('hide')
             $('#loader').width('0%')
+            toastr.success('Nice Thread created', 'Success')
           }, function myError (response) {
             console.log(response || 'Request failed')
+            toastr.error('Oh no, I cant belive', 'Error')
           })
         }
       }
