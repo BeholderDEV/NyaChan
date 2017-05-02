@@ -108,10 +108,8 @@
         }
       }).then(function successCallback (response) {
         validatedPost(JSON.parse(response.data.body).success)
-        toastr.success('Success', 'You just created a Thread')
       }, function errorCallback (response) {
         console.log(response)
-        toastr.error('OPS', 'Let\'s try again')
       })
 
       function validatedPost (valid) {
@@ -214,8 +212,10 @@
             vcRecaptchaService.reload($scope.widgetId)
             $('#newThreadModal').modal('hide')
             $('#loader').width('0%')
+            toastr.error('Nice Thread created', 'Success')
           }, function myError (response) {
             console.log(response || 'Request failed')
+            toastr.error('Oh no, I cant belive', 'Error')
           })
         }
       }

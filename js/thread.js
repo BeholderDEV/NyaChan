@@ -69,10 +69,9 @@
         }
       }).then(function successCallback (response) {
         validatedPost(JSON.parse(response.data.body).success)
-        toastr.success('Right in the Post', 'You\'ve just answered it')
+
       }, function errorCallback (response) {
         console.log(response)
-        toastr.error('O my gof', 'Why is it happening? Try again')
       })
 
       function validatedPost (valid) {
@@ -163,8 +162,9 @@
             vcRecaptchaService.reload($scope.widgetId)
             $('#newThreadModal').modal('hide')
             $('#loader').width('0%')
-            toastr.success('You\'ve posted it', 'Why?')
+            toastr.success('Right in the Post', 'You\'ve just answered it')
           }, function myError (response) {
+            toastr.error('OMG, its dead!', 'Error')
             console.log(response || 'Request failed')
           })
         }
