@@ -102,7 +102,7 @@ module.exports = function (app, passport) {
     })
   })
 
-  function checkPumpLimit (threadid, callback, res) {
+  function checkArchived (threadid, callback, res) {
     MongoClient.connect(url, function (err, db) {
       if (err) {
         console.log('Unable to connect to the mongoDB server. Error:', err)
@@ -152,9 +152,8 @@ module.exports = function (app, passport) {
         } else {
           console.log('Connection established to', url)
           db.collection('thread').update({ '_id': ObjectId(newPost.threadid) }, { $inc: { numberOfPosts: 1 } })
-          db.collection('thread').update({ '_id': ObjectId(newPost.threadid) }, { $set: { lastDate: newPost.date } })
-          if (pumpReached === true) {
-            db.collection('thread').update({'_id': ObjectId(newPost.threadid)}, { $set: { archived: true } })
+          if (pumpReached === false) {
+            db.collection('thread').update({ '_id': ObjectId(newPost.threadid) }, { $set: { lastDate: newPost.date } })
           }
           db.collection('thread', function (err, collection) {
             collection.update({ '_id': ObjectId(newPost.threadid) }, { $push: { post: newPost } }, function (err, result) {
@@ -171,7 +170,7 @@ module.exports = function (app, passport) {
         }
       })
     }
-    checkPumpLimit(newPost.threadid, saveOnServer, res)
+    checkArchived(newPost.threadid, saveOnServer, res)
   })
 
   function checkTagLimit (tag) {

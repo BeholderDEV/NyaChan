@@ -79,7 +79,7 @@ function setImageSizeDimension (file, callback) {
   })
 }
 
-function checkPumpLimit (threadid, callback, res) {
+function checkArchived (threadid, callback, res) {
   MongoClient.connect(url, function (err, db) {
     if (err) {
       console.log('Unable to connect to the mongoDB server. Error:', err)
@@ -130,7 +130,7 @@ module.exports = function (app, express, path) {
       })
     }
     if (req.params.op === 0) {
-      checkPumpLimit(req.params.idThread, saveOnDropBox, res)
+      checkArchived(req.params.idThread, saveOnDropBox, res)
     } else {
       saveOnDropBox()
     }
