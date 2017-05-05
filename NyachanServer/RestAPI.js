@@ -41,7 +41,7 @@ function sendDataDropbox (name, data, callback) {
 
 function resizeImage (file, op, callback) {
   var baseH = 125
-  if (op === 1) {
+  if (op == 1) {
     baseH = 250
   }
   imgResizer.open(file.path, function (err, image) {
