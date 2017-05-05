@@ -43,6 +43,7 @@ function resizeImage (file, op, callback) {
   var baseH = 125
   if (op === 1) {
     baseH = 250
+    console.log("É O OP")
   }
   imgResizer.open(file.path, function (err, image) {
     var w = image.width()
@@ -79,7 +80,7 @@ function setImageSizeDimension (file, callback) {
   })
 }
 
-function checkArchived (threadid, callback, req, res) {
+function checkArchived (threadid, callback, res) {
   MongoClient.connect(url, function (err, db) {
     if (err) {
       console.log('Unable to connect to the mongoDB server. Error:', err)
@@ -93,7 +94,7 @@ function checkArchived (threadid, callback, req, res) {
           res.status(403)
           res.send({'error': 'Archived Thread'})
         } else {
-          callback(req, res)
+          callback()
         }
       })
       db.close()
@@ -105,7 +106,7 @@ module.exports = function (app, express, path) {
   app.use(express.static(path.join(__dirname, '/../')))
 
   app.post('/dbxPost/:op/:idThread', function (req, res) {
-    var saveOnDropBox = function (req, res) {
+    var saveOnDropBox = function () {
       var form = new formidable.IncomingForm()
       var respostaUrl = {}
       form.keepExtensions = true
@@ -130,9 +131,9 @@ module.exports = function (app, express, path) {
       })
     }
     if (req.params.op === 0) {
-      checkArchived(req.params.idThread, saveOnDropBox, req, res)
+      checkArchived(req.params.idThread, saveOnDropBox, res)
     } else {
-      saveOnDropBox(req, res)
+      saveOnDropBox()
     }
   })
 
