@@ -185,20 +185,43 @@ module.exports = function (app, passport) {
           if (error) {
             throw error
           }
-          console.log(documents.length)
           if (documents.length > 4) {
-            console.log(documents[documents.length - 1]._id)
             MongoClient.connect(url, function (err, db2) {
               if (err) {
                 console.log('Unable to connect to the mongoDB server. Error:', err)
               } else {
                 console.log('Connection established to', url)
-                db2.collection('thread').update({ '_id': ObjectId(documents[documents.length - 1]._id) }, { $set: { archived: true } })
+                db2.collection('thread').find({ tags: tag, archived: true }).sort(query).toArray(function (error, documentsArc) {
+                  if (error) {
+                    throw error
+                  }
+                  if (documentsArc.length > 4) {
+                    MongoClient.connect(url, function (err, db3) {
+                      if (err) {
+                        console.log('Unable to connect to the mongoDB server. Error:', err)
+                      } else {
+                        console.log('Connection established to', url)
+                        db3.collection('thread').remove({ '_id': ObjectId(documentsArc[documentsArc.length - 1]._id) }, function(err, numberOfRemovedDocs) {
+                          if (err) {
+                            throw err
+                          }
+                          db3.close();
+                        })
+                      }
+                    })
+                  }
+                })
+                db2.collection('thread').update({ '_id': ObjectId(documents[documents.length - 1]._id) }, { $set: { archived: true } }, function(err, docs) {
+                  if (err) {
+                    throw err
+                  }
+                  db2.close()
+                })               
               }
             })
           }
+          db.close()
         })
-        db.close()
       }
     })
   }
