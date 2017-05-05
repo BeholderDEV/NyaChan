@@ -105,8 +105,6 @@ module.exports = function (app, express, path) {
   app.use(express.static(path.join(__dirname, '/../')))
 
   app.post('/dbxPost/:op/:idThread', function (req, res) {
-    console.log("ADICIONAR THREAD")
-    console.log(req.params.op)
     var saveOnDropBox = function () {
       var form = new formidable.IncomingForm()
       var respostaUrl = {}
@@ -120,8 +118,6 @@ module.exports = function (app, express, path) {
             respostaUrl.size = properties.size
             sendDataDropbox(file.name, data, function (url) {
               respostaUrl.mainUrl = url
-              console.log("VAI FAZER RESIZE")
-              console.log(req.params.op)
               resizeImage(file, req.params.op, function (buffer) {
                 sendDataDropbox(file.name, buffer, function (urlThumb) {
                   respostaUrl.thumbUrl = urlThumb
