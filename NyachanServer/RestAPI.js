@@ -79,7 +79,7 @@ function setImageSizeDimension (file, callback) {
   })
 }
 
-function checkArchived (threadid, callback, res) {
+function checkArchived (threadid, callback, req, res) {
   MongoClient.connect(url, function (err, db) {
     if (err) {
       console.log('Unable to connect to the mongoDB server. Error:', err)
@@ -93,7 +93,7 @@ function checkArchived (threadid, callback, res) {
           res.status(403)
           res.send({'error': 'Archived Thread'})
         } else {
-          callback()
+          callback(req, res)
         }
       })
       db.close()
@@ -105,7 +105,7 @@ module.exports = function (app, express, path) {
   app.use(express.static(path.join(__dirname, '/../')))
 
   app.post('/dbxPost/:op/:idThread', function (req, res) {
-    var saveOnDropBox = function () {
+    var saveOnDropBox = function (req, res) {
       var form = new formidable.IncomingForm()
       var respostaUrl = {}
       form.keepExtensions = true
@@ -130,9 +130,9 @@ module.exports = function (app, express, path) {
       })
     }
     if (req.params.op === 0) {
-      checkArchived(req.params.idThread, saveOnDropBox, res)
+      checkArchived(req.params.idThread, saveOnDropBox, req, res)
     } else {
-      saveOnDropBox()
+      saveOnDropBox(req, res)
     }
   })
 
@@ -141,8 +141,8 @@ module.exports = function (app, express, path) {
     form.keepExtensions = true
     form.parse(req)
     form.on('file', function (name, file) {
-      console.log('aaa')
       fs.readFile(file.path, function (err, data) {
+        console.log("IMAGEM USUÁRIO")
         console.log(file.name)
         sendDataDropbox(req.params.user + '.jpeg', data, function (url) {
           var respostaUrl = {}
@@ -155,14 +155,12 @@ module.exports = function (app, express, path) {
 
   app.post('/recaptcha', function (req, res, $http) {
     var resp = req.body
-    console.log('Passou 1')
     var secretKey = '6LfogRgUAAAAADhwW9O5J7ZeBLrDxoy7M9vxHdIX'
     var verificationUrl = 'https://www.google.com/recaptcha/api/siteverify'
     var urldata = '?secret=' + secretKey + '&response=' + resp.response
-    console.log('Passou 1.5')
 
     request(verificationUrl + urldata, function (error, response, body) {
-      console.log('Passou 2')
+      console.log('RECAPTCHA')
       res.send(response)
     })
   })

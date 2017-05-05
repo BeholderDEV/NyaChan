@@ -215,7 +215,6 @@ module.exports = function (app, passport) {
                   if (err) {
                     throw err
                   }
-                  console.log(docs)
                   db2.close()
                 })
               }
