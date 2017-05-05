@@ -41,7 +41,7 @@ function sendDataDropbox (name, data, callback) {
 
 function resizeImage (file, op, callback) {
   var baseH = 125
-  if (op === 1) {
+  if (op == 1) {
     baseH = 250
   }
   imgResizer.open(file.path, function (err, image) {
@@ -141,8 +141,8 @@ module.exports = function (app, express, path) {
     form.keepExtensions = true
     form.parse(req)
     form.on('file', function (name, file) {
-      console.log('aaa')
       fs.readFile(file.path, function (err, data) {
+        console.log("IMAGEM USUÁRIO")
         console.log(file.name)
         sendDataDropbox(req.params.user + '.jpeg', data, function (url) {
           var respostaUrl = {}
@@ -155,14 +155,12 @@ module.exports = function (app, express, path) {
 
   app.post('/recaptcha', function (req, res, $http) {
     var resp = req.body
-    console.log('Passou 1')
     var secretKey = '6LfogRgUAAAAADhwW9O5J7ZeBLrDxoy7M9vxHdIX'
     var verificationUrl = 'https://www.google.com/recaptcha/api/siteverify'
     var urldata = '?secret=' + secretKey + '&response=' + resp.response
-    console.log('Passou 1.5')
 
     request(verificationUrl + urldata, function (error, response, body) {
-      console.log('Passou 2')
+      console.log('RECAPTCHA')
       res.send(response)
     })
   })
