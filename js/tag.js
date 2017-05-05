@@ -22,37 +22,37 @@
 
     switch (searchTag) {
       case 'a':
-        tagName = 'Anime & Mangá'
+        tagName = 'Anime & Manga'
         break
       case 'c':
-        tagName = 'Quadrinhos & Desenhos Animados'
+        tagName = 'Cartoon & Comics'
         break
       case 'g':
         tagName = 'Gif & Webm'
         break
       case 'h':
-        tagName = 'História e Ciências Humanas'
+        tagName = 'History & Humanities'
         break
       case 'm':
-        tagName = 'História e Ciências Humanas'
+        tagName = 'Music'
         break
       case 't':
-        tagName = 'Tecnologia'
+        tagName = 'Tecnology'
         break
       case 'tv':
-        tagName = 'Televisão & Filmes'
+        tagName = 'Movies & Television'
         break
       case 'v':
-        tagName = 'Vídeo Games'
+        tagName = 'Video Games'
         break
       case 'b':
-        tagName = 'Aleatório'
+        tagName = 'Random'
         break
       case 'p':
-        tagName = 'Politicamente Incorreto'
+        tagName = 'Politically Incorrect'
         break
       default:
-        tagName = 'Aleatório'
+        tagName = 'Random'
     }
     $scope.tag = searchTag
     $scope.tagName = tagName
