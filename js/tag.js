@@ -131,7 +131,7 @@
         }
 
         var files = $('#file')[0].files[0]
-        if (typeof post === undefined) {
+        if (post === undefined) {
           post = {}
           post.body = ' '
         }
@@ -146,7 +146,7 @@
             return
           }
         }
-        if (typeof files !== undefined) {
+        if (files !== undefined) {
           var formData = new FormData()
           formData.append('fileData', files)
           var xhr = new XMLHttpRequest()
@@ -169,7 +169,7 @@
         }
 
         function sendThread (file, uploadedFile) {
-          if (typeof files !== undefined) {
+          if (files !== undefined) {
             var ext = files.name.substring(files.name.lastIndexOf('.') + 1).toLowerCase()
             var dataPost = {
               body: post.body,
