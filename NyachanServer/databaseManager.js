@@ -213,6 +213,16 @@ module.exports = function (app, passport) {
                             throw err
                           }
                           db3.close();
+                          MongoClient.connect(url, function (err, db5) {
+                            console.log("Update depois de deletar na tag " + tag)
+                            db5.collection('thread').update({ '_id': ObjectId(documents[documents.length - 1]._id) }, { $set: { archived: true } }, function(err, docs) {
+                              if (err) {
+                                throw err
+                              }
+                              db5.close()
+                              checkTagLimit(tags, i + 1)
+                            })
+                          })
                         })
                       }
                     })
@@ -225,19 +235,9 @@ module.exports = function (app, passport) {
                         }
                         db4.close()
                         checkTagLimit(tags, i + 1)
-                        return
                       })
                     })
-
                   }
-                })
-                console.log("Update depois de deletar na tag " + tag)
-                db2.collection('thread').update({ '_id': ObjectId(documents[documents.length - 1]._id) }, { $set: { archived: true } }, function(err, docs) {
-                  if (err) {
-                    throw err
-                  }
-                  db2.close()
-                  checkTagLimit(tags, i + 1)
                 })
               }
             })
