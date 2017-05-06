@@ -241,7 +241,7 @@ module.exports = function (app, passport) {
                 })
               }
             })
-          }else
+          }else{
           console.log("Não entrou em if " + tag)
             checkTagLimit(tags, i + 1)
           }
