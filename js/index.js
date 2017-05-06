@@ -112,7 +112,7 @@
         }
         var avatar = $scope.myCroppedImage
 
-        if (typeof avatar !== undefined) {
+        if (avatar !== undefined) {
           var formData = new FormData()
           var base64ImageContent = avatar.replace(/^data:image\/(png|jpeg);base64,/, '')
           var blob = base64ToBlob(base64ImageContent, 'image/jpeg')
