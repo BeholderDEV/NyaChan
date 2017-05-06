@@ -12,6 +12,8 @@
         $scope.userName = user.login
         $scope.userImage = user.avatar
         $scope.isUserLogged = true
+      }else{
+        $scope.userName = 'Anon'
       }
     }
 
@@ -92,7 +94,7 @@
             return
         }
 
-        if (files !== null) {
+        if (files !== undefined) {
           if (!validFile(files.name)) {
             alert('Arquivo Invalido')
             return
@@ -129,7 +131,7 @@
               body: post.body,
               date: '2016-01-02 19:33:00',
               title: post.title,
-              userName: 'Anon',
+              userName: $scope.userName,
               file: [{
                 size: uploadedFile.size,
                 name: files.name,
@@ -146,7 +148,7 @@
               body: post.body,
               date: '2016-01-02 19:33:00',
               title: post.title,
-              userName: 'Anon'
+              userName: $scope.userName
             }
           }
 

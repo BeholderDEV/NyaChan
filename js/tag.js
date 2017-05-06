@@ -12,6 +12,8 @@
         $scope.userName = user.login
         $scope.userImage = user.avatar
         $scope.isUserLogged = true
+      }else{
+        $scope.userName = 'Anon'
       }
     }
 
@@ -176,7 +178,7 @@
               date: '2016-01-02 19:33:00',
               archived: false,
               subject: post.title,
-              userName: 'Anon',
+              userName: $scope.userName,
               tags: selectTags,
               file: [{
                 size: uploadedFile.size,
@@ -194,7 +196,7 @@
               date: '2016-01-02 19:33:00',
               archived: false,
               subject: post.title,
-              userName: 'Anon',
+              userName: $scope.userName,
               tags: selectTags
             }
           }
