@@ -207,14 +207,12 @@ module.exports = function (app, passport) {
                         console.log('Unable to connect to the mongoDB server. Error:', err)
                       } else {
                         console.log('Connection established to', url)
-                        console.log("Deletando na tag " + tag)
                         db3.collection('thread').remove({ '_id': ObjectId(documentsArc[documentsArc.length - 1]._id) }, function(err, numberOfRemovedDocs) {
                           if (err) {
                             throw err
                           }
                           db3.close();
                           MongoClient.connect(url, function (err, db5) {
-                            console.log("Update depois de deletar na tag " + tag)
                             db5.collection('thread').update({ '_id': ObjectId(documents[documents.length - 1]._id) }, { $set: { archived: true } }, function(err, docs) {
                               if (err) {
                                 throw err
@@ -227,7 +225,6 @@ module.exports = function (app, passport) {
                       }
                     })
                   }else{
-                    console.log("Apenas Update na tag " + tag)
                     MongoClient.connect(url, function (err, db4) {
                       db4.collection('thread').update({ '_id': ObjectId(documents[documents.length - 1]._id) }, { $set: { archived: true } }, function(err, docs) {
                         if (err) {
@@ -242,7 +239,6 @@ module.exports = function (app, passport) {
               }
             })
           }else{
-          console.log("Não entrou em if " + tag)
             checkTagLimit(tags, i + 1)
           }
           db.close()
