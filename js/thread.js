@@ -94,7 +94,7 @@
             return
         }
 
-        if (files !== null) {
+        if (files !== undefined) {
           if (!validFile(files.name)) {
             alert('Arquivo Invalido')
             return
