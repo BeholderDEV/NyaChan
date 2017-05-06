@@ -227,7 +227,7 @@ module.exports = function (app, passport) {
                         checkTagLimit(tags, i + 1)
                         return
                       })
-                    )}
+                    })
 
                   }
                 })
