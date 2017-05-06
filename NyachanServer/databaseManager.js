@@ -173,7 +173,7 @@ module.exports = function (app, passport) {
     checkArchived(newPost.threadid, saveOnServer, res)
   })
 
-  function checkTagLimit (tag) {
+  function checkTagLimit (tag, callback) {
     var query = {}
     query['lastDate'] = -1
     MongoClient.connect(url, function (err, db) {
@@ -221,6 +221,7 @@ module.exports = function (app, passport) {
             })
           }
           db.close()
+          return callback("Deu certo tag " + tag);
         })
       }
     })
@@ -248,8 +249,12 @@ module.exports = function (app, passport) {
         return
       }
     }
+
     newThread.tags.forEach(function (tag) {
-      checkTagLimit(tag)
+      console.log("Iniciou " + tag);
+      checkTagLimit(tag, function (resp){
+        console.log(resp);
+      });
     })
 
     MongoClient.connect(url, function (err, db) {
