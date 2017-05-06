@@ -173,7 +173,13 @@ module.exports = function (app, passport) {
     checkArchived(newPost.threadid, saveOnServer, res)
   })
 
-  function checkTagLimit (tag, callback) {
+  function checkTagLimit (tags, i) {
+    if(i >= tags.length){
+      return
+    }
+
+    var tag = tags[i]
+    console.log("Iniciando tag " + tag)
     var query = {}
     query['lastDate'] = -1
     MongoClient.connect(url, function (err, db) {
@@ -201,6 +207,7 @@ module.exports = function (app, passport) {
                         console.log('Unable to connect to the mongoDB server. Error:', err)
                       } else {
                         console.log('Connection established to', url)
+                        console.log("Deletando na tag " + tag)
                         db3.collection('thread').remove({ '_id': ObjectId(documentsArc[documentsArc.length - 1]._id) }, function(err, numberOfRemovedDocs) {
                           if (err) {
                             throw err
@@ -209,19 +216,36 @@ module.exports = function (app, passport) {
                         })
                       }
                     })
+                  }else{
+                    console.log("Apenas Update na tag " + tag)
+                    MongoClient.connect(url, function (err, db4) {
+                      db4.collection('thread').update({ '_id': ObjectId(documents[documents.length - 1]._id) }, { $set: { archived: true } }, function(err, docs) {
+                        if (err) {
+                          throw err
+                        }
+                        db4.close()
+                        checkTagLimit(tags, i + 1)
+                        return
+                      })
+                    )}
+
                   }
                 })
+                console.log("Update depois de deletar na tag " + tag)
                 db2.collection('thread').update({ '_id': ObjectId(documents[documents.length - 1]._id) }, { $set: { archived: true } }, function(err, docs) {
                   if (err) {
                     throw err
                   }
                   db2.close()
+                  checkTagLimit(tags, i + 1)
                 })
               }
             })
+          }else
+          console.log("Não entrou em if " + tag)
+            checkTagLimit(tags, i + 1)
           }
           db.close()
-          return callback("Deu certo tag " + tag);
         })
       }
     })
@@ -249,13 +273,8 @@ module.exports = function (app, passport) {
         return
       }
     }
-
-    newThread.tags.forEach(function (tag) {
-      console.log("Iniciou " + tag);
-      checkTagLimit(tag, function (resp){
-        console.log(resp);
-      });
-    })
+    newThread.tags
+    checkTagLimit(newThread.tags, 0)
 
     MongoClient.connect(url, function (err, db) {
       if (err) {
