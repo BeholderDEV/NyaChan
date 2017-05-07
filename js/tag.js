@@ -150,7 +150,8 @@
         }
         var uploadedFiles = [];
         if (files !== undefined) {
-          for(var i=0; i<files.length;i++)
+
+          var sendFilesToDropbox = function(i, files, uploadedFiles)
           {
               var formData = new FormData()
               formData.append('fileData', files[i])
@@ -160,9 +161,12 @@
                   var uploadedFile = JSON.parse(xhr.response)
                   console.log(uploadedFiles)
                   uploadedFiles[i] = uploadedFile
-                  if(i==files.length-1)
+                  if(i>=files.length-1)
                   {
                     sendThread(files, uploadedFiles);
+                  }
+                  else{
+                    sendFilesToDropbox(i+1, files, uploadedFiles)
                   }
                 }
               }
@@ -176,6 +180,8 @@
               xhr.send(formData)
               console.log("UPLOAD "+ i)
           }
+          sendFilesToDropbox(0, files, uploadedFiles)
+
         } else {
           sendThread(null, null)
         }
