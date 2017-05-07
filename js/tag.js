@@ -7,15 +7,60 @@
   app.controller('tagController', function ($scope, $http, $window, $cookies, $cookieStore, vcRecaptchaService, toastr) {
     $scope.init = function () {
       $scope.isUserLogged = false
+      $scope.isUserAdmin = false
       if ($cookies.get('user') !== undefined) {
         var user = JSON.parse($cookies.get('user'))
         $scope.userName = user.login
         $scope.userImage = user.avatar
         $scope.isUserLogged = true
+        $scope.isUserAdmin = user.role == "admin"
       }else{
         $scope.userName = 'Anon'
       }
     }
+
+    $scope.deleteThread = function(threadId){
+      console.log("bb " + threadId)
+      var dataDelete = {
+        user: JSON.parse($cookies.get('user')),
+        thread: threadId
+      }
+      $http({
+        method: 'DELETE',
+        // url: 'https://nyachan-server.herokuapp.com/api/deleteThread',
+        url: "http://localhost:3000/api/deleteThread",
+        data: dataDelete,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then(function mySucces (response) {
+        console.log("Sucess " + response.body)
+      }, function myError (response) {
+        console.log("Error " + response.body)
+      })
+    }
+
+    // $scope.isUserAdmin = function(){
+    //   if($cookies.get('user') === undefined){
+    //     return false
+    //   }
+    //   var dataUser =  JSON.parse($cookies.get('user'))
+      // $http({
+      //   method: 'GET',
+      //   // url: 'https://nyachan-server.herokuapp.com/api/tag/' + searchTag + '?sortType=lastDate&archived=false',
+      //   url: "http://localhost:3000/isUserAdmin",
+      //   data: dataUser,
+      //   headers: {
+      //     'Content-Type': 'application/json'
+      //   }
+      // }).then(function mySucces (response) {
+      //   console.log("Sucess " + response)
+      //   return true;
+      // }, function myError (response) {
+      //   console.log("Error " + response)
+      //   return false
+      // })
+    // }
 
     $scope.time_zone = new Date().getTimezoneOffset()
     var url = $(location).attr('href')
@@ -90,8 +135,8 @@
     $scope.search = function () {
       $http({
         method: 'GET',
-        url: 'https://nyachan-server.herokuapp.com/api/tag/' + searchTag + '?sortType=lastDate&archived=false'
-                // url: "http://localhost:3000/app/tag/" + searchTag
+        // url: 'https://nyachan-server.herokuapp.com/api/tag/' + searchTag + '?sortType=lastDate&archived=false'
+                url: "http://localhost:3000/api/tag/" + searchTag + '?sortType=lastDate&archived=false'
       }).then(function mySucces (response) {
         $scope.threads = response.data
       }, function myError (response) {
@@ -203,8 +248,8 @@
 
           $http({
             method: 'POST',
-            url: 'https://nyachan-server.herokuapp.com/api/thread/newThread',
-            // url: "http://localhost:3000/thread/newThread",
+            // url: 'https://nyachan-server.herokuapp.com/api/thread/newThread',
+            url: "http://localhost:3000/api/thread/newThread",
             data: dataPost,
             headers: {
               'Content-Type': 'application/json'

@@ -171,12 +171,13 @@
         }
       }).then(function mySucces (response) {
         $('#loginModal').modal('hide')
+        response.data.password = post.password
         $cookieStore.put('user', response.data)
         $scope.userName = response.data.login
         $scope.userImage = response.data.avatar
         $scope.isUserLogged = true
         $scope.isUserLogged = true
-        toastr.success('Wellcome back', 'We were wainting for you')
+        toastr.success('Welcome back', 'We were wainting for you')
       }, function myError (response) {
         console.log(response || 'Request failed')
         toastr.error('Something went wrong', 'Is this your real name?')

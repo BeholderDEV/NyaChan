@@ -50,8 +50,8 @@
     $scope.searchThread = function (threadID) {
       $http({
         method: 'GET',
-        url: 'https://nyachan-server.herokuapp.com/api/thread/' + threadID
-              // url: "http://localhost:3000/app/thread/" + threadID
+        // url: 'https://nyachan-server.herokuapp.com/api/thread/' + threadID
+              url: "http://localhost:3000/api/thread/" + threadID
       }).then(function mySucces (response) {
         $scope.thread = response.data[0]
       }, function myError (response) {
