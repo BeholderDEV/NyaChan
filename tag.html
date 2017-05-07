@@ -72,10 +72,10 @@
                     <a ng-repeat="a in t.tags" ng-href="http://nyachan-server.herokuapp.com/tag/{{a}}"><span class="label label-nya">{{a}}</span></a>
                   </h3>
                 </div>
-                <div class="panel-body">
-                  <a ng-repeat="f in t.file" ng-href="{{f.source}}" target="_blank">{{f.name}}</a>
+                <div ng-repeat="f in t.file" class="panel-body" >
+                  <a ng-href="{{f.source}}" target="_blank">{{f.name}}</a>
                   <div class="col-md-12">
-                    <img ng-repeat="f in t.file" onclick="toggle($(this))" data-width="{{f.width}}" data-height="{{f.height}}" data-full="{{f.source}}" data-thumb="{{f.thumb}}" data-is-full="0"  ng-src="{{f.thumb}}" class="img-responsive some-image"/>
+                    <img onclick="toggle($(this))" data-width="{{f.width}}" data-height="{{f.height}}" data-full="{{f.source}}" data-thumb="{{f.thumb}}" data-is-full="0"  ng-src="{{f.thumb}}" class="img-responsive some-image"/>
                   </div>
                   <div class="col-md-12">
                     {{t.body}}
