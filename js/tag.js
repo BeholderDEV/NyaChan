@@ -159,6 +159,10 @@
                 if (xhr.readyState === XMLHttpRequest.DONE) {
                   var uploadedFile = JSON.parse(xhr.response)
                   uploadedFiles[i] = uploadedFile
+                  if(i==files.length-1)
+                  {
+                    sendThread(files, uploadedFiles);
+                  }
                 }
               }
               xhr.upload.addEventListener('progress', function (evt) {
@@ -170,12 +174,7 @@
               xhr.open('post', '/dbxPost/1/0', true)
               xhr.send(formData)
               console.log("UPLOAD "+ i)
-          }
-          while(uploadedFiles==undefined || files.length !== uploadedFiles.length)
-          {
-              console.log("fileslength "+files.length+" uploadedfiles "+uploadedFiles.length)
-          }
-          sendThread(files, uploadedFiles);
+          }          
         } else {
           sendThread(null, null)
         }
