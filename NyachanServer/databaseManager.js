@@ -232,6 +232,7 @@ module.exports = function (app, passport) {
     newThread.userIP = req.headers['x-forwarded-for']
     var date = new Date()
     newThread.date = date.getTime()
+    newThread.archived = false
     if (newThread.tags[0] === undefined) {
       res.status(403)
       res.send({'error': 'An error has occurred'})

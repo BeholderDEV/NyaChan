@@ -185,7 +185,7 @@
           sendThread(null, null)
         }
 
-        function sendThread (files, uploadedFile) {
+        function sendThread (files, uploadedFiles) {
           if (files !== undefined) {
             var dataPost = {
               body: post.body,
