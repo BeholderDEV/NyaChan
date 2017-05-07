@@ -32,6 +32,25 @@ $(document).ready(function () {
   $('#selectTags').multiselect()
 })
 
+$(document).ready(function () {
+  $('#changeTags').multiselect({
+      nonSelectedText: 'Change Tags',
+      onDropdownHidden: function(event) {
+          var selectedOptions = $('#changeTags option:selected');
+          if(selectedOptions.length != 0){
+            var arrSelected = [];
+            selectedOptions.each(function(){
+               arrSelected.push($(this).val());
+            });
+            var scope = angular.element(document.getElementById("body")).scope();
+            scope.$apply(function () {
+              scope.changeTags(arrSelected);
+            })
+          }
+      }
+  });
+})
+
 $('#newThreadButton').click(function () {
   var actualTag = $('#tagTitle').attr('value')
   $('#selectTags').multiselect('select', [actualTag])

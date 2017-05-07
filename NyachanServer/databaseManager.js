@@ -145,6 +145,7 @@ module.exports = function (app, passport) {
         return
       }
     }
+    newPost.idPost = new ObjectId();
     var saveOnServer = function (pumpReached) {
       MongoClient.connect(url, function (err, db) {
         if (err) {
@@ -327,6 +328,7 @@ module.exports = function (app, passport) {
           newUser.password = createHash(password)
           newUser.email = req.param('email')
           newUser.avatar = req.param('avatar')
+          newUser.role = "user"
           newUser.save(function (err) {
             if (err) {
               console.log('Error in Saving user: ' + err)
@@ -402,10 +404,93 @@ module.exports = function (app, passport) {
     })(req, res)
   })
 
+  function isAdmin(login, password, callback) {
+    User.findOne({'login': login}, function (err, user) {
+      if(user){
+        if(isValidPassword(user, password) & user.role == "admin"){
+          return callback(true)
+        }
+        return callback(false)
+      }
+      return callback(false)
+    })
+  }
+
   var isAuthenticated = function (req, res, next) {
     if (req.isAuthenticated()) { return next() }
     res.redirect('/')
   }
+
+  app.delete('/api/delete/:type', function (req, res) {
+    isAdmin(req.body.user.login, req.body.user.password, function(admin){
+      if(admin){
+        MongoClient.connect(url, function (err, db) {
+          if (err) {
+            console.log('Unable to connect to the mongoDB server. Error:', err)
+          } else {
+            console.log('Connection established to', url)
+            db.collection('thread', function (err, collection) {
+              if(req.params.type == "thread"){
+                collection.remove({_id: ObjectId(req.body.thread)}, {safe: true}, function (err, result) {
+                  if (err) {
+                    console.log('Error ' + err)
+                    res.send({'error': 'An error has occurred'})
+                  } else {
+                    res.send("Sucess")
+                  }
+                })
+              }else{
+                collection.update({_id: ObjectId(req.body.thread)},{$pull: {post: {idPost: ObjectId(req.body.post)}}} , {safe: true}, function (err, result) {
+                  if (err) {
+                    console.log('Error ' + err)
+                    res.send({'error': 'An error has occurred'})
+                  } else {
+                    MongoClient.connect(url, function (err, db2) {
+                      db2.collection('thread').update({ _id: ObjectId(req.body.thread) }, { $inc: { numberOfPosts: -1 } }, function(){
+                        res.send("Sucess")
+                      })
+                    })
+                  }
+                })
+              }
+            })
+            db.close()
+          }
+        })
+      }else{
+        res.status(403)
+        res.send("No permission to do that")
+      }
+    });
+  })
+
+  app.post('/api/changeTags', function (req, res) {
+    isAdmin(req.body.user.login, req.body.user.password, function(admin){
+      if(admin){
+        MongoClient.connect(url, function (err, db) {
+          if (err) {
+            console.log('Unable to connect to the mongoDB server. Error:', err)
+          } else {
+            console.log('Connection established to', url)
+            db.collection('thread', function (err, collection) {
+              collection.update({_id: ObjectId(req.body.thread)},{$set: {tags: req.body.tags}} , {safe: true}, function (err, result) {
+                if (err) {
+                  console.log('Error ' + err)
+                  res.send({'error': 'An error has occurred'})
+                }else {
+                  res.send("Sucess")
+                }
+              })
+            })
+            db.close()
+          }
+        })
+      }else{
+        res.status(403)
+        res.send("No permission to do that")
+      }
+    })
+  })
 
   app.get('/logout', function (req, res) {
     req.logout()
