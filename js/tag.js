@@ -170,10 +170,10 @@
               xhr.open('post', '/dbxPost/1/0', true)
               xhr.send(formData)
               console.log("UPLOAD "+ i)
-              while(xhr.readyState !== XMLHttpRequest.DONE)
-              {
+          }
+          while(files.length !== uploadedFiles.length)
+          {
 
-              }
           }
           sendThread(files, uploadedFiles);
         } else {
