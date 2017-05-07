@@ -173,7 +173,7 @@
           }
           while(uploadedFiles==undefined || files.length !== uploadedFiles.length)
           {
-
+              console.log("fileslength "+files.length+" uploadedfiles "+uploadedFiles.length)
           }
           sendThread(files, uploadedFiles);
         } else {
