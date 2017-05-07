@@ -33,8 +33,8 @@
           'Content-Type': 'application/json'
         }
       }).then(function mySucces (response) {
-        $scope.threads = $scope.search()
         toastr.success('Thread deleted', 'Success')
+        $window.location.href = 'https://nyachan-server.herokuapp.com/'
       }, function myError (response) {
         console.log("Error " + response.body)
       })
