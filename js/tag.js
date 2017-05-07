@@ -153,7 +153,7 @@
           for(var i=0; i<files.length;i++)
           {
               var formData = new FormData()
-              formData.append('fileData', files)
+              formData.append('fileData', files[i])
               var xhr = new XMLHttpRequest()
               xhr.onreadystatechange = function () {
                 if (xhr.readyState === XMLHttpRequest.DONE) {
