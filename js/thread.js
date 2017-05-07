@@ -19,6 +19,28 @@
       }
     }
 
+    $scope.changeTags = function(selectedTags){
+      var dataTags = {
+        user: JSON.parse($cookies.get('user')),
+        thread: $scope.thread._id,
+        tags: selectedTags
+      }
+      $http({
+        method: 'POST',
+        url: 'https://nyachan-server.herokuapp.com/api/changeTags',
+        // url: "http://localhost:3000/changeTags",
+        data: dataTags,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then(function mySucces (response) {
+        $scope.thread = $scope.searchThread(searchId)
+        toastr.success('Tags changed', 'Success')
+      }, function myError (response) {
+        console.log("Error " + response.body)
+      })
+    }
+
     $scope.deleteThread = function(threadId){
       var dataDelete = {
         user: JSON.parse($cookies.get('user')),

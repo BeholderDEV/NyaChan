@@ -5,6 +5,7 @@
     }])
 
   app.controller('tagController', function ($scope, $http, $window, $cookies, $cookieStore, vcRecaptchaService, toastr) {
+    
     $scope.init = function () {
       $scope.isUserLogged = false
       $scope.isUserAdmin = false
@@ -39,6 +40,26 @@
         console.log("Error " + response.body)
       })
     }
+
+    // $scope.changeTags = function(threadId){
+    //   var dataTags = {
+    //     thread: threadId
+    //   }
+    //   $http({
+    //     method: 'POST',
+    //     // url: 'https://nyachan-server.herokuapp.com/api/changeTags',
+    //     url: "http://localhost:3000/api/changeTags",
+    //     data: dataTags,
+    //     headers: {
+    //       'Content-Type': 'application/json'
+    //     }
+    //   }).then(function mySucces (response) {
+    //     $scope.threads = $scope.search()
+    //     toastr.success('Tags changed', 'Success')
+    //   }, function myError (response) {
+    //     console.log("Error " + response.body)
+    //   })
+    // }
 
     $scope.time_zone = new Date().getTimezoneOffset()
     var url = $(location).attr('href')

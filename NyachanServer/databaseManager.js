@@ -464,6 +464,34 @@ module.exports = function (app, passport) {
     });
   })
 
+  app.post('/api/changeTags', function (req, res) {
+    isAdmin(req.body.user.login, req.body.user.password, function(admin){
+      if(admin){
+        MongoClient.connect(url, function (err, db) {
+          if (err) {
+            console.log('Unable to connect to the mongoDB server. Error:', err)
+          } else {
+            console.log('Connection established to', url)
+            db.collection('thread', function (err, collection) {
+              collection.update({_id: ObjectId(req.body.thread)},{$set: {tags: req.body.tags}} , {safe: true}, function (err, result) {
+                if (err) {
+                  console.log('Error ' + err)
+                  res.send({'error': 'An error has occurred'})
+                }else {
+                  res.send("Sucess")
+                }
+              })
+            })
+            db.close()
+          }
+        })
+      }else{
+        res.status(403)
+        res.send("No permission to do that")
+      }
+    })
+  })
+
   app.get('/logout', function (req, res) {
     req.logout()
     res.redirect('/')
