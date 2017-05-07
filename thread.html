@@ -66,6 +66,7 @@
               <h3 class='panel-title'>
               {{thread.subject}} ~ <span class="label id">{{thread._id}} by {{thread.userName}} on {{ thread.date | date: 'MMM d, y H:mm:ss' : 'time_zone' }}</span>
               <a ng-repeat="a in thread.tags" ng-href="http://nyachan-server.herokuapp.com/tag/{{a}}"><span class="label label-nya">{{a}}</span></a>
+              <button type="button" ng-if="isUserAdmin" class="btn btn-danger" ng-click="deleteThread(t._id)">Delete Thread</button>
               </h3>
             </div>
             <div class='panel-body'>

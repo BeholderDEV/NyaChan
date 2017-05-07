@@ -19,6 +19,27 @@
       }
     }
 
+    $scope.deleteThread = function(threadId){
+      var dataDelete = {
+        user: JSON.parse($cookies.get('user')),
+        thread: threadId
+      }
+      $http({
+        method: 'DELETE',
+        url: 'https://nyachan-server.herokuapp.com/api/delete/thread',
+        // url: "http://localhost:3000/api/delete/thread",
+        data: dataDelete,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then(function mySucces (response) {
+        $scope.threads = $scope.search()
+        toastr.success('Thread deleted', 'Success')
+      }, function myError (response) {
+        console.log("Error " + response.body)
+      })
+    }
+
     $scope.deletePost = function(threadId, postId){
       var dataDelete = {
         user: JSON.parse($cookies.get('user')),
