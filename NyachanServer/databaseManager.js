@@ -145,6 +145,7 @@ module.exports = function (app, passport) {
         return
       }
     }
+    newPost.postId = new ObjectID();
     var saveOnServer = function (pumpReached) {
       MongoClient.connect(url, function (err, db) {
         if (err) {

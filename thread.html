@@ -81,7 +81,9 @@
             <div class="panel-footer">
               <ul class="list-group">
                 <li class="list-group-item panel" ng-repeat="p in thread.post" id="{{p.idPost}}">
-                  <div class="panel-heading">{{p.title}} - <span class="label id">{{p.idPost}} by {{p.userName}} on {{ p.date | date: 'MMM d, y H:mm:ss' : 'time_zone' }}</span></div>
+                  <div class="panel-heading">{{p.title}} - <span class="label id">{{p.idPost}} by {{p.userName}} on {{ p.date | date: 'MMM d, y H:mm:ss' : 'time_zone' }}</span>
+                  <button type="button" ng-if="isUserAdmin" class="btn btn-danger" ng-click="deletePost(p.idPost)">Delete Post</button>
+                  </div>
                   <div class="panel-body">
                     <a ng-href="{{p.file[0].source}}" target="_blank">{{p.file[0].name}}</a>
                     <img onclick="toggle($(this))" data-full="{{p.file[0].source}}" data-thumb="{{p.file[0].thumb}}" data-is-full="0" ng-src="{{p.file[0].thumb}}" class="img-responsive some-image"/>

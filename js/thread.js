@@ -7,14 +7,37 @@
   app.controller('threadController', function ($scope, $http, $window, $cookies, $cookieStore, vcRecaptchaService, toastr) {
     $scope.init = function () {
       $scope.isUserLogged = false
+      $scope.isUserAdmin = false
       if ($cookies.get('user') !== undefined) {
         var user = JSON.parse($cookies.get('user'))
         $scope.userName = user.login
         $scope.userImage = user.avatar
         $scope.isUserLogged = true
+        $scope.isUserAdmin = user.role == "admin"
       }else{
         $scope.userName = 'Anon'
       }
+    }
+
+    $scope.deletePost = function(postId){
+      var dataDelete = {
+        user: JSON.parse($cookies.get('user')),
+        post: postId
+      }
+      $http({
+        method: 'DELETE',
+        url: 'https://nyachan-server.herokuapp.com/api/deleteThread',
+        // url: "http://localhost:3000/api/deletePost",
+        data: dataDelete,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then(function mySucces (response) {
+
+        toastr.success('Post deleted', 'Success')
+      }, function myError (response) {
+        console.log("Error " + response.body)
+      })
     }
 
     $scope.time_zone = new Date().getTimezoneOffset()
@@ -50,8 +73,8 @@
     $scope.searchThread = function (threadID) {
       $http({
         method: 'GET',
-        // url: 'https://nyachan-server.herokuapp.com/api/thread/' + threadID
-              url: "http://localhost:3000/api/thread/" + threadID
+        url: 'https://nyachan-server.herokuapp.com/api/thread/' + threadID
+              // url: "http://localhost:3000/api/thread/" + threadID
       }).then(function mySucces (response) {
         $scope.thread = response.data[0]
       }, function myError (response) {

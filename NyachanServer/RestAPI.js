@@ -3,7 +3,7 @@ var MongoClient = mongodb.MongoClient
 var ObjectId = require('mongodb').ObjectID
 var Dropbox = require('dropbox')
 var request = require('request')
-// var imgResizer = require('lwip')
+var imgResizer = require('lwip')
 var dbx = new Dropbox({ accessToken: 'RQ4xXaH3x-AAAAAAAAAADuWlSlvLuWi5Lef3ymzTNYzSNvQY2AwDOvqmVY73I41f' })
 var formidable = require('formidable')
 var fs = require('fs')
@@ -167,26 +167,26 @@ module.exports = function (app, express, path) {
 
   app.get('/tag/:tagName', function (req, res) {
     res.type('text/html')
-     res.sendFile(path.resolve('../tag.html'));
-    // res.sendfile('tag.html')
+     // res.sendFile(path.resolve('../tag.html'));
+    res.sendfile('tag.html')
   })
 
   app.get('/archived/:tagName', function (req, res) {
     res.type('text/html')
-     res.sendFile(path.resolve('../tag.html'));
-    // res.sendfile('archived.html')
+     // res.sendFile(path.resolve('../tag.html'));
+    res.sendfile('archived.html')
   })
 
   app.get('/thread/:idThread', function (req, res) {
     res.type('text/html')
-     res.sendFile(path.resolve('../thread.html'));
-    // res.sendfile('thread.html')
+     // res.sendFile(path.resolve('../thread.html'));
+    res.sendfile('thread.html')
   })
 
   app.get('/404', function (req, res) {
     res.type('text/html')
-     res.sendFile(path.resolve('../404.html'));
-    // res.sendfile('404.html')
+     // res.sendFile(path.resolve('../404.html'));
+    res.sendfile('404.html')
   })
 
   // app.get('*', function(req, res, next) {
