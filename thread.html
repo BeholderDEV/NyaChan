@@ -69,10 +69,10 @@
               <a ng-repeat="a in thread.tags" ng-href="http://nyachan-server.herokuapp.com/tag/{{a}}"><span class="label label-nya">{{a}}</span></a>
               </h3>
             </div>
-            <div class='panel-body'>
-              <a ng-href="{{thread.file[0].source}}" target="_blank">{{thread.file[0].name}}</a>
+            <div class='panel-body' ng-repeat="f in p.file">
+              <a ng-href="{{thread.file[0].source}}" target="_blank">{{f.name}}</a>
               <div class="col-md-12">
-                <img onclick="toggle($(this))" data-width="{{thread.file[0].width}}" data-height="{{thread.file[0].height}}" data-full="{{thread.file[0].source}}" data-thumb="{{thread.file[0].thumb}}" data-is-full="0"  ng-src="{{thread.file[0].thumb}}" class="img-responsive some-image"/>
+                <img onclick="toggle($(this))" data-width="{{f.width}}" data-height="{{f.height}}" data-full="{{f.source}}" data-thumb="{{f.thumb}}" data-is-full="0"  ng-src="{{f.thumb}}" class="img-responsive some-image"/>
               </div>
               <div class="col-md-12">
                 {{thread.body}}
@@ -192,6 +192,7 @@
   <script src="../js/app.js"></script>
   <script src="../js/thread.js"></script>
   <script src="../js/script.js"></script>
+  <script src="../js/kartik-script.js"></script>
   <script src="../js/angular-recaptcha.min.js"></script>
 </body>
 </html>

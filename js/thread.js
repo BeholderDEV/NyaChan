@@ -100,7 +100,7 @@
             return
           }
         }
-
+        var uploadedFiles = [];
         if (files !== undefined) {
           var sendFilesToDropbox = function(i, files, uploadedFiles)
           {
