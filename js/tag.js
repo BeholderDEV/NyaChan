@@ -155,7 +155,7 @@
               var formData = new FormData()
               formData.append('fileData', files[i])
               var xhr = new XMLHttpRequest()
-              xhr.onreadystatechange = function (i) {
+              xhr.onreadystatechange = function () {
                 if (xhr.readyState === XMLHttpRequest.DONE) {
                   var uploadedFile = JSON.parse(xhr.response)
                   console.log(i)
