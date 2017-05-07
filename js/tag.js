@@ -143,7 +143,7 @@
         }
 
         if (files !== undefined) {
-          if (!validFile(files.name)) {
+          if (!validFile(files[0].name)) {
             alert('Arquivo Invalido')
             return
           }
