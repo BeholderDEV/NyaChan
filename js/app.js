@@ -36,6 +36,7 @@ function filesToJSON(files, uploadedFiles)
     }
     filesJSON[i]=jsonFile
   }
+  return filesJSON
 }
 
 function validFile (filename) {
