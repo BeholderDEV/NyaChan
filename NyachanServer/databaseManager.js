@@ -445,8 +445,10 @@ module.exports = function (app, passport) {
                     console.log('Error ' + err)
                     res.send({'error': 'An error has occurred'})
                   } else {
-                    db.collection('thread').update({ '_id': ObjectId(req.body.thread) }, { $inc: { numberOfPosts: -1 } })
-                    res.send("Sucess")
+                    db.collection('thread').update({ '_id': ObjectId(req.body.thread) }, { $inc: { numberOfPosts: -1 } }, function(){
+                      console.log("Yup")
+                      res.send("Sucess")
+                    })
                   }
                 })
               }
