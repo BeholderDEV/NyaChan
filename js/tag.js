@@ -155,7 +155,7 @@
               var formData = new FormData()
               formData.append('fileData', files[i])
               var xhr = new XMLHttpRequest()
-              xhr.onreadystatechange = function () {
+              xhr.onreadystatechange = function (i) {
                 if (xhr.readyState === XMLHttpRequest.DONE) {
                   var uploadedFile = JSON.parse(xhr.response)
                   uploadedFiles[i] = uploadedFile
@@ -174,7 +174,7 @@
               xhr.open('post', '/dbxPost/1/0', true)
               xhr.send(formData)
               console.log("UPLOAD "+ i)
-          }          
+          }
         } else {
           sendThread(null, null)
         }
