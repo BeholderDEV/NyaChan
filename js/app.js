@@ -24,15 +24,15 @@ function filesToJSON(files, uploadedFiles)
   var filesJSON = []
   for(var i=0; i<uploadedFiles.length;i++)
   {
-    var ext = files[0].name.substring(files[0].name.lastIndexOf('.') + 1).toLowerCase()
+    var ext = files[i].name.substring(files[i].name.lastIndexOf('.') + 1).toLowerCase()
     var jsonFile = {
       size: uploadedFiles[0].size,
-      name: files[0].name,
+      name: files[i].name,
       extension: ext,
-      height: uploadedFiles[0].height,
-      width: uploadedFiles[0].width,
-      source: uploadedFiles[0].mainUrl,
-      thumb: uploadedFiles[0].thumbUrl
+      height: uploadedFiles[i].height,
+      width: uploadedFiles[i].width,
+      source: uploadedFiles[i].mainUrl,
+      thumb: uploadedFiles[i].thumbUrl
     }
     filesJSON[i]=jsonFile
   }
