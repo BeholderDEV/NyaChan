@@ -248,7 +248,7 @@
         }
       }).then(function mySucces (response) {
         $scope.isUserLogged = false
-        $cookies.remove($cookies.get('user'));
+        $cookies.remove("user",{domain:'https://nyachan-server.herokuapp.com/'})
         toastr.success('Goodbye', 'See you soon')
       }, function myError (response) {
         console.log(response || 'Request failed')
