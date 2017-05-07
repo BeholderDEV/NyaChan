@@ -142,37 +142,46 @@
           return
         }
 
-        // if (files !== undefined) {
-        //   if (!validFile(files.name)) {
-        //     alert('Arquivo Invalido')
-        //     return
-        //   }
-        // }
         if (files !== undefined) {
-          var formData = new FormData()
-          formData.append('fileData', files)
-          var xhr = new XMLHttpRequest()
-          xhr.onreadystatechange = function () {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-              var uploadedFile = JSON.parse(xhr.response)
-              sendThread(files, uploadedFile)
-            }
+          if (!validFile(files.name)) {
+            alert('Arquivo Invalido')
+            return
           }
-          xhr.upload.addEventListener('progress', function (evt) {
-            if (evt.lengthComputable) {
-              var percentComplete = evt.loaded / evt.total
-              $('#loader').width(Math.round(percentComplete * 100) + '%')
-            }
-          }, false)
-          xhr.open('post', '/dbxPost/1/0', true)
-          xhr.send(formData)
+        }
+        var uploadedFiles;
+        if (files !== undefined) {
+          for(var i=0; i<files.length;i++)
+          {
+              var formData = new FormData()
+              formData.append('fileData', files)
+              var xhr = new XMLHttpRequest()
+              xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                  var uploadedFile = JSON.parse(xhr.response)
+                  uploadedFiles[i] = uploadedFile
+                }
+              }
+              xhr.upload.addEventListener('progress', function (evt) {
+                if (evt.lengthComputable) {
+                  var percentComplete = evt.loaded / evt.total
+                  $('#loader').width(Math.round(percentComplete * 100) + '%')
+                }
+              }, false)
+              xhr.open('post', '/dbxPost/1/0', true)
+              xhr.send(formData)
+              console.log("UPLOAD "+ i)
+              while(xhr.readyState !== XMLHttpRequest.DONE)
+              {
+
+              }
+          }
+          sendThread(files, uploadedFiles);
         } else {
           sendThread(null, null)
         }
 
-        function sendThread (file, uploadedFile) {
+        function sendThread (files, uploadedFile) {
           if (files !== undefined) {
-            var ext = files.name.substring(files.name.lastIndexOf('.') + 1).toLowerCase()
             var dataPost = {
               body: post.body,
               date: '2016-01-02 19:33:00',
@@ -180,15 +189,7 @@
               subject: post.title,
               userName: $scope.userName,
               tags: selectTags,
-              file: [{
-                size: uploadedFile.size,
-                name: files.name,
-                extension: ext,
-                height: uploadedFile.height,
-                width: uploadedFile.width,
-                source: uploadedFile.mainUrl,
-                thumb: uploadedFile.thumbUrl
-              }]
+              file: filesToJSON(files, uploadedFiles)
             }
           } else {
             var dataPost = {

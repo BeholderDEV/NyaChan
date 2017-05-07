@@ -19,6 +19,25 @@ function validarPost (post, files) {
   }
 }
 
+function filesToJSON(files, uploadedFiles)
+{
+  var filesJSON = []
+  for(var i=0; i<uploadedFiles.length;i++)
+  {
+    var ext = files[0].name.substring(files[0].name.lastIndexOf('.') + 1).toLowerCase()
+    var jsonFile = {
+      size: uploadedFiles[0].size,
+      name: files[0].name,
+      extension: ext,
+      height: uploadedFiles[0].height,
+      width: uploadedFiles[0].width,
+      source: uploadedFiles[0].mainUrl,
+      thumb: uploadedFiles[0].thumbUrl
+    }
+    filesJSON[i]=jsonFile
+  }
+}
+
 function validFile (filename) {
   console.log('validando')
   var validFormats = [ 'jpg', 'jpeg', 'png', 'gif', 'bmp', 'webm', 'pdf' ]
