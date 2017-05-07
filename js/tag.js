@@ -132,7 +132,7 @@
           selectTags.push(selectedOptions[i].value)
         }
 
-        var files = $('#file')[0].files[0]
+        var files = $('#file')[0].files
         if (post === undefined) {
           post = {}
           post.body = ' '
@@ -142,12 +142,12 @@
           return
         }
 
-        if (files !== undefined) {
-          if (!validFile(files.name)) {
-            alert('Arquivo Invalido')
-            return
-          }
-        }
+        // if (files !== undefined) {
+        //   if (!validFile(files.name)) {
+        //     alert('Arquivo Invalido')
+        //     return
+        //   }
+        // }
         if (files !== undefined) {
           var formData = new FormData()
           formData.append('fileData', files)
