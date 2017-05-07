@@ -75,7 +75,7 @@
                 <div class="panel-body">
                   <a ng-href="{{t.file[0].source}}" target="_blank">{{t.file[0].name}}</a>
                   <div class="col-md-12">
-                    <img onclick="toggle($(this))" data-width="{{t.file[0].width}}" data-height="{{t.file[0].height}}" data-full="{{t.file[0].source}}" data-thumb="{{t.file[0].thumb}}" data-is-full="0"  ng-src="{{t.file[0].thumb}}" class="img-responsive some-image"/>
+                    <img ng-repeat="f in t.file" onclick="toggle($(this))" data-width="{{f.width}}" data-height="{{f.height}}" data-full="{{f.source}}" data-thumb="{{f.thumb}}" data-is-full="0"  ng-src="{{f.thumb}}" class="img-responsive some-image"/>
                   </div>
                   <div class="col-md-12">
                     {{t.body}}
