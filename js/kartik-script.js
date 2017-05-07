@@ -1,5 +1,3 @@
-$("#file").fileinput();
-
 $(document).on('ready', function() {
     $("#file").fileinput({
         showUpload: false,
