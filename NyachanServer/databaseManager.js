@@ -440,12 +440,16 @@ module.exports = function (app, passport) {
                   }
                 })
               }else{
-                collection.update({_id: ObjectId(req.body.thread)}, {$pull: {post: {idPost: ObjectId(req.body.post)}}}, { $inc: { numberOfPosts: -1 } } , {safe: true}, function (err, result) {
+                collection.update({_id: ObjectId(req.body.thread)},{$pull: {post: {idPost: ObjectId(req.body.post)}}} , {safe: true}, function (err, result) {
                   if (err) {
                     console.log('Error ' + err)
                     res.send({'error': 'An error has occurred'})
                   } else {
-                    res.send("Sucess")
+                    MongoClient.connect(url, function (err, db2) {
+                      db2.collection('thread').update({ _id: ObjectId(req.body.thread) }, { $inc: { numberOfPosts: -1 } }, function(){
+                        res.send("Sucess")
+                      })
+                    })
                   }
                 })
               }
