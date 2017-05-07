@@ -148,7 +148,7 @@
             return
           }
         }
-        var uploadedFiles;
+        var uploadedFiles = [];
         if (files !== undefined) {
           for(var i=0; i<files.length;i++)
           {
@@ -171,7 +171,7 @@
               xhr.send(formData)
               console.log("UPLOAD "+ i)
           }
-          while(files.length !== uploadedFiles.length)
+          while(uploadedFiles==undefined || files.length !== uploadedFiles.length)
           {
 
           }
