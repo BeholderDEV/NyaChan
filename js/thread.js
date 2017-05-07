@@ -19,6 +19,22 @@
       }
     }
 
+    $scope.logoutUser = function () {
+      $http({
+        method: 'GET',
+        url: 'https://nyachan-server.herokuapp.com/logout',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then(function mySucces (response) {
+        $scope.isUserLogged = false
+        $cookieStore.remove('user')
+        toastr.success('Goodbye', 'See you soon')
+      }, function myError (response) {
+        console.log(response || 'Request failed')
+      })
+    }
+
     $scope.changeTags = function(selectedTags){
       var dataTags = {
         user: JSON.parse($cookies.get('user')),
