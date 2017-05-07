@@ -26,8 +26,8 @@
       }
       $http({
         method: 'DELETE',
-        url: 'https://nyachan-server.herokuapp.com/api/deleteThread',
-        // url: "http://localhost:3000/api/deleteThread",
+        url: 'https://nyachan-server.herokuapp.com/api/delete/thread',
+        // url: "http://localhost:3000/api/delete/thread",
         data: dataDelete,
         headers: {
           'Content-Type': 'application/json'

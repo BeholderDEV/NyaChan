@@ -19,21 +19,22 @@
       }
     }
 
-    $scope.deletePost = function(postId){
+    $scope.deletePost = function(threadId, postId){
       var dataDelete = {
         user: JSON.parse($cookies.get('user')),
-        post: postId
+        post: postId,
+        thread: threadId
       }
       $http({
         method: 'DELETE',
-        url: 'https://nyachan-server.herokuapp.com/api/deleteThread',
-        // url: "http://localhost:3000/api/deletePost",
+        url: 'https://nyachan-server.herokuapp.com/api/delete/post',
+        // url: "http://localhost:3000/api/delete/post",
         data: dataDelete,
         headers: {
           'Content-Type': 'application/json'
         }
       }).then(function mySucces (response) {
-
+        $scope.thread = $scope.searchThread(searchId)
         toastr.success('Post deleted', 'Success')
       }, function myError (response) {
         console.log("Error " + response.body)

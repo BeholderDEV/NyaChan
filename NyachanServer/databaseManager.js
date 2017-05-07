@@ -145,7 +145,7 @@ module.exports = function (app, passport) {
         return
       }
     }
-    newPost.postId = new ObjectId();
+    newPost.idPost = new ObjectId();
     var saveOnServer = function (pumpReached) {
       MongoClient.connect(url, function (err, db) {
         if (err) {
@@ -421,7 +421,7 @@ module.exports = function (app, passport) {
     res.redirect('/')
   }
 
-  app.delete('/api/deleteThread', function (req, res) {
+  app.delete('/api/delete/:type', function (req, res) {
     isAdmin(req.body.user.login, req.body.user.password, function(admin){
       if(admin){
         MongoClient.connect(url, function (err, db) {
@@ -430,14 +430,25 @@ module.exports = function (app, passport) {
           } else {
             console.log('Connection established to', url)
             db.collection('thread', function (err, collection) {
-              collection.remove({_id: ObjectId(req.body.thread)}, {safe: true}, function (err, result) {
-                if (err) {
-                  console.log('Error ' + err)
-                  res.send({'error': 'An error has occurred'})
-                } else {
-                  res.send("Sucess")
-                }
-              })
+              if(req.params.type == "thread"){
+                collection.remove({_id: ObjectId(req.body.thread)}, {safe: true}, function (err, result) {
+                  if (err) {
+                    console.log('Error ' + err)
+                    res.send({'error': 'An error has occurred'})
+                  } else {
+                    res.send("Sucess")
+                  }
+                })
+              }else{
+                collection.update({_id: ObjectId(req.body.thread)},{$pull: {post: {idPost: ObjectId(req.body.post)}}} , {safe: true}, function (err, result) {
+                  if (err) {
+                    console.log('Error ' + err)
+                    res.send({'error': 'An error has occurred'})
+                  } else {
+                    res.send("Sucess")
+                  }
+                })
+              }
             })
             db.close()
           }
