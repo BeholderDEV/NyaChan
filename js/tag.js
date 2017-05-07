@@ -159,7 +159,6 @@
               xhr.onreadystatechange = function () {
                 if (xhr.readyState === XMLHttpRequest.DONE) {
                   var uploadedFile = JSON.parse(xhr.response)
-                  console.log(uploadedFiles)
                   uploadedFiles[i] = uploadedFile
                   if(i>=files.length-1)
                   {
