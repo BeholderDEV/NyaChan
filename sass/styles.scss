@@ -47,10 +47,7 @@ a {
   border: none;
   .navbar-brand{
       color: $text-color;
-      font-size: 24px;
-      margin-top: 7px;
   }
-
 }
 
 .btn{
@@ -85,13 +82,7 @@ input, textarea{
     }
   }
   &.panel-index{
-    img{
-      margin: auto;
-      max-height: 150px;
-    }
-
     .panel-body{
-      height: 200px;
       border-radius: 0px 0px $border-radius $border-radius;
     }
     display: block;

@@ -1,2 +1,36 @@
-body{padding-top:100px}.navbar-right .dropdown-menu{right:auto}.cropArea{background:#E4E4E4;overflow:hidden;height:350px}@-webkit-keyframes progress-bar-stripes{from{background-position:0 0}to{background-position:40px 0}}@-moz-keyframes progress-bar-stripes{from{background-position:0 0}to{background-position:40px 0}}
-/*# sourceMappingURL=struct.css.map */
+/*
+Error: Invalid CSS after "}": expected "}", was ""
+        on line 38 of sass/struct.scss
+
+33: }
+34: @-moz-keyframes progress-bar-stripes {
+35:  from  { background-position: 0 0; }
+36:  to    { background-position: 40px 0; }
+37: }
+
+Backtrace:
+sass/struct.scss:38
+/var/lib/gems/2.3.0/gems/sass-3.4.23/lib/sass/scss/parser.rb:1207:in `expected'
+/var/lib/gems/2.3.0/gems/sass-3.4.23/lib/sass/scss/parser.rb:1137:in `expected'
+/var/lib/gems/2.3.0/gems/sass-3.4.23/lib/sass/scss/parser.rb:1132:in `tok!'
+/var/lib/gems/2.3.0/gems/sass-3.4.23/lib/sass/scss/parser.rb:667:in `block'
+/var/lib/gems/2.3.0/gems/sass-3.4.23/lib/sass/scss/parser.rb:658:in `ruleset'
+/var/lib/gems/2.3.0/gems/sass-3.4.23/lib/sass/scss/parser.rb:684:in `block_child'
+/var/lib/gems/2.3.0/gems/sass-3.4.23/lib/sass/scss/parser.rb:677:in `block_contents'
+/var/lib/gems/2.3.0/gems/sass-3.4.23/lib/sass/scss/parser.rb:125:in `stylesheet'
+/var/lib/gems/2.3.0/gems/sass-3.4.23/lib/sass/scss/parser.rb:41:in `parse'
+/var/lib/gems/2.3.0/gems/sass-3.4.23/lib/sass/engine.rb:406:in `_to_tree'
+/var/lib/gems/2.3.0/gems/sass-3.4.23/lib/sass/engine.rb:381:in `_render_with_sourcemap'
+/var/lib/gems/2.3.0/gems/sass-3.4.23/lib/sass/engine.rb:298:in `render_with_sourcemap'
+/var/lib/gems/2.3.0/gems/sass-3.4.23/lib/sass/exec/sass_scss.rb:391:in `run'
+/var/lib/gems/2.3.0/gems/sass-3.4.23/lib/sass/exec/sass_scss.rb:63:in `process_result'
+/var/lib/gems/2.3.0/gems/sass-3.4.23/lib/sass/exec/base.rb:52:in `parse'
+/var/lib/gems/2.3.0/gems/sass-3.4.23/lib/sass/exec/base.rb:19:in `parse!'
+/var/lib/gems/2.3.0/gems/sass-3.4.23/bin/sass:13:in `<top (required)>'
+/usr/local/bin/sass:23:in `load'
+/usr/local/bin/sass:23:in `<main>'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Error: Invalid CSS after \"}\": expected \"}\", was \"\"\A         on line 38 of sass/struct.scss\A \A 33: }\A 34: @-moz-keyframes progress-bar-stripes {\A 35:  from  { background-position: 0 0; }\A 36:  to    { background-position: 40px 0; }\A 37: }"; }
