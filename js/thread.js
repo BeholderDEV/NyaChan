@@ -61,7 +61,34 @@
         console.log('Error ' + response.body)
       })
     }
+    $scope.downloadFiles = function(imgFiles)
+    {
 
+      var carregarImagens = function(i, imgLinks)
+      {
+          var zip=new JSZip();
+          console.log(imgLink[i])
+          JSZipUtils.getBinaryContent(imgLinks[i].source, function (err, data) {
+            if(err) {
+              console.erro("Problem happened when download img: " + imgLink[i])
+              deferred.resolve(zip) // ignore this error: just logging
+              // deferred.reject(zip); // or we may fail the download
+            } else {
+              zip.file(imgLinks[i].name+".jpg", data, {binary:true})
+              deferred.resolve(zip)
+            }
+            if(i>=imgLinks.length)
+            {
+              var content = zip.generate({type:"blob"})
+              saveAs(content, "downloadImages.zip")
+            }
+            else {
+              carregarImagens(i+1, imgLinks)
+            }
+          })
+      }
+      carregarImagens(0, imgLinks)
+    }
     $scope.deletePost = function (threadId, postId) {
       var dataDelete = {
         user: JSON.parse($cookies.get('user')),
