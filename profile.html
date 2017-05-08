@@ -65,16 +65,63 @@
     </nav>
     <div class="container">
       <div class="row" id="profile-area">
-          <div class="col-md-offset-5 col-md-2">
-            <img ng-src="{{userImage}}" class="img-responsive img-circle" id="profile-pic">
-            <h2>{{userName}}</h2>
-            <div class="btn-group" role="group" aria-label="...">
-              <button type="button" class="btn btn-default btn-profile" title="Alterar CSS" data-toggle="modal" data-target="#CSSModal"><i class="fa fa-code"></i></button>
-              <button type="button" class="btn btn-default btn-profile" title="Alterar Imagens Perfil" data-toggle="modal" data-target="#ImageModal"><i class="fa fa-image"></i></button>
-              <button type="button" class="btn btn-default btn-profile" title="Alterar Configurações de Perfil" data-toggle="modal" data-target="#ConfigModal"><i class="fa fa-cogs"></i></button>
-            </div>
+        <div class="col-md-offset-5 col-md-2">
+          <img ng-src="{{userImage}}" class="img-responsive img-circle" id="profile-pic">
+          <h2>{{userName}}</h2>
+          <div class="btn-group" role="group" aria-label="...">
+            <button type="button" class="btn btn-default btn-profile" title="Alterar CSS" data-toggle="modal" data-target="#CSSModal"><i class="fa fa-code"></i></button>
+            <button type="button" class="btn btn-default btn-profile" title="Alterar Imagens Perfil" data-toggle="modal" data-target="#ImageModal"><i class="fa fa-image"></i></button>
+            <button type="button" class="btn btn-default btn-profile" title="Alterar Configurações de Perfil" data-toggle="modal" data-target="#ConfigModal"><i class="fa fa-cogs"></i></button>
           </div>
         </div>
+      </div>
+      <div ng-repeat="t in threads">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                  {{t.subject}} ~ <span class="label id"><a ng-href="http://nyachan-server.herokuapp.com/thread/{{t._id}}">{{t._id}}</a> by {{t.userName}} on {{ t.date | date: 'MMM d, y H:mm:ss' : 'time_zone' }}</span>
+                  <a ng-repeat="a in t.tags" ng-href="http://nyachan-server.herokuapp.com/tag/{{a}}"><span class="label label-nya">{{a}}</span></a>
+                  <button type="button" ng-if="isUserAdmin" class="btn btn-danger pull-right" ng-click="deleteThread(t._id)"><i class="fa fa-trash-o"></i></button>
+                </h3>
+              </div>
+              <div class="panel-body">
+                <div class="col-md-4 image-body">
+                  <carousel>
+                    <slide ng-repeat="f in t.file" active="slide.active">
+                      <a href="{{f.source}}" data-title="{{f.name}}" data-lightbox="{{t._id}}">
+                        <img ng-src="{{f.thumb}}" class="img-responsive some-image"/>
+                      </a>
+                    </slide>
+                  </carousel>
+                </div>
+                <div class="col-md-8 content-body">
+                  {{t.body}}
+                </div>
+              </div>
+              <div class="panel-footer">
+                <ul class="list-group">
+                  <li class="list-group-item panel" ng-repeat="p in t.post" id="{{p.idPost}}">
+                    <div class="panel-heading">{{p.title}} - <span class="label id">{{p.idPost}} by {{p.userName}} on {{ p.date | date: 'MMM d, y H:mm:ss' : 'time_zone' }}</span></div>
+                    <div class="panel-body">
+                      <div class="col-md-3 image-body">
+                        <carousel>
+                          <slide ng-repeat="f in p.file" active="slide.active">
+                            <a href="{{f.source}}" data-title="{{f.name}}" data-lightbox="{{p.idPost}}">
+                              <img ng-src="{{f.thumb}}" class="img-responsive some-image"/>
+                            </a>
+                          </slide>
+                        </carousel>
+                      </div>
+                      <div class="col-md-9 content-body">
+                        {{p.body}}
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+          </div>
+        </div>
+
     </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
