@@ -85,8 +85,10 @@
             deferreds.push(getSingleBinCont(zip, value))
         });
         $.when.apply($, deferreds).done(function () {
-            var blob = zip.generate({type:"blob"})
-            saveAs(blob, "images.zip")
+            var blob = zip.generateAsync({type:"blob"}).then(function(content) {
+                saveAs(content, "images.zip");
+            });
+            // saveAs(blob, "images.zip")
         });
       }
       downloadDaughterZip()
