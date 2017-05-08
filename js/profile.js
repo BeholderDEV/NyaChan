@@ -28,7 +28,7 @@
     }).then(function mySucces (response) {
       var out = [];
       for(var i = 0 ; i < response.data.length ; i++){
-        if(response.data[i].userName = $scope.userName){
+        if(response.data[i].userName === $scope.userName){
           out.put(response.data[i])
         }
       }
