@@ -26,6 +26,8 @@ function toggle (obj) {
   $(tag).data('height', h)
   obj.hide()
   obj.parent().append(tag)
+  obj.parent().parent().parent().removeClass('col-md-4')
+  obj.parent().parent().parent().addClass('col-md-12')
 }
 
 $(document).ready(function () {
