@@ -269,6 +269,38 @@
         }
       }
     }
+    
+    $scope.downloadFiles = function(imgFiles)
+    {
+      var getSingleBinCont = function (zip, value) {
+          var deferred = $.Deferred()
+          var trueLink = value.source.replace("www.dropbox.com", "dl.dropboxusercontent.com")
+          JSZipUtils.getBinaryContent(trueLink, function (err, data){
+              if(err){
+                  deferred.reject(err)
+              }
+              else{
+                  zip.file(value.name, data, {binary:true})
+                  deferred.resolve(data)
+              }
+          });
+          return deferred
+      }
+      var downloadZip = function (){
+        var zip = new JSZip()
+        var deferreds = []
+
+        angular.forEach(imgFiles, function (value, key){
+            deferreds.push(getSingleBinCont(zip, value))
+        });
+        $.when.apply($, deferreds).done(function () {
+            var blob = zip.generateAsync({type:"blob"}).then(function(content) {
+                saveAs(content, "images.zip");
+            });
+        });
+      }
+      downloadZip()
+    }
 
     $scope.logoutUser = function () {
       $http({
