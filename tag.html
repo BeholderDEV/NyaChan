@@ -94,7 +94,7 @@
                     <li class="list-group-item panel" ng-repeat="p in t.post" id="{{p.idPost}}">
                       <div class="panel-heading">{{p.title}} - <span class="label id">{{p.idPost}} by {{p.userName}} on {{ p.date | date: 'MMM d, y H:mm:ss' : 'time_zone' }}</span></div>
                       <div class="panel-body">
-                        <div class="col-md-4 image-body">
+                        <div class="col-md-3 image-body">
                           <carousel>
                             <slide ng-repeat="f in p.file" active="slide.active">
                               <a href="{{f.source}}" data-title="{{f.name}}" data-lightbox="{{p.idPost}}">
@@ -103,7 +103,7 @@
                             </slide>
                           </carousel>
                         </div>
-                        <div class="col-md-8 content-body">
+                        <div class="col-md-9 content-body">
                           {{p.body}}
                         </div>
                       </div>
