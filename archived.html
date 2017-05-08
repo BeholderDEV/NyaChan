@@ -60,7 +60,7 @@
           <div class="panel-footer">
             <ul class="list-group">
               <li class="list-group-item panel" ng-repeat="p in threads" id="{{p.idPost}}">
-                <div class="panel-heading">{{p.title}} ~ <span class="label id"><a ng-href="http://nyachan-server.herokuapp.com/thread/{{p._id}}">{{p._id}}</a> by {{p.userName}} on {{ p.date | date: 'MMM d, y H:mm:ss' : 'time_zone' }}</span>
+                <div class="panel-heading">{{p.subject}} ~ <span class="label id"><a ng-href="http://nyachan-server.herokuapp.com/thread/{{p._id}}">{{p._id}}</a> by {{p.userName}} on {{ p.date | date: 'MMM d, y H:mm:ss' : 'time_zone' }}</span>
                 </div>
                 <div class="panel-body">
                     {{p.body}}
