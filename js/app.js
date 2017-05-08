@@ -1,11 +1,11 @@
 function validarPost (post, files) {
   var myEl
-  if ((post.body === ' ' || post.body === undefined) && files === undefined) {
+  if ((post.body === ' ' || post.body === undefined) && (files === undefined || files.length<1)) {
     if (post.body === ' ' || post.body === undefined) {
       myEl = angular.element(document.querySelector('#comment-group'))
       myEl.addClass('has-error')
     }
-    if (files === undefined) {
+    if (files === undefined || files.length<1) {
       myEl = angular.element(document.querySelector('#file-group'))
       myEl.addClass('has-error')
     }
@@ -17,6 +17,26 @@ function validarPost (post, files) {
     myEl.removeClass('has-error')
     return true
   }
+}
+
+function filesToJSON(files, uploadedFiles)
+{
+  var filesJSON = []
+  for(var i=0; i<uploadedFiles.length;i++)
+  {
+    var ext = files[i].name.substring(files[i].name.lastIndexOf('.') + 1).toLowerCase()
+    var jsonFile = {
+      size: uploadedFiles[i].size,
+      name: files[i].name,
+      extension: ext,
+      height: uploadedFiles[i].height,
+      width: uploadedFiles[i].width,
+      source: uploadedFiles[i].mainUrl,
+      thumb: uploadedFiles[i].thumbUrl
+    }
+    filesJSON[i]=jsonFile
+  }
+  return filesJSON
 }
 
 function validFile (filename) {

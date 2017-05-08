@@ -150,7 +150,7 @@
           vcRecaptchaService.reload($scope.widgetId)
           return
         }
-        var files = $('#file')[0].files[0]
+        var files = $('#file')[0].files
 
         if (post === undefined) {
           post = {}
@@ -160,54 +160,57 @@
         if (!validarPost(post, files)) {
             return
         }
-
-        if (files !== undefined) {
-          if (!validFile(files.name)) {
+        console.log(files)
+        if (files !== undefined || files.length>1) {
+          if (!validFile(files[0].name)) {
             alert('Arquivo Invalido')
             return
           }
         }
-
-        if (files !== undefined) {
-          var formData = new FormData()
-          formData.append('fileData', files)
-          var xhr = new XMLHttpRequest()
-          xhr.onreadystatechange = function () {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-              var uploadedFile = JSON.parse(xhr.response)
-              sendPost(files, uploadedFile)
-            }
+        var uploadedFiles = [];
+        if (files !== undefined || files.length>1) {
+          var sendFilesToDropbox = function(i, files, uploadedFiles)
+          {
+              var formData = new FormData()
+              formData.append('fileData', files[i])
+              var xhr = new XMLHttpRequest()
+              xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                  var uploadedFile = JSON.parse(xhr.response)
+                  uploadedFiles[i] = uploadedFile
+                  if(i>=files.length-1)
+                  {
+                    sendPost(files, uploadedFiles);
+                  }
+                  else{
+                    sendFilesToDropbox(i+1, files, uploadedFiles)
+                  }
+                }
+              }
+              xhr.upload.addEventListener('progress', function (evt) {
+                if (evt.lengthComputable) {
+                  var percentComplete = evt.loaded / evt.total
+                  $('#loader').width(Math.round(percentComplete * 100) + '%')
+                }
+              }, false)
+              xhr.open('post', '/dbxPost/0/' + $scope.thread._id, true)
+              xhr.send(formData)
+              console.log("UPLOAD "+ i)
           }
-          xhr.upload.addEventListener('progress', function (evt) {
-            if (evt.lengthComputable) {
-              var percentComplete = evt.loaded / evt.total
-              $('#loader').width(Math.round(percentComplete * 100) + '%')
-            }
-          }, false)
-          xhr.open('post', '/dbxPost/0/' + $scope.thread._id, true)
-          xhr.send(formData)
+          sendFilesToDropbox(0, files, uploadedFiles)
         } else {
           sendPost(null, null)
         }
 
-        function sendPost (file, uploadedFile) {
+        function sendPost (files, uploadedFiles) {
           if (files !== undefined) {
-            var ext = files.name.substring(files.name.lastIndexOf('.') + 1).toLowerCase()
             var dataPost = {
               threadid: $scope.thread._id,
               body: post.body,
               date: '2016-01-02 19:33:00',
               title: post.title,
               userName: $scope.userName,
-              file: [{
-                size: uploadedFile.size,
-                name: files.name,
-                extension: ext,
-                height: uploadedFile.height,
-                width: uploadedFile.width,
-                source: uploadedFile.mainUrl,
-                thumb: uploadedFile.thumbUrl
-              }]
+              file: filesToJSON(files, uploadedFiles)
             }
           } else {
             var dataPost = {
