@@ -19,23 +19,24 @@
         $scope.userName = 'Anon'
       }
     }
-  })
-  $scope.search = function () {
-    $http({
-      method: 'GET',
-      url: 'https://nyachan-server.herokuapp.com/api/threads?sortType=numberOfPosts'
-              // url: "http://localhost:3000/api/tag/" + searchTag + '?sortType=lastDate&archived=false'
-    }).then(function mySucces (response) {
-      var out = [];
-      for(var i = 0 ; i < response.data.length ; i++){
-        if(response.data[i].userName === $scope.userName){
-          out.put(response.data[i])
+    $scope.search = function () {
+      $http({
+        method: 'GET',
+        url: 'https://nyachan-server.herokuapp.com/api/threads?sortType=numberOfPosts'
+                // url: "http://localhost:3000/api/tag/" + searchTag + '?sortType=lastDate&archived=false'
+      }).then(function mySucces (response) {
+        var out = [];
+        for(var i = 0 ; i < response.data.length ; i++){
+          if(response.data[i].userName === $scope.userName){
+            out.put(response.data[i])
+          }
         }
-      }
-      $scope.threads = out
-    }, function myError (response) {
-      $window.location.href = 'https://nyachan-server.herokuapp.com/404'
-    })
-  }
-  $scope.threads = $scope.search()
+        $scope.threads = out
+      }, function myError (response) {
+        $window.location.href = 'https://nyachan-server.herokuapp.com/404'
+      })
+    }
+    $scope.threads = $scope.search()
+  })
+
 })()
