@@ -64,7 +64,17 @@
       </div>
     </nav>
     <div class="container">
-      {{userName}}
+      <div class="row" id="profile-area">
+          <div class="col-md-offset-5 col-md-2">
+            <img ng-src="{{userImage}}" class="img-responsive img-circle" id="profile-pic">
+            <h2>{{userName}}</h2>
+            <div class="btn-group" role="group" aria-label="...">
+              <button type="button" class="btn btn-default btn-profile" title="Alterar CSS" data-toggle="modal" data-target="#CSSModal"><i class="fa fa-code"></i></button>
+              <button type="button" class="btn btn-default btn-profile" title="Alterar Imagens Perfil" data-toggle="modal" data-target="#ImageModal"><i class="fa fa-image"></i></button>
+              <button type="button" class="btn btn-default btn-profile" title="Alterar Configurações de Perfil" data-toggle="modal" data-target="#ConfigModal"><i class="fa fa-cogs"></i></button>
+            </div>
+          </div>
+        </div>
     </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
