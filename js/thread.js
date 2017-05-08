@@ -190,6 +190,7 @@
               xhr.upload.addEventListener('progress', function (evt) {
                 if (evt.lengthComputable) {
                   var percentComplete = evt.loaded / evt.total
+                  percentComplete = (percentComplete/files.length)*(i+1)
                   $('#loader').width(Math.round(percentComplete * 100) + '%')
                 }
               }, false)
