@@ -77,7 +77,7 @@
           });
           return deferred
       }
-      var downloadDaughterZip = function (){
+      var downloadZip = function (){
         var zip = new JSZip()
         var deferreds = []
 
@@ -88,35 +88,9 @@
             var blob = zip.generateAsync({type:"blob"}).then(function(content) {
                 saveAs(content, "images.zip");
             });
-            // saveAs(blob, "images.zip")
         });
       }
-      downloadDaughterZip()
-
-      // var carregarImagens = function(i, imgLinks)
-      // {
-      //     var zip=new JSZip();
-      //     var trueLink = imgLinks[i].source.replace("www.dropbox.com", "dl.dropboxusercontent.com")
-      //     JSZipUtils.getBinaryContent(trueLink, function (err, data) {
-      //       if(err) {
-      //         console.log("Problem happened when download img: " + imgLinks[i])
-      //         deferred.reject(zip) // ignore this error: just logging
-      //         // deferred.reject(zip); // or we may fail the download
-      //       } else {
-      //         zip.file(imgLinks[i].name+".jpg", data, {binary:true})
-      //         deferred.resolve(zip)
-      //       }
-      //       if(i>=imgLinks.length)
-      //       {
-      //         var content = zip.generate({type:"blob"})
-      //         saveAs(content, "downloadImages.zip")
-      //       }
-      //       else {
-      //         carregarImagens(i+1, imgLinks)
-      //       }
-      //     })
-      // }
-      // carregarImagens(0, imgFiles)
+      downloadZip()
     }
     $scope.deletePost = function (threadId, postId) {
       var dataDelete = {

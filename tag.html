@@ -74,6 +74,7 @@
                     <a ng-repeat="a in t.tags" ng-href="http://nyachan-server.herokuapp.com/tag/{{a}}"><span class="label label-nya">{{a}}</span></a>
                     <button type="button" ng-if="isUserAdmin" class="btn btn-danger pull-right" ng-click="deleteThread(t._id)"><i class="fa fa-trash-o"></i></button>
                   </h3>
+                  <button type="button" class="btn btn-danger pull-right" ng-click="downloadFiles(t.file)"><i class="fa fa-download"></i></button>
                 </div>
                 <div class="panel-body">
                   <div class="col-md-4 image-body">
@@ -92,7 +93,9 @@
                 <div class="panel-footer">
                   <ul class="list-group">
                     <li class="list-group-item panel" ng-repeat="p in t.post" id="{{p.idPost}}">
-                      <div class="panel-heading">{{p.title}} - <span class="label id">{{p.idPost}} by {{p.userName}} on {{ p.date | date: 'MMM d, y H:mm:ss' : 'time_zone' }}</span></div>
+                      <div class="panel-heading">{{p.title}} - <span class="label id">{{p.idPost}} by {{p.userName}} on {{ p.date | date: 'MMM d, y H:mm:ss' : 'time_zone' }}</span>
+                        <button type="button" class="btn btn-danger pull-right" ng-click="downloadFiles(p.file)"><i class="fa fa-download"></i></button>
+                      </div>
                       <div class="panel-body">
                         <div class="col-md-3 image-body">
                           <carousel>
