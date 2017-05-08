@@ -70,7 +70,7 @@ module.exports = function (app, passport) {
             }
             res.jsonp(documents)
           })
-        }catch(){
+        }catch(err){
           res.status(404)
           res.send("Erro no id")
         }
