@@ -67,10 +67,10 @@
       var carregarImagens = function(i, imgLinks)
       {
           var zip=new JSZip();
-          console.log(imgLinks[i])
-          JSZipUtils.getBinaryContent(imgLinks[i].source, function (err, data) {
+          var trueLink = imgLinks[i].source.replace("www.dropbox.com", "dl.dropboxusercontent.com")
+          JSZipUtils.getBinaryContent(trueLink, function (err, data) {
             if(err) {
-              console.erro("Problem happened when download img: " + imgLinks[i])
+              console.log("Problem happened when download img: " + imgLinks[i])
               deferred.resolve(zip) // ignore this error: just logging
               // deferred.reject(zip); // or we may fail the download
             } else {
