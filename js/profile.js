@@ -19,5 +19,5 @@
         $scope.userName = 'Anon'
       }
     }
-  }
+  })
 })()
