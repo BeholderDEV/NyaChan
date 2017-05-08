@@ -5,6 +5,19 @@
     }])
 
   app.controller('tagController', function ($scope, $http, $window, $cookies, $cookieStore, vcRecaptchaService, toastr) {
+    $scope.toggle = function (obj) {
+      var img = obj.data('full')
+      var nam = obj.data('name')
+      var num = obj.data('index')
+      var slidesHTML= angular.element('<carousel><slide ng-repeat="f in thread['+num+'].file" active="slide.active"><img ng-src="{{f.source}}" class="img-responsive some-image"/></slide></carousel>')
+      var compileAppendedSlidesHTML= $compile(slidesHTML)
+      var element = compileAppendedSlidesHTML($scope)
+      $('#image-name').empty()
+      $('#image-name').append(nam)
+      $('#carousel-modal').empty()
+      $('#carousel-modal').append(compileAppendedSlidesHTML)
+      $('#showImageModal').modal('show')
+    }
 
     $scope.init = function () {
       $scope.isUserLogged = false
