@@ -16,7 +16,8 @@ function restoreImage () {
 function toggle (obj) {
   var img = obj.data('full')
   var nam = obj.data('name')
-  var full = '<carousel><slide ng-repeat="f in t.file" active="slide.active"><img ng-src="{{f.source}}" class="img-responsive some-image"/></slide></carousel>'
+  var num = obj.data('index')
+  var full = '<carousel><slide ng-repeat="f in thread['+num+'].file" active="slide.active"><img ng-src="{{f.source}}" class="img-responsive some-image"/></slide></carousel>'
   $('#image-name').empty()
   $('#image-name').append(nam)
   $('#carousel-modal').empty()
