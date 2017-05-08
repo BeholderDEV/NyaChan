@@ -183,6 +183,12 @@ module.exports = function (app, express, path) {
     res.sendfile('thread.html')
   })
 
+  app.get('/profile', function (req, res) {
+    res.type('text/html')
+     // res.sendFile(path.resolve('../thread.html'));
+    res.sendfile('profile.html')
+  })
+
   app.get('/404', function (req, res) {
     res.type('text/html')
      // res.sendFile(path.resolve('../404.html'));

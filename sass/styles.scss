@@ -20,6 +20,17 @@ img{
   border-radius: $border-radius;
 }
 
+#profile-area {
+  text-align: center;
+  color: $text-color;
+  padding: 20px;
+  background-color: $panel-dark-bg !important;
+  #profile-pic {
+      margin: 0 auto;
+      width: 150px;
+  }
+}
+
 
 #loading-bar .bar{
   background:$primary-color;

@@ -55,7 +55,7 @@
               <li><a href="#">Signed in as:</a></li>
               <li><a href="#">{{userName}}</a></li>
               <li role="separator" class="divider"></li>
-              <li><a href="#">Profile</a></li>
+              <li><a href="/profile">Profile</a></li>
               <li><a ng-click="logoutUser()" href="#">Logout</a></li>
             </ul>
         </div>
@@ -86,7 +86,7 @@
               </h3>              
             </div>
             <div class="panel-body">
-              <div class="col-md-4 image-body">
+              <div class="col-md-4 image-body" ng-show="thread.file[0] !== undefined">
                 <carousel>
                   <slide ng-repeat="f in thread.file" active="slide.active">
                     <a href="{{f.source}}" data-title="{{f.name}}" data-lightbox="{{thread._id}}">
@@ -106,7 +106,7 @@
                     <button type="button" class="btn btn-danger pull-right" ng-click="downloadFiles(p.file)"><i class="fa fa-download"></i></button>
                   </div>
                   <div class="panel-body">
-                    <div class="col-md-3 image-body">
+                    <div class="col-md-3 image-body" ng-show="p.file[0] !== undefined">
                       <carousel>
                         <slide ng-repeat="f in p.file" active="slide.active">
                           <a href="{{f.source}}" data-title="{{f.name}}" data-lightbox="{{p.idPost}}">
