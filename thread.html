@@ -67,7 +67,7 @@
               <h3 class='panel-title'>
               {{thread.subject}} ~ <span class="label id">{{thread._id}} by {{thread.userName}} on {{ thread.date | date: 'MMM d, y H:mm:ss' : 'time_zone' }}</span>
               <a ng-repeat="a in thread.tags" ng-href="http://nyachan-server.herokuapp.com/tag/{{a}}"><span class="label label-nya">{{a}}</span></a>
-              <button type="button" ng-if="isUserAdmin" class="btn btn-danger pull-right" ng-click="deleteThread(thread._id)"><i clasa="fa fa-trash-o"></i></button>
+              <button type="button" ng-if="isUserAdmin" class="btn btn-danger pull-right" ng-click="deleteThread(thread._id)"><i class="fa fa-trash-o"></i></button>
               <select class="pull-right" id="changeTags" ng-if="isUserAdmin" multiple="multiple" required>
                     <option value="a">Anime &#38; Mangá</option>
                     <option value="c">Quadrinhos &#38; Desenhos Animados</option>
