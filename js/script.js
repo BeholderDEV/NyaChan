@@ -15,17 +15,20 @@ function restoreImage () {
 }
 function toggle (obj) {
   var img = obj.data('full')
+  var nam = obj.data('name')
   var full = '<img src="' + img + '" class="img-responsive"/>'
-  var tag = $(full)
-  $(tag).on('click', restoreImage)
-  var w = obj.attr('width')
-  $(tag).attr('width', obj.data('width'))
-  $(tag).data('width', w)
-  var h = obj.attr('height')
-  $(tag).attr('height', obj.data('height'))
-  $(tag).data('height', h)
-  obj.hide()
-  obj.parent().append(tag)
+  $('#image-name').empty()
+  $('#image-name').append(nam)
+  $('#carousel-modal').empty()
+  $('#carousel-modal').append(full)
+  $('#showImageModal').on('show.bs.modal', function () {
+         $(this).find('.modal-body').css({
+                width:'auto', //probably not needed
+                height:'auto', //probably not needed
+                'max-height':'100%'
+         });
+  });
+  $('#showImageModal').modal('show')
 }
 
 $(document).ready(function () {
