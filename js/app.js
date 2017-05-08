@@ -26,7 +26,7 @@ function filesToJSON(files, uploadedFiles)
   {
     var ext = files[i].name.substring(files[i].name.lastIndexOf('.') + 1).toLowerCase()
     var jsonFile = {
-      size: uploadedFiles[0].size,
+      size: uploadedFiles[i].size,
       name: files[i].name,
       extension: ext,
       height: uploadedFiles[i].height,
