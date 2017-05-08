@@ -161,14 +161,14 @@
           return
         }
         console.log(files)
-        if (files !== undefined || files.length > 1) {
+        if (files !== undefined && files.length > 0) {
           if (!validFile(files[0].name)) {
             alert('Arquivo Invalido')
             return
           }
         }
         var uploadedFiles = [];
-        if (files !== undefined || files.length > 1) {
+        if (files !== undefined && files.length > 0) {
           var sendFilesToDropbox = function (i, files, uploadedFiles) {
             var formData = new FormData()
             formData.append('fileData', files[i])
@@ -197,11 +197,11 @@
           }
           sendFilesToDropbox(0, files, uploadedFiles)
         } else {
-          sendPost(null, null)
+          sendPost(undefined, undefined)
         }
 
         function sendPost (files, uploadedFiles) {
-          if (files !== undefined) {
+          if (files !== undefined && files.length > 0) {
             var dataPost = {
               threadid: $scope.thread._id,
               body: post.body,
