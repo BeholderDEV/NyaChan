@@ -93,7 +93,7 @@
         if (!validarPost(post, files)) {
             return
         }
-
+        console.log(files)
         if (files !== undefined) {
           if (!validFile(files[0].name)) {
             alert('Arquivo Invalido')
