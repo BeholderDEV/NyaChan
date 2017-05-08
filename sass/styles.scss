@@ -10,7 +10,6 @@ $border-radius: 10px;
 $img-bg: "/img/bg.jpg";
 
 body{
-  padding-top: 100px;
   background-color: $dark-bg;
   background-attachment: fixed;
   background-image: url($img-bg);
@@ -20,14 +19,8 @@ body{
 img{
   border-radius: $border-radius;
 }
-.navbar-right .dropdown-menu {
-  right: auto;
-}
-.cropArea {
-  background: #E4E4E4;
-  overflow: hidden;
-  height:350px;
-}
+
+
 #loading-bar .bar{
   background:$primary-color;
   height:3px;
@@ -218,12 +211,4 @@ footer{
   &:hover{
     color: $primary-color !important;
   }
-}
-@-webkit-keyframes progress-bar-stripes {
- from  { background-position: 0 0; }
- to    { background-position: 40px 0; }
-}
-@-moz-keyframes progress-bar-stripes {
- from  { background-position: 0 0; }
- to    { background-position: 40px 0; }
 }
