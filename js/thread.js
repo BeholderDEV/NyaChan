@@ -67,10 +67,10 @@
       var carregarImagens = function(i, imgLinks)
       {
           var zip=new JSZip();
-          console.log(imgLink[i])
+          console.log(imgLinks[i])
           JSZipUtils.getBinaryContent(imgLinks[i].source, function (err, data) {
             if(err) {
-              console.erro("Problem happened when download img: " + imgLink[i])
+              console.erro("Problem happened when download img: " + imgLinks[i])
               deferred.resolve(zip) // ignore this error: just logging
               // deferred.reject(zip); // or we may fail the download
             } else {
@@ -87,7 +87,7 @@
             }
           })
       }
-      carregarImagens(0, imgLinks)
+      carregarImagens(0, imgFiles)
     }
     $scope.deletePost = function (threadId, postId) {
       var dataDelete = {
