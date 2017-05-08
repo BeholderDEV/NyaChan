@@ -28,7 +28,7 @@
         var out = [];
         for(var i = 0 ; i < response.data.length ; i++){
           if(response.data[i].userName === $scope.userName){
-            out.put(response.data[i])
+            out.push(response.data[i])
           }
         }
         $scope.threads = out
