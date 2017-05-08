@@ -73,8 +73,8 @@
                     {{t.subject}} ~ <span class="label id"><a ng-href="http://nyachan-server.herokuapp.com/thread/{{t._id}}">{{t._id}}</a> by {{t.userName}} on {{ t.date | date: 'MMM d, y H:mm:ss' : 'time_zone' }}</span>
                     <a ng-repeat="a in t.tags" ng-href="http://nyachan-server.herokuapp.com/tag/{{a}}"><span class="label label-nya">{{a}}</span></a>
                     <button type="button" ng-if="isUserAdmin" class="btn btn-danger pull-right" ng-click="deleteThread(t._id)"><i class="fa fa-trash-o"></i></button>
+                    <button type="button" class="btn btn-danger pull-right" ng-click="downloadFiles(t.file)"><i class="fa fa-download"></i></button>  
                   </h3>
-                  <button type="button" class="btn btn-danger pull-right" ng-click="downloadFiles(t.file)"><i class="fa fa-download"></i></button>
                 </div>
                 <div class="panel-body">
                   <div class="col-md-4 image-body">
