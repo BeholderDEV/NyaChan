@@ -97,10 +97,9 @@
                         <div class="col-md-4 image-body">
                           <carousel>
                             <slide ng-repeat="f in p.file" active="slide.active">
-                              <img onclick="toggle($(this))" data-width="{{f.width}}" data-height="{{f.height}}" data-full="{{f.source}}" data-thumb="{{f.thumb}}" data-is-full="0"  ng-src="{{f.thumb}}" class="img-responsive some-image"/>
-                              <div class="carousel-caption">
-                                <h4>{{f.name}}</h4>
-                              </div>
+                              <a href="{{f.source}}" data-title="{{f.name}}" data-lightbox="roadtrip">
+                                <img ng-src="{{f.thumb}}" class="img-responsive some-image"/>
+                              </a>
                             </slide>
                           </carousel>
                         </div>
