@@ -17,17 +17,9 @@ function toggle (obj) {
   var img = obj.data('full')
   var full = '<img src="' + img + '" class="img-responsive"/>'
   var tag = $(full)
-  $(tag).on('click', restoreImage)
-  var w = obj.attr('width')
-  $(tag).attr('width', obj.data('width'))
-  $(tag).data('width', w)
-  var h = obj.attr('height')
-  $(tag).attr('height', obj.data('height'))
-  $(tag).data('height', h)
-  obj.hide()
-  obj.parent().append(tag)
-  obj.parent().parent().parent().parent().removeClass('col-md-4')
-  obj.parent().parent().parent().parent().addClass('col-md-12')
+  $('carousel-modal').remove()
+  $('carousel-modal').append(full)
+  $('showImageModal').modal('show')
 }
 
 $(document).ready(function () {
