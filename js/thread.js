@@ -161,14 +161,14 @@
             return
         }
         console.log(files)
-        if (files !== undefined) {
+        if (files !== undefined || files.length>1) {
           if (!validFile(files[0].name)) {
             alert('Arquivo Invalido')
             return
           }
         }
         var uploadedFiles = [];
-        if (files !== undefined) {
+        if (files !== undefined || files.length>1) {
           var sendFilesToDropbox = function(i, files, uploadedFiles)
           {
               var formData = new FormData()

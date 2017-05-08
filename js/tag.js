@@ -5,7 +5,7 @@
     }])
 
   app.controller('tagController', function ($scope, $http, $window, $cookies, $cookieStore, vcRecaptchaService, toastr) {
-    
+
     $scope.init = function () {
       $scope.isUserLogged = false
       $scope.isUserAdmin = false
@@ -186,14 +186,14 @@
           return
         }
 
-        if (files !== undefined) {
+        if (files !== undefined || files.length>1) {
           if (!validFile(files[0].name)) {
             alert('Arquivo Invalido')
             return
           }
         }
         var uploadedFiles = [];
-        if (files !== undefined) {
+        if (files !== undefined || files.length>1) {
 
           var sendFilesToDropbox = function(i, files, uploadedFiles)
           {
