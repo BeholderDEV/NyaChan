@@ -102,7 +102,7 @@
               <ul class="list-group">
                 <li class="list-group-item panel" ng-repeat="p in thread.post" id="{{p.idPost}}">
                   <div class="panel-heading">{{p.title}} - <span class="label id">{{p.idPost}} by {{p.userName}} on {{ p.date | date: 'MMM d, y H:mm:ss' : 'time_zone' }}</span>
-                    <button type="button" class="btn btn-danger pull-right" ng-click="downloadFiles({{p.file}})"><i class="fa fa-download"></i></button>
+                    <button type="button" class="btn btn-danger pull-right" ng-click="downloadFiles(p.file)"><i class="fa fa-download"></i></button>
                   </div>
                   <div class="panel-body">
                     <div class="col-md-3 image-body">
