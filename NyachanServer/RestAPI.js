@@ -40,9 +40,9 @@ function sendDataDropbox (name, data, callback) {
 }
 
 function resizeImage (file, op, callback) {
-  var baseH = 150
+  var baseH = 100
   if (op == 1) {
-    baseH = 300
+    baseH = 150
   }
   imgResizer.open(file.path, function (err, image) {
     var w = image.width()
