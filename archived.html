@@ -54,18 +54,16 @@
     <div class="container">
       <div>
         <div class="panel panel-default">
-          <div class="panel-heading">
-              <h3 class="panel-title">
-                {{tagName}} Archive
-              </h3>
-            </div>
-            <div class="panel-body">
-              <ul class="list-group">
-                <li class="list-group-item panel" ng-repeat="t in threads" id="{{p.idPost}}">
-                  {{t.subject}} ~ <a ng-href="http://nyachan-server.herokuapp.com/thread/{{t._id}}">{{t._id}}</a> by {{t.userName}} on {{ t.date | date: 'MMM d, y H:mm:ss' : 'time_zone' }} 
-                </li>
-              <ul>
-            </div>
+          <div class="panel-body">
+            {{tagName}} Archive
+          </div>
+          <div class="panel-footer">
+            <ul class="list-group">
+              <li class="list-group-item panel" ng-repeat="t in threads" id="{{p.idPost}}">
+                {{t.subject}} ~ <a ng-href="http://nyachan-server.herokuapp.com/thread/{{t._id}}">{{t._id}}</a> by {{t.userName}} on {{ t.date | date: 'MMM d, y H:mm:ss' : 'time_zone' }}
+              </li>
+            <ul>
+          </div>
         </div>
 
       </div>
