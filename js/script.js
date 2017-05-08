@@ -15,8 +15,10 @@ function restoreImage () {
 }
 function toggle (obj) {
   var img = obj.data('full')
+  var nam = obj.data('name')
   var full = '<img src="' + img + '" class="img-responsive"/>'
-  var tag = $(full)
+  $('#image-name').empty()
+  $('#image-name').append(nam)
   $('#carousel-modal').empty()
   $('#carousel-modal').append(full)
   $('#showImageModal').modal('show')
