@@ -70,6 +70,7 @@
                   <h3 class="panel-title">
                     {{t.subject}} ~ <span class="label id"><a ng-href="http://nyachan-server.herokuapp.com/thread/{{t._id}}">{{t._id}}</a> by {{t.userName}} on {{ t.date | date: 'MMM d, y H:mm:ss' : 'time_zone' }}</span>
                     <a ng-repeat="a in t.tags" ng-href="http://nyachan-server.herokuapp.com/tag/{{a}}"><span class="label label-nya">{{a}}</span></a>
+                    <button type="button" ng-if="isUserAdmin" class="btn btn-danger" ng-click="deleteThread(t._id)">Delete Thread</button>
                   </h3>
                 </div>
                 <div ng-repeat="f in t.file" class="panel-body" >
