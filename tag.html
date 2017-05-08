@@ -73,12 +73,14 @@
                     <button type="button" ng-if="isUserAdmin" class="btn btn-danger" ng-click="deleteThread(t._id)">Delete Thread</button>
                   </h3>
                 </div>
-                <div ng-repeat="f in t.file" class="panel-body" >
-                  <a ng-href="{{f.source}}" target="_blank">{{f.name}}</a>
-                  <div class="col-md-12">
-                    <img onclick="toggle($(this))" data-width="{{f.width}}" data-height="{{f.height}}" data-full="{{f.source}}" data-thumb="{{f.thumb}}" data-is-full="0"  ng-src="{{f.thumb}}" class="img-responsive some-image"/>
-                  </div>
-                  <div class="col-md-12">
+                <div class="panel-body" >
+                  <div class="col-md-3" ng-repeat="f in t.file">
+                    <a ng-href="{{f.source}}" target="_blank">{{f.name}}</a>
+                    <div class="col-md-12">
+                      <img onclick="toggle($(this))" data-width="{{f.width}}" data-height="{{f.height}}" data-full="{{f.source}}" data-thumb="{{f.thumb}}" data-is-full="0"  ng-src="{{f.thumb}}" class="img-responsive some-image"/>
+                    </div>
+                  <div>
+                  <div class="col-md-9">
                     {{t.body}}
                   </div>
                 </div>
@@ -87,8 +89,10 @@
                     <li class="list-group-item panel" ng-repeat="p in t.post" id="{{p.idPost}}">
                       <div class="panel-heading">{{p.title}} - <span class="label id">{{p.idPost}} by {{p.userName}} on {{ p.date | date: 'MMM d, y H:mm:ss' : 'time_zone' }}</span></div>
                       <div class="panel-body">
-                        <a ng-href="{{p.file[0].source}}" target="_blank">{{p.file[0].name}}</a>
-                        <img onclick="toggle($(this))" data-full="{{p.file[0].source}}" data-thumb="{{p.file[0].thumb}}" data-is-full="0" ng-src="{{p.file[0].thumb}}" class="img-responsive some-image"/>
+                        <div ng-repeat="f in p.file">
+                          <a ng-href="{{f.source}}" target="_blank">{{f.name}}</a>
+                          <img onclick="toggle($(this))" data-full="{{f.source}}" data-thumb="{{f.thumb}}" data-is-full="0" ng-src="{{f.thumb}}" class="img-responsive some-image"/>
+                        </div>
                         <p>{{p.body}}</p>
                       </div>
                     </li>
