@@ -83,13 +83,13 @@
               </h3>
             </div>
             <div class='panel-body'>
-              <div ng-repeat="f in thread.file" class="col-md-4">
+              <div ng-repeat="f in thread.file" class="col-md-12">
                 <a ng-href="{{f.source}}" target="_blank">{{f.name}}</a>
                 <div class="col-md-12">
                   <img onclick="toggle($(this))" data-width="{{f.width}}" data-height="{{f.height}}" data-full="{{f.source}}" data-thumb="{{f.thumb}}" data-is-full="0"  ng-src="{{f.thumb}}" class="img-responsive some-image"/>
                 </div>
               </div>
-              <div class="col-md-8">
+              <div class="col-md-12">
                 {{thread.body}}
               </div>
             </div>
