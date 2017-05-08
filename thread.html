@@ -100,6 +100,7 @@
                   <div class="panel-body" ng-repeat="f in p.file">
                     <a ng-href="{{f.source}}" target="_blank">{{f.name}}</a>
                     <img onclick="toggle($(this))" data-full="{{f.source}}" data-thumb="{{f.thumb}}" data-is-full="0" ng-src="{{f.thumb}}" class="img-responsive some-image"/>
+                    <p>{{p.body}}</p>
                   </div>
                 </li>
               </ul>
