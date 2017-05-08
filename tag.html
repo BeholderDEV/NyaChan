@@ -74,14 +74,18 @@
                     <button type="button" ng-if="isUserAdmin" class="btn btn-danger pull-right" ng-click="deleteThread(t._id)"><i class="fa fa-trash-o"></i></button>
                   </h3>
                 </div>
-                <div class="panel-body" >
-                  <div class="col-md-12" ng-repeat="f in t.file">
-                    <a ng-href="{{f.source}}" target="_blank">{{f.name}}</a>
-                    <div class="col-md-12">
-                      <img onclick="toggle($(this))" data-width="{{f.width}}" data-height="{{f.height}}" data-full="{{f.source}}" data-thumb="{{f.thumb}}" data-is-full="0"  ng-src="{{f.thumb}}" class="img-responsive some-image"/>
-                    </div>
+                <div class="panel-body">
+                  <div class="col-md-6">
+                    <carousel interval="myInterval">
+                      <slide ng-repeat="f in t.file" active="slide.active">
+                        <img onclick="toggle($(this))" data-width="{{f.width}}" data-height="{{f.height}}" data-full="{{f.source}}" data-thumb="{{f.thumb}}" data-is-full="0"  ng-src="{{f.thumb}}" class="img-responsive some-image"/>
+                        <div class="carousel-caption">
+                          <h4>{{f.name}}</h4>
+                        </div>
+                      </slide>
+                    </carousel>
                   </div>
-                  <div class="col-md-12">
+                  <div class="col-md-6">
                     {{t.body}}
                   </div>
                 </div>
