@@ -5,10 +5,7 @@
     }])
 
   app.controller('tagController', function ($scope, $http, $window, $cookies, $cookieStore, vcRecaptchaService, toastr) {
-    $scope.toggle = function (obj) {
-      var img = obj.data('full')
-      var nam = obj.data('name')
-      var num = obj.data('index')
+    $scope.toggle = function (num) {
       var slidesHTML= angular.element('<carousel><slide ng-repeat="f in thread['+num+'].file" active="slide.active"><img ng-src="{{f.source}}" class="img-responsive some-image"/></slide></carousel>')
       var compileAppendedSlidesHTML= $compile(slidesHTML)
       var element = compileAppendedSlidesHTML($scope)

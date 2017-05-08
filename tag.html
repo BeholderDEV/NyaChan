@@ -78,7 +78,7 @@
                   <div class="col-md-4 image-body">
                     <carousel>
                       <slide ng-repeat="f in t.file" active="slide.active">
-                        <img ng-click="toggle($(this))" data-index="{{threadIndex}}" data-slides="{{t.file}}" data-name="{{f.name}}" data-full="{{f.source}}" ng-src="{{f.thumb}}" class="img-responsive some-image"/>
+                        <img ng-click="toggle(threadIndex)" data-index="{{threadIndex}}" data-slides="{{t.file}}" data-name="{{f.name}}" data-full="{{f.source}}" ng-src="{{f.thumb}}" class="img-responsive some-image"/>
                       </slide>
                     </carousel>
                   </div>
