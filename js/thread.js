@@ -95,7 +95,7 @@
         }
 
         if (files !== undefined) {
-          if (!validFile(files.name)) {
+          if (!validFile(files[0].name)) {
             alert('Arquivo Invalido')
             return
           }
@@ -137,7 +137,6 @@
 
         function sendPost (files, uploadedFiles) {
           if (files !== undefined) {
-            var ext = files.name.substring(files.name.lastIndexOf('.') + 1).toLowerCase()
             var dataPost = {
               threadid: $scope.thread._id,
               body: post.body,
