@@ -10,7 +10,7 @@
       var compileAppendedSlidesHTML= $compile(slidesHTML)
       var element = compileAppendedSlidesHTML($scope)
       $('#image-name').empty()
-      $('#image-name').append(nam)
+      $('#image-name').append('Images')
       $('#carousel-modal').empty()
       $('#carousel-modal').append(compileAppendedSlidesHTML)
       $('#showImageModal').modal('show')
