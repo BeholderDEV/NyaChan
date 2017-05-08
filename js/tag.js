@@ -14,8 +14,8 @@
         $scope.userName = user.login
         $scope.userImage = user.avatar
         $scope.isUserLogged = true
-        $scope.isUserAdmin = user.role == "admin"
-      }else{
+        $scope.isUserAdmin = user.role === 'admin'
+      } else {
         $scope.userName = 'Anon'
       }
     }
@@ -37,7 +37,7 @@
         $scope.threads = $scope.search()
         toastr.success('Thread deleted', 'Success')
       }, function myError (response) {
-        console.log("Error " + response.body)
+        console.log('Error ' + response.body)
       })
     }
 
@@ -186,52 +186,48 @@
           return
         }
 
-        if (files !== undefined || files.length>1) {
+        if (files !== undefined && files.length > 0) {
           if (!validFile(files[0].name)) {
             alert('Arquivo Invalido')
             return
           }
         }
-        var uploadedFiles = [];
-        if (files !== undefined || files.length>1) {
+        var uploadedFiles = []
+        if (files !== undefined && files.length > 0) {
 
-          var sendFilesToDropbox = function(i, files, uploadedFiles)
-          {
-              var formData = new FormData()
-              formData.append('fileData', files[i])
-              var xhr = new XMLHttpRequest()
-              xhr.onreadystatechange = function () {
-                if (xhr.readyState === XMLHttpRequest.DONE) {
-                  var uploadedFile = JSON.parse(xhr.response)
-                  uploadedFiles[i] = uploadedFile
-                  if(i>=files.length-1)
-                  {
-                    sendThread(files, uploadedFiles);
-                  }
-                  else{
-                    sendFilesToDropbox(i+1, files, uploadedFiles)
-                  }
+          var sendFilesToDropbox = function (i, files, uploadedFiles) {
+            var formData = new FormData()
+            formData.append('fileData', files[i])
+            var xhr = new XMLHttpRequest()
+            xhr.onreadystatechange = function () {
+              if (xhr.readyState === XMLHttpRequest.DONE) {
+                var uploadedFile = JSON.parse(xhr.response)
+                uploadedFiles[i] = uploadedFile
+                if (i >= files.length - 1) {
+                  sendThread(files, uploadedFiles)
+                } else {
+                  sendFilesToDropbox(i + 1, files, uploadedFiles)
                 }
               }
-              xhr.upload.addEventListener('progress', function (evt) {
-                if (evt.lengthComputable) {
-                  var percentComplete = evt.loaded / evt.total
-                  percentComplete = (percentComplete/files.length)*(i+1)
-                  $('#loader').width(Math.round(percentComplete * 100) + '%')
-                }
-              }, false)
-              xhr.open('post', '/dbxPost/1/0', true)
-              xhr.send(formData)
-              console.log("UPLOAD "+ i)
+            }
+            xhr.upload.addEventListener('progress', function (evt) {
+              if (evt.lengthComputable) {
+                var percentComplete = evt.loaded / evt.total
+                percentComplete = (percentComplete / files.length) * (i + 1)
+                $('#loader').width(Math.round(percentComplete * 100) + '%')
+              }
+            }, false)
+            xhr.open('post', '/dbxPost/1/0', true)
+            xhr.send(formData)
+            console.log('UPLOAD ' + i)
           }
           sendFilesToDropbox(0, files, uploadedFiles)
-
         } else {
-          sendThread(null, null)
+          sendThread(undefined, undefined)
         }
 
         function sendThread (files, uploadedFiles) {
-          if (files !== undefined) {
+          if (files !== undefined && files.length > 0) {
             var dataPost = {
               body: post.body,
               date: '2016-01-02 19:33:00',
@@ -283,7 +279,7 @@
         }
       }).then(function mySucces (response) {
         $scope.isUserLogged = false
-        $cookies.remove("user",{path:'/'})
+        $cookies.remove('user', { path:'/' })
         toastr.success('Goodbye', 'See you soon')
       }, function myError (response) {
         console.log(response || 'Request failed')

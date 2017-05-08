@@ -10,7 +10,6 @@ $border-radius: 10px;
 $img-bg: "/img/bg.jpg";
 
 body{
-  padding-top: 100px;
   background-color: $dark-bg;
   background-attachment: fixed;
   background-image: url($img-bg);
@@ -20,14 +19,8 @@ body{
 img{
   border-radius: $border-radius;
 }
-.navbar-right .dropdown-menu {
-  right: auto;
-}
-.cropArea {
-  background: #E4E4E4;
-  overflow: hidden;
-  height:350px;
-}
+
+
 #loading-bar .bar{
   background:$primary-color;
   height:3px;
@@ -54,10 +47,7 @@ a {
   border: none;
   .navbar-brand{
       color: $text-color;
-      font-size: 24px;
-      margin-top: 7px;
   }
-
 }
 
 .btn{
@@ -92,13 +82,7 @@ input, textarea{
     }
   }
   &.panel-index{
-    img{
-      margin: auto;
-      max-height: 150px;
-    }
-
     .panel-body{
-      height: 200px;
       border-radius: 0px 0px $border-radius $border-radius;
     }
     display: block;
@@ -142,6 +126,9 @@ input, textarea{
     border-radius: $border-radius $border-radius 0px 0px;
     background-color: $panel-dark-bg;
     border: none;
+    .btn-danger{
+      margin-top: -8px;
+    }
     a{
       text-decoration: underline;
       color: #1694fd;
@@ -172,25 +159,6 @@ input, textarea{
       padding: 0;
     }
   }
-
-  .image-thumb{
-    max-height: 125px;
-    max-width: 125px;
-    width: auto;
-    height: auto;
-  }
-  .image-thumb-OP{
-    max-height: 250px;
-    max-width: 250px;
-    width: auto;
-    height: auto;
-  }
-  .image-md{
-    width: 300px;
-  }
-  .image-sm{
-    width: 150px;
-  }
   .quote{
     color: $qoute-color;
   }
@@ -215,12 +183,4 @@ footer{
   &:hover{
     color: $primary-color !important;
   }
-}
-@-webkit-keyframes progress-bar-stripes {
- from  { background-position: 0 0; }
- to    { background-position: 40px 0; }
-}
-@-moz-keyframes progress-bar-stripes {
- from  { background-position: 0 0; }
- to    { background-position: 40px 0; }
 }
