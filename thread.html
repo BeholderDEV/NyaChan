@@ -67,6 +67,19 @@
               <h3 class='panel-title'>
               {{thread.subject}} ~ <span class="label id">{{thread._id}} by {{thread.userName}} on {{ thread.date | date: 'MMM d, y H:mm:ss' : 'time_zone' }}</span>
               <a ng-repeat="a in thread.tags" ng-href="http://nyachan-server.herokuapp.com/tag/{{a}}"><span class="label label-nya">{{a}}</span></a>
+              <button type="button" ng-if="isUserAdmin" class="btn btn-danger" ng-click="deleteThread(thread._id)">Delete Thread</button>
+              <select id="changeTags" ng-if="isUserAdmin" multiple="multiple" required>
+                    <option value="a">Anime &#38; Mangá</option>
+                    <option value="c">Quadrinhos &#38; Desenhos Animados</option>
+                    <option value="g">Gif &#38; Webm</option>
+                    <option value="h">História e Ciências Humanas</option>
+                    <option value="m">Música</option>
+                    <option value="t">Tecnologia</option>
+                    <option value="tv">Televisão &#38; Filmes</option>
+                    <option value="v">Vídeo Games</option>
+                    <option value="b">Aleatório</option>
+                    <option value="p">Politicamente Incorreto</option>
+                </select>
               </h3>
             </div>
             <div class='panel-body' ng-repeat="f in thread.file">
@@ -83,10 +96,10 @@
               <ul class="list-group">
                 <li class="list-group-item panel" ng-repeat="p in thread.post" id="{{p.idPost}}">
                   <div class="panel-heading">{{p.title}} - <span class="label id">{{p.idPost}} by {{p.userName}} on {{ p.date | date: 'MMM d, y H:mm:ss' : 'time_zone' }}</span></div>
+                  <button type="button" ng-if="isUserAdmin" class="btn btn-danger" ng-click="deletePost(p.threadid, p.idPost)">Delete Post</button>
                   <div class="panel-body" ng-repeat="f in p.file">
                     <a ng-href="{{f.source}}" target="_blank">{{f.name}}</a>
                     <img onclick="toggle($(this))" data-full="{{f.source}}" data-thumb="{{f.thumb}}" data-is-full="0" ng-src="{{f.thumb}}" class="img-responsive some-image"/>
-                    <p>{{p.body}}</p>
                   </div>
                 </li>
               </ul>

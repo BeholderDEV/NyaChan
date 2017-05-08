@@ -5,17 +5,61 @@
     }])
 
   app.controller('tagController', function ($scope, $http, $window, $cookies, $cookieStore, vcRecaptchaService, toastr) {
+    
     $scope.init = function () {
       $scope.isUserLogged = false
+      $scope.isUserAdmin = false
       if ($cookies.get('user') !== undefined) {
         var user = JSON.parse($cookies.get('user'))
         $scope.userName = user.login
         $scope.userImage = user.avatar
         $scope.isUserLogged = true
+        $scope.isUserAdmin = user.role == "admin"
       }else{
         $scope.userName = 'Anon'
       }
     }
+
+    $scope.deleteThread = function(threadId){
+      var dataDelete = {
+        user: JSON.parse($cookies.get('user')),
+        thread: threadId
+      }
+      $http({
+        method: 'DELETE',
+        url: 'https://nyachan-server.herokuapp.com/api/delete/thread',
+        // url: "http://localhost:3000/api/delete/thread",
+        data: dataDelete,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then(function mySucces (response) {
+        $scope.threads = $scope.search()
+        toastr.success('Thread deleted', 'Success')
+      }, function myError (response) {
+        console.log("Error " + response.body)
+      })
+    }
+
+    // $scope.changeTags = function(threadId){
+    //   var dataTags = {
+    //     thread: threadId
+    //   }
+    //   $http({
+    //     method: 'POST',
+    //     // url: 'https://nyachan-server.herokuapp.com/api/changeTags',
+    //     url: "http://localhost:3000/api/changeTags",
+    //     data: dataTags,
+    //     headers: {
+    //       'Content-Type': 'application/json'
+    //     }
+    //   }).then(function mySucces (response) {
+    //     $scope.threads = $scope.search()
+    //     toastr.success('Tags changed', 'Success')
+    //   }, function myError (response) {
+    //     console.log("Error " + response.body)
+    //   })
+    // }
 
     $scope.time_zone = new Date().getTimezoneOffset()
     var url = $(location).attr('href')
@@ -91,7 +135,7 @@
       $http({
         method: 'GET',
         url: 'https://nyachan-server.herokuapp.com/api/tag/' + searchTag + '?sortType=lastDate&archived=false'
-                // url: "http://localhost:3000/app/tag/" + searchTag
+                // url: "http://localhost:3000/api/tag/" + searchTag + '?sortType=lastDate&archived=false'
       }).then(function mySucces (response) {
         $scope.threads = response.data
       }, function myError (response) {
@@ -210,7 +254,7 @@
           $http({
             method: 'POST',
             url: 'https://nyachan-server.herokuapp.com/api/thread/newThread',
-            // url: "http://localhost:3000/thread/newThread",
+            // url: "http://localhost:3000/api/thread/newThread",
             data: dataPost,
             headers: {
               'Content-Type': 'application/json'
@@ -227,6 +271,22 @@
           })
         }
       }
+    }
+
+    $scope.logoutUser = function () {
+      $http({
+        method: 'GET',
+        url: 'https://nyachan-server.herokuapp.com/logout',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then(function mySucces (response) {
+        $scope.isUserLogged = false
+        $cookies.remove("user",{path:'/'})
+        toastr.success('Goodbye', 'See you soon')
+      }, function myError (response) {
+        console.log(response || 'Request failed')
+      })
     }
   })
 })()

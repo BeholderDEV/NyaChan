@@ -7,14 +7,81 @@
   app.controller('threadController', function ($scope, $http, $window, $cookies, $cookieStore, vcRecaptchaService, toastr) {
     $scope.init = function () {
       $scope.isUserLogged = false
+      $scope.isUserAdmin = false
       if ($cookies.get('user') !== undefined) {
         var user = JSON.parse($cookies.get('user'))
         $scope.userName = user.login
         $scope.userImage = user.avatar
         $scope.isUserLogged = true
+        $scope.isUserAdmin = user.role == "admin"
       }else{
         $scope.userName = 'Anon'
       }
+    }
+
+    $scope.changeTags = function(selectedTags){
+      var dataTags = {
+        user: JSON.parse($cookies.get('user')),
+        thread: $scope.thread._id,
+        tags: selectedTags
+      }
+      $http({
+        method: 'POST',
+        url: 'https://nyachan-server.herokuapp.com/api/changeTags',
+        // url: "http://localhost:3000/changeTags",
+        data: dataTags,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then(function mySucces (response) {
+        $scope.thread = $scope.searchThread(searchId)
+        toastr.success('Tags changed', 'Success')
+      }, function myError (response) {
+        console.log("Error " + response.body)
+      })
+    }
+
+    $scope.deleteThread = function(threadId){
+      var dataDelete = {
+        user: JSON.parse($cookies.get('user')),
+        thread: threadId
+      }
+      $http({
+        method: 'DELETE',
+        url: 'https://nyachan-server.herokuapp.com/api/delete/thread',
+        // url: "http://localhost:3000/api/delete/thread",
+        data: dataDelete,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then(function mySucces (response) {
+        toastr.success('Thread deleted', 'Success')
+        $window.location.href = 'https://nyachan-server.herokuapp.com/'
+      }, function myError (response) {
+        console.log("Error " + response.body)
+      })
+    }
+
+    $scope.deletePost = function(threadId, postId){
+      var dataDelete = {
+        user: JSON.parse($cookies.get('user')),
+        post: postId,
+        thread: threadId
+      }
+      $http({
+        method: 'DELETE',
+        url: 'https://nyachan-server.herokuapp.com/api/delete/post',
+        // url: "http://localhost:3000/api/delete/post",
+        data: dataDelete,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then(function mySucces (response) {
+        $scope.thread = $scope.searchThread(searchId)
+        toastr.success('Post deleted', 'Success')
+      }, function myError (response) {
+        console.log("Error " + response.body)
+      })
     }
 
     $scope.time_zone = new Date().getTimezoneOffset()
@@ -51,7 +118,7 @@
       $http({
         method: 'GET',
         url: 'https://nyachan-server.herokuapp.com/api/thread/' + threadID
-              // url: "http://localhost:3000/app/thread/" + threadID
+              // url: "http://localhost:3000/api/thread/" + threadID
       }).then(function mySucces (response) {
         $scope.thread = response.data[0]
       }, function myError (response) {
@@ -174,6 +241,21 @@
           })
         }
       }
+    }
+    $scope.logoutUser = function () {
+      $http({
+        method: 'GET',
+        url: 'https://nyachan-server.herokuapp.com/logout',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then(function mySucces (response) {
+        $scope.isUserLogged = false
+        $cookies.remove("user",{path:'/'})
+        toastr.success('Goodbye', 'See you soon')
+      }, function myError (response) {
+        console.log(response || 'Request failed')
+      })
     }
   })
 })()
