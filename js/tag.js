@@ -1,10 +1,20 @@
 (function () {
-  var app = angular.module('nya-chan', ['angular-loading-bar', 'ngCookies', 'vcRecaptcha', 'toastr'])
+  var app = angular.module('nya-chan', ['angular-loading-bar', 'ngCookies', 'vcRecaptcha', 'toastr','ui.bootstrap'])
     .config(['cfpLoadingBarProvider', function (cfpLoadingBarProvider) {
       cfpLoadingBarProvider.includeSpinner = false
     }])
 
-  app.controller('tagController', function ($scope, $http, $window, $cookies, $cookieStore, vcRecaptchaService, toastr) {
+  app.controller('tagController', function ($scope, $http, $compile, $window, $cookies, $cookieStore, vcRecaptchaService, toastr) {
+    $scope.toggle = function (num) {
+      var slidesHTML= angular.element('<carousel><slide ng-repeat="f in thread['+num+'].file" active="slide.active"><img ng-src="{{f.source}}" class="img-responsive some-image"/></slide></carousel>')
+      var compileAppendedSlidesHTML= $compile(slidesHTML)
+      var element = compileAppendedSlidesHTML($scope)
+      $('#image-name').empty()
+      $('#image-name').append('Images')
+      $('#carousel-modal').empty()
+      $('#carousel-modal').append(compileAppendedSlidesHTML)
+      $('#showImageModal').modal('show')
+    }
 
     $scope.init = function () {
       $scope.isUserLogged = false
