@@ -13,13 +13,13 @@
         $scope.userName = user.login
         $scope.userImage = user.avatar
         $scope.isUserLogged = true
-        $scope.isUserAdmin = user.role == "admin"
-      }else{
+        $scope.isUserAdmin = user.role === 'admin'
+      } else {
         $scope.userName = 'Anon'
       }
     }
 
-    $scope.changeTags = function(selectedTags){
+    $scope.changeTags = function (selectedTags) {
       var dataTags = {
         user: JSON.parse($cookies.get('user')),
         thread: $scope.thread._id,
@@ -37,11 +37,11 @@
         $scope.thread = $scope.searchThread(searchId)
         toastr.success('Tags changed', 'Success')
       }, function myError (response) {
-        console.log("Error " + response.body)
+        console.log('Error ' + response.body)
       })
     }
 
-    $scope.deleteThread = function(threadId){
+    $scope.deleteThread = function (threadId) {
       var dataDelete = {
         user: JSON.parse($cookies.get('user')),
         thread: threadId
@@ -58,11 +58,11 @@
         toastr.success('Thread deleted', 'Success')
         $window.location.href = 'https://nyachan-server.herokuapp.com/'
       }, function myError (response) {
-        console.log("Error " + response.body)
+        console.log('Error ' + response.body)
       })
     }
 
-    $scope.deletePost = function(threadId, postId){
+    $scope.deletePost = function (threadId, postId) {
       var dataDelete = {
         user: JSON.parse($cookies.get('user')),
         post: postId,
@@ -80,7 +80,7 @@
         $scope.thread = $scope.searchThread(searchId)
         toastr.success('Post deleted', 'Success')
       }, function myError (response) {
-        console.log("Error " + response.body)
+        console.log('Error ' + response.body)
       })
     }
 
@@ -158,45 +158,42 @@
         }
 
         if (!validarPost(post, files)) {
-            return
+          return
         }
         console.log(files)
-        if (files !== undefined || files.length>1) {
+        if (files !== undefined || files.length > 1) {
           if (!validFile(files[0].name)) {
             alert('Arquivo Invalido')
             return
           }
         }
         var uploadedFiles = [];
-        if (files !== undefined || files.length>1) {
-          var sendFilesToDropbox = function(i, files, uploadedFiles)
-          {
-              var formData = new FormData()
-              formData.append('fileData', files[i])
-              var xhr = new XMLHttpRequest()
-              xhr.onreadystatechange = function () {
-                if (xhr.readyState === XMLHttpRequest.DONE) {
-                  var uploadedFile = JSON.parse(xhr.response)
-                  uploadedFiles[i] = uploadedFile
-                  if(i>=files.length-1)
-                  {
-                    sendPost(files, uploadedFiles);
-                  }
-                  else{
-                    sendFilesToDropbox(i+1, files, uploadedFiles)
-                  }
+        if (files !== undefined || files.length > 1) {
+          var sendFilesToDropbox = function (i, files, uploadedFiles) {
+            var formData = new FormData()
+            formData.append('fileData', files[i])
+            var xhr = new XMLHttpRequest()
+            xhr.onreadystatechange = function () {
+              if (xhr.readyState === XMLHttpRequest.DONE) {
+                var uploadedFile = JSON.parse(xhr.response)
+                uploadedFiles[i] = uploadedFile
+                if (i >= files.length - 1) {
+                  sendPost(files, uploadedFiles)
+                } else {
+                  sendFilesToDropbox(i + 1, files, uploadedFiles)
                 }
               }
-              xhr.upload.addEventListener('progress', function (evt) {
-                if (evt.lengthComputable) {
-                  var percentComplete = evt.loaded / evt.total
-                  percentComplete = (percentComplete/files.length)*(i+1)
-                  $('#loader').width(Math.round(percentComplete * 100) + '%')
-                }
-              }, false)
-              xhr.open('post', '/dbxPost/0/' + $scope.thread._id, true)
-              xhr.send(formData)
-              console.log("UPLOAD "+ i)
+            }
+            xhr.upload.addEventListener('progress', function (evt) {
+              if (evt.lengthComputable) {
+                var percentComplete = evt.loaded / evt.total
+                percentComplete = (percentComplete / files.length) * (i + 1)
+                $('#loader').width(Math.round(percentComplete * 100) + '%')
+              }
+            }, false)
+            xhr.open('post', '/dbxPost/0/' + $scope.thread._id, true)
+            xhr.send(formData)
+            console.log('UPLOAD ' + i)
           }
           sendFilesToDropbox(0, files, uploadedFiles)
         } else {
@@ -252,7 +249,7 @@
         }
       }).then(function mySucces (response) {
         $scope.isUserLogged = false
-        $cookies.remove("user",{path:'/'})
+        $cookies.remove('user', { path:'/' })
         toastr.success('Goodbye', 'See you soon')
       }, function myError (response) {
         console.log(response || 'Request failed')
