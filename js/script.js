@@ -21,7 +21,7 @@ function toggle (obj) {
   $('#image-name').append(nam)
   $('#carousel-modal').empty()
   $('#carousel-modal').append(full)
-  $('#carousel-modal').on('show.bs.modal', function () {
+  $('#showImageModal').on('show.bs.modal', function () {
          $(this).find('.modal-body').css({
                 width:'auto', //probably not needed
                 height:'auto', //probably not needed
