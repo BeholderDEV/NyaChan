@@ -52,40 +52,22 @@
       </div>
     </nav>
     <div class="container">
-      <h1 class="" id="tagTitle" value="{{tag}}">{{tagName}}</h1>
       <div>
-        <div ng-repeat="t in threads">
-          <div class="panel panel-default">
-              <div class="panel-heading">
-                  <h3 class="panel-title">
-                    {{t.subject}} ~ <span class="label id"><a ng-href="http://nyachan-server.herokuapp.com/thread/{{t._id}}">{{t._id}}</a> by {{t.userName}} on {{ t.date | date: 'MMM d, y H:mm:ss' : 'time_zone' }}</span>
-                    <a ng-repeat="a in t.tags" ng-href="http://nyachan-server.herokuapp.com/tag/{{a}}"><span class="label label-nya">{{a}}</span></a>
-                    <a ng-href="http://nyachan-server.herokuapp.com/thread/{{t._id}}"><i class="fa fa-reply pull-right"></i></a>
-                  </h3>
-                </div>
-                <div class="panel-body">
-                  <a ng-href="{{t.file[0].source}}" target="_blank">{{t.file[0].name}}</a>
-                  <div class="col-md-12">
-                    <img onclick="toggle($(this))" data-width="{{t.file[0].width}}" data-height="{{t.file[0].height}}" data-full="{{t.file[0].source}}" data-thumb="{{t.file[0].thumb}}" data-is-full="0"  ng-src="{{t.file[0].thumb}}" class="img-responsive some-image"/>
-                  </div>
-                  <div class="col-md-12">
-                    {{t.body}}
-                  </div>
-                </div>
-                <div class="panel-footer">
-                  <ul class="list-group">
-                    <li class="list-group-item panel" ng-repeat="p in t.post" id="{{p.idPost}}">
-                      <div class="panel-heading">{{p.title}} - <span class="label id">{{p.idPost}} by {{p.userName}} on {{ p.date | date: 'MMM d, y H:mm:ss' : 'time_zone' }}</span></div>
-                      <div class="panel-body">
-                        <a ng-href="{{p.file[0].source}}" target="_blank">{{p.file[0].name}}</a>
-                        <img onclick="toggle($(this))" data-full="{{p.file[0].source}}" data-thumb="{{p.file[0].thumb}}" data-is-full="0" ng-src="{{p.file[0].thumb}}" class="img-responsive some-image"/>
-                        <p>{{p.body}}</p>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+              <h3 class="panel-title">
+                {{tagName}} Archive
+              </h3>
             </div>
-          </div>
+            <div class="panel-body">
+              <ul class="list-group">
+                <li class="list-group-item panel" ng-repeat="t in threads" id="{{p.idPost}}">
+                  {{t.subject}} ~ <a ng-href="http://nyachan-server.herokuapp.com/thread/{{t._id}}">{{t._id}}</a> by {{t.userName}} on {{ t.date | date: 'MMM d, y H:mm:ss' : 'time_zone' }} 
+                </li>
+              <ul>
+            </div>
+        </div>
+
       </div>
     </div>
 

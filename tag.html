@@ -64,7 +64,7 @@
       </div>
     </nav>
     <div class="container">
-      <h1 class="" id="tagTitle" value="{{tag}}">{{tagName}}</h1>
+      <h1 class="" id="tagTitle" value="{{tag}}"><a ng-href="http://nyachan-server.herokuapp.com/archived/{{tag}}"><i class="fa fa-archive"></i></a>{{tagName}}</h1>
       <div>
         <div ng-repeat="t in threads">
           <div class="panel panel-default">
