@@ -76,7 +76,7 @@
                 </div>
                 <div class="panel-body">
                   <div class="col-md-6">
-                    <carousel interval="myInterval">
+                    <carousel>
                       <slide ng-repeat="f in t.file" active="slide.active">
                         <img onclick="toggle($(this))" data-width="{{f.width}}" data-height="{{f.height}}" data-full="{{f.source}}" data-thumb="{{f.thumb}}" data-is-full="0"  ng-src="{{f.thumb}}" class="img-responsive some-image"/>
                         <div class="carousel-caption">
