@@ -63,31 +63,57 @@
     }
     $scope.downloadFiles = function(imgFiles)
     {
-
-      var carregarImagens = function(i, imgLinks)
-      {
-          var zip=new JSZip();
-          var trueLink = imgLinks[i].source.replace("www.dropbox.com", "dl.dropboxusercontent.com")
-          JSZipUtils.getBinaryContent(trueLink, function (err, data) {
-            if(err) {
-              console.log("Problem happened when download img: " + imgLinks[i])
-              deferred.resolve(zip) // ignore this error: just logging
-              // deferred.reject(zip); // or we may fail the download
-            } else {
-              zip.file(imgLinks[i].name+".jpg", data, {binary:true})
-              deferred.resolve(zip)
-            }
-            if(i>=imgLinks.length)
-            {
-              var content = zip.generate({type:"blob"})
-              saveAs(content, "downloadImages.zip")
-            }
-            else {
-              carregarImagens(i+1, imgLinks)
-            }
-          })
+      var getSingleBinCont = function (zip, value) {
+          var deferred = $.Deferred()
+          JSZipUtils.getBinaryContent(value.source, function (err, data){
+              if(err){
+                  deferred.reject(err)
+              }
+              else{
+                  zip.file(value.name, data, {binary:true})
+                  deferred.resolve(data)
+              }
+          });
+          return deferred
       }
-      carregarImagens(0, imgFiles)
+      var downloadDaughterZip = function (){
+        var zip = new JSZip()
+        var deferreds = []
+
+        angular.forEach(imgFiles, function (value, key){
+            deferreds.push(getSingleBinCont(zip, value))
+        });
+        $.when.apply($, deferreds).done(function () {
+            var blob = zip.generate({type:"blob"})
+            saveAs(blob, "images.zip")
+        });
+      }
+      downloadDaughterZip()
+
+      // var carregarImagens = function(i, imgLinks)
+      // {
+      //     var zip=new JSZip();
+      //     var trueLink = imgLinks[i].source.replace("www.dropbox.com", "dl.dropboxusercontent.com")
+      //     JSZipUtils.getBinaryContent(trueLink, function (err, data) {
+      //       if(err) {
+      //         console.log("Problem happened when download img: " + imgLinks[i])
+      //         deferred.reject(zip) // ignore this error: just logging
+      //         // deferred.reject(zip); // or we may fail the download
+      //       } else {
+      //         zip.file(imgLinks[i].name+".jpg", data, {binary:true})
+      //         deferred.resolve(zip)
+      //       }
+      //       if(i>=imgLinks.length)
+      //       {
+      //         var content = zip.generate({type:"blob"})
+      //         saveAs(content, "downloadImages.zip")
+      //       }
+      //       else {
+      //         carregarImagens(i+1, imgLinks)
+      //       }
+      //     })
+      // }
+      // carregarImagens(0, imgFiles)
     }
     $scope.deletePost = function (threadId, postId) {
       var dataDelete = {
