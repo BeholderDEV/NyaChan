@@ -17,7 +17,7 @@ function toggle (obj) {
   var img = obj.data('full')
   var full = '<img src="' + img + '" class="img-responsive"/>'
   var tag = $(full)
-  $('#carousel-modal').remove()
+  $('#carousel-modal').empty()
   $('#carousel-modal').append(full)
   $('#showImageModal').modal('show')
 }
