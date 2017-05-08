@@ -89,6 +89,14 @@ input, textarea{
   }
   .panel-body{
     background-color: $panel-bg;
+    padding: 0;
+    .image-body{
+      padding: 2rem;
+      background-color: $panel-dark-bg;
+    }
+    .content-body{
+      padding: 2rem;
+    }
     .list-title{
       padding: 5px 10px;
       border-left: 2px solid $primary-color;

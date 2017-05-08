@@ -75,7 +75,7 @@
                   </h3>
                 </div>
                 <div class="panel-body">
-                  <div class="col-md-6">
+                  <div class="col-md-6 image-body">
                     <carousel>
                       <slide ng-repeat="f in t.file" active="slide.active">
                         <img onclick="toggle($(this))" data-width="{{f.width}}" data-height="{{f.height}}" data-full="{{f.source}}" data-thumb="{{f.thumb}}" data-is-full="0"  ng-src="{{f.thumb}}" class="img-responsive some-image"/>
@@ -85,7 +85,7 @@
                       </slide>
                     </carousel>
                   </div>
-                  <div class="col-md-6">
+                  <div class="col-md-6 content-body">
                     {{t.body}}
                   </div>
                 </div>
