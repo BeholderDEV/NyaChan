@@ -65,7 +65,8 @@
     {
       var getSingleBinCont = function (zip, value) {
           var deferred = $.Deferred()
-          JSZipUtils.getBinaryContent(value.source, function (err, data){
+          var trueLink = value.source.replace("www.dropbox.com", "dl.dropboxusercontent.com")
+          JSZipUtils.getBinaryContent(trueLink, function (err, data){
               if(err){
                   deferred.reject(err)
               }
