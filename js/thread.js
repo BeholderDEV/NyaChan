@@ -83,7 +83,7 @@
           vcRecaptchaService.reload($scope.widgetId)
           return
         }
-        var files = $('#file')[0].files[0]
+        var files = $('#file')[0].files
 
         if (post === undefined) {
           post = {}
