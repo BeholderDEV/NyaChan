@@ -88,7 +88,7 @@
               <div class="col-md-4 image-body" ng-show="thread.file[0] !== undefined">
                 <carousel>
                   <slide ng-repeat="f in thread.file" active="slide.active">
-                    <a href="{{f.source}}" data-title="{{f.name}}" data-lightbox="{{t._id}}">
+                    <a href="{{f.source}}" data-title="{{f.name}}" data-lightbox="{{thread._id}}">
                       <img ng-src="{{f.thumb}}" class="img-responsive some-image"/>
                     </a>
                   </slide>
