@@ -73,11 +73,12 @@
                     {{t.subject}} ~ <span class="label id"><a ng-href="http://nyachan-server.herokuapp.com/thread/{{t._id}}">{{t._id}}</a> by {{t.userName}} on {{ t.date | date: 'MMM d, y H:mm:ss' : 'time_zone' }}</span>
                     <a ng-repeat="a in t.tags" ng-href="http://nyachan-server.herokuapp.com/tag/{{a}}"><span class="label label-nya">{{a}}</span></a>
                     <button type="button" ng-if="isUserAdmin" class="btn btn-danger pull-right" ng-click="deleteThread(t._id)"><i class="fa fa-trash-o"></i></button>
-                    <button type="button" class="btn btn-danger pull-right" ng-click="downloadFiles(t.file)"><i class="fa fa-download"></i></button>
+
                   </h3>
                 </div>
                 <div class="panel-body">
                   <div class="col-md-4 image-body" ng-show="t.file[0] !== undefined">
+                    <button type="button" class="btn btn-danger pull-right" ng-click="downloadFiles(t.file)"><i class="fa fa-download"></i></button>
                     <carousel>
                       <slide ng-repeat="f in t.file" active="slide.active">
                         <a href="{{f.source}}" data-title="{{f.name}}" data-lightbox="{{t._id}}">
@@ -94,10 +95,11 @@
                   <ul class="list-group">
                     <li class="list-group-item panel" ng-repeat="p in t.post" id="{{p.idPost}}">
                       <div class="panel-heading">{{p.title}} - <span class="label id">{{p.idPost}} by {{p.userName}} on {{ p.date | date: 'MMM d, y H:mm:ss' : 'time_zone' }}</span>
-                        <button type="button" class="btn btn-danger pull-right" ng-click="downloadFiles(p.file)"><i class="fa fa-download"></i></button>
+
                       </div>
                       <div class="panel-body">
                         <div class="col-md-3 image-body" ng-show="p.file[0] !== undefined">
+                          <button type="button" class="btn btn-danger pull-right" ng-click="downloadFiles(p.file)"><i class="fa fa-download"></i></button>
                           <carousel>
                             <slide ng-repeat="f in p.file" active="slide.active">
                               <a href="{{f.source}}" data-title="{{f.name}}" data-lightbox="{{p.idPost}}">
