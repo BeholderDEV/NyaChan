@@ -88,7 +88,7 @@
                   </div>
 
                   <div class="content-body" ng-class="t.file[0] === undefined ? 'col-md-12' : 'col-md-8'">
-                    <button type="button" class="btn btn-danger pull-right" ng-click="downloadFiles(t.file)"><i class="fa fa-download"></i></button>
+                    <button type="button" ng-show="t.file[0] === undefined" class="btn btn-danger pull-right" ng-click="downloadFiles(t.file)"><i class="fa fa-download"></i></button>
                     {{t.body}}
                   </div>
                 </div>
@@ -109,7 +109,7 @@
                           </carousel>
                         </div>
                         <div class="content-body" ng-class="p.file[0] === undefined ? 'col-md-12' : 'col-md-9'">
-                          <button type="button" class="btn btn-danger pull-right" ng-click="downloadFiles(p.file)"><i class="fa fa-download"></i></button>
+                          <button type="button" alt="Download Files" ng-show="p.file[0] === undefined" class="btn btn-danger pull-right" ng-click="downloadFiles(p.file)"><i class="fa fa-download"></i></button>
                           {{p.body}}
                         </div>
                       </div>
