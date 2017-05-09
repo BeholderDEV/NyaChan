@@ -204,6 +204,7 @@
                 var uploadedFile = JSON.parse(xhr.response)
                 uploadedFiles[i] = uploadedFile
                 if (i >= files.length - 1) {
+                  $('#loader').width('90%')
                   sendThread(files, uploadedFiles)
                 } else {
                   sendFilesToDropbox(i + 1, files, uploadedFiles)
@@ -214,7 +215,7 @@
               if (evt.lengthComputable) {
                 var percentComplete = evt.loaded / evt.total
                 percentComplete = (percentComplete / files.length) * (i + 1)
-                $('#loader').width(Math.round(percentComplete * 90) + '%')
+                $('#loader').width(Math.round(percentComplete * 75) + '%')
               }
             }, false)
             xhr.open('post', '/dbxPost/1/0', true)
@@ -263,7 +264,7 @@
               vcRecaptchaService.reload($scope.widgetId)
               $('#newThreadModal').modal('hide')
               $('#loader').width('0%')
-            }, 1000)
+            }, 2000)
             toastr.success('Nice Thread created', 'Success')
           }, function myError (response) {
             console.log(response || 'Request failed')
