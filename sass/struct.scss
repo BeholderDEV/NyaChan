@@ -10,6 +10,13 @@ body{
       margin-top: 7px;
   }
 }
+.panel-heading{
+  .label{
+    display: block;
+    text-align: left;
+    white-space: normal;
+  }
+}
 .panel-body{
   img{
     margin:auto;
