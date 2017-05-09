@@ -83,10 +83,15 @@ input, textarea{
   border-radius: $border-radius;
 }
 .panel{
+
   border-radius: $border-radius;
   background-color: transparent;
   border: none;
   color: $text-color;
+  .btn-danger{
+    margin-top: -8px;
+    background-color: $primary-color;
+  }
   &.lone{
     .panel-body{
       border-radius: 0px 0px $border-radius $border-radius;
@@ -100,10 +105,7 @@ input, textarea{
   }
   .panel-body{
     background-color: $panel-bg;
-    .btn-danger{
-      margin-top: -8px;
-      background-color: $primary-color;
-    }
+
     .image-body{
       padding: 2rem;
       background-color: $panel-dark-bg;
