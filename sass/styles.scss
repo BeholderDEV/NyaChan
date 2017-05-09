@@ -146,13 +146,14 @@ input, textarea{
     border: none;
     .btn-danger{
       margin-top: -8px;
+      background-color: $primary-color;
     }
     a{
       text-decoration: underline;
-      color: #1694fd;
+      color: $primary-color;
     }
     a:hover{
-      color: #9206fd;
+      color: $text-color;
     }
     h3{
       color: $text-color;
