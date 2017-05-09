@@ -213,7 +213,9 @@
             xhr.upload.addEventListener('progress', function (evt) {
               if (evt.lengthComputable) {
                 var percentComplete = evt.loaded / evt.total
+                console.log("loaded por total "+percentComplete)
                 percentComplete = (percentComplete / files.length) * (i + 1)
+                console.log("modificada "+percentComplete)
                 $('#loader').width(Math.round(percentComplete * 100) + '%')
               }
             }, false)
@@ -269,7 +271,7 @@
         }
       }
     }
-    
+
     $scope.downloadFiles = function(imgFiles)
     {
       var getSingleBinCont = function (zip, value) {
