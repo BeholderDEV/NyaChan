@@ -258,12 +258,12 @@
             }
           }).then(function mySucces (response) {
             $('#loader').width('100%')
-            $scope.threads = $scope.search()
-            vcRecaptchaService.reload($scope.widgetId)
-            $('#newThreadModal').modal('hide')
             setTimeout(function(){
+              $scope.threads = $scope.search()
+              vcRecaptchaService.reload($scope.widgetId)
+              $('#newThreadModal').modal('hide')
               $('#loader').width('0%')
-            }, 1000)           
+            }, 500)
             toastr.success('Nice Thread created', 'Success')
           }, function myError (response) {
             console.log(response || 'Request failed')
