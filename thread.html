@@ -82,30 +82,28 @@
                     <option value="b">Aleatório</option>
                     <option value="p">Politicamente Incorreto</option>
                 </select>
-                <button type="button" class="btn btn-danger pull-right" ng-click="downloadFiles(thread.file)"><i class="fa fa-download"></i></button>
               </h3>
             </div>
             <div class="panel-body">
               <div class="col-md-4 image-body" ng-show="thread.file[0] !== undefined">
                 <carousel>
                   <slide ng-repeat="f in thread.file" active="slide.active">
-                    <a href="{{f.source}}" data-title="{{f.name}}" data-lightbox="{{thread._id}}">
+                    <a href="{{f.source}}" data-title="{{f.name}}" data-lightbox="{{t._id}}">
                       <img ng-src="{{f.thumb}}" class="img-responsive some-image"/>
                     </a>
                   </slide>
                 </carousel>
               </div>
-              <div class="col-md-8 content-body">
-                {{t.body}}
+              <div class="content-body" ng-class="col-md-8 : thread.file[0] !== undefined , col-md-12 : thread.file[0] === undefined">
+                <button type="button" class="btn btn-danger pull-right" ng-click="downloadFiles(thread.file)"><i class="fa fa-download"></i></button>
+                {{thread.body}}
               </div>
             </div>
             <div class="panel-footer">
               <ul class="list-group">
                 <li class="list-group-item panel" ng-repeat="p in thread.post" id="{{p.idPost}}">
                   <div class="panel-heading">{{p.title}} - <span class="label id">{{p.idPost}} by {{p.userName}} on {{ p.date | date: 'MMM d, y H:mm:ss' : 'time_zone' }}</span>
-                    <button type="button" ng-if="isUserAdmin" class="btn btn-danger pull-right" ng-click="deletePost(p.threadid, p.idPost)"><i class="fa fa-trash-o"></i></button> 
-                    <button type="button" class="btn btn-danger pull-right" ng-click="downloadFiles(p.file)"><i class="fa fa-download"></i></button>
-
+                    <button type="button" ng-if="isUserAdmin" class="btn btn-danger pull-right" ng-click="deletePost(p.threadid, p.idPost)"><i class="fa fa-trash-o"></i></button>
                   </div>
                   <div class="panel-body">
                     <div class="col-md-3 image-body" ng-show="p.file[0] !== undefined">
@@ -117,7 +115,8 @@
                         </slide>
                       </carousel>
                     </div>
-                    <div class="col-md-9 content-body">
+                    <div class="content-body" ng-class="col-md-9 : p.file[0] !== undefined , col-md-12 : p.file[0] === undefined">
+                      <button type="button" class="btn btn-danger pull-right" ng-click="downloadFiles(p.file)"><i class="fa fa-download"></i></button>
                       {{p.body}}
                     </div>
                   </div>
