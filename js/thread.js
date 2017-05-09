@@ -264,7 +264,7 @@
               vcRecaptchaService.reload($scope.widgetId)
               $('#newThreadModal').modal('hide')
               $('#loader').width('0%')
-            }, 500)
+            }, 1000)
             toastr.success('Right in the Post', 'You\'ve just answered it')
           }, function myError (response) {
             toastr.error('OMG, its dead!', 'Error')
