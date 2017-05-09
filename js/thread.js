@@ -217,10 +217,8 @@
             xhr.upload.addEventListener('progress', function (evt) {
               if (evt.lengthComputable) {
                 var percentComplete = evt.loaded / evt.total
-                console.log("loaded por total "+percentComplete)
                 percentComplete = (percentComplete / files.length) * (i + 1)
-                console.log("modificada "+percentComplete)
-                $('#loader').width(Math.round(percentComplete * 100) + '%')
+                $('#loader').width(Math.round(percentComplete * 90) + '%')
               }
             }, false)
             xhr.open('post', '/dbxPost/0/' + $scope.thread._id, true)
@@ -260,8 +258,9 @@
               'Content-Type': 'application/json'
             }
           }).then(function mySucces (response) {
+            $('#loader').width('100%')
             $scope.thread = $scope.searchThread(searchId)
-            vcRecaptchaService.reload($scope.widgetId)
+            vcRecaptchaService.reload($scope.widgetId)            
             $('#newThreadModal').modal('hide')
             $('#loader').width('0%')
             toastr.success('Right in the Post', 'You\'ve just answered it')
