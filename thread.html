@@ -94,7 +94,7 @@
                   </slide>
                 </carousel>
               </div>
-              <div class="content-body" ng-class="col-md-8 : thread.file[0] !== undefined , col-md-12 : thread.file[0] === undefined">
+              <div class="content-body" ng-class="t.file[0] === undefined ? 'col-md-12' : 'col-md-8'">
                 <button type="button" class="btn btn-danger pull-right" ng-click="downloadFiles(thread.file)"><i class="fa fa-download"></i></button>
                 {{thread.body}}
               </div>
@@ -115,7 +115,7 @@
                         </slide>
                       </carousel>
                     </div>
-                    <div class="content-body" ng-class="col-md-9 : p.file[0] !== undefined , col-md-12 : p.file[0] === undefined">
+                    <div class="content-body" ng-class="p.file[0] === undefined ? 'col-md-12' : 'col-md-9'">
                       <button type="button" class="btn btn-danger pull-right" ng-click="downloadFiles(p.file)"><i class="fa fa-download"></i></button>
                       {{p.body}}
                     </div>
