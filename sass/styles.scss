@@ -105,10 +105,7 @@ input, textarea{
   }
   .panel-body{
     background-color: $panel-bg;
-    .btn-danger{
-      margin-top: -8px;
-      background-color: $primary-color;
-    }
+
     .image-body{
       padding: 2rem;
       background-color: $panel-dark-bg;
