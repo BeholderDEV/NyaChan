@@ -36,6 +36,12 @@ img{
   background:$primary-color;
   height:3px;
 }
+#loading-bar .peg {
+  -moz-box-shadow: $primary-color 1px 0 6px 1px;
+  -ms-box-shadow: $primary-color 1px 0 6px 1px;
+  -webkit-box-shadow: $primary-color 1px 0 6px 1px;
+  box-shadow: $primary-color 1px 0 6px 1px;
+}
 #loading-bar-spinner .spinner-icon{
   border-top-color:$primary-color;
   border-left-color:$primary-color;
