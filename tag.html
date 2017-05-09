@@ -78,7 +78,6 @@
                 </div>
                 <div class="panel-body">
                   <div class="col-md-4 image-body" ng-show="t.file[0] !== undefined">
-                    <button type="button" class="btn btn-danger pull-right" ng-click="downloadFiles(t.file)"><i class="fa fa-download"></i></button>
                     <carousel>
                       <slide ng-repeat="f in t.file" active="slide.active">
                         <a href="{{f.source}}" data-title="{{f.name}}" data-lightbox="{{t._id}}">
@@ -88,6 +87,7 @@
                     </carousel>
                   </div>
                   <div class="col-md-8 content-body">
+                    <button type="button" class="btn btn-danger pull-right" ng-click="downloadFiles(t.file)"><i class="fa fa-download"></i></button>
                     {{t.body}}
                   </div>
                 </div>
@@ -99,7 +99,6 @@
                       </div>
                       <div class="panel-body">
                         <div class="col-md-3 image-body" ng-show="p.file[0] !== undefined">
-                          <button type="button" class="btn btn-danger pull-right" ng-click="downloadFiles(p.file)"><i class="fa fa-download"></i></button>
                           <carousel>
                             <slide ng-repeat="f in p.file" active="slide.active">
                               <a href="{{f.source}}" data-title="{{f.name}}" data-lightbox="{{p.idPost}}">
@@ -109,6 +108,7 @@
                           </carousel>
                         </div>
                         <div class="col-md-9 content-body">
+                          <button type="button" class="btn btn-danger pull-right" ng-click="downloadFiles(p.file)"><i class="fa fa-download"></i></button>
                           {{p.body}}
                         </div>
                       </div>
