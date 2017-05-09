@@ -150,7 +150,10 @@ input, textarea{
     border-radius: $border-radius $border-radius 0px 0px;
     background-color: $panel-dark-bg;
     border: none;
-
+    .btn-danger{
+      margin-top: -8px;
+      background-color: $primary-color;
+    }
     a{
       text-decoration: underline;
       color: $primary-color;
