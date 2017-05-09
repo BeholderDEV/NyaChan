@@ -264,7 +264,7 @@
               vcRecaptchaService.reload($scope.widgetId)
               $('#newThreadModal').modal('hide')
               $('#loader').width('0%')
-            }, 2000)
+            }, 1500)
             toastr.success('Nice Thread created', 'Success')
           }, function myError (response) {
             console.log(response || 'Request failed')
