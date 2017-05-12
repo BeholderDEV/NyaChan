@@ -21,7 +21,6 @@
     }
 
     $scope.reportPost = function(threadIdReport, postIdReport){
-      // console.log("Thread Id " + threadId + " Post " + postId)
       var dataReport = {
         reason: null,
         threadId: threadIdReport,
@@ -29,8 +28,8 @@
       }
       $http({
         method: 'POST',
-        // url: 'https://nyachan-server.herokuapp.com/api/reportPost',
-        url: "http://localhost:3000/api/reportPost",
+        url: 'https://nyachan-server.herokuapp.com/api/reportPost',
+        // url: "http://localhost:3000/api/reportPost",
         data: dataReport,
         headers: {
           'Content-Type': 'application/json'
@@ -136,8 +135,8 @@
     $scope.search = function () {
       $http({
         method: 'GET',
-        // url: 'https://nyachan-server.herokuapp.com/api/tag/' + searchTag + '?sortType=lastDate&archived=false'
-                url: "http://localhost:3000/api/tag/" + searchTag + '?sortType=lastDate&archived=false'
+        url: 'https://nyachan-server.herokuapp.com/api/tag/' + searchTag + '?sortType=lastDate&archived=false'
+                // url: "http://localhost:3000/api/tag/" + searchTag + '?sortType=lastDate&archived=false'
       }).then(function mySucces (response) {
         $scope.threads = response.data
       }, function myError (response) {
