@@ -42,27 +42,27 @@ module.exports = function (app, passport) {
           console.log('Connection established to', url)
           if(req.body.postId !== null){
             db.collection('thread', function (err, collection) {
-              collection.findOne({post: {$elemMatch: {idPost: ObjectId(req.body.postId)}}}, function (err, result) {
-                if (err) { 
+              collection.update({post: {$elemMatch: {idPost: ObjectId(req.body.postId)}}},{$set: {"post.$.body": "post.$.body" + "  [USER WAS BANNED]"}}, function (err, result) {
+                if (err) {
                   console.log('Error ' + err)
                 }
-                var post
-                result.post.forEach(function(t) {  /// Arrumar forma melhor de fazer isso
-                  if (ObjectId(t.idPost) === ObjectId(req.body.postId)) {
-                    console.log("aaa")
-                    post = t.body
-                  }
-                })
-                post = post + "  [USER WAS BANNED]"
-                updatePost(req, post, function(){
+                // var post
+                // result.post.forEach(function(t) {  /// Arrumar forma melhor de fazer isso
+                //   if (ObjectId(t.idPost) === ObjectId(req.body.postId)) {
+                //     console.log("aaa")
+                //     post = t.body
+                //   }
+                // })
+                // post = post + "  [USER WAS BANNED]"
+                // updatePost(req, post, function(){
                   callback()
-                })
+                // })
               })
             })
           }else {
             db.collection('thread', function (err, collection) {
               collection.findOne({_id: ObjectId(req.body.threadId)}, function (err, result) {
-                if (err) { 
+                if (err) {
                   console.log('Error ' + err)
                 }
                 var post = result.body
@@ -85,10 +85,10 @@ module.exports = function (app, passport) {
           console.log('Unable to connect to the mongoDB server. Error:', err)
         } else {
           console.log('Connection established to', url)
-          
+
           db.collection('thread', function (err, collection) {
             collection.update({post: {$elemMatch: {idPost: ObjectId(req.body.postId)}}},{$set: {"post.$.body": newPost}}, function (err, result) {
-              if (err) { 
+              if (err) {
                 console.log('Error ' + err)
               }
               callback()
@@ -107,7 +107,7 @@ module.exports = function (app, passport) {
           console.log('Connection established to', url)
           db.collection('thread', function (err, collection) {
             collection.update({_id: ObjectId(req.body.threadId)}, {$set: {body: newPost}}, function (err, result) {
-              if (err) { 
+              if (err) {
                 console.log('Error ' + err)
               }
               callback()
@@ -437,7 +437,7 @@ module.exports = function (app, passport) {
   app.delete('/api/delete/report/:idReport', function (req, res) {
     Report.remove({ _id: ObjectId(req.params.idReport) }, function(err) {
       if (err) {
-       throw err 
+       throw err
       }
       res.send("Report deleted")
     })
@@ -484,9 +484,9 @@ module.exports = function (app, passport) {
           console.log('Error in Saving Ban: ' + err)
           throw err
         }
-        // showBan(req, function(){
+        showBan(req, function(){
           res.send("Ban completed")
-        // })
+        })
       })
     })
 
@@ -495,7 +495,7 @@ module.exports = function (app, passport) {
   app.delete('/api/delete/ban/:banId', function (req, res) {
     Ban.remove({ _id: ObjectId(req.params.banId) }, function(err) {
       if (err) {
-       throw err 
+       throw err
       }
       res.send("Ban deleted")
     })
