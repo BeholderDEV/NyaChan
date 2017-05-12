@@ -49,7 +49,7 @@ module.exports = function (app, passport) {
                 if (err) {
                   console.log('Error ' + err)
                 }
-                console.log("HERE " + result)
+                console.log("HERE " + util.inspect(myObject, false, null))
                 // var post
                 // result.post.forEach(function(t) {  /// Arrumar forma melhor de fazer isso
                   // if (ObjectId(t.idPost) === ObjectId(req.body.postId)) {
