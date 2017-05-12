@@ -41,26 +41,28 @@
       })
     }
 
-    $scope.banIP = function(threadIdBan, postIdBan, userIP, banTime){
-      console.log("Satan " + banTime + " " + threadIdBan)
-      // var dataReport = {
-      //   reason: null,
-      //   threadId: threadIdReport,
-      //   postId: postIdReport
-      // }
-      // $http({
-      //   method: 'POST',
-      //   // url: 'https://nyachan-server.herokuapp.com/api/reportPost',
-      //   url: "http://localhost:3000/api/reportPost",
-      //   data: dataReport,
-      //   headers: {
-      //     'Content-Type': 'application/json'
-      //   }
-      // }).then(function mySucces (response) {
-      //   toastr.success('Report completed', 'Success')
-      // }, function myError (response) {
-      //   console.log('Error ' + response.body)
-      // })
+    $scope.banIP = function(threadIdBan, postIdBan, userIPBan, userNameBan, banTime){
+      var dataBan = {
+        threadId: threadIdBan,
+        postId: postIdBan,
+        userIP: userIPBan,
+        user: userNameBan,
+        banTime: banTime
+      }
+      $http({
+        method: 'POST',
+        // url: 'https://nyachan-server.herokuapp.com/api/banIP',
+        url: "http://localhost:3000/api/banIP",
+        data: dataBan,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then(function mySucces (response) {
+        toastr.success('Ban completed', 'Success')
+        $scope.thread = $scope.searchThread(searchId)
+      }, function myError (response) {
+        console.log('Error ' + response.body)
+      })
     }
 
     $scope.changeTags = function (selectedTags) {

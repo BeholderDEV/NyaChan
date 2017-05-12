@@ -331,11 +331,25 @@ module.exports = function (app, passport) {
   })
 
   app.post('/api/banIP', function (req, res) {
+
     var date = new Date()
+    var dateEnd = null
+    if(req.body.banTime === "Day"){
+      dateEnd = new Date()
+      dateEnd.setDate(date.getDate() + 1)
+    }
+    if(req.body.banTime === "Week"){
+      dateEnd = new Date()
+      dateEnd.setDate(date.getDate() + 7)
+    }
+    if(req.body.banTime === "Month"){
+      dateEnd = new Date()
+      dateEnd.setDate(date.getDate() + 30)
+    }
     var newBan = new Ban()
     newBan.dateBegin = date.getTime()
-    newBan.dateEnd = req.body.dateEnd
-    newBan.IP = req.body.IP
+    newBan.dateEnd = dateEnd
+    newBan.IP = req.body.userIP
     newBan.user = null
     if(req.body.user !== "Anon"){
       newBan.user = req.body.user

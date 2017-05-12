@@ -73,10 +73,10 @@
               <button type="button" class="btn btn-danger pull-right" title="Report Post" ng-click="reportPost(thread._id, null)"><i class="fa fa-exclamation-circle"></i></button>
               <button type="button" class="btn btn-danger pull-right dropdown-toggle" ng-if="isUserAdmin" title="Ban User" data-toggle="dropdown"><i class="fa fa-gavel"></i></button>
                 <ul class="dropdown-menu dropdown-menu-right">
-                  <li><a href="#" ng-click="banIP(thread._id, null, thread.userIP, 'Dia')">Dia</a></li>
-                  <li><a href="#" ng-click="banIP(thread._id, null, thread.userIP, 'Semana')">Semana</a></li>
-                  <li><a href="#" ng-click="banIP(thread._id, null, thread.userIP, 'Mês')">Mês</a></li>
-                  <li><a href="#" ng-click="banIP(thread._id, null, thread.userIP, 'Eternamente')">Eternamente</a></li>
+                  <li><a href="#" ng-click="banIP(thread._id, null, thread.userIP, thread.userName, 'Day')">Day</a></li>
+                  <li><a href="#" ng-click="banIP(thread._id, null, thread.userIP, thread.userName, 'Week')">Week</a></li>
+                  <li><a href="#" ng-click="banIP(thread._id, null, thread.userIP, thread.userName, 'Month')">Month</a></li>
+                  <li><a href="#" ng-click="banIP(thread._id, null, thread.userIP, thread.userName, 'Forever')">Forever</a></li>
                 </ul>
               <select class="pull-right" id="changeTags" ng-if="isUserAdmin" multiple="multiple" required>
                     <option value="a">Anime &#38; Mangá</option>
@@ -115,10 +115,10 @@
                     <button type="button" class="btn btn-danger pull-right" title="Report Post" ng-click="reportPost(p.threadid, p.idPost)"><i class="fa fa-exclamation-circle"></i></button>
                     <button type="button" class="btn btn-danger pull-right dropdown-toggle" ng-if="isUserAdmin" title="Ban User" data-toggle="dropdown"><i class="fa fa-gavel"></i></button>
                     <ul class="dropdown-menu dropdown-menu-right">
-                      <li><a href="#" ng-click="banIP(p.threadid, p.idPost, p.userIP, 'Dia')">Dia</a></li>
-                      <li><a href="#" ng-click="banIP(p.threadid, p.idPost, p.userIP, 'Semana')">Semana</a></li>
-                      <li><a href="#" ng-click="banIP(p.threadid, p.idPost, p.userIP, 'Mês')">Mês</a></li>
-                      <li><a href="#" ng-click="banIP(p.threadid, p.idPost, p.userIP, 'Eternamente')">Eternamente</a></li>
+                      <li><a href="#" ng-click="banIP(p.threadid, p.idPost, p.userIP, p.userName, 'Dia')">Day</a></li>
+                      <li><a href="#" ng-click="banIP(p.threadid, p.idPost, p.userIP, p.userName, 'Weel')">Week</a></li>
+                      <li><a href="#" ng-click="banIP(p.threadid, p.idPost, p.userIP, p.userName, 'Month')">Month</a></li>
+                      <li><a href="#" ng-click="banIP(p.threadid, p.idPost, p.userIP, p.userName, 'Forever')">Forever</a></li>
                     </ul>
 
                   </div>
