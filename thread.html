@@ -65,11 +65,19 @@
       <div>
         <div>
           <div class='panel panel-default'>
-            <div class='panel-heading'>
+            <div class='panel-heading dropdown'>
               <h3 class='panel-title'>
               {{thread.subject}} ~ <span class="label id">{{thread._id}} by {{thread.userName}} on {{ thread.date | date: 'MMM d, y H:mm:ss' : 'time_zone' }}</span>
               <a ng-repeat="a in thread.tags" ng-href="http://nyachan-server.herokuapp.com/tag/{{a}}"><span class="label label-nya">{{a}}</span></a>
-              <button type="button" ng-if="isUserAdmin" class="btn btn-danger pull-right" ng-click="deleteThread(thread._id)"><i class="fa fa-trash-o"></i></button>
+              <button type="button" ng-if="isUserAdmin" class="btn btn-danger pull-right" title="Delete Thread" ng-click="deleteThread(thread._id)"><i class="fa fa-trash-o"></i></button>
+              <button type="button" class="btn btn-danger pull-right" title="Report Post" ng-click="reportPost(thread._id, null)"><i class="fa fa-exclamation-circle"></i></button>
+              <button type="button" class="btn btn-danger pull-right dropdown-toggle" ng-if="isUserAdmin" title="Ban User" data-toggle="dropdown"><i class="fa fa-gavel"></i></button>
+                <ul class="dropdown-menu dropdown-menu-right">
+                  <li><a href="#" ng-click="banIP(thread._id, null, thread.userIP, thread.userName, 'Day')">Day</a></li>
+                  <li><a href="#" ng-click="banIP(thread._id, null, thread.userIP, thread.userName, 'Week')">Week</a></li>
+                  <li><a href="#" ng-click="banIP(thread._id, null, thread.userIP, thread.userName, 'Month')">Month</a></li>
+                  <li><a href="#" ng-click="banIP(thread._id, null, thread.userIP, thread.userName, 'Forever')">Forever</a></li>
+                </ul>
               <select class="pull-right" id="changeTags" ng-if="isUserAdmin" multiple="multiple" required>
                     <option value="a">Anime &#38; Mangá</option>
                     <option value="c">Quadrinhos &#38; Desenhos Animados</option>
@@ -102,8 +110,17 @@
             <div class="panel-footer">
               <ul class="list-group">
                 <li class="list-group-item panel" ng-repeat="p in thread.post" id="{{p.idPost}}">
-                  <div class="panel-heading">{{p.title}} - <span class="label id">{{p.idPost}} by {{p.userName}} on {{ p.date | date: 'MMM d, y H:mm:ss' : 'time_zone' }}</span>
-                    <button type="button" ng-if="isUserAdmin" class="btn btn-danger pull-right" ng-click="deletePost(p.threadid, p.idPost)"><i class="fa fa-trash-o"></i></button>
+                  <div class="panel-heading dropdown">{{p.title}} - <span class="label id">{{p.idPost}} by {{p.userName}} on {{ p.date | date: 'MMM d, y H:mm:ss' : 'time_zone' }}</span>
+                    <button type="button" ng-if="isUserAdmin" class="btn btn-danger pull-right" title="Delete Post" ng-click="deletePost(p.threadid, p.idPost)"><i class="fa fa-trash-o"></i></button>
+                    <button type="button" class="btn btn-danger pull-right" title="Report Post" ng-click="reportPost(p.threadid, p.idPost)"><i class="fa fa-exclamation-circle"></i></button>
+                    <button type="button" class="btn btn-danger pull-right dropdown-toggle" ng-if="isUserAdmin" title="Ban User" data-toggle="dropdown"><i class="fa fa-gavel"></i></button>
+                    <ul class="dropdown-menu dropdown-menu-right">
+                      <li><a href="#" ng-click="banIP(p.threadid, p.idPost, p.userIP, p.userName, 'Day')">Day</a></li>
+                      <li><a href="#" ng-click="banIP(p.threadid, p.idPost, p.userIP, p.userName, 'Weel')">Week</a></li>
+                      <li><a href="#" ng-click="banIP(p.threadid, p.idPost, p.userIP, p.userName, 'Month')">Month</a></li>
+                      <li><a href="#" ng-click="banIP(p.threadid, p.idPost, p.userIP, p.userName, 'Forever')">Forever</a></li>
+                    </ul>
+
                   </div>
                   <div class="panel-body">
                     <div class="col-md-3 image-body" ng-show="p.file[0] !== undefined">
@@ -197,8 +214,8 @@
         </div>
       </div>
     </div>
-
   </div>
+  
   <div id="alert-model" class="hidden">
     <div class="alert alert-${kind} alert-dismissible" role="alert">
       <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>

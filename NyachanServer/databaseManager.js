@@ -2,8 +2,11 @@ var mongodb = require('mongodb')
 var MongoClient = mongodb.MongoClient
 var ObjectId = require('mongodb').ObjectID
 var Dropbox = require('dropbox')
-var User = require('./user')
+var User = require('./Models/user')
+var Report = require('./Models/report')
+var Ban = require('./Models/ban')
 var mongoose = require('mongoose')
+var util = require('util')
 var dbx = new Dropbox({ accessToken: 'RQ4xXaH3x-AAAAAAAAAADuWlSlvLuWi5Lef3ymzTNYzSNvQY2AwDOvqmVY73I41f' })
 var LocalStrategy = require('passport-local').Strategy
 var bCrypt = require('bcrypt-nodejs')
@@ -11,6 +14,129 @@ var bCrypt = require('bcrypt-nodejs')
 module.exports = function (app, passport) {
   var url = 'mongodb://alisson:123456@ds053206.mlab.com:53206/nyachan_data'
   mongoose.connect(url)
+
+  function verificarBanimento(postIP, userPost, callback){
+    var dataAtual = new Date()
+    Ban.findOne({$or: [{IP: postIP}, {user: userPost}], dateEnd: {$gte: dataAtual}}, function (err, user) {
+      if(user){
+        callback("Banido")
+      }else{
+        clearBans(postIP, userPost, dataAtual, function(){
+          callback(null)
+        })
+      }
+    })
+  }
+
+  function clearBans(postIP, userPost, dataAtual, callback){
+    Ban.remove({$or: [{IP: postIP}, {user: userPost}], dateEnd: {$lte: dataAtual}}, function (err) {
+      callback()
+    })
+  }
+
+  function showBan (req, callback){
+      MongoClient.connect(url, function (err, db) {
+        if (err) {
+          console.log('Unable to connect to the mongoDB server. Error:', err)
+        } else {
+          console.log('Connection established to', url)
+          if(req.body.postId !== null){
+            db.collection('thread', function (err, collection) {
+              collection.findOne({post: {$elemMatch: {idPost: ObjectId(req.body.postId)}}}, {'post.$': 1}, function (err, result) {
+                if (err) {
+                  console.log('Error ' + err)
+                }
+                var post = result.post[0].body + "  [USER WAS BANNED]"
+                updatePost(req, post, function(){
+                  callback()
+                })
+              })
+            })
+          }else {
+            db.collection('thread', function (err, collection) {
+              collection.findOne({_id: ObjectId(req.body.threadId)}, function (err, result) {
+                if (err) {
+                  console.log('Error ' + err)
+                }
+                var post = result.body
+                post = post + "  [USER WAS BANNED]"
+                updateThread(req, post, function(){
+                  callback()
+                })
+              })
+            })
+          }
+
+          db.close()
+        }
+      })
+  }
+
+  function updatePost(req, newPost, callback){
+    MongoClient.connect(url, function (err, db) {
+        if (err) {
+          console.log('Unable to connect to the mongoDB server. Error:', err)
+        } else {
+          console.log('Connection established to', url)
+
+          db.collection('thread', function (err, collection) {
+            collection.update({post: {$elemMatch: {idPost: ObjectId(req.body.postId)}}},{$set: {"post.$.body": newPost}}, function (err, result) {
+              if (err) {
+                console.log('Error ' + err)
+              }
+              callback()
+            })
+          })
+          db.close()
+        }
+      })
+  }
+
+  function updateThread(req, newPost, callback){
+    MongoClient.connect(url, function (err, db) {
+        if (err) {
+          console.log('Unable to connect to the mongoDB server. Error:', err)
+        } else {
+          console.log('Connection established to', url)
+          db.collection('thread', function (err, collection) {
+            collection.update({_id: ObjectId(req.body.threadId)}, {$set: {body: newPost}}, function (err, result) {
+              if (err) {
+                console.log('Error ' + err)
+              }
+              callback()
+            })
+          })
+          db.close()
+        }
+      })
+  }
+
+  function checkArchived (threadid, callback, res) {
+    MongoClient.connect(url, function (err, db) {
+      if (err) {
+        console.log('Unable to connect to the mongoDB server. Error:', err)
+      } else {
+        console.log('Connection established to', url)
+        db.collection('thread').find({ _id: ObjectId(threadid) }).toArray(function (error, documents) {
+          if (error) {
+            throw error
+          }
+          if (documents[0].archived) {
+            res.status(403)
+            res.send({'error': 'Archived Thread'})
+          } else {
+            if (documents[0].numberOfPosts < 5) {
+              callback(false)// não atualiza atributo Archived na Thread
+            } else {
+              callback(true)// atualiza atributo Archived na Thread
+            }
+          }
+        })
+        db.close()
+      }
+    })
+  }
+
 
   app.get('/app/threads', function (req, res) {
     MongoClient.connect(url, function (err, db) {
@@ -108,76 +234,58 @@ module.exports = function (app, passport) {
     })
   })
 
-  function checkArchived (threadid, callback, res) {
-    MongoClient.connect(url, function (err, db) {
-      if (err) {
-        console.log('Unable to connect to the mongoDB server. Error:', err)
-      } else {
-        console.log('Connection established to', url)
-        db.collection('thread').find({ _id: ObjectId(threadid) }).toArray(function (error, documents) {
-          if (error) {
-            throw error
-          }
-          if (documents[0].archived) {
-            res.status(403)
-            res.send({'error': 'Archived Thread'})
-          } else {
-            if (documents[0].numberOfPosts < 5) {
-              callback(false)// não atualiza atributo Archived na Thread
-            } else {
-              callback(true)// atualiza atributo Archived na Thread
-            }
-          }
-        })
-        db.close()
-      }
-    })
-  }
-
   app.post('/api/thread/newPost', function (req, res) {
-    var newPost = req.body
-    newPost.userIP = req.headers['x-forwarded-for']
-    var date = new Date()
-    newPost.date = date.getTime()
-    if (newPost.file !== undefined) {
-      var filename = newPost.file[0].name
-
-      var validFormats = [ 'jpg', 'jpeg', 'png', 'gif', 'bmp', 'webm', 'pdf' ]
-      var ext = filename.substring(filename.lastIndexOf('.') + 1).toLowerCase()
-
-      if (validFormats.indexOf(ext) === -1) {
+    verificarBanimento(req.headers['x-forwarded-for'], req.body.userName, function(isBanned){
+      if(isBanned !== null){
         res.status(403)
-        res.send({'error': 'An error has occurred'})
+        res.send("User is banned")
         return
       }
-    }
-    newPost.idPost = new ObjectId();
-    var saveOnServer = function (pumpReached) {
-      MongoClient.connect(url, function (err, db) {
-        if (err) {
-          console.log('Unable to connect to the mongoDB server. Error:', err)
-        } else {
-          console.log('Connection established to', url)
-          db.collection('thread').update({ '_id': ObjectId(newPost.threadid) }, { $inc: { numberOfPosts: 1 } })
-          if (pumpReached === false) {
-            db.collection('thread').update({ '_id': ObjectId(newPost.threadid) }, { $set: { lastDate: newPost.date } })
-          }
-          db.collection('thread', function (err, collection) {
-            collection.update({ '_id': ObjectId(newPost.threadid) }, { $push: { post: newPost } }, function (err, result) {
-              if (err) {
-                console.log('Error ' + err)
-                res.send({'error': 'An error has occurred'})
-              } else {
-                console.log('' + result)
-                res.send(newPost)
-              }
-            })
-          })
-          db.close()
+      var newPost = req.body
+      newPost.userIP = req.headers['x-forwarded-for']
+      var date = new Date()
+      newPost.date = date.getTime()
+      if (newPost.file !== undefined) {
+        var filename = newPost.file[0].name
+
+        var validFormats = [ 'jpg', 'jpeg', 'png', 'gif', 'bmp', 'webm', 'pdf' ]
+        var ext = filename.substring(filename.lastIndexOf('.') + 1).toLowerCase()
+
+        if (validFormats.indexOf(ext) === -1) {
+          res.status(403)
+          res.send({'error': 'An error has occurred'})
+          return
         }
-      })
-    }
-    checkArchived(newPost.threadid, saveOnServer, res)
+      }
+      newPost.idPost = new ObjectId();
+      var saveOnServer = function (pumpReached) {
+        MongoClient.connect(url, function (err, db) {
+          if (err) {
+            console.log('Unable to connect to the mongoDB server. Error:', err)
+          } else {
+            console.log('Connection established to', url)
+            db.collection('thread').update({ '_id': ObjectId(newPost.threadid) }, { $inc: { numberOfPosts: 1 } })
+            if (pumpReached === false) {
+              db.collection('thread').update({ '_id': ObjectId(newPost.threadid) }, { $set: { lastDate: newPost.date } })
+            }
+            db.collection('thread', function (err, collection) {
+              collection.update({ '_id': ObjectId(newPost.threadid) }, { $push: { post: newPost } }, function (err, result) {
+                if (err) {
+                  console.log('Error ' + err)
+                  res.send({'error': 'An error has occurred'})
+                } else {
+                  console.log('' + result)
+                  res.send(newPost)
+                }
+              })
+            })
+            db.close()
+          }
+        })
+      }
+      checkArchived(newPost.threadid, saveOnServer, res)
+    })
+
   })
 
   function checkTagLimit (tag, callback) {
@@ -235,55 +343,154 @@ module.exports = function (app, passport) {
   }
 
   app.post('/api/thread/newThread', function (req, res) {
-    var newThread = req.body
-    newThread.userIP = req.headers['x-forwarded-for']
-    var date = new Date()
-    newThread.date = date.getTime()
-    if (newThread.tags[0] === undefined) {
-      res.status(403)
-      res.send({'error': 'An error has occurred'})
-      return
-    }
-    if (newThread.file !== undefined) {
-      var filename = newThread.file[0].name
-
-      var validFormats = [ 'jpg', 'jpeg', 'png', 'gif', 'bmp', 'webm', 'pdf' ]
-      var ext = filename.substring(filename.lastIndexOf('.') + 1).toLowerCase()
-
-      if (validFormats.indexOf(ext) === -1) {
+    verificarBanimento(req.headers['x-forwarded-for'], req.body.userName, function(isBanned){
+      if(isBanned !== null){
+        res.status(403)
+        res.send("User is banned")
+        return
+      }
+      var newThread = req.body
+      newThread.userIP = req.headers['x-forwarded-for']
+      var date = new Date()
+      newThread.date = date.getTime()
+      if (newThread.tags[0] === undefined) {
         res.status(403)
         res.send({'error': 'An error has occurred'})
         return
       }
-    }
+      if (newThread.file !== undefined) {
+        var filename = newThread.file[0].name
 
-    newThread.tags.forEach(function (tag) {
-      console.log("Iniciou " + tag);
-      checkTagLimit(tag, function (resp){
-        console.log(resp);
-      });
+        var validFormats = [ 'jpg', 'jpeg', 'png', 'gif', 'bmp', 'webm', 'pdf' ]
+        var ext = filename.substring(filename.lastIndexOf('.') + 1).toLowerCase()
+
+        if (validFormats.indexOf(ext) === -1) {
+          res.status(403)
+          res.send({'error': 'An error has occurred'})
+          return
+        }
+      }
+
+      newThread.tags.forEach(function (tag) {
+        console.log("Iniciou " + tag);
+        checkTagLimit(tag, function (resp){
+          console.log(resp);
+        });
+      })
+
+      MongoClient.connect(url, function (err, db) {
+        if (err) {
+          console.log('Unable to connect to the mongoDB server. Error:', err)
+        } else {
+          console.log('Connection established to', url)
+          newThread.numberOfPosts = 1
+          newThread.lastDate = newThread.date
+          db.collection('thread', function (err, collection) {
+            collection.insert(newThread, {safe: true}, function (err, result) {
+              if (err) {
+                console.log('Error ' + err)
+                res.send({'error': 'An error has occurred'})
+              } else {
+                console.log('' + result)
+                res.send(result)
+              }
+            })
+          })
+          db.close()
+        }
+      })
+    })
+  })
+
+
+
+
+  app.post('/api/reportPost', function (req, res) {
+    var date = new Date()
+    var newReport = new Report()
+    newReport.date = date.getTime()
+    newReport.reason = req.body.reason
+    newReport.threadId = req.body.threadId
+    newReport.postId = req.body.postId
+    newReport.save(function (err) {
+      if (err) {
+        console.log('Error in Saving report: ' + err)
+        throw err
+      }
+      res.send("Report completed")
+    })
+  })
+
+  app.get('/api/reports', function (req, res) {
+    Report.find({}, null, {sort: '-date'}, function(err, reports) {
+      res.send(reports)
+    });
+  })
+
+  app.delete('/api/delete/report/:idReport', function (req, res) {
+    Report.remove({ _id: ObjectId(req.params.idReport) }, function(err) {
+      if (err) {
+       throw err
+      }
+      res.send("Report deleted")
+    })
+  })
+
+
+  app.get('/api/bans', function (req, res) {
+    Ban.find({}, null, {sort: '-dateBegin'}, function(err, bans) {
+      res.send(bans)
+    });
+  })
+
+  app.post('/api/banIP', function (req, res) {
+    verificarBanimento(req.body.userIP, req.body.user, function (isBanned) {
+      if(isBanned !== null){
+        res.status(403)
+        res.send("User is banned")
+        return
+      }
+      var date = new Date()
+      var dateEnd = null
+      if(req.body.banTime === "Day"){
+        dateEnd = new Date()
+        dateEnd.setDate(date.getDate() + 1)
+      }
+      if(req.body.banTime === "Week"){
+        dateEnd = new Date()
+        dateEnd.setDate(date.getDate() + 7)
+      }
+      if(req.body.banTime === "Month"){
+        dateEnd = new Date()
+        dateEnd.setDate(date.getDate() + 30)
+      }
+      var newBan = new Ban()
+      newBan.dateBegin = date.getTime()
+      newBan.dateEnd = dateEnd
+      newBan.IP = req.body.userIP
+      newBan.user = null
+      if(req.body.user !== "Anon"){
+        newBan.user = req.body.user
+      }
+      newBan.save(function (err) {
+        if (err) {
+          console.log('Error in Saving Ban: ' + err)
+          throw err
+        }
+        showBan(req, function(){
+          res.send("Ban completed")
+        })
+      })
     })
 
-    MongoClient.connect(url, function (err, db) {
+  })
+
+  app.delete('/api/delete/ban/:banId', function (req, res) {
+    Ban.remove({ _id: ObjectId(req.params.banId) }, function(err) {
       if (err) {
-        console.log('Unable to connect to the mongoDB server. Error:', err)
-      } else {
-        console.log('Connection established to', url)
-        newThread.numberOfPosts = 1
-        newThread.lastDate = newThread.date
-        db.collection('thread', function (err, collection) {
-          collection.insert(newThread, {safe: true}, function (err, result) {
-            if (err) {
-              console.log('Error ' + err)
-              res.send({'error': 'An error has occurred'})
-            } else {
-              console.log('' + result)
-              res.send(result)
-            }
-          })
-        })
-        db.close()
+       throw err
       }
+      res.send("Ban deleted")
     })
   })
 
@@ -393,6 +600,95 @@ module.exports = function (app, passport) {
       }
     })(req, res)
   })
+
+  function isAdmin(login, password, callback) {
+    User.findOne({'login': login}, function (err, user) {
+      if(user){
+        if(isValidPassword(user, password) & user.role == "admin"){
+          return callback(true)
+        }
+        return callback(false)
+      }
+      return callback(false)
+    })
+  }
+
+  var isAuthenticated = function (req, res, next) {
+    if (req.isAuthenticated()) { return next() }
+    res.redirect('/')
+  }
+
+  app.delete('/api/delete/:type', function (req, res) {
+    isAdmin(req.body.user.login, req.body.user.password, function(admin){
+      if(admin){
+        MongoClient.connect(url, function (err, db) {
+          if (err) {
+            console.log('Unable to connect to the mongoDB server. Error:', err)
+          } else {
+            console.log('Connection established to', url)
+            db.collection('thread', function (err, collection) {
+              if(req.params.type == "thread"){
+                collection.remove({_id: ObjectId(req.body.thread)}, {safe: true}, function (err, result) {
+                  if (err) {
+                    console.log('Error ' + err)
+                    res.send({'error': 'An error has occurred'})
+                  } else {
+                    res.send("Sucess")
+                  }
+                })
+              }else{
+                collection.update({_id: ObjectId(req.body.thread)},{$pull: {post: {idPost: ObjectId(req.body.post)}}} , {safe: true}, function (err, result) {
+                  if (err) {
+                    console.log('Error ' + err)
+                    res.send({'error': 'An error has occurred'})
+                  } else {
+                    MongoClient.connect(url, function (err, db2) {
+                      db2.collection('thread').update({ _id: ObjectId(req.body.thread) }, { $inc: { numberOfPosts: -1 } }, function(){
+                        res.send("Sucess")
+                      })
+                    })
+                  }
+                })
+              }
+            })
+            db.close()
+          }
+        })
+      }else{
+        res.status(403)
+        res.send("No permission to do that")
+      }
+    });
+  })
+
+  app.post('/api/changeTags', function (req, res) {
+    isAdmin(req.body.user.login, req.body.user.password, function(admin){
+      if(admin){
+        MongoClient.connect(url, function (err, db) {
+          if (err) {
+            console.log('Unable to connect to the mongoDB server. Error:', err)
+          } else {
+            console.log('Connection established to', url)
+            db.collection('thread', function (err, collection) {
+              collection.update({_id: ObjectId(req.body.thread)},{$set: {tags: req.body.tags}} , {safe: true}, function (err, result) {
+                if (err) {
+                  console.log('Error ' + err)
+                  res.send({'error': 'An error has occurred'})
+                }else {
+                  res.send("Sucess")
+                }
+              })
+            })
+            db.close()
+          }
+        })
+      }else{
+        res.status(403)
+        res.send("No permission to do that")
+      }
+    })
+  })
+
 
   var isAuthenticated = function (req, res, next) {
     if (req.isAuthenticated()) { return next() }
