@@ -4,6 +4,7 @@ var ObjectId = require('mongodb').ObjectID
 var Dropbox = require('dropbox')
 var User = require('./Models/user')
 var Report = require('./Models/report')
+var Ban = require('./Models/ban')
 var mongoose = require('mongoose')
 var dbx = new Dropbox({ accessToken: 'RQ4xXaH3x-AAAAAAAAAADuWlSlvLuWi5Lef3ymzTNYzSNvQY2AwDOvqmVY73I41f' })
 var LocalStrategy = require('passport-local').Strategy
@@ -314,7 +315,6 @@ module.exports = function (app, passport) {
   })
 
   app.delete('/api/delete/report/:idReport', function (req, res) {
-    console.log("Aaa")
     Report.remove({ _id: ObjectId(req.params.idReport) }, function(err) {
       if (err) {
        throw err 
@@ -323,7 +323,40 @@ module.exports = function (app, passport) {
     })
   })
 
-  
+
+  app.get('/api/bans', function (req, res) {
+    Ban.find({}, null, {sort: '-dateBegin'}, function(err, bans) {
+      res.send(bans)
+    });
+  })
+
+  app.post('/api/banIP', function (req, res) {
+    var date = new Date()
+    var newBan = new Ban()
+    newBan.dateBegin = date.getTime()
+    newBan.dateEnd = req.body.dateEnd
+    newBan.IP = req.body.IP
+    newBan.user = null
+    if(req.body.user !== "Anon"){
+      newBan.user = req.body.user
+    }
+    newBan.save(function (err) {
+      if (err) {
+        console.log('Error in Saving report: ' + err)
+        throw err
+      }
+      res.send("Ban completed")
+    })
+  })
+
+  app.delete('/api/delete/ban/:banId', function (req, res) {
+    Ban.remove({ _id: ObjectId(req.params.banId) }, function(err) {
+      if (err) {
+       throw err 
+      }
+      res.send("Ban deleted")
+    })
+  })
 
   passport.serializeUser(function (user, done) {
     console.log('Serialize')

@@ -28,8 +28,8 @@
       }
       $http({
         method: 'POST',
-        url: 'https://nyachan-server.herokuapp.com/api/reportPost',
-        // url: "http://localhost:3000/api/reportPost",
+        // url: 'https://nyachan-server.herokuapp.com/api/reportPost',
+        url: "http://localhost:3000/api/reportPost",
         data: dataReport,
         headers: {
           'Content-Type': 'application/json'
@@ -39,6 +39,27 @@
       }, function myError (response) {
         console.log('Error ' + response.body)
       })
+    }
+
+    $scope.banIP = function(){
+      // var dataReport = {
+      //   reason: null,
+      //   threadId: threadIdReport,
+      //   postId: postIdReport
+      // }
+      // $http({
+      //   method: 'POST',
+      //   // url: 'https://nyachan-server.herokuapp.com/api/reportPost',
+      //   url: "http://localhost:3000/api/reportPost",
+      //   data: dataReport,
+      //   headers: {
+      //     'Content-Type': 'application/json'
+      //   }
+      // }).then(function mySucces (response) {
+      //   toastr.success('Report completed', 'Success')
+      // }, function myError (response) {
+      //   console.log('Error ' + response.body)
+      // })
     }
 
     $scope.deleteThread = function(threadId){
@@ -135,8 +156,8 @@
     $scope.search = function () {
       $http({
         method: 'GET',
-        url: 'https://nyachan-server.herokuapp.com/api/tag/' + searchTag + '?sortType=lastDate&archived=false'
-                // url: "http://localhost:3000/api/tag/" + searchTag + '?sortType=lastDate&archived=false'
+        // url: 'https://nyachan-server.herokuapp.com/api/tag/' + searchTag + '?sortType=lastDate&archived=false'
+                url: "http://localhost:3000/api/tag/" + searchTag + '?sortType=lastDate&archived=false'
       }).then(function mySucces (response) {
         $scope.threads = response.data
       }, function myError (response) {
