@@ -42,25 +42,15 @@ module.exports = function (app, passport) {
           console.log('Connection established to', url)
           if(req.body.postId !== null){
             db.collection('thread', function (err, collection) {
-              // Document.findById({docId, 'items.id': 'yourId'}, {'items.$': 1}, function(err, item){
-              //
-              // }
               collection.findOne({post: {$elemMatch: {idPost: ObjectId(req.body.postId)}}}, {'post.$': 1}, function (err, result) {
                 if (err) {
                   console.log('Error ' + err)
                 }
                 console.log("HERE " + util.inspect(result, false, null))
-                // var post
-                // result.post.forEach(function(t) {  /// Arrumar forma melhor de fazer isso
-                  // if (ObjectId(t.idPost) === ObjectId(req.body.postId)) {
-                    // console.log("aaa")
-                    // post = t.body
-                  // }
-                // })
-                // post = post + "  [USER WAS BANNED]"
-                // updatePost(req, post, function(){
+                var post = result.post[0].body + "  [USER WAS BANNED]"
+                updatePost(req, post, function(){
                   callback()
-                // })
+                })
               })
             })
           }else {
