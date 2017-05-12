@@ -28,8 +28,8 @@
       }
       $http({
         method: 'POST',
-        // url: 'https://nyachan-server.herokuapp.com/api/reportPost',
-        url: "http://localhost:3000/api/reportPost",
+        url: 'https://nyachan-server.herokuapp.com/api/reportPost',
+        // url: "http://localhost:3000/api/reportPost",
         data: dataReport,
         headers: {
           'Content-Type': 'application/json'
@@ -156,8 +156,8 @@
     $scope.search = function () {
       $http({
         method: 'GET',
-        // url: 'https://nyachan-server.herokuapp.com/api/tag/' + searchTag + '?sortType=lastDate&archived=false'
-                url: "http://localhost:3000/api/tag/" + searchTag + '?sortType=lastDate&archived=false'
+        url: 'https://nyachan-server.herokuapp.com/api/tag/' + searchTag + '?sortType=lastDate&archived=false'
+                // url: "http://localhost:3000/api/tag/" + searchTag + '?sortType=lastDate&archived=false'
       }).then(function mySucces (response) {
         $scope.threads = response.data
       }, function myError (response) {
@@ -290,7 +290,11 @@
             toastr.success('Nice Thread created', 'Success')
           }, function myError (response) {
             console.log(response || 'Request failed')
-            toastr.error('Oh no, I cant belive', 'Error')
+            if(response.data === "User is banned"){
+              toastr.error('You were banned!', 'Error')
+            }else{
+              toastr.error('OMG, its dead!', 'Error')
+            }
           })
         }
       }

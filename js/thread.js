@@ -28,8 +28,8 @@
       }
       $http({
         method: 'POST',
-        // url: 'https://nyachan-server.herokuapp.com/api/reportPost',
-        url: "http://localhost:3000/api/reportPost",
+        url: 'https://nyachan-server.herokuapp.com/api/reportPost',
+        // url: "http://localhost:3000/api/reportPost",
         data: dataReport,
         headers: {
           'Content-Type': 'application/json'
@@ -51,8 +51,8 @@
       }
       $http({
         method: 'POST',
-        // url: 'https://nyachan-server.herokuapp.com/api/banIP',
-        url: "http://localhost:3000/api/banIP",
+        url: 'https://nyachan-server.herokuapp.com/api/banIP',
+        // url: "http://localhost:3000/api/banIP",
         data: dataBan,
         headers: {
           'Content-Type': 'application/json'
@@ -61,7 +61,10 @@
         toastr.success('Ban completed', 'Success')
         $scope.thread = $scope.searchThread(searchId)
       }, function myError (response) {
-        console.log('Error ' + response.body)
+        console.log('Error ' + response.data)
+        if(response.data === "User is banned"){
+          toastr.error('User is already banned!', 'Error')
+        }
       })
     }
 
@@ -193,8 +196,8 @@
     $scope.searchThread = function (threadID) {
       $http({
         method: 'GET',
-        // url: 'https://nyachan-server.herokuapp.com/api/thread/' + threadID
-              url: "http://localhost:3000/api/thread/" + threadID
+        url: 'https://nyachan-server.herokuapp.com/api/thread/' + threadID
+              // url: "http://localhost:3000/api/thread/" + threadID
       }).then(function mySucces (response) {
         $scope.thread = response.data[0]
       }, function myError (response) {
@@ -300,6 +303,7 @@
           $http({
             method: 'POST',
             url: 'https://nyachan-server.herokuapp.com/api/thread/newPost',
+            // url: 'http://localhost:3000/api/thread/newPost',
             data: dataPost,
             headers: {
               'Content-Type': 'application/json'
@@ -314,7 +318,11 @@
             }, 1500)
             toastr.success('Right in the Post', 'You\'ve just answered it')
           }, function myError (response) {
-            toastr.error('OMG, its dead!', 'Error')
+            if(response.data === "User is banned"){
+              toastr.error('You were banned!', 'Error')
+            }else{
+              toastr.error('OMG, its dead!', 'Error')
+            }
             console.log(response || 'Request failed')
           })
         }
