@@ -41,7 +41,8 @@
       })
     }
 
-    $scope.banIP = function(){
+    $scope.banIP = function(threadIdBan, postIdBan, userIP, banTime){
+      console.log("Satan " + banTime + " " + threadIdBan)
       // var dataReport = {
       //   reason: null,
       //   threadId: threadIdReport,
