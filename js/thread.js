@@ -19,6 +19,29 @@
       }
     }
 
+
+    $scope.reportPost = function(threadIdReport, postIdReport){
+      // console.log("Thread Id " + threadId + " Post " + postId)
+      var dataReport = {
+        reason: null,
+        threadId: threadIdReport,
+        postId: postIdReport
+      }
+      $http({
+        method: 'POST',
+        // url: 'https://nyachan-server.herokuapp.com/api/reportPost',
+        url: "http://localhost:3000/api/reportPost",
+        data: dataReport,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then(function mySucces (response) {
+        toastr.success('Report completed', 'Success')
+      }, function myError (response) {
+        console.log('Error ' + response.body)
+      })
+    }
+
     $scope.changeTags = function (selectedTags) {
       var dataTags = {
         user: JSON.parse($cookies.get('user')),
@@ -147,8 +170,8 @@
     $scope.searchThread = function (threadID) {
       $http({
         method: 'GET',
-        url: 'https://nyachan-server.herokuapp.com/api/thread/' + threadID
-              // url: "http://localhost:3000/api/thread/" + threadID
+        // url: 'https://nyachan-server.herokuapp.com/api/thread/' + threadID
+              url: "http://localhost:3000/api/thread/" + threadID
       }).then(function mySucces (response) {
         $scope.thread = response.data[0]
       }, function myError (response) {

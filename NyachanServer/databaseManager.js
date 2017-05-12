@@ -2,7 +2,8 @@ var mongodb = require('mongodb')
 var MongoClient = mongodb.MongoClient
 var ObjectId = require('mongodb').ObjectID
 var Dropbox = require('dropbox')
-var User = require('./user')
+var User = require('./Models/user')
+var Report = require('./Models/report')
 var mongoose = require('mongoose')
 var dbx = new Dropbox({ accessToken: 'RQ4xXaH3x-AAAAAAAAAADuWlSlvLuWi5Lef3ymzTNYzSNvQY2AwDOvqmVY73I41f' })
 var LocalStrategy = require('passport-local').Strategy
@@ -287,6 +288,43 @@ module.exports = function (app, passport) {
     })
   })
 
+
+
+
+  app.post('/api/reportPost', function (req, res) {
+    var date = new Date()
+    var newReport = new Report()
+    newReport.date = date.getTime()
+    newReport.reason = req.body.reason
+    newReport.threadId = req.body.threadId
+    newReport.postId = req.body.postId
+    newReport.save(function (err) {
+      if (err) {
+        console.log('Error in Saving report: ' + err)
+        throw err
+      }
+      res.send("Report completed")
+    })
+  })
+
+  app.get('/api/reports', function (req, res) {
+    Report.find({}, null, {sort: '-date'}, function(err, reports) {
+      res.send(reports)
+    });
+  })
+
+  app.delete('/api/delete/report/:idReport', function (req, res) {
+    console.log("Aaa")
+    Report.remove({ _id: ObjectId(req.params.idReport) }, function(err) {
+      if (err) {
+       throw err 
+      }
+      res.send("Report deleted")
+    })
+  })
+
+  
+
   passport.serializeUser(function (user, done) {
     console.log('Serialize')
     done(null, user._id)
@@ -393,6 +431,95 @@ module.exports = function (app, passport) {
       }
     })(req, res)
   })
+
+  function isAdmin(login, password, callback) {
+    User.findOne({'login': login}, function (err, user) {
+      if(user){
+        if(isValidPassword(user, password) & user.role == "admin"){
+          return callback(true)
+        }
+        return callback(false)
+      }
+      return callback(false)
+    })
+  }
+
+  var isAuthenticated = function (req, res, next) {
+    if (req.isAuthenticated()) { return next() }
+    res.redirect('/')
+  }
+
+  app.delete('/api/delete/:type', function (req, res) {
+    isAdmin(req.body.user.login, req.body.user.password, function(admin){
+      if(admin){
+        MongoClient.connect(url, function (err, db) {
+          if (err) {
+            console.log('Unable to connect to the mongoDB server. Error:', err)
+          } else {
+            console.log('Connection established to', url)
+            db.collection('thread', function (err, collection) {
+              if(req.params.type == "thread"){
+                collection.remove({_id: ObjectId(req.body.thread)}, {safe: true}, function (err, result) {
+                  if (err) {
+                    console.log('Error ' + err)
+                    res.send({'error': 'An error has occurred'})
+                  } else {
+                    res.send("Sucess")
+                  }
+                })
+              }else{
+                collection.update({_id: ObjectId(req.body.thread)},{$pull: {post: {idPost: ObjectId(req.body.post)}}} , {safe: true}, function (err, result) {
+                  if (err) {
+                    console.log('Error ' + err)
+                    res.send({'error': 'An error has occurred'})
+                  } else {
+                    MongoClient.connect(url, function (err, db2) {
+                      db2.collection('thread').update({ _id: ObjectId(req.body.thread) }, { $inc: { numberOfPosts: -1 } }, function(){
+                        res.send("Sucess")
+                      })
+                    })
+                  }
+                })
+              }
+            })
+            db.close()
+          }
+        })
+      }else{
+        res.status(403)
+        res.send("No permission to do that")
+      }
+    });
+  })
+
+  app.post('/api/changeTags', function (req, res) {
+    isAdmin(req.body.user.login, req.body.user.password, function(admin){
+      if(admin){
+        MongoClient.connect(url, function (err, db) {
+          if (err) {
+            console.log('Unable to connect to the mongoDB server. Error:', err)
+          } else {
+            console.log('Connection established to', url)
+            db.collection('thread', function (err, collection) {
+              collection.update({_id: ObjectId(req.body.thread)},{$set: {tags: req.body.tags}} , {safe: true}, function (err, result) {
+                if (err) {
+                  console.log('Error ' + err)
+                  res.send({'error': 'An error has occurred'})
+                }else {
+                  res.send("Sucess")
+                }
+              })
+            })
+            db.close()
+          }
+        })
+      }else{
+        res.status(403)
+        res.send("No permission to do that")
+      }
+    })
+  })
+
 
   var isAuthenticated = function (req, res, next) {
     if (req.isAuthenticated()) { return next() }

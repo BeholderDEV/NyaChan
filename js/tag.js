@@ -20,6 +20,28 @@
       }
     }
 
+    $scope.reportPost = function(threadIdReport, postIdReport){
+      // console.log("Thread Id " + threadId + " Post " + postId)
+      var dataReport = {
+        reason: null,
+        threadId: threadIdReport,
+        postId: postIdReport
+      }
+      $http({
+        method: 'POST',
+        // url: 'https://nyachan-server.herokuapp.com/api/reportPost',
+        url: "http://localhost:3000/api/reportPost",
+        data: dataReport,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then(function mySucces (response) {
+        toastr.success('Report completed', 'Success')
+      }, function myError (response) {
+        console.log('Error ' + response.body)
+      })
+    }
+
     $scope.deleteThread = function(threadId){
       var dataDelete = {
         user: JSON.parse($cookies.get('user')),
@@ -40,26 +62,6 @@
         console.log('Error ' + response.body)
       })
     }
-
-    // $scope.changeTags = function(threadId){
-    //   var dataTags = {
-    //     thread: threadId
-    //   }
-    //   $http({
-    //     method: 'POST',
-    //     // url: 'https://nyachan-server.herokuapp.com/api/changeTags',
-    //     url: "http://localhost:3000/api/changeTags",
-    //     data: dataTags,
-    //     headers: {
-    //       'Content-Type': 'application/json'
-    //     }
-    //   }).then(function mySucces (response) {
-    //     $scope.threads = $scope.search()
-    //     toastr.success('Tags changed', 'Success')
-    //   }, function myError (response) {
-    //     console.log("Error " + response.body)
-    //   })
-    // }
 
     $scope.time_zone = new Date().getTimezoneOffset()
     var url = $(location).attr('href')
@@ -134,8 +136,8 @@
     $scope.search = function () {
       $http({
         method: 'GET',
-        url: 'https://nyachan-server.herokuapp.com/api/tag/' + searchTag + '?sortType=lastDate&archived=false'
-                // url: "http://localhost:3000/api/tag/" + searchTag + '?sortType=lastDate&archived=false'
+        // url: 'https://nyachan-server.herokuapp.com/api/tag/' + searchTag + '?sortType=lastDate&archived=false'
+                url: "http://localhost:3000/api/tag/" + searchTag + '?sortType=lastDate&archived=false'
       }).then(function mySucces (response) {
         $scope.threads = response.data
       }, function myError (response) {

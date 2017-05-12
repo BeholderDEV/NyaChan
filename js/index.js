@@ -25,11 +25,13 @@
   app.controller('indexController', function ($scope, $http, $cookies, $cookieStore, vcRecaptchaService, toastr) {
     $scope.init = function () {
       $scope.isUserLogged = false
+      $scope.isUserAdmin = false
       if ($cookies.get('user') !== undefined) {
         var user = JSON.parse($cookies.get('user'))
         $scope.userName = user.login
         $scope.userImage = user.avatar
         $scope.isUserLogged = true
+        $scope.isUserAdmin = user.role === 'admin'
       }
     }
 
@@ -176,7 +178,7 @@
         $scope.userName = response.data.login
         $scope.userImage = response.data.avatar
         $scope.isUserLogged = true
-        $scope.isUserLogged = true
+        $scope.isUserAdmin = response.data.role === "admin";
         toastr.success('Welcome back', 'We were wainting for you')
       }, function myError (response) {
         console.log(response || 'Request failed')
