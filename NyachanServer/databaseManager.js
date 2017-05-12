@@ -46,7 +46,6 @@ module.exports = function (app, passport) {
                 if (err) {
                   console.log('Error ' + err)
                 }
-                console.log("HERE " + util.inspect(result, false, null))
                 var post = result.post[0].body + "  [USER WAS BANNED]"
                 updatePost(req, post, function(){
                   callback()
