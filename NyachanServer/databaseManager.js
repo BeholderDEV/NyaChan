@@ -6,6 +6,7 @@ var User = require('./Models/user')
 var Report = require('./Models/report')
 var Ban = require('./Models/ban')
 var mongoose = require('mongoose')
+var util = require('util')
 var dbx = new Dropbox({ accessToken: 'RQ4xXaH3x-AAAAAAAAAADuWlSlvLuWi5Lef3ymzTNYzSNvQY2AwDOvqmVY73I41f' })
 var LocalStrategy = require('passport-local').Strategy
 var bCrypt = require('bcrypt-nodejs')
@@ -13,6 +14,86 @@ var bCrypt = require('bcrypt-nodejs')
 module.exports = function (app, passport) {
   var url = 'mongodb://alisson:123456@ds053206.mlab.com:53206/nyachan_data'
   mongoose.connect(url)
+
+
+  function showBan (req, callback){
+      MongoClient.connect(url, function (err, db) {
+        if (err) {
+          console.log('Unable to connect to the mongoDB server. Error:', err)
+        } else {
+          console.log('Connection established to', url)
+          if(req.body.postId !== null){
+            db.collection('thread', function (err, collection) {
+              collection.findOne({post: {$elemMatch: {idPost: ObjectId(req.body.postId)}}}, function (err, result) {
+                if (err) { 
+                  console.log('Error ' + err)
+                }
+                var post = result.post[0].body
+                post = post + "  [USER WAS BANNED]"
+                updatePost(req, post, function(){
+                  callback()
+                })
+              })
+            })
+          }else {
+            db.collection('thread', function (err, collection) {
+              collection.findOne({_id: ObjectId(req.body.threadId)}, function (err, result) {
+                if (err) { 
+                  console.log('Error ' + err)
+                }
+                var post = result.body
+                post = post + "  [USER WAS BANNED]"
+                updateThread(req, post, function(){
+                  callback()
+                })
+              })
+            })
+          }
+
+          db.close()
+        }
+      })
+  }
+
+  function updatePost(req, newPost, callback){
+    MongoClient.connect(url, function (err, db) {
+        if (err) {
+          console.log('Unable to connect to the mongoDB server. Error:', err)
+        } else {
+          console.log('Connection established to', url)
+          
+          db.collection('thread', function (err, collection) {
+            collection.update({_id: ObjectId(req.body.threadId)},{$set: {"post.$.body": newPost}}, function (err, result) {
+              if (err) { 
+                console.log('Error ' + err)
+              }
+              callback()
+            })
+          })
+          db.close()
+        }
+      })
+  }
+
+  function updateThread(req, newPost, callback){
+    MongoClient.connect(url, function (err, db) {
+        if (err) {
+          console.log('Unable to connect to the mongoDB server. Error:', err)
+        } else {
+          console.log('Connection established to', url)
+          db.collection('thread', function (err, collection) {
+            collection.update({_id: ObjectId(req.body.threadId)}, {$set: {body: newPost}}, function (err, result) {
+              if (err) { 
+                console.log('Error ' + err)
+              }
+              callback()
+            })
+          })
+          db.close()
+        }
+      })
+  }
+
 
   app.get('/app/threads', function (req, res) {
     MongoClient.connect(url, function (err, db) {
@@ -356,10 +437,12 @@ module.exports = function (app, passport) {
     }
     newBan.save(function (err) {
       if (err) {
-        console.log('Error in Saving report: ' + err)
+        console.log('Error in Saving Ban: ' + err)
         throw err
       }
-      res.send("Ban completed")
+      showBan(req, function(){
+        res.send("Ban completed")
+      })
     })
   })
 
