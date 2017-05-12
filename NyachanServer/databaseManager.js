@@ -42,7 +42,7 @@ module.exports = function (app, passport) {
           console.log('Connection established to', url)
           if(req.body.postId !== null){
             db.collection('thread', function (err, collection) {
-              collection.update({post: {$elemMatch: {idPost: ObjectId(req.body.postId)}}},{$set: {"post.$.body": "post.$.body" + "  [USER WAS BANNED]"}}, function (err, result) {
+              collection.update({post: {$elemMatch: {idPost: ObjectId(req.body.postId)}}},{$set: {"post.$.body": post.$.body + "  [USER WAS BANNED]"}}, function (err, result) {
                 if (err) {
                   console.log('Error ' + err)
                 }
