@@ -76,13 +76,13 @@
               <div class="panel-heading ">
                   <div class="panel-title dropdown">
                       <h4>
-                        <a type="button" class="btn dropdown-toggle pull-right" data-toggle="dropdown"><i class="material-icons">more_vert</i></a>
+                        <a type="button" class="btn dropdown-toggle" data-toggle="dropdown"><i class="material-icons">more_vert</i></a>
                         <ul class="dropdown-menu">
                           <li><a href="#" class="btn btn-danger" ng-click="reportPost(t._id, null)"><i class="material-icons">report_problem</i> Report Post</a></li>
                           <li><a href="#" class="btn btn-danger" ng-if="isUserAdmin" ng-click="deleteThread(t._id)"><i class="material-icons">delete</i> Delete Thread</a></li>
                           <li><a href="#" class="btn btn-info" ng-show="t.file[0] !== undefined" ng-click="downloadFiles(t.file)"><i class="material-icons">get_app</i> Download Files</a></li>
                         </ul>
-                        
+
                         {{t.subject}} ~ <a ng-href="http://nyachan-server.herokuapp.com/thread/{{t._id}}">{{t._id}}</a> by {{t.userName}}
                         <a ng-repeat="a in t.tags" ng-href="http://nyachan-server.herokuapp.com/tag/{{a}}"><span class="label label-nya">{{a}}</span></a>
 
