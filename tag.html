@@ -91,7 +91,7 @@
                   </div>
 
                   <div class="content-body" ng-class="t.file[0] === undefined ? 'col-md-12' : 'col-md-8'">
-                    <button type="button" title="Download Files" ng-show="t.file[0] !== undefined" class="btn btn-danger pull-right" ng-click="downloadFiles(t.file)"><i class="fa fa-download"></i></button>
+                    <button type="button" title="Download Files" ng-show="t.file[0] !== undefined" class="btn btn-info pull-right" ng-click="downloadFiles(t.file)"><i class="fa fa-download"></i></button>
                     {{t.body}}
                   </div>
                 </div>
@@ -112,7 +112,7 @@
                           </carousel>
                         </div>
                         <div class="content-body" ng-class="p.file[0] === undefined ? 'col-md-12' : 'col-md-9'">
-                          <button type="button" title="Download Files" ng-show="p.file[0] !== undefined" class="btn btn-danger pull-right" ng-click="downloadFiles(p.file)"><i class="fa fa-download"></i></button>
+                          <button type="button" title="Download Files" ng-show="p.file[0] !== undefined" class="btn btn-info pull-right" ng-click="downloadFiles(p.file)"><i class="fa fa-download"></i></button>
                           <button type="button" class="btn btn-danger pull-right" title="Report Post" ng-click="reportPost(p.threadid, p.idPost)"><i class="fa fa-exclamation-circle"></i></button>
                           {{p.body}}
                         </div>
@@ -205,7 +205,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="submit" ng-click="createThread(post)" class="btn btn-nya post-button">Post</button>
+            <button type="submit" ng-click="createThread(post)" class="btn btn-primary post-button">Post</button>
           </div>
         </div>
       </div>
