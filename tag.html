@@ -84,7 +84,9 @@
                         <button type="button" class="btn dropdown-toggle" data-toggle="dropdown"><i class="material-icons">more vert</i></button>
                         <ul class="dropdown-menu dropdown-menu-right">
                           <li><a href="#" ng-click="reportPost(t._id, null)">Report Post</a></li>
-                          <li><a href="#" ng-click="deleteThread(t._id)">Delete Thread</a></li>
+                          <li><a href="#" ng-if="isUserAdmin" ng-click="deleteThread(t._id)">Delete Thread</a></li>
+                          <li><a href="#" ng-show="t.file[0] !== undefined" ng-click="downloadFiles(t.file)">Download Files</a></li>
+
                         </ul>
                       </div>
                     </div>
@@ -98,7 +100,7 @@
                       </a>
                     </slide>
                   </carousel>
-                  <button type="button" title="Download Files" ng-show="t.file[0] !== undefined" class="btn btn-info pull-right" ng-click="downloadFiles(t.file)"><i class="fa fa-download"></i></button>
+
                   {{t.body}}
                 </div>
                 <div class="panel-footer">
