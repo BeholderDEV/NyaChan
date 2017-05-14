@@ -53,8 +53,8 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li id="newThreadButton" class="btn" data-toggle="modal" data-target="#newThreadModal"><a>New Thread  <i class="fa fa-plus"></i></a></li>
-            <li class="btn dropdown-toggle" ng-if="isUserLogged" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><a><img ng-src="{{userImage}}" class="img-circle" height="20px"/> <span class="caret"></span></a></li>
+            <li id="newThreadButton" data-toggle="modal" data-target="#newThreadModal"><a>New Thread  <i class="fa fa-plus"></i></a></li>
+            <li class="dropdown-toggle" ng-if="isUserLogged" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><a><img ng-src="{{userImage}}" class="img-circle" height="20px"/> <span class="caret"></span></a></li>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
               <li><a href="#">Signed in as:</a></li>
               <li><a href="#">{{userName}}</a></li>
