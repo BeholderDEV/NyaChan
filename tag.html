@@ -15,7 +15,9 @@
     <link rel="stylesheet" href="https://unpkg.com/angular-toastr/dist/angular-toastr.css" />
     <link rel="stylesheet" href="../lib/file-input/fileinput.min.css" media="all" type="text/css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.9.0/css/lightbox.min.css" integrity="sha256-iU/Wh1HMAs/NgpurDAu14e7S3FkllcJ5aPnpPDdnO6c=" crossorigin="anonymous" />
-
+    <!-- Material Design fonts -->
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/icon?family=Material+Icons">
     <link href="../node_modules/bootstrap-material-design/dist/css/bootstrap-material-design.min.css" rel="stylesheet" type="text/css">
     <link href="../node_modules/bootstrap-material-design/dist/css/ripples.min.css" rel="stylesheet" type="text/css">
 
@@ -69,17 +71,19 @@
     <div class="container">
       <h1 class="" id="tagTitle" value="{{tag}}"><a ng-href="http://nyachan-server.herokuapp.com/archived/{{tag}}"><i class="fa fa-archive"></i></a> {{tagName}}</h1>
       <div>
-        <div ng-repeat="t in threads" class="col-md-4">
+        <div ng-repeat="t in threads" class="col-md-6">
           <div class="panel panel-default">
               <div class="panel-heading ">
                   <h3 class="panel-title">
                     {{t.subject}} ~ <span class="label id"><a ng-href="http://nyachan-server.herokuapp.com/thread/{{t._id}}">{{t._id}}</a> by {{t.userName}} on {{ t.date | date: 'MMM d, y H:mm:ss' : 'time_zone' }}</span>
                     <a ng-repeat="a in t.tags" ng-href="http://nyachan-server.herokuapp.com/tag/{{a}}"><span class="label label-nya">{{a}}</span></a>
-                    <button type="button" class="btn btn-danger pull-right dropdown-toggle" data-toggle="dropdown"><i class="material-icons">more vert</i></button>
-                    <ul class="dropdown dropdown-menu dropdown-menu-right">
-                      <li><a href="#" ng-click="reportPost(t._id, null)">Report Post</a></li>
-                      <li><a href="#" ng-click="deleteThread(t._id)">Delete Thread</a></li>
-                    </ul>
+                    <div class="dropdown">
+                      <button type="button" class="btn btn-danger pull-right dropdown-toggle" data-toggle="dropdown"><i class="material-icons">more vert</i></button>
+                      <ul class="dropdown-menu dropdown-menu-right">
+                        <li><a href="#" ng-click="reportPost(t._id, null)">Report Post</a></li>
+                        <li><a href="#" ng-click="deleteThread(t._id)">Delete Thread</a></li>
+                      </ul>
+                    </div>
                   </h3>
                 </div>
                 <div class="panel-body">
