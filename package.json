@@ -21,6 +21,7 @@
     "formidable":"1.1.1",
     "request":"*",
     "lwip": "*",
+    "bootstrap-material-design": "*",
     "passport": "0.3.2",
     "passport-local": "1.0.0",
     "express-session": "1.15.2",
