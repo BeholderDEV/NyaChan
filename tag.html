@@ -77,7 +77,7 @@
                   <h3 class="panel-title dropdown">
                     <div class="row">
                       <div class="col-md-10">
-                        {{t.sobject}} ~ <a ng-href="http://nyachan-server.herokuapp.com/thread/{{t._id}}">{{t._id}}</a> by {{t.userName}}
+                        {{t.subject}} ~ <a ng-href="http://nyachan-server.herokuapp.com/thread/{{t._id}}">{{t._id}}</a> by {{t.userName}}
                         <a ng-repeat="a in t.tags" ng-href="http://nyachan-server.herokuapp.com/tag/{{a}}"><span class="label label-nya">{{a}}</span></a>
                       </div>
                       <div class="col-md-2">
@@ -106,10 +106,17 @@
                 <div class="panel-footer">
                   <ul class="list-group">
                     <li class="list-group-item panel" ng-repeat="p in t.post" id="{{p.idPost}}">
-                      <div class="panel-heading">{{p.title}} - <span class="label id">{{p.idPost}} by {{p.userName}} on {{ p.date | date: 'MMM d, y H:mm:ss' : 'time_zone' }}</span>
+                      <div class="panel-heading dropdown">{{p.title}} - {{p.idPost}} by {{p.userName}}
+                        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown"><i class="material-icons">more_vert</i></button>
+                        <ul class="dropdown-menu">
+                          <li><a href="#" ng-click="reportPost(p.idPost, null)">Report Post</a></li>
+                          <li><a href="#" ng-show="p.file[0] !== undefined" ng-click="downloadFiles(p.file)">Download Files</a></li>
+
+                        </ul>
 
                       </div>
                       <div class="panel-body">
+
                         <div class="col-md-3 image-body" ng-show="p.file[0] !== undefined">
                           <carousel>
                             <slide ng-repeat="f in p.file" active="slide.active">
@@ -120,8 +127,6 @@
                           </carousel>
                         </div>
                         <div class="content-body" ng-class="p.file[0] === undefined ? 'col-md-12' : 'col-md-9'">
-                          <button type="button" title="Download Files" ng-show="p.file[0] !== undefined" class="btn btn-info pull-right" ng-click="downloadFiles(p.file)"><i class="fa fa-download"></i></button>
-                          <button type="button" class="btn btn-danger pull-right" title="Report Post" ng-click="reportPost(p.threadid, p.idPost)"><i class="fa fa-exclamation-circle"></i></button>
                           {{p.body}}
                         </div>
                       </div>
