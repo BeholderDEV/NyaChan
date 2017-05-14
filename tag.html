@@ -74,16 +74,16 @@
         <div ng-repeat="t in threads" class="col-md-6">
           <div class="panel panel-default">
               <div class="panel-heading ">
-                  <h3 class="panel-title">
+                  <h3 class="panel-title dropdown">
                     <span class="label id"><a ng-href="http://nyachan-server.herokuapp.com/thread/{{t._id}}">threas</a> by {{t.userName}}</span>
                     <a ng-repeat="a in t.tags" ng-href="http://nyachan-server.herokuapp.com/tag/{{a}}"><span class="label label-nya">{{a}}</span></a>
-                    <div class="dropdown">
-                      <button type="button" class="btn btn-danger pull-right dropdown-toggle" data-toggle="dropdown"><i class="material-icons">more vert</i></button>
-                      <ul class="dropdown-menu dropdown-menu-right">
-                        <li><a href="#" ng-click="reportPost(t._id, null)">Report Post</a></li>
-                        <li><a href="#" ng-click="deleteThread(t._id)">Delete Thread</a></li>
-                      </ul>
-                    </div>
+
+                    <button type="button" class="btn btn-danger pull-right dropdown-toggle" data-toggle="dropdown"><i class="material-icons">more vert</i></button>
+                    <ul class="dropdown-menu dropdown-menu-right">
+                      <li><a href="#" ng-click="reportPost(t._id, null)">Report Post</a></li>
+                      <li><a href="#" ng-click="deleteThread(t._id)">Delete Thread</a></li>
+                    </ul>
+
                   </h3>
                 </div>
                 <div class="panel-body">
