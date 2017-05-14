@@ -70,9 +70,6 @@
         <div>
           <div class='panel panel-default'>
             <div class='panel-heading dropdown'>
-              <h3 class='panel-title'>
-              {{thread.subject}} ~ <span class="label id">{{thread._id}} by {{thread.userName}} on {{ thread.date | date: 'MMM d, y H:mm:ss' : 'time_zone' }}</span>
-              <a ng-repeat="a in thread.tags" ng-href="http://nyachan-server.herokuapp.com/tag/{{a}}"><span class="label label-nya">{{a}}</span></a>
               <div class="btn-group btn-group-justified">
                 <button type="button" ng-if="isUserAdmin" class="btn btn-danger pull-right" title="Delete Thread" ng-click="deleteThread(thread._id)"><i class="fa fa-trash-o"></i></button>
                 <button type="button" class="btn btn-danger pull-right" title="Report Post" ng-click="reportPost(thread._id, null)"><i class="fa fa-exclamation-circle"></i></button>
@@ -84,18 +81,23 @@
                     <li><a href="#" ng-click="banIP(thread._id, null, thread.userIP, thread.userName, 'Forever')">Forever</a></li>
                   </ul>
                 <select class="pull-right" id="changeTags" ng-if="isUserAdmin" multiple="multiple" required>
-                      <option value="a">Anime &#38; Mangá</option>
-                      <option value="c">Quadrinhos &#38; Desenhos Animados</option>
-                      <option value="g">Gif &#38; Webm</option>
-                      <option value="h">História e Ciências Humanas</option>
-                      <option value="m">Música</option>
-                      <option value="t">Tecnologia</option>
-                      <option value="tv">Televisão &#38; Filmes</option>
-                      <option value="v">Vídeo Games</option>
-                      <option value="b">Aleatório</option>
-                      <option value="p">Politicamente Incorreto</option>
-                  </select>
-                </div>
+                    <option value="a">Anime &#38; Mangá</option>
+                    <option value="c">Quadrinhos &#38; Desenhos Animados</option>
+                    <option value="g">Gif &#38; Webm</option>
+                    <option value="h">História e Ciências Humanas</option>
+                    <option value="m">Música</option>
+                    <option value="t">Tecnologia</option>
+                    <option value="tv">Televisão &#38; Filmes</option>
+                    <option value="v">Vídeo Games</option>
+                    <option value="b">Aleatório</option>
+                    <option value="p">Politicamente Incorreto</option>
+                </select>
+              </div>
+              <h3 class='panel-title'>
+
+              {{thread.subject}} ~ <span class="label id">{{thread._id}} by {{thread.userName}} on {{ thread.date | date: 'MMM d, y H:mm:ss' : 'time_zone' }}</span>
+              <a ng-repeat="a in thread.tags" ng-href="http://nyachan-server.herokuapp.com/tag/{{a}}"><span class="label label-nya">{{a}}</span></a>
+
               </h3>
             </div>
             <div class="panel-body">
