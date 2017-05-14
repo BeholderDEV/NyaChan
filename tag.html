@@ -100,8 +100,9 @@
                       </a>
                     </slide>
                   </carousel>
-
-                  {{t.body}}
+                  <p>
+                    {{t.body}}
+                  </p>
                 </div>
                 <div class="panel-footer">
                   <ul class="list-group">
@@ -111,7 +112,7 @@
                           {{p.title}} - {{p.idPost}} by {{p.userName}}
                         </div>
                         <div class="col-md-3">
-                          <a class="dropdown-toggle" data-toggle="dropdown"><i class="material-icons">more_vert</i></a>
+                          <a type="button" class="btn dropdown-toggle" data-toggle="dropdown"><i class="material-icons">more_vert</i></a>
                           <ul class="dropdown-menu">
                             <li><a href="#" ng-click="reportPost(p.idPost, null)">Report Post</a></li>
                             <li><a href="#" ng-show="p.file[0] !== undefined" ng-click="downloadFiles(p.file)">Download Files</a></li>
@@ -131,7 +132,7 @@
                           </carousel>
                         </div>
                         <div class="content-body" ng-class="p.file[0] === undefined ? 'col-md-12' : 'col-md-9'">
-                          {{p.body}}
+                          <p> {{p.body}} </p>
                         </div>
                       </div>
                     </li>
