@@ -74,7 +74,7 @@
         <div ng-repeat="t in threads" class="col-md-6">
           <div class="panel panel-default">
               <div class="panel-heading ">
-                  <duv class="panel-title dropdown">
+                  <div class="panel-title dropdown">
                     <div class="row">
                       <h4 class="col-md-10">
                         {{t.subject}} ~ <a ng-href="http://nyachan-server.herokuapp.com/thread/{{t._id}}">{{t._id}}</a> by {{t.userName}}
@@ -83,9 +83,9 @@
                       <div class="col-md-2">
                         <button type="button" class="btn dropdown-toggle" data-toggle="dropdown"><i class="material-icons">more_vert</i></button>
                         <ul class="dropdown-menu">
-                          <li><a href="#" ng-click="reportPost(t._id, null)">Report Post</a></li>
-                          <li><a href="#" ng-if="isUserAdmin" ng-click="deleteThread(t._id)">Delete Thread</a></li>
-                          <li><a href="#" ng-show="t.file[0] !== undefined" ng-click="downloadFiles(t.file)">Download Files</a></li>
+                          <li><a href="#" ng-click="reportPost(t._id, null)"><i class="material-icons">report_problem</i> Report Post</a></li>
+                          <li><a href="#" ng-if="isUserAdmin" ng-click="deleteThread(t._id)"><i class="material-icons">delete</i> Delete Thread</a></li>
+                          <li><a href="#" ng-show="t.file[0] !== undefined" ng-click="downloadFiles(t.file)"><i class="material-icons">get_app</i> Download Files</a></li>
 
                         </ul>
                       </div>
