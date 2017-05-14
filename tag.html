@@ -75,7 +75,6 @@
           <div class="panel panel-default">
               <div class="panel-heading ">
                   <div class="panel-title dropdown">
-                    <div class="row">
                       <h4>
                         {{t.subject}} ~ <a ng-href="http://nyachan-server.herokuapp.com/thread/{{t._id}}">{{t._id}}</a> by {{t.userName}}
                         <a ng-repeat="a in t.tags" ng-href="http://nyachan-server.herokuapp.com/tag/{{a}}"><span class="label label-nya">{{a}}</span></a>
@@ -86,10 +85,6 @@
                           <li><a href="#" class="btn btn-info" ng-show="t.file[0] !== undefined" ng-click="downloadFiles(t.file)"><i class="material-icons">get_app</i> Download Files</a></li>
                         </ul>
                       </h4>
-
-
-
-                    </div>
                   </div>
                 </div>
                 <div class="panel-body">
