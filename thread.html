@@ -77,32 +77,30 @@
                 <a type="button" style="padding: 5px;" class="btn dropdown-toggle" data-toggle="dropdown"><i class="material-icons">more_vert</i></a>
                 <ul class="dropdown-menu dropdown2">
                   <li><a href="#" class="btn btn-danger" ng-if="isUserAdmin" ng-click="deleteThread(thread._id)"><i class="material-icons">delete</i> Delete Thread</a></li>
-                  <li><a href="#" class="btn btn-danger dropdown-toggle" ng-if="isUserAdmin" title="Ban User" data-toggle="dropdown2"><i class="material-icons">gavel</i> Ban User</button>
-                  <ul class="dropdown-menu dropdown-menu-right">
-                    <li><a href="#" ng-click="banIP(thread._id, null, thread.userIP, thread.userName, 'Day')">Day</a></li>
-                    <li><a href="#" ng-click="banIP(thread._id, null, thread.userIP, thread.userName, 'Week')">Week</a></li>
-                    <li><a href="#" ng-click="banIP(thread._id, null, thread.userIP, thread.userName, 'Month')">Month</a></li>
-                    <li><a href="#" ng-click="banIP(thread._id, null, thread.userIP, thread.userName, 'Forever')">Forever</a></li>
-                  </ul>
-                  <li><select class="btn btn-info" id="changeTags" ng-if="isUserAdmin" multiple="multiple" required>
-                      <option value="a">Anime &#38; Mangá</option>
-                      <option value="c">Quadrinhos &#38; Desenhos Animados</option>
-                      <option value="g">Gif &#38; Webm</option>
-                      <option value="h">História e Ciências Humanas</option>
-                      <option value="m">Música</option>
-                      <option value="t">Tecnologia</option>
-                      <option value="tv">Televisão &#38; Filmes</option>
-                      <option value="v">Vídeo Games</option>
-                      <option value="b">Aleatório</option>
-                      <option value="p">Politicamente Incorreto</option>
-                  </select></li>
                   <li><a href="#" class="btn btn-danger" ng-click="reportPost(thread._id, null)"> <i class="material-icons">report_problem</i> Report Post</a></li>
                   <li><a href="#" class="btn btn-info" ng-show="thread.file[0] !== undefined" ng-click="downloadFiles(thread.file)"><i class="material-icons">get_app</i> Download Files</a></li>
                   <li><a href="#" class="btn btn-info" ng-show="thread.file[0] !== undefined" ng-click="downloadFiles(thread.file)"><i class="material-icons">get_app</i> Download Files</a></li>
                 </ul>
-                {{thread.subject}} ~ {{thread._id}} by {{thread.userName}} on {{ thread.date | date: 'MMM d, y H:mm:ss' : 'time_zone' }}
+                {{thread.subject}} ~ {{thread._id}} by {{thread.userName}} <a href="#" class="btn btn-danger dropdown-toggle" ng-if="isUserAdmin" title="Ban User" data-toggle="dropdown2"><i class="material-icons">gavel</i> Ban User</a>
+                <ul class="dropdown-menu dropdown-menu-right">
+                  <li><a href="#" ng-click="banIP(thread._id, null, thread.userIP, thread.userName, 'Day')">Day</a></li>
+                  <li><a href="#" ng-click="banIP(thread._id, null, thread.userIP, thread.userName, 'Week')">Week</a></li>
+                  <li><a href="#" ng-click="banIP(thread._id, null, thread.userIP, thread.userName, 'Month')">Month</a></li>
+                  <li><a href="#" ng-click="banIP(thread._id, null, thread.userIP, thread.userName, 'Forever')">Forever</a></li>
+                </ul> on {{ thread.date | date: 'MMM d, y H:mm:ss' : 'time_zone' }}
                 <a ng-repeat="a in thread.tags" ng-href="http://nyachan-server.herokuapp.com/tag/{{a}}"><span class="label label-nya">{{a}}</span></a>
-
+                <select class="btn btn-info" id="changeTags" ng-if="isUserAdmin" multiple="multiple" required>
+                    <option value="a">Anime &#38; Mangá</option>
+                    <option value="c">Quadrinhos &#38; Desenhos Animados</option>
+                    <option value="g">Gif &#38; Webm</option>
+                    <option value="h">História e Ciências Humanas</option>
+                    <option value="m">Música</option>
+                    <option value="t">Tecnologia</option>
+                    <option value="tv">Televisão &#38; Filmes</option>
+                    <option value="v">Vídeo Games</option>
+                    <option value="b">Aleatório</option>
+                    <option value="p">Politicamente Incorreto</option>
+                </select>
 
 
 
