@@ -81,7 +81,7 @@
                         <a ng-repeat="a in t.tags" ng-href="http://nyachan-server.herokuapp.com/tag/{{a}}"><span class="label label-nya">{{a}}</span></a>
                       </h4>
                       <div class="col-md-3">
-                        <button type="button" class="dropdown-toggle" data-toggle="dropdown"><i class="material-icons">more_vert</i></button>
+                        <a type="button" class="btn dropdown-toggle" data-toggle="dropdown"><i class="material-icons">more_vert</i></a>
                         <ul class="dropdown-menu">
                           <li><a href="#" ng-click="reportPost(t._id, null)"><i class="material-icons">report_problem</i> Report Post</a></li>
                           <li><a href="#" ng-if="isUserAdmin" ng-click="deleteThread(t._id)"><i class="material-icons">delete</i> Delete Thread</a></li>
