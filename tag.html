@@ -74,12 +74,12 @@
         <div ng-repeat="t in threads" class="col-md-6">
           <div class="panel panel-default">
               <div class="panel-heading ">
-                  <h3 class="panel-title dropdown">
+                  <duv class="panel-title dropdown">
                     <div class="row">
-                      <div class="col-md-10">
+                      <h4 class="col-md-10">
                         {{t.subject}} ~ <a ng-href="http://nyachan-server.herokuapp.com/thread/{{t._id}}">{{t._id}}</a> by {{t.userName}}
                         <a ng-repeat="a in t.tags" ng-href="http://nyachan-server.herokuapp.com/tag/{{a}}"><span class="label label-nya">{{a}}</span></a>
-                      </div>
+                      </h4>
                       <div class="col-md-2">
                         <button type="button" class="btn dropdown-toggle" data-toggle="dropdown"><i class="material-icons">more_vert</i></button>
                         <ul class="dropdown-menu">
@@ -90,7 +90,7 @@
                         </ul>
                       </div>
                     </div>
-                  </h3>
+                  </div>
                 </div>
                 <div class="panel-body">
                   <carousel class="col-md-12">
