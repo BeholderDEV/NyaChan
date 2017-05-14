@@ -72,11 +72,12 @@
         <div ng-repeat="t in threads">
           <div class="panel panel-default">
               <div class="panel-heading">
-                  <button type="button" ng-if="isUserAdmin" class="btn btn-danger pull-right" title="Delete Thread" ng-click="deleteThread(t._id)"><i class="fa fa-trash-o"></i></button>
-                  <button type="button" class="btn btn-danger pull-right" title="Report Post" ng-click="reportPost(t._id, null)"><i class="fa fa-exclamation-circle"></i></button>
+
                   <h3 class="panel-title">
                     {{t.subject}} ~ <span class="label id"><a ng-href="http://nyachan-server.herokuapp.com/thread/{{t._id}}">{{t._id}}</a> by {{t.userName}} on {{ t.date | date: 'MMM d, y H:mm:ss' : 'time_zone' }}</span>
                     <a ng-repeat="a in t.tags" ng-href="http://nyachan-server.herokuapp.com/tag/{{a}}"><span class="label label-nya">{{a}}</span></a>
+                    <button type="button" class="btn btn-danger pull-right" title="Report Post" ng-click="reportPost(t._id, null)"><i class="fa fa-exclamation-circle"></i></button>
+                    <button type="button" ng-if="isUserAdmin" class="btn btn-danger pull-right" title="Delete Thread" ng-click="deleteThread(t._id)"><i class="fa fa-trash-o"></i></button>
                   </h3>
                 </div>
                 <div class="panel-body">
