@@ -71,7 +71,7 @@
       <div>
         <div ng-repeat="t in threads">
           <div class="panel panel-default">
-              <div class="panel-heading">
+              <div class="panel-heading dropdown">
 
                   <h3 class="panel-title">
                     {{t.subject}} ~ <span class="label id"><a ng-href="http://nyachan-server.herokuapp.com/thread/{{t._id}}">{{t._id}}</a> by {{t.userName}} on {{ t.date | date: 'MMM d, y H:mm:ss' : 'time_zone' }}</span>
