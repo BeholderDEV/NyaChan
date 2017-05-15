@@ -89,13 +89,15 @@
                   </div>
                 </div>
                 <div class="panel-body">
-                  <carousel class="col-md-12">
-                    <slide ng-repeat="f in t.file" active="slide.active">
-                      <a href="{{f.source}}" data-title="{{f.name}}" data-lightbox="{{t._id}}">
-                        <img ng-src="{{f.source}}" class="img-responsive some-image"/>
-                      </a>
-                    </slide>
-                  </carousel>
+                  <div class="col-md-4 image-body" ng-show="t.file[0] !== undefined">
+                    <carousel>
+                      <slide ng-repeat="f in t.file" active="slide.active">
+                        <a href="{{f.source}}" data-title="{{f.name}}" data-lightbox="{{t._id}}">
+                          <img ng-src="{{f.thumb}}" class="img-responsive some-image"/>
+                        </a>
+                      </slide>
+                    </carousel>
+                  </div>
                   <p>
                     {{t.body}}
                   </p>
