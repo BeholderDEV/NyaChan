@@ -1,5 +1,6 @@
 body{
   padding-top: 100px;
+  background-color: #DADFE1;
 }
 .navbar-right .dropdown-menu {
   right: auto;
@@ -14,6 +15,9 @@ body{
   img{
     margin:auto;
   }
+}
+.panel-footer{
+  background-color: #BDC3C7;
 }
 .panel-index{
   img{
@@ -35,11 +39,6 @@ body{
 
 
 .row {
- -moz-column-width: 37em;
- -webkit-column-width: 37em;
- -moz-column-gap: .4em;
- -webkit-column-gap: .4em;
-
 }
 
 .panel {
