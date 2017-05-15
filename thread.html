@@ -122,7 +122,7 @@
             <div class="panel-footer">
               <ul class="list-group">
                 <li class="list-group-item panel" ng-repeat="p in thread.post" id="{{p.idPost}}">
-                  <div class="panel-heading dropdown">{{p.title}} - <span class="label id">{{p.idPost}} by {{p.userName}} on {{ p.date | date: 'MMM d, y H:mm:ss' : 'time_zone' }}</span>
+                  <div class="panel-heading dropdown">{{p.title}} - {{p.idPost}} by {{p.userName}} on {{ p.date | date: 'MMM d, y H:mm:ss' : 'time_zone' }}
                     <button type="button" ng-if="isUserAdmin" class="btn btn-danger pull-right" title="Delete Post" ng-click="deletePost(p.threadid, p.idPost)"><i class="material-icons">delete</i></button>
                     <button type="button" class="btn btn-danger pull-right" title="Report Post" ng-click="reportPost(p.threadid, p.idPost)"><i class="material-icons">report_problem</i></button>
                     <button type="button" title="Download Files" ng-show="p.file[0] !== undefined" class="btn btn-info pull-right" ng-click="downloadFiles(p.file)"><i class="material-icons">get_app</i></button>
