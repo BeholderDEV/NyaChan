@@ -52,13 +52,16 @@ body{
 
 .panel {
  display: inline-block;
- margin-bottom: 50px;
+ margin:  .5em;
  padding:  0;
  width:98%;
+ .panel-default{
+   margin-bottom: 50px;
+ }
 }
 
 .list-group .list-group-item {
-    padding: 0px;
+    padding: 0;
 }
 
 @-webkit-keyframes progress-bar-stripes {
