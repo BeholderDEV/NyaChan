@@ -74,7 +74,7 @@
           <div class="panel panel-default">
               <div class="panel-heading panel-OP">
                   <div class="panel-title dropdown">
-                      <h5>
+                      <h3>
                         <a type="button" class="btn dropdown-toggle" style="padding: 5px;" data-toggle="dropdown"><i class="material-icons">more_vert</i></a>
                         <ul class="dropdown-menu">
                           <li><a href="#" class="btn btn-danger" ng-click="reportPost(t._id, null)"><i class="material-icons">report_problem</i> Report Post</a></li>
@@ -85,7 +85,7 @@
                         {{t.subject}} ~ <a class="tid" ng-href="http://nyachan-server.herokuapp.com/thread/{{t._id}}">{{t._id}}</a> by {{t.userName}}
                         <a ng-repeat="a in t.tags" ng-href="http://nyachan-server.herokuapp.com/tag/{{a}}"><span class="label label-nya">{{a}}</span></a>
 
-                      </h5>
+                      </h3>
                   </div>
                 </div>
                 <div class="panel-body">
