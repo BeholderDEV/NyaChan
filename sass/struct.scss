@@ -31,6 +31,24 @@ body{
   height:350px;
 }
 
+*, *:before, *:after {box-sizing:  border-box !important;}
+
+
+.row {
+ -moz-column-width: 25em;
+ -webkit-column-width: 25em;
+ -moz-column-gap: .5em;
+ -webkit-column-gap: .5em;
+
+}
+
+.panel {
+ display: inline-block;
+ margin:  .5em;
+ padding:  0;
+ width:98%;
+}
+
 @-webkit-keyframes progress-bar-stripes {
  from  { background-position: 0 0; }
  to    { background-position: 40px 0; }
