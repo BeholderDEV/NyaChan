@@ -80,9 +80,9 @@
       <br>
       <br>
       <div class="row">
-          <div ng-repeat="t in threads">
-            <div class="panel panel-default">
-              <div class="panel-heading">
+        <div ng-repeat="t in threads" class="">
+          <div class="panel panel-default">
+              <div class="panel-heading ">
                   <div class="panel-title dropdown">
                       <h5>
                         <a type="button" class="btn dropdown-toggle" style="padding: 5px;" data-toggle="dropdown"><i class="material-icons">more_vert</i></a>
@@ -99,18 +99,16 @@
                   </div>
                 </div>
                 <div class="panel-body">
-                  <div class="col-md-4 image-body">
-                    <carousel>
-                      <slide ng-repeat="f in t.file" active="slide.active">
-                        <a href="{{f.source}}" data-title="{{f.name}}" data-lightbox="{{t._id}}">
-                          <img ng-src="{{f.thumb}}" class="img-responsive some-image"/>
-                        </a>
-                      </slide>
-                    </carousel>
-                  </div>
-                  <div class="col-md-8 content-body">
+                  <carousel class="col-md-12">
+                    <slide ng-repeat="f in t.file" active="slide.active">
+                      <a href="{{f.source}}" data-title="{{f.name}}" data-lightbox="{{t._id}}">
+                        <img ng-src="{{f.source}}" class="img-responsive some-image"/>
+                      </a>
+                    </slide>
+                  </carousel>
+                  <p>
                     {{t.body}}
-                  </div>
+                  </p>
                 </div>
                 <div class="panel-footer">
                   <ul class="list-group">
@@ -142,7 +140,7 @@
                     </li>
                   </ul>
                 </div>
-              </div>
+            </div>
           </div>
       </div>
     </div>
