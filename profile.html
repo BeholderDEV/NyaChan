@@ -52,8 +52,8 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li id="newThreadButton" class="btn" data-toggle="modal" data-target="#newThreadModal"><a>New Thread  <i class="fa fa-plus"></i></a></li>
-            <li class="btn dropdown-toggle" ng-if="isUserLogged" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><a><img ng-src="{{userImage}}" class="img-circle" height="20px"/> <span class="caret"></span></a></li>
+            <li id="newThreadButton" class="" data-toggle="modal" data-target="#newThreadModal"><a>New Thread  <i class="fa fa-plus"></i></a></li>
+            <li class="dropdown-toggle" ng-if="isUserLogged" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><a><img ng-src="{{userImage}}" class="img-circle" height="20px"/> <span class="caret"></span></a></li>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
               <li><a href="#">Signed in as:</a></li>
               <li><a href="#">{{userName}}</a></li>
@@ -84,11 +84,20 @@
           <div ng-repeat="t in threads">
             <div class="panel panel-default">
               <div class="panel-heading">
-                  <h3 class="panel-title">
-                    {{t.subject}} ~ <span class="label id"><a ng-href="http://nyachan-server.herokuapp.com/thread/{{t._id}}">{{t._id}}</a> by {{t.userName}} on {{ t.date | date: 'MMM d, y H:mm:ss' : 'time_zone' }}</span>
-                    <a ng-repeat="a in t.tags" ng-href="http://nyachan-server.herokuapp.com/tag/{{a}}"><span class="label label-nya">{{a}}</span></a>
-                    <button type="button" ng-if="isUserAdmin" class="btn btn-danger pull-right" ng-click="deleteThread(t._id)"><i class="fa fa-trash-o"></i></button>
-                  </h3>
+                  <div class="panel-title dropdown">
+                      <h5>
+                        <a type="button" class="btn dropdown-toggle" style="padding: 5px;" data-toggle="dropdown"><i class="material-icons">more_vert</i></a>
+                        <ul class="dropdown-menu">
+                          <li><a href="#" class="btn btn-danger" ng-click="reportPost(t._id, null)"><i class="material-icons">report_problem</i> Report Post</a></li>
+                          <li><a href="#" class="btn btn-danger" ng-if="isUserAdmin" ng-click="deleteThread(t._id)"><i class="material-icons">delete</i> Delete Thread</a></li>
+                          <li><a href="#" class="btn btn-info" ng-show="t.file[0] !== undefined" ng-click="downloadFiles(t.file)"><i class="material-icons">get_app</i> Download Files</a></li>
+                        </ul>
+
+                        {{t.subject}} ~ <a ng-href="http://nyachan-server.herokuapp.com/thread/{{t._id}}">{{t._id}}</a> by {{t.userName}}
+                        <a ng-repeat="a in t.tags" ng-href="http://nyachan-server.herokuapp.com/tag/{{a}}"><span class="label label-nya">{{a}}</span></a>
+
+                      </h5>
+                  </div>
                 </div>
                 <div class="panel-body">
                   <div class="col-md-4 image-body">
