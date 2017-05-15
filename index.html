@@ -96,7 +96,7 @@
       <!-- end tags -->
       <!-- popular threads -->
       <div class='panel panel-default  lone' ng-app = "nya-chan" ng-controller= "indexController" ng-cloak>
-        <div class='panel-heading'>
+        <div class='panel-heading panel-OP'>
           <h3 class='panel-title'>
             Popular Threads
           </h3>
@@ -105,7 +105,7 @@
           <div ng-repeat="t in threads | limitTo:8" class="col-md-3 col-xs-6">
             <a ng-href="http://nyachan-server.herokuapp.com/thread/{{t._id}}">
             <div class='panel panel-default panel-index'>
-              <div class='panel-heading'>
+              <div class='panel-heading panel-OP'>
                 <h3 class='panel-title' ng-if="t.subject !== undefined">
                   {{t.subject}}
                 </h3>
