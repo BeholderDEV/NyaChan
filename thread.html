@@ -125,7 +125,7 @@
                   <div class="panel-heading dropdown">{{p.title}} - <span class="label id">{{p.idPost}} by {{p.userName}} on {{ p.date | date: 'MMM d, y H:mm:ss' : 'time_zone' }}</span>
                     <button type="button" ng-if="isUserAdmin" class="btn btn-danger pull-right" title="Delete Post" ng-click="deletePost(p.threadid, p.idPost)"><i class="material-icons">delete</i></button>
                     <button type="button" class="btn btn-danger pull-right" title="Report Post" ng-click="reportPost(p.threadid, p.idPost)"><i class="material-icons">report_problem</i></button>
-                    <button type="button" title="Download Files" ng-show="p.file[0] !== undefined" class="btn btn-info pull-right" ng-click="downloadFiles(p.file)"><i class="material-icons">get-app</i></button>
+                    <button type="button" title="Download Files" ng-show="p.file[0] !== undefined" class="btn btn-info pull-right" ng-click="downloadFiles(p.file)"><i class="material-icons">get_app</i></button>
                     <button type="button" class="btn btn-danger pull-right dropdown-toggle" ng-if="isUserAdmin" title="Ban User" data-toggle="dropdown"><i class="material-icons">gavel</i></button>
                     <ul class="dropdown-menu dropdown-menu-right">
                       <li><a href="#" ng-click="banIP(p.threadid, p.idPost, p.userIP, p.userName, 'Day')">Day</a></li>
