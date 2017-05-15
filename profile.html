@@ -116,7 +116,15 @@
                 <div class="panel-footer">
                   <ul class="list-group">
                     <li class="list-group-item panel" ng-repeat="p in t.post" id="{{p.idPost}}">
-                      <div class="panel-heading">{{p.title}} - <span class="label id">{{p.idPost}} by {{p.userName}} on {{ p.date | date: 'MMM d, y H:mm:ss' : 'time_zone' }}</span></div>
+                      <div class="panel-heading dropdown">
+                        <a type="button" style="padding: 5px;" class="btn dropdown-toggle" data-toggle="dropdown"><i class="material-icons">more_vert</i></a>
+                        <ul class="dropdown-menu">
+                          <li><a href="#" class="btn btn-danger" ng-click="reportPost(p.idPost, null)"> <i class="material-icons">report_problem</i> Report Post</a></li>
+                          <li><a href="#" class="btn btn-info" ng-show="p.file[0] !== undefined" ng-click="downloadFiles(p.file)"><i class="material-icons">get_app</i> Download Files</a></li>
+                        </ul>
+                        {{p.title}} - {{p.idPost}} by {{p.userName}}
+
+                      </div>
                       <div class="panel-body">
                         <div class="col-md-3 image-body">
                           <carousel>
