@@ -80,7 +80,6 @@
       <br>
       <br>
       <div class="row">
-        <div class="col-md-12">
           <div ng-repeat="t in threads">
             <div class="panel panel-default">
               <div class="panel-heading">
@@ -126,7 +125,8 @@
 
                       </div>
                       <div class="panel-body">
-                        <div class="col-md-3 image-body">
+
+                        <div class="col-md-5 image-body" ng-show="p.file[0] !== undefined">
                           <carousel>
                             <slide ng-repeat="f in p.file" active="slide.active">
                               <a href="{{f.source}}" data-title="{{f.name}}" data-lightbox="{{p.idPost}}">
@@ -135,8 +135,8 @@
                             </slide>
                           </carousel>
                         </div>
-                        <div class="col-md-9 content-body">
-                          {{p.body}}
+                        <div class="content-body" ng-class="p.file[0] === undefined ? 'col-md-12' : 'col-md-7'">
+                          <p> {{p.body}} </p>
                         </div>
                       </div>
                     </li>
@@ -144,7 +144,6 @@
                 </div>
               </div>
           </div>
-        </div>
       </div>
     </div>
 
