@@ -16,11 +16,12 @@ body{
     white-space: normal;
   }
 }
-.navbar{
-  background-color: #34495E;
+.navbar, .navbar.navbar-default {
+    background-color: #22313F !important;
+    color: #ECECEC !important;
 }
 .panel-OP{
-  background-color: #34495E !important;
+  background-color: #22313F !important;
   color: #ECECEC !important;
 }
 .panel-body{
