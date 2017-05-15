@@ -7,7 +7,6 @@
     <title>Nya Chan</title>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/css/jasny-bootstrap.min.css">
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.min.css' type='text/css' media='all' />
     <link rel="stylesheet" href="../lib/Bootstrap-multiselect/bootstrap-multiselect.css" type="text/css"/>
@@ -55,7 +54,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li data-toggle="modal" data-target="#newThreadModal"><a>Reply <i class="fa fa-plus"></i></a></li>
+            <li data-toggle="modal" data-target="#newThreadModal"><a>Reply <i class="material-icons">add</i></a></li>
             <li class="dropdown-toggle" ng-if="isUserLogged" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><a><img ng-src="{{userImage}}" class="img-circle" height="20px"/> <span class="caret"></span></a></li>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
               <li><a href="#">Signed in as:</a></li>
@@ -124,9 +123,10 @@
               <ul class="list-group">
                 <li class="list-group-item panel" ng-repeat="p in thread.post" id="{{p.idPost}}">
                   <div class="panel-heading dropdown">{{p.title}} - <span class="label id">{{p.idPost}} by {{p.userName}} on {{ p.date | date: 'MMM d, y H:mm:ss' : 'time_zone' }}</span>
-                    <button type="button" ng-if="isUserAdmin" class="btn btn-danger pull-right" title="Delete Post" ng-click="deletePost(p.threadid, p.idPost)"><i class="fa fa-trash-o"></i></button>
-                    <button type="button" class="btn btn-danger pull-right" title="Report Post" ng-click="reportPost(p.threadid, p.idPost)"><i class="fa fa-exclamation-circle"></i></button>
-                    <button type="button" class="btn btn-danger pull-right dropdown-toggle" ng-if="isUserAdmin" title="Ban User" data-toggle="dropdown"><i class="fa fa-gavel"></i></button>
+                    <button type="button" ng-if="isUserAdmin" class="btn btn-danger pull-right" title="Delete Post" ng-click="deletePost(p.threadid, p.idPost)"><i class="material-icons">delete</i></button>
+                    <button type="button" class="btn btn-danger pull-right" title="Report Post" ng-click="reportPost(p.threadid, p.idPost)"><i class="material-icons">report_problem</i></button>
+                    <button type="button" title="Download Files" ng-show="p.file[0] !== undefined" class="btn btn-info pull-right" ng-click="downloadFiles(p.file)"><i class="material-icons">get-app</i></button>
+                    <button type="button" class="btn btn-danger pull-right dropdown-toggle" ng-if="isUserAdmin" title="Ban User" data-toggle="dropdown"><i class="material-icons">gavel</i></button>
                     <ul class="dropdown-menu dropdown-menu-right">
                       <li><a href="#" ng-click="banIP(p.threadid, p.idPost, p.userIP, p.userName, 'Day')">Day</a></li>
                       <li><a href="#" ng-click="banIP(p.threadid, p.idPost, p.userIP, p.userName, 'Weel')">Week</a></li>
@@ -146,7 +146,7 @@
                       </carousel>
                     </div>
                     <div class="content-body" ng-class="p.file[0] === undefined ? 'col-md-12' : 'col-md-9'">
-                      <button type="button" title="Download Files" ng-show="p.file[0] !== undefined" class="btn btn-info pull-right" ng-click="downloadFiles(p.file)"><i class="fa fa-download"></i></button>
+
                       {{p.body}}
                     </div>
                   </div>
