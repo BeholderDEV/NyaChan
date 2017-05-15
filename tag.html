@@ -89,7 +89,7 @@
                   </div>
                 </div>
                 <div class="panel-body">
-                  <div class="col-md-4 image-body" ng-show="t.file[0] !== undefined">
+                  <div class="col-md-4 col-sm-4 image-body" ng-show="t.file[0] !== undefined">
                     <carousel>
                       <slide ng-repeat="f in t.file" active="slide.active">
                         <a href="{{f.source}}" data-title="{{f.name}}" data-lightbox="{{t._id}}">
@@ -116,7 +116,7 @@
                       </div>
                       <div class="panel-body">
 
-                        <div class="col-md-5 image-body" ng-show="p.file[0] !== undefined">
+                        <div class="col-md-4 col-sm-4 image-body" ng-show="p.file[0] !== undefined">
                           <carousel>
                             <slide ng-repeat="f in p.file" active="slide.active">
                               <a href="{{f.source}}" data-title="{{f.name}}" data-lightbox="{{p.idPost}}">
