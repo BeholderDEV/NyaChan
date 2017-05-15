@@ -7,16 +7,21 @@
     <title>Nya Chan</title>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/css/jasny-bootstrap.min.css">
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.min.css' type='text/css' media='all' />
     <link rel="stylesheet" href="../lib/Bootstrap-multiselect/bootstrap-multiselect.css" type="text/css"/>
     <link rel="stylesheet" href="https://unpkg.com/angular-toastr/dist/angular-toastr.css" />
     <link rel="stylesheet" href="../lib/file-input/fileinput.min.css" media="all" type="text/css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.9.0/css/lightbox.min.css" integrity="sha256-iU/Wh1HMAs/NgpurDAu14e7S3FkllcJ5aPnpPDdnO6c=" crossorigin="anonymous" />
+    <!-- Material Design fonts -->
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="../node_modules/bootstrap-material-design/dist/css/bootstrap-material-design.min.css" rel="stylesheet" type="text/css">
+    <link href="../node_modules/bootstrap-material-design/dist/css/ripples.min.css" rel="stylesheet" type="text/css">
+
+
     <!-- Meu CSS -->
     <link href="../css/struct.css" rel="stylesheet" type="text/css">
-    <link href="../css/styles.css" rel="stylesheet" type="text/css">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -49,8 +54,8 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li class="btn" data-toggle="modal" data-target="#newThreadModal"><a>Reply <i class="fa fa-plus"></i></a></li>
-            <li class="btn dropdown-toggle" ng-if="isUserLogged" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><a><img ng-src="{{userImage}}" class="img-circle" height="20px"/> <span class="caret"></span></a></li>
+            <li data-toggle="modal" data-target="#newThreadModal"><a>Reply <i class="material-icons">add</i></a></li>
+            <li class="dropdown-toggle" ng-if="isUserLogged" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><a><img ng-src="{{userImage}}" class="img-circle" height="20px"/> <span class="caret"></span></a></li>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
               <li><a href="#">Signed in as:</a></li>
               <li><a href="#">{{userName}}</a></li>
@@ -66,19 +71,24 @@
         <div>
           <div class='panel panel-default'>
             <div class='panel-heading dropdown'>
+
               <h3 class='panel-title'>
-              {{thread.subject}} ~ <span class="label id">{{thread._id}} by {{thread.userName}} on {{ thread.date | date: 'MMM d, y H:mm:ss' : 'time_zone' }}</span>
-              <a ng-repeat="a in thread.tags" ng-href="http://nyachan-server.herokuapp.com/tag/{{a}}"><span class="label label-nya">{{a}}</span></a>
-              <button type="button" ng-if="isUserAdmin" class="btn btn-danger pull-right" title="Delete Thread" ng-click="deleteThread(thread._id)"><i class="fa fa-trash-o"></i></button>
-              <button type="button" class="btn btn-danger pull-right" title="Report Post" ng-click="reportPost(thread._id, null)"><i class="fa fa-exclamation-circle"></i></button>
-              <button type="button" class="btn btn-danger pull-right dropdown-toggle" ng-if="isUserAdmin" title="Ban User" data-toggle="dropdown"><i class="fa fa-gavel"></i></button>
+                <a type="button" style="padding: 5px;" class="btn dropdown-toggle" data-toggle="dropdown"><i class="material-icons">more_vert</i></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#" class="btn btn-danger" ng-if="isUserAdmin" ng-click="deleteThread(thread._id)"><i class="material-icons">delete</i> Delete Thread</a></li>
+                  <li><a href="#" class="btn btn-danger" ng-click="reportPost(thread._id, null)"> <i class="material-icons">report_problem</i> Report Post</a></li>
+                  <li><a href="#" class="btn btn-info" ng-show="thread.file[0] !== undefined" ng-click="downloadFiles(thread.file)"><i class="material-icons">get_app</i> Download Files</a></li>
+                </ul>
+                {{thread.subject}} ~ {{thread._id}} by {{thread.userName}}
+                <a href="#" class="btn btn-danger dropdown-toggle" ng-if="isUserAdmin" title="Ban User" data-toggle="dropdown"><i class="material-icons">gavel</i> Ban User</a>
                 <ul class="dropdown-menu dropdown-menu-right">
                   <li><a href="#" ng-click="banIP(thread._id, null, thread.userIP, thread.userName, 'Day')">Day</a></li>
                   <li><a href="#" ng-click="banIP(thread._id, null, thread.userIP, thread.userName, 'Week')">Week</a></li>
                   <li><a href="#" ng-click="banIP(thread._id, null, thread.userIP, thread.userName, 'Month')">Month</a></li>
                   <li><a href="#" ng-click="banIP(thread._id, null, thread.userIP, thread.userName, 'Forever')">Forever</a></li>
-                </ul>
-              <select class="pull-right" id="changeTags" ng-if="isUserAdmin" multiple="multiple" required>
+                </ul> on {{ thread.date | date: 'MMM d, y H:mm:ss' : 'time_zone' }}
+                <a ng-repeat="a in thread.tags" ng-href="http://nyachan-server.herokuapp.com/tag/{{a}}"><span class="label label-nya">{{a}}</span></a>
+                <select class="btn btn-info" id="changeTags" ng-if="isUserAdmin" multiple="multiple" required>
                     <option value="a">Anime &#38; Mangá</option>
                     <option value="c">Quadrinhos &#38; Desenhos Animados</option>
                     <option value="g">Gif &#38; Webm</option>
@@ -90,6 +100,9 @@
                     <option value="b">Aleatório</option>
                     <option value="p">Politicamente Incorreto</option>
                 </select>
+
+
+
               </h3>
             </div>
             <div class="panel-body">
@@ -103,17 +116,17 @@
                 </carousel>
               </div>
               <div class="content-body" ng-class="thread.file[0] === undefined ? 'col-md-12' : 'col-md-8'">
-                <button type="button" title="Download Files" ng-show="thread.file[0] !== undefined" class="btn btn-danger pull-right" ng-click="downloadFiles(thread.file)"><i class="fa fa-download"></i></button>
                 {{thread.body}}
               </div>
             </div>
             <div class="panel-footer">
               <ul class="list-group">
                 <li class="list-group-item panel" ng-repeat="p in thread.post" id="{{p.idPost}}">
-                  <div class="panel-heading dropdown">{{p.title}} - <span class="label id">{{p.idPost}} by {{p.userName}} on {{ p.date | date: 'MMM d, y H:mm:ss' : 'time_zone' }}</span>
-                    <button type="button" ng-if="isUserAdmin" class="btn btn-danger pull-right" title="Delete Post" ng-click="deletePost(p.threadid, p.idPost)"><i class="fa fa-trash-o"></i></button>
-                    <button type="button" class="btn btn-danger pull-right" title="Report Post" ng-click="reportPost(p.threadid, p.idPost)"><i class="fa fa-exclamation-circle"></i></button>
-                    <button type="button" class="btn btn-danger pull-right dropdown-toggle" ng-if="isUserAdmin" title="Ban User" data-toggle="dropdown"><i class="fa fa-gavel"></i></button>
+                  <div class="panel-heading dropdown">{{p.title}} - {{p.idPost}} by {{p.userName}} on {{ p.date | date: 'MMM d, y H:mm:ss' : 'time_zone' }}
+                    <button type="button" ng-if="isUserAdmin" class="btn btn-danger pull-right" title="Delete Post" ng-click="deletePost(p.threadid, p.idPost)"><i class="material-icons">delete</i></button>
+                    <button type="button" class="btn btn-danger pull-right" title="Report Post" ng-click="reportPost(p.threadid, p.idPost)"><i class="material-icons">report_problem</i></button>
+                    <button type="button" title="Download Files" ng-show="p.file[0] !== undefined" class="btn btn-info pull-right" ng-click="downloadFiles(p.file)"><i class="material-icons">get_app</i></button>
+                    <button type="button" class="btn btn-danger pull-right dropdown-toggle" ng-if="isUserAdmin" title="Ban User" data-toggle="dropdown"><i class="material-icons">gavel</i></button>
                     <ul class="dropdown-menu dropdown-menu-right">
                       <li><a href="#" ng-click="banIP(p.threadid, p.idPost, p.userIP, p.userName, 'Day')">Day</a></li>
                       <li><a href="#" ng-click="banIP(p.threadid, p.idPost, p.userIP, p.userName, 'Weel')">Week</a></li>
@@ -133,7 +146,7 @@
                       </carousel>
                     </div>
                     <div class="content-body" ng-class="p.file[0] === undefined ? 'col-md-12' : 'col-md-9'">
-                      <button type="button" title="Download Files" ng-show="p.file[0] !== undefined" class="btn btn-danger pull-right" ng-click="downloadFiles(p.file)"><i class="fa fa-download"></i></button>
+
                       {{p.body}}
                     </div>
                   </div>
@@ -210,12 +223,12 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="submit" ng-click="addPost(post)" class="btn btn-nya post-button">Post</button>
+          <button type="submit" ng-click="addPost(post)" class="btn btn-primary post-button">Post</button>
         </div>
       </div>
     </div>
   </div>
-  
+
   <div id="alert-model" class="hidden">
     <div class="alert alert-${kind} alert-dismissible" role="alert">
       <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -247,8 +260,11 @@
 
   <script src="../js/app.js"></script>
   <script src="../js/thread.js"></script>
+  <script src="../node_modules/bootstrap-material-design/dist/js/material.min.js"></script>
+  <script src="../node_modules/bootstrap-material-design/dist/js/ripples.min.js"></script>
   <script src="../js/script.js"></script>
   <script src="../js/kartik-script.js"></script>
+
   <script src="../js/angular-recaptcha.min.js"></script>
 </body>
 </html>

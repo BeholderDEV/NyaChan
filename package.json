@@ -12,21 +12,21 @@
   },
   "dependencies": {
     "angular-recaptcha": "^4.0.3",
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "1.5.x",
+    "bootstrap-material-design": "^0.5.10",
+    "dropbox": "2.5.2",
     "express": "4.x",
+    "express-session": "1.15.2",
+    "formidable": "1.1.1",
+    "lwip": "*",
     "mongodb": "2.x",
     "mongoose": "4.6.3",
     "node-sass": "4.5.0",
-    "dropbox": "2.5.2",
-    "formidable":"1.1.1",
-    "request":"*",
-    "lwip": "*",
     "passport": "0.3.2",
     "passport-local": "1.0.0",
-    "express-session": "1.15.2",
-    "bcrypt-nodejs": "0.0.3"
+    "request": "*"
   },
-
   "repository": {
     "type": "git",
     "url": "https://github.com/BeholderDEV/NyaChan"
@@ -39,7 +39,17 @@
     "ImageBoard"
   ],
   "standard": {
-    "globals": ["$", "FormData", "XMLHttpRequest","next", "angular", "alert", "location", "Blob", "FileReader"],
+    "globals": [
+      "$",
+      "FormData",
+      "XMLHttpRequest",
+      "next",
+      "angular",
+      "alert",
+      "location",
+      "Blob",
+      "FileReader"
+    ],
     "ignore": [
       "/lib/"
     ]

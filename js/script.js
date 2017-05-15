@@ -8,7 +8,7 @@
 //   }
 //
 // });
-
+$.material.init()
 function restoreImage () {
   $(this).parent().children('.some-image').show()
   $(this).remove()
