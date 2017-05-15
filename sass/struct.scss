@@ -10,7 +10,6 @@ body{
 }
 .panel-heading{
   background-color: #BDC3C7 !important;
-  color: #ECECEC !important;
   .label{
     text-align: left;
     white-space: normal;
@@ -53,9 +52,13 @@ body{
 
 .panel {
  display: inline-block;
- margin:  .5em;
+ margin-bottom: 50px;
  padding:  0;
  width:98%;
+}
+
+.list-group .list-group-item {
+    padding: 0px;
 }
 
 @-webkit-keyframes progress-bar-stripes {
