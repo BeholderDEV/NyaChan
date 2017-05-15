@@ -11,6 +11,10 @@ body{
     white-space: normal;
   }
 }
+.panel-OP{
+  background-color: #6C7A89;
+  color: #ECECEC;
+}
 .panel-body{
   background-color: #DADFE1;
   img{
@@ -43,13 +47,6 @@ body{
 }
 
 .panel {
-  .panel-default
-  {
-    .panel-heading{
-      background-color: #6C7A89;
-      color: #ECECEC;
-    }
-  }  
  display: inline-block;
  margin:  .5em;
  padding:  0;
