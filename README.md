@@ -2,6 +2,8 @@
 
 Nyachan Glorious Server -- Or maybe not so glorious
 
+More about it on [wiki](https://github.com/BeholderDEV/NyaChan/wiki)
+
 ## Installation
 
 ```sh
