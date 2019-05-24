@@ -223,7 +223,7 @@
       })
 
       function validatedPost (valid) {
-        if (valid) {
+        if (true) {
 
         } else {
           vcRecaptchaService.reload($scope.widgetId)
