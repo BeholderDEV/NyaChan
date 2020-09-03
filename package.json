@@ -16,7 +16,7 @@
     "express": "4.x",
     "mongodb": "2.x",
     "mongoose": "5.7.6",
-    "node-sass": "4.5.0",
+    "node-sass": "4.14.1",
     "dropbox": "2.5.2",
     "formidable":"1.1.1",
     "request":"*",
