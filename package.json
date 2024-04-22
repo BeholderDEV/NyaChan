@@ -18,7 +18,7 @@
     "mongoose": "5.7.6",
     "node-sass": "4.14.1",
     "dropbox": "2.5.2",
-    "formidable":"1.1.1",
+    "formidable":"3.2.4",
     "request":"*",
     "lwip": "*",
     "passport": "0.3.2",
