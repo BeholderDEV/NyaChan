@@ -15,7 +15,7 @@
     "body-parser": "1.5.x",
     "express": "4.x",
     "mongodb": "3.x",
-    "mongoose": "5.7.6",
+    "mongoose": "5.13.20",
     "node-sass": "4.14.1",
     "dropbox": "2.5.2",
     "formidable":"1.1.1",
